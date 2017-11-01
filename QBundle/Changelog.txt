@@ -1,0 +1,60 @@
+﻿+ Added
+* Changed
+- Removed
+~dev edition
+
+Known problems:
+
+
+To Be done:
+Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
+Rename to Qbundle
+Add support for both AIO and Launcher style (choose at first time)
+Add support for Blago Miner (first step)
+Add support for XPlotter (first step)
+Add a components download window where you can select to download/update a component.
+More visuals when wallet is running. Like Mining info Network diff
+Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
+Make NRS exception handling to cover more error types.
+Environment check
+
+~V1.3
+
+
+
+V1.2
++ Getting started Wizard.
++ Support for multiple database types.
++ Individual components download at start.
++ Contributors Window.
++ NRS network configuration.
++ Export, Import and Convert database using (binary burst database format).
++ Builtin repositories for quickdownload of databases.
++ Autodetect and setup Peer IP
++ Limit logical CPU cores feature.
++ Option to use automatic GPU acceleration.
++ Sanity check
++ Internal Upgrade Scenarios Handler
++ Windows firewall rules can be automatically configured.
++ Option to always start with administrative privileges.
++ Wallet Exception monitoring with automatic restart.
++ Debug option with stack trace log
+* Internal settings handler changed.
+* Corrected spelling errors.
+* Update system changed to handle more components.
+* Internal code structure changed to be more modular
+* Download system changed to be consistent and show more info.
+* Console log is now Realtime and limited to 3000 lines
+
+
+V1.1
++ Update Functions
++ Mirrorfunction for repositories
+* Fixed potential problem with Sigint that could cause launcer to close.
++ Menu
++ Statusbar
++ Settings window
+
+V1.0
++Gui
++Processmanager
