@@ -62,9 +62,20 @@ Partial Class frmMain
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblWallet = New System.Windows.Forms.Label()
         Me.lblUpdates = New System.Windows.Forms.Label()
+        Me.WalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StopWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SwitchToAIOStyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SwitchToLauncherStyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.pnlLauncher = New System.Windows.Forms.Panel()
+        Me.pnlAIO = New System.Windows.Forms.Panel()
+        Me.wb1 = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.pnlLauncher.SuspendLayout()
+        Me.pnlAIO.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -74,7 +85,7 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.LblDbStatus)
         Me.GroupBox1.Controls.Add(Me.lblDbName)
-        Me.GroupBox1.Location = New System.Drawing.Point(252, 27)
+        Me.GroupBox1.Location = New System.Drawing.Point(239, 4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(165, 90)
         Me.GroupBox1.TabIndex = 0
@@ -109,9 +120,9 @@ Partial Class frmMain
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(17, 41)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(33, 13)
+        Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "NRS:"
+        Me.Label3.Text = "BRS:"
         '
         'LblDbStatus
         '
@@ -136,7 +147,7 @@ Partial Class frmMain
         '
         'btnStartStop
         '
-        Me.btnStartStop.Location = New System.Drawing.Point(29, 87)
+        Me.btnStartStop.Location = New System.Drawing.Point(16, 64)
         Me.btnStartStop.Name = "btnStartStop"
         Me.btnStartStop.Size = New System.Drawing.Size(202, 30)
         Me.btnStartStop.TabIndex = 2
@@ -146,10 +157,10 @@ Partial Class frmMain
         'MenuStrip1
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.White
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.AboutToolStripMenuItem2})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem, Me.WalletToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.AboutToolStripMenuItem2})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(448, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(841, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -311,9 +322,9 @@ Partial Class frmMain
         '
         Me.StatusStrip1.BackColor = System.Drawing.Color.White
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 120)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 516)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(448, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(841, 22)
         Me.StatusStrip1.TabIndex = 5
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -338,7 +349,7 @@ Partial Class frmMain
         '
         Me.lblWallet.AutoSize = True
         Me.lblWallet.Font = New System.Drawing.Font("Rockwell", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWallet.Location = New System.Drawing.Point(25, 30)
+        Me.lblWallet.Location = New System.Drawing.Point(12, 7)
         Me.lblWallet.Name = "lblWallet"
         Me.lblWallet.Size = New System.Drawing.Size(206, 23)
         Me.lblWallet.TabIndex = 7
@@ -349,25 +360,92 @@ Partial Class frmMain
         Me.lblUpdates.AutoSize = True
         Me.lblUpdates.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lblUpdates.ForeColor = System.Drawing.Color.Red
-        Me.lblUpdates.Location = New System.Drawing.Point(26, 60)
+        Me.lblUpdates.Location = New System.Drawing.Point(13, 37)
         Me.lblUpdates.Name = "lblUpdates"
         Me.lblUpdates.Size = New System.Drawing.Size(206, 13)
         Me.lblUpdates.TabIndex = 8
         Me.lblUpdates.Text = "Updates available. Click here for more info"
         Me.lblUpdates.Visible = False
         '
+        'WalletToolStripMenuItem
+        '
+        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartWalletToolStripMenuItem, Me.StopWalletToolStripMenuItem})
+        Me.WalletToolStripMenuItem.Name = "WalletToolStripMenuItem"
+        Me.WalletToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+        Me.WalletToolStripMenuItem.Text = "Wallet"
+        '
+        'StartWalletToolStripMenuItem
+        '
+        Me.StartWalletToolStripMenuItem.Name = "StartWalletToolStripMenuItem"
+        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StartWalletToolStripMenuItem.Text = "Start Wallet"
+        '
+        'StopWalletToolStripMenuItem
+        '
+        Me.StopWalletToolStripMenuItem.Name = "StopWalletToolStripMenuItem"
+        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StopWalletToolStripMenuItem.Text = "Stop Wallet"
+        '
+        'WindowToolStripMenuItem
+        '
+        Me.WindowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SwitchToAIOStyleToolStripMenuItem, Me.SwitchToLauncherStyleToolStripMenuItem})
+        Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
+        Me.WindowToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
+        Me.WindowToolStripMenuItem.Text = "Window"
+        '
+        'SwitchToAIOStyleToolStripMenuItem
+        '
+        Me.SwitchToAIOStyleToolStripMenuItem.Name = "SwitchToAIOStyleToolStripMenuItem"
+        Me.SwitchToAIOStyleToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.SwitchToAIOStyleToolStripMenuItem.Text = "Switch to AIO style"
+        '
+        'SwitchToLauncherStyleToolStripMenuItem
+        '
+        Me.SwitchToLauncherStyleToolStripMenuItem.Name = "SwitchToLauncherStyleToolStripMenuItem"
+        Me.SwitchToLauncherStyleToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.SwitchToLauncherStyleToolStripMenuItem.Text = "Switch to Launcher Style"
+        '
+        'pnlLauncher
+        '
+        Me.pnlLauncher.Controls.Add(Me.lblWallet)
+        Me.pnlLauncher.Controls.Add(Me.GroupBox1)
+        Me.pnlLauncher.Controls.Add(Me.lblUpdates)
+        Me.pnlLauncher.Controls.Add(Me.btnStartStop)
+        Me.pnlLauncher.Location = New System.Drawing.Point(0, 25)
+        Me.pnlLauncher.Name = "pnlLauncher"
+        Me.pnlLauncher.Size = New System.Drawing.Size(420, 98)
+        Me.pnlLauncher.TabIndex = 9
+        '
+        'pnlAIO
+        '
+        Me.pnlAIO.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlAIO.Controls.Add(Me.wb1)
+        Me.pnlAIO.Location = New System.Drawing.Point(2, 25)
+        Me.pnlAIO.Name = "pnlAIO"
+        Me.pnlAIO.Size = New System.Drawing.Size(839, 488)
+        Me.pnlAIO.TabIndex = 10
+        '
+        'wb1
+        '
+        Me.wb1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.wb1.Location = New System.Drawing.Point(0, 0)
+        Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.wb1.Name = "wb1"
+        Me.wb1.Size = New System.Drawing.Size(839, 488)
+        Me.wb1.TabIndex = 0
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(448, 142)
-        Me.Controls.Add(Me.lblUpdates)
-        Me.Controls.Add(Me.lblWallet)
+        Me.ClientSize = New System.Drawing.Size(841, 538)
+        Me.Controls.Add(Me.pnlLauncher)
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.btnStartStop)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.pnlAIO)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -381,6 +459,9 @@ Partial Class frmMain
         Me.MenuStrip1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.pnlLauncher.ResumeLayout(False)
+        Me.pnlLauncher.PerformLayout()
+        Me.pnlAIO.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -425,4 +506,13 @@ Partial Class frmMain
     Friend WithEvents ViewConsolesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents lblBlockInfo As ToolStripStatusLabel
+    Friend WithEvents WalletToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StartWalletToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StopWalletToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents WindowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SwitchToAIOStyleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SwitchToLauncherStyleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents pnlLauncher As Panel
+    Friend WithEvents pnlAIO As Panel
+    Friend WithEvents wb1 As WebBrowser
 End Class

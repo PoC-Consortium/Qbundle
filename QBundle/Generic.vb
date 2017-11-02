@@ -63,23 +63,23 @@ Friend Class Generic
     Friend Shared Sub WriteNRSConfig()
         Dim Data As String = ""
         Dim Buffer() As String = Nothing
-        'writing nxt.properties
+        'writing brs.properties
 
         'Peer settings
         Data &= "#Peer network" & vbCrLf
         Buffer = Split(QB.settings.ListenPeer, ";")
-        Data &= "nxt.peerServerPort = " & Buffer(1) & vbCrLf
-        Data &= "nxt.peerServerHost = " & Buffer(0) & vbCrLf & vbCrLf
+        Data &= "brs.peerServerPort = " & Buffer(1) & vbCrLf
+        Data &= "brs.peerServerHost = " & Buffer(0) & vbCrLf & vbCrLf
 
         'API settings
         Data &= "#API network" & vbCrLf
         Buffer = Split(QB.settings.ListenIf, ";")
-        Data &= "nxt.apiServerPort = " & Buffer(1) & vbCrLf
-        Data &= "nxt.apiServerHost = " & Buffer(0) & vbCrLf
+        Data &= "brs.apiServerPort = " & Buffer(1) & vbCrLf
+        Data &= "brs.apiServerHost = " & Buffer(0) & vbCrLf
         If QB.settings.ConnectFrom.Contains("0.0.0.0") Then
-            Data &= "nxt.allowedBotHosts = *" & vbCrLf & vbCrLf
+            Data &= "brs.allowedBotHosts = *" & vbCrLf & vbCrLf
         Else
-            Data &= "nxt.allowedBotHosts = " & QB.settings.ConnectFrom & vbCrLf & vbCrLf
+            Data &= "brs.allowedBotHosts = " & QB.settings.ConnectFrom & vbCrLf & vbCrLf
         End If
 
 
@@ -88,7 +88,7 @@ Friend Class Generic
             Dim ip As String = GetMyIp()
             If ip <> "" Then
                 Data &= "#Auto IP set" & vbCrLf
-                Data &= "nxt.myAddress = " & ip & vbCrLf & vbCrLf
+                Data &= "brs.myAddress = " & ip & vbCrLf & vbCrLf
             End If
         End If
 
@@ -97,7 +97,7 @@ Friend Class Generic
             Dim ip As String = GetMyIp()
             If ip <> "" Then
                 Data &= "#Dynamic platform" & vbCrLf
-                Data &= "nxt.myPlatform = WCB-" & App.GetDbNameFromType(QB.settings.DbType) & vbCrLf & vbCrLf
+                Data &= "brs.myPlatform = WCB-" & App.GetDbNameFromType(QB.settings.DbType) & vbCrLf & vbCrLf
             End If
         End If
 
@@ -111,24 +111,24 @@ Friend Class Generic
                     If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
-                Data &= "nxt.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
-                Data &= "nxt.dbUsername = " & vbCrLf
-                Data &= "nxt.dbPassword = " & vbCrLf & vbCrLf
+                Data &= "brs.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
+                Data &= "brs.dbUsername = " & vbCrLf
+                Data &= "brs.dbPassword = " & vbCrLf & vbCrLf
             Case DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
-                Data &= "nxt.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
-                Data &= "nxt.dbUsername = burstwallet" & vbCrLf
-                Data &= "nxt.dbPassword = burstwallet" & vbCrLf & vbCrLf
+                Data &= "brs.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
+                Data &= "brs.dbUsername = burstwallet" & vbCrLf
+                Data &= "brs.dbPassword = burstwallet" & vbCrLf & vbCrLf
             Case DbType.MariaDB
                 Data &= "#Using installed MariaDb" & vbCrLf
-                Data &= "nxt.dbUrl=jdbc:mariadb://" & QB.settings.DbServer & "/" & QB.settings.DbName & vbCrLf
-                Data &= "nxt.dbUsername = " & QB.settings.DbUser & vbCrLf
-                Data &= "nxt.dbPassword = " & QB.settings.DbPass & vbCrLf & vbCrLf
+                Data &= "brs.dbUrl=jdbc:mariadb://" & QB.settings.DbServer & "/" & QB.settings.DbName & vbCrLf
+                Data &= "brs.dbUsername = " & QB.settings.DbUser & vbCrLf
+                Data &= "brs.dbPassword = " & QB.settings.DbPass & vbCrLf & vbCrLf
             Case DbType.H2
                 Data &= "#Using H2" & vbCrLf
-                Data &= "nxt.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
-                Data &= "nxt.dbUsername = sa" & vbCrLf
-                Data &= "nxt.dbPassword = sa" & vbCrLf & vbCrLf
+                Data &= "brs.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
+                Data &= "brs.dbUsername = sa" & vbCrLf
+                Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
         End Select
 
         If QB.settings.useOpenCL Then
@@ -140,7 +140,7 @@ Friend Class Generic
 
         Try
 
-            IO.File.WriteAllText(BaseDir & "conf\nxt.properties", Data)
+            IO.File.WriteAllText(BaseDir & "conf\brs.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try

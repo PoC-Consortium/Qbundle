@@ -77,7 +77,7 @@
             Pset.AppPath = BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = QB.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf nxt.db.quicksync.CreateBinDump " & txtFilename.Text
+        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.CreateBinDump " & txtFilename.Text
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = BaseDir

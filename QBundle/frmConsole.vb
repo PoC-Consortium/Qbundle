@@ -40,7 +40,7 @@
                         If AppId = AppNames.MariaPortable And cmbLog.SelectedIndex = 1 Then
                             txtLog.AppendText(data & vbCrLf)
                         End If
-                        If AppId = AppNames.NRS And cmbLog.SelectedIndex = 0 Then
+                        If AppId = AppNames.BRS And cmbLog.SelectedIndex = 0 Then
                             txtLog.AppendText(data & vbCrLf)
                         End If
                     End If

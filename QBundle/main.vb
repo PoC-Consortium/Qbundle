@@ -14,7 +14,7 @@
     'Used for Appnames to AppId for diffrent process and repo managements
     Public Enum AppNames As Integer
         Launcher = 0
-        NRS = 1
+        BRS = 1
         JavaInstalled = 2
         JavaPortable = 3
         MariaPortable = 4 'Maria DB Portable

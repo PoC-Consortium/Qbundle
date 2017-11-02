@@ -175,7 +175,7 @@
             Pset.AppPath = BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = QB.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf nxt.db.quicksync.CreateBinDump " & BaseDir & "Convertion.bbd"
+        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.CreateBinDump " & BaseDir & "Convertion.bbd"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = BaseDir
@@ -349,7 +349,7 @@
             Pset.AppPath = BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = QB.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf nxt.db.quicksync.LoadBinDump " & BaseDir & "Convertion.bbd -y"
+        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.LoadBinDump " & BaseDir & "Convertion.bbd -y"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = BaseDir

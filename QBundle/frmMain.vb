@@ -55,7 +55,7 @@
             AddHandler App.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
         SetDbInfo()
-        lblWallet.Text = "Burst wallet v" & App.GetLocalVersion(AppNames.NRS, False)
+        lblWallet.Text = "Burst wallet v" & App.GetLocalVersion(AppNames.BRS, False)
 
         If QB.settings.Cpulimit = 0 Or QB.settings.Cpulimit > Environment.ProcessorCount Then 'need to set correct cpu
             Select Case Environment.ProcessorCount
@@ -76,6 +76,49 @@
         AddHandler ProcHandler.Update, AddressOf ProcEvents
         AddHandler ProcHandler.Aborting, AddressOf Aborted
 
+
+        StopWalletToolStripMenuItem.Enabled = False
+        If QB.settings.QBMode = 0 Then
+            StartStop()
+
+        End If
+        SetMode(QB.settings.QBMode)
+
+
+    End Sub
+    Private Sub SetMode(ByVal NewMode As Integer)
+
+
+        Select Case NewMode
+            Case 0 ' AIO Mode
+
+                Me.FormBorderStyle = FormBorderStyle.Sizable
+                Me.MaximizeBox = True
+                Me.Width = 1024
+                Me.Height = 768
+                QB.settings.QBMode = 0
+                QB.settings.SaveSettings()
+                Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
+                Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
+                pnlAIO.Visible = True
+                pnlLauncher.Visible = False
+
+            Case 1 ' Launcher Mode
+                Me.FormBorderStyle = FormBorderStyle.FixedDialog
+                Me.MaximizeBox = False
+                Me.Width = 464
+                Me.Height = 181
+                QB.settings.QBMode = 1
+                QB.settings.SaveSettings()
+                Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
+                Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
+                pnlAIO.Visible = False
+                pnlLauncher.Visible = True
+        End Select
+
+
+
+
     End Sub
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
@@ -94,7 +137,10 @@
 #Region " Clickabe Objects "
     'buttons
     Private Sub btnStartStop_Click(sender As Object, e As EventArgs) Handles btnStartStop.Click
+        StartStop()
 
+    End Sub
+    Private Sub StartStop()
         If Running Then
             lblGotoWallet.Visible = False
             btnStartStop.Text = "Stopping"
@@ -113,8 +159,9 @@
             Running = True
             btnStartStop.Enabled = False
             btnStartStop.Text = "Starting"
+            StartWalletToolStripMenuItem.Enabled = False
+            StopWalletToolStripMenuItem.Enabled = True
         End If
-
     End Sub
 
     'labels
@@ -184,7 +231,7 @@
         End If
 
         Select Case AppId
-            Case AppNames.NRS
+            Case AppNames.BRS
                 lblNrsStatus.Text = "Starting"
                 lblNrsStatus.ForeColor = Color.DarkOrange
             Case AppNames.MariaPortable
@@ -201,7 +248,7 @@
             Return
         End If
 
-        If AppId = AppNames.NRS Then
+        If AppId = AppNames.BRS Then
             APITimer.Enabled = False
             APITimer.Stop()
             lblNrsStatus.Text = "Stopped"
@@ -219,6 +266,8 @@
             btnStartStop.Text = "Start Wallet"
             btnStartStop.Enabled = True
             Running = False
+            StartWalletToolStripMenuItem.Enabled = True
+            StopWalletToolStripMenuItem.Enabled = False
         End If
 
     End Sub
@@ -231,7 +280,7 @@
         'threadsafe here
         Select Case Operation
             Case ProcOp.Stopped  'Stoped
-                If AppId = AppNames.NRS Then
+                If AppId = AppNames.BRS Then
                     LblDbStatus.Text = "Stopped"
                     LblDbStatus.ForeColor = Color.Red
                     APITimer.Enabled = False
@@ -247,7 +296,7 @@
                     LblDbStatus.ForeColor = Color.DarkGreen
 
                 End If
-                If AppId = AppNames.NRS Then
+                If AppId = AppNames.BRS Then
                     lblNrsStatus.Text = "Running"
                     lblNrsStatus.ForeColor = Color.DarkGreen
                     btnStartStop.Text = "Stop Wallet"
@@ -257,13 +306,21 @@
                     APITimer.Interval = "1000"
                     APITimer.Enabled = True
                     APITimer.Start()
+                    Dim s() As String = Split(QB.settings.ListenIf, ";")
+                    Dim url As String = Nothing
+                    If s(0) = "0.0.0.0" Then
+                        url = "http://127.0.0.1:" & s(1)
+                    Else
+                        url = "http://" & s(0) & ":" & s(1)
+                    End If
+                    wb1.Navigate(url)
                 End If
             Case ProcOp.Stopping
                 If AppId = AppNames.MariaPortable Then
                     LblDbStatus.Text = "Stopping"
                     LblDbStatus.ForeColor = Color.DarkOrange
                 End If
-                If AppId = AppNames.NRS Then
+                If AppId = AppNames.BRS Then
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
                     APITimer.Enabled = False
@@ -274,13 +331,13 @@
                     Console(1).Add(data)
                     If Console(1).Count = 3001 Then Console(1).RemoveAt(0)
                 End If
-                If AppId = AppNames.NRS Then
+                If AppId = AppNames.BRS Then
                     Console(0).Add(data)
                     'here we can do error detection
                     If QB.settings.WalletException And LastException.AddHours(1) < Now Then
                         If data.StartsWith("Exception in") Then
                             LastException = Now
-                            ProcHandler.ReStartProcess(AppNames.NRS)
+                            ProcHandler.ReStartProcess(AppNames.BRS)
                         End If
                     End If
 
@@ -291,13 +348,13 @@
                     Console(1).Add(data)
                     If Console(1).Count = 3001 Then Console(1).RemoveAt(0)
                 End If
-                If AppId = AppNames.NRS Then
+                If AppId = AppNames.BRS Then
                     Console(0).Add(data)
                     'here we can do error detection
                     If QB.settings.WalletException And LastException.AddHours(1) < Now Then
                         If data.StartsWith("Exception in") Then
                             LastException = Now
-                            ProcHandler.ReStartProcess(AppNames.NRS)
+                            ProcHandler.ReStartProcess(AppNames.BRS)
                         End If
                     End If
 
@@ -317,7 +374,7 @@
             Return
         End If
         MsgBox(Data)
-        If AppId = AppNames.NRS Then
+        If AppId = AppNames.BRS Then
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
         End If
@@ -351,14 +408,14 @@
             pset(0).StartsignalMaxTime = 60
 
             pset(1) = New clsProcessHandler.pSettings
-            pset(1).AppId = AppNames.NRS
+            pset(1).AppId = AppNames.BRS
             If QB.settings.JavaType = AppNames.JavaInstalled Then
                 pset(1).AppPath = "java"
             Else
                 pset(1).AppPath = BaseDir & "Java\bin\java.exe"
             End If
             pset(1).Cores = QB.settings.Cpulimit
-            pset(1).Params = "-cp burst.jar;lib\*;conf nxt.Nxt"
+            pset(1).Params = "-cp burst.jar;lib\*;conf brs.Burst"
             pset(1).StartSignal = "Started API server at"
             pset(1).StartsignalMaxTime = 300
             pset(1).WorkingDirectory = BaseDir
@@ -368,14 +425,14 @@
 
         Else 'normal start
             Dim Pset As New clsProcessHandler.pSettings
-            Pset.AppId = AppNames.NRS
+            Pset.AppId = AppNames.BRS
             If QB.settings.JavaType = AppNames.JavaInstalled Then
                 Pset.AppPath = "java"
             Else
                 Pset.AppPath = BaseDir & "Java\bin\java.exe"
             End If
             Pset.Cores = QB.settings.Cpulimit
-            Pset.Params = "-cp burst.jar;lib\*;lib\FirebirdSQL;conf nxt.Nxt"
+            Pset.Params = "-cp burst.jar;lib\;conf brs.Burst"
             Pset.StartSignal = "Started API server at"
             Pset.StartsignalMaxTime = 300
             Pset.WorkingDirectory = BaseDir
@@ -387,11 +444,11 @@
     Public Sub StopWallet()
         If QB.settings.DbType = DbType.pMariaDB Then 'send startsequence
             Dim Pid(1) As Object
-            Pid(0) = AppNames.NRS
+            Pid(0) = AppNames.BRS
             Pid(1) = AppNames.MariaPortable
             ProcHandler.StopProcessSquence(Pid)
         Else
-            ProcHandler.StopProcess(AppNames.NRS)
+            ProcHandler.StopProcess(AppNames.BRS)
         End If
     End Sub
 #End Region
@@ -484,6 +541,27 @@
         End Try
 
 
+    End Sub
+
+    Private Sub SwitchToAIOStyleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SwitchToAIOStyleToolStripMenuItem.Click
+        QB.settings.QBMode = 0
+        QB.settings.SaveSettings()
+        SetMode(0)
+    End Sub
+
+    Private Sub SwitchToLauncherStyleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SwitchToLauncherStyleToolStripMenuItem.Click
+        QB.settings.QBMode = 1
+        QB.settings.SaveSettings()
+        SetMode(1)
+    End Sub
+
+    Private Sub StartWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartWalletToolStripMenuItem.Click
+        StartStop()
+
+    End Sub
+
+    Private Sub StopWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopWalletToolStripMenuItem.Click
+        StartStop()
     End Sub
 
 

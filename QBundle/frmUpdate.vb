@@ -33,11 +33,11 @@
             lblStatus.Text = "Waiting for wallet to stop"
             If QB.settings.DbType = DbType.pMariaDB Then 'send startsequence
                 Dim Pid(1) As Object
-                Pid(0) = AppNames.NRS
+                Pid(0) = AppNames.BRS
                 Pid(1) = AppNames.MariaPortable
                 ProcHandler.StopProcessSquence(Pid)
             Else
-                ProcHandler.StopProcess(AppNames.NRS)
+                ProcHandler.StopProcess(AppNames.BRS)
             End If
             tmr.Interval = 500
             tmr.Start()

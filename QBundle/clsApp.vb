@@ -71,13 +71,19 @@ Public Class clsApp
 
         'ok we have the data to parse
         'now we need to translate the names into correct integer values corresponding to Appname enum
+        Dim AppId As Integer
         If data.Length <> 0 Then
             Dim Lines() As String = Split(data, vbCrLf)
             For Each Line In Lines
 
                 If Trim(Line) <> "" Then
                     Dim Cell() As String = Split(Line, "|")
-                    Dim AppId As Integer = [Enum].Parse(GetType(AppNames), Cell(0)) 'converting name to appid
+                    Try
+                        AppId = [Enum].Parse(GetType(AppNames), Cell(0)) 'converting name to appid
+                    Catch ex As Exception
+                        If Cell(0) = "NRS" Then AppId = AppNames.BRS
+                    End Try
+
                     _Apps(AppId).RemoteVersion = Cell(1)
                     _Apps(AppId).ExtractToDir = Cell(2)
                     _Apps(AppId).RemoteUrl = Cell(3)
@@ -106,14 +112,14 @@ Public Class clsApp
 
         Try
             If File.Exists(BaseDir & "burst.jar") Then 'check if burst jar is here then we have nrs?
-                _Apps(AppNames.NRS).LocalFound = True
+                _Apps(AppNames.BRS).LocalFound = True
                 'try to set version since we have burst.jar
                 If File.Exists(BaseDir & "conf\version") Then
                     Dim Version As String = File.ReadAllText(BaseDir & "conf\version")
-                    _Apps(AppNames.NRS).LocalVersion = Version
+                    _Apps(AppNames.BRS).LocalVersion = Version
                 Else
                     'asume version 1.3.4cg
-                    _Apps(AppNames.NRS).LocalVersion = "1.3.4cg"
+                    _Apps(AppNames.BRS).LocalVersion = "1.3.6cg"
                 End If
             End If
         Catch ex As Exception
@@ -225,7 +231,7 @@ Public Class clsApp
         Dim appid As Integer = CType(obj, Integer)
         'we are now in threaded environment
         'if we do not have remoteinfo lets get it.
-        If _Apps(AppNames.NRS).RemoteUrl = "" Then
+        If _Apps(AppNames.BRS).RemoteUrl = "" Then
             If Not SetRemoteInfo() Then
                 RaiseEvent Aborted(appid)
                 Exit Sub
@@ -456,8 +462,8 @@ Public Class clsApp
     Public Function GetAppNameFromId(ByVal AppId As Integer) As String
         'Used when AppId needs resolves to human readable names
         Select Case AppId
-            Case AppNames.NRS
-                Return "NRS"
+            Case AppNames.BRS
+                Return "BRS"
             Case AppNames.JavaInstalled
                 Return "Java"
             Case AppNames.JavaPortable
@@ -465,7 +471,7 @@ Public Class clsApp
             Case AppNames.MariaPortable
                 Return "Portable MariaDB"
             Case AppNames.Launcher
-                Return "Burst wallet launcher"
+                Return "Qbundle"
 
         End Select
         Return ""

@@ -24,6 +24,7 @@
     Private _Upgradev As Integer
     Private _AlwaysAdmin As Boolean
     Private _Repo As String
+    Private _QBMode As Integer
 
 
     'NRS
@@ -182,6 +183,14 @@
             _Repo = value
         End Set
     End Property
+    Public Property QBMode() As Integer
+        Get
+            Return _QBMode
+        End Get
+        Set(ByVal value As Integer)
+            _QBMode = value
+        End Set
+    End Property
 
     Friend Sub New()
         _autoip = True
@@ -206,6 +215,7 @@
         _Upgradev = 11
         _AlwaysAdmin = False
         _Repo = "http://files.getburst.net;http://files2.getburst.net"
+        _QBMode = 1 '0 = AIO 1 = Launcher
     End Sub
     Friend Sub LoadSettings()
         Try
