@@ -56,7 +56,7 @@
         AddHandler ProcHandler.Started, AddressOf Starting
         AddHandler ProcHandler.Stopped, AddressOf Stopped
         AddHandler ProcHandler.Update, AddressOf ProcEvents
-        If QB.settings.DbType = DbType.pMariaDB Then
+        If QB.settings.DbType = Q.DbType.pMariaDB Then
             StartMaria()
         Else
             StartExport()
@@ -70,8 +70,8 @@
 
 
         Dim Pset As New clsProcessHandler.pSettings
-        Pset.AppId = AppNames.Export
-        If QB.settings.JavaType = AppNames.JavaInstalled Then
+        Pset.AppId = Q.AppNames.Export
+        If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
             Pset.AppPath = "java"
         Else
             Pset.AppPath = BaseDir & "Java\bin\java.exe"
@@ -106,7 +106,7 @@
             AddHandler ProcHandler.Started, AddressOf Starting
             AddHandler ProcHandler.Stopped, AddressOf Stopped
             AddHandler ProcHandler.Update, AddressOf ProcEvents
-            If QB.settings.DbType = DbType.pMariaDB Then
+            If QB.settings.DbType = Q.DbType.pMariaDB Then
                 StartMaria()
             Else
                 StartExport()
@@ -122,7 +122,7 @@
         End If
 
         Select Case AppId
-            Case AppNames.Export
+            Case Q.AppNames.Export
                 lblStatus.Text = "Starting to export"
                 pb1.Value = 0
         End Select
@@ -135,14 +135,14 @@
             Me.Invoke(d, New Object() {AppId})
             Return
         End If
-        If AppId = AppNames.Export Then
-            If QB.settings.DbType = DbType.pMariaDB Then
+        If AppId = Q.AppNames.Export Then
+            If QB.settings.DbType = Q.DbType.pMariaDB Then
                 StopMaria()
             Else
                 Complete()
             End If
         End If
-        If AppId = AppNames.MariaPortable Then
+        If AppId = Q.AppNames.MariaPortable Then
             Complete()
         End If
     End Sub
@@ -170,7 +170,7 @@
         'threadsafe here
         Dim darray() As String = Nothing
         Dim percent As Integer = 0
-        If AppId = AppNames.Export Then 'we need to filter messages
+        If AppId = Q.AppNames.Export Then 'we need to filter messages
             Select Case Operation
                 Case ProcOp.Stopped
                 Case ProcOp.FoundSignal
@@ -204,7 +204,7 @@
                     Running = False
             End Select
         End If
-        If AppId = AppNames.MariaPortable Then
+        If AppId = Q.AppNames.MariaPortable Then
             If Operation = ProcOp.FoundSignal Then
                 StartExport()
             End If
@@ -220,7 +220,7 @@
             Return
         End If
 
-        If AppId = AppNames.Export Then
+        If AppId = Q.AppNames.Export Then
             MsgBox(Data)
         End If
 
@@ -233,7 +233,7 @@
         Try
             If QB.Generic.SanityCheck Then
                 Dim pr As New clsProcessHandler.pSettings
-                pr.AppId = AppNames.MariaPortable
+                pr.AppId = Q.AppNames.MariaPortable
                 pr.AppPath = BaseDir & "MariaDb\bin\mysqld.exe"
                 pr.Cores = 0
                 pr.Params = "--console"
@@ -249,6 +249,6 @@
     End Sub
     Private Sub StopMaria()
         lblStatus.Text = "Stopping MariaDB"
-        ProcHandler.StopProcess(AppNames.MariaPortable)
+        ProcHandler.StopProcess(Q.AppNames.MariaPortable)
     End Sub
 End Class

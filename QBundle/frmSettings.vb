@@ -30,10 +30,10 @@ Public Class frmSettings
 
 #Region " Clickable objects "
     Private Sub rJava0_Click(sender As Object, e As EventArgs) Handles rJava0.Click
-        ChangeJavaType(AppNames.JavaInstalled)
+        ChangeJavaType(Q.AppNames.JavaInstalled)
     End Sub
     Private Sub rJava1_Click(sender As Object, e As EventArgs) Handles rJava1.Click
-        ChangeJavaType(AppNames.JavaPortable)
+        ChangeJavaType(Q.AppNames.JavaPortable)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -134,9 +134,9 @@ Public Class frmSettings
 
     End Sub
     Private Sub LoadSettings()
-        If Not App.isInstalled(AppNames.JavaInstalled) Then rJava0.Enabled = False
-        If Not App.isInstalled(AppNames.JavaPortable) Then rJava1.Enabled = False
-        If QB.settings.DbType = DbType.MariaDB Then
+        If Not App.isInstalled(Q.AppNames.JavaInstalled) Then rJava0.Enabled = False
+        If Not App.isInstalled(Q.AppNames.JavaPortable) Then rJava1.Enabled = False
+        If QB.settings.DbType = Q.DbType.MariaDB Then
             pnlMaria.Enabled = True
             pnlDbSettings.Enabled = True
         Else
@@ -191,13 +191,13 @@ Public Class frmSettings
         rJava0.Checked = False
         rJava1.Checked = False
         Select Case id
-            Case AppNames.JavaInstalled
+            Case Q.AppNames.JavaInstalled
                 rJava0.Checked = True
-            Case AppNames.JavaPortable
+            Case Q.AppNames.JavaPortable
                 rJava1.Checked = True
             Case Else
                 rJava1.Checked = True
-                id = AppNames.JavaPortable
+                id = Q.AppNames.JavaPortable
         End Select
         JavaType = id
     End Sub

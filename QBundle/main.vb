@@ -4,24 +4,10 @@
     '############################
     ' Enums
     '############################
-    Public Enum DbType As Integer
-        H2 = 0
-        FireBird = 1
-        pMariaDB = 2
-        MariaDB = 3
-    End Enum
+
 
     'Used for Appnames to AppId for diffrent process and repo managements
-    Public Enum AppNames As Integer
-        Launcher = 0
-        BRS = 1
-        JavaInstalled = 2
-        JavaPortable = 3
-        MariaPortable = 4 'Maria DB Portable
-        Import = 5 'Export / import db
-        Export = 6
-        DownloadFile = 7 'Download whatever
-    End Enum
+
 
 
     Public Enum States
@@ -54,4 +40,6 @@
     Public WithEvents App As clsApp
     Public WithEvents ProcHandler As clsProcessHandler
     Public settings As clsSettings
+    Public Accounts As clsAccounts
+
 End Module

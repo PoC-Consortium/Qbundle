@@ -19,6 +19,9 @@
         If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
         settings = New clsSettings
         settings.LoadSettings()
+        Accounts = New clsAccounts
+        Accounts.LoadAccounts()
+
         QB.Generic.CheckCommandArgs()
         If settings.AlwaysAdmin And Not QB.Generic.IsAdmin Then
             'restartme as admin
@@ -26,7 +29,7 @@
             End
         End If
         If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
-        LastException = Now
+        LastException = Now 'for brs exception monitoring
 
         If Not QB.Generic.CheckWritePermission Then
             MsgBox("Burst Wallet launcher do not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
@@ -55,7 +58,7 @@
             AddHandler App.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
         SetDbInfo()
-        lblWallet.Text = "Burst wallet v" & App.GetLocalVersion(AppNames.BRS, False)
+        lblWallet.Text = "Burst wallet v" & App.GetLocalVersion(Q.AppNames.BRS, False)
 
         If QB.settings.Cpulimit = 0 Or QB.settings.Cpulimit > Environment.ProcessorCount Then 'need to set correct cpu
             Select Case Environment.ProcessorCount
@@ -231,10 +234,10 @@
         End If
 
         Select Case AppId
-            Case AppNames.BRS
+            Case Q.AppNames.BRS
                 lblNrsStatus.Text = "Starting"
                 lblNrsStatus.ForeColor = Color.DarkOrange
-            Case AppNames.MariaPortable
+            Case Q.AppNames.MariaPortable
                 LblDbStatus.Text = "Starting"
                 LblDbStatus.ForeColor = Color.DarkOrange
         End Select
@@ -248,14 +251,14 @@
             Return
         End If
 
-        If AppId = AppNames.BRS Then
+        If AppId = Q.AppNames.BRS Then
             APITimer.Enabled = False
             APITimer.Stop()
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
         End If
-        If QB.settings.DbType = DbType.pMariaDB Then
-            If AppId = AppNames.MariaPortable Then
+        If QB.settings.DbType = Q.DbType.pMariaDB Then
+            If AppId = Q.AppNames.MariaPortable Then
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
                 btnStartStop.Text = "Start Wallet"
@@ -280,23 +283,23 @@
         'threadsafe here
         Select Case Operation
             Case ProcOp.Stopped  'Stoped
-                If AppId = AppNames.BRS Then
+                If AppId = Q.AppNames.BRS Then
                     LblDbStatus.Text = "Stopped"
                     LblDbStatus.ForeColor = Color.Red
                     APITimer.Enabled = False
                     APITimer.Stop()
                 End If
-                If AppId = AppNames.MariaPortable Then
+                If AppId = Q.AppNames.MariaPortable Then
                     lblNrsStatus.Text = "Stopped"
                     lblNrsStatus.ForeColor = Color.Red
                 End If
             Case ProcOp.FoundSignal
-                If AppId = AppNames.MariaPortable Then
+                If AppId = Q.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Running"
                     LblDbStatus.ForeColor = Color.DarkGreen
 
                 End If
-                If AppId = AppNames.BRS Then
+                If AppId = Q.AppNames.BRS Then
                     lblNrsStatus.Text = "Running"
                     lblNrsStatus.ForeColor = Color.DarkGreen
                     btnStartStop.Text = "Stop Wallet"
@@ -316,45 +319,45 @@
                     wb1.Navigate(url)
                 End If
             Case ProcOp.Stopping
-                If AppId = AppNames.MariaPortable Then
+                If AppId = Q.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Stopping"
                     LblDbStatus.ForeColor = Color.DarkOrange
                 End If
-                If AppId = AppNames.BRS Then
+                If AppId = Q.AppNames.BRS Then
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
                     APITimer.Enabled = False
                     APITimer.Stop()
                 End If
             Case ProcOp.ConsoleOut
-                If AppId = AppNames.MariaPortable Then
+                If AppId = Q.AppNames.MariaPortable Then
                     Console(1).Add(data)
                     If Console(1).Count = 3001 Then Console(1).RemoveAt(0)
                 End If
-                If AppId = AppNames.BRS Then
+                If AppId = Q.AppNames.BRS Then
                     Console(0).Add(data)
                     'here we can do error detection
                     If QB.settings.WalletException And LastException.AddHours(1) < Now Then
                         If data.StartsWith("Exception in") Then
                             LastException = Now
-                            ProcHandler.ReStartProcess(AppNames.BRS)
+                            ProcHandler.ReStartProcess(Q.AppNames.BRS)
                         End If
                     End If
 
                     If Console(0).Count = 3001 Then Console(0).RemoveAt(0)
                 End If
             Case ProcOp.ConsoleErr
-                If AppId = AppNames.MariaPortable Then
+                If AppId = Q.AppNames.MariaPortable Then
                     Console(1).Add(data)
                     If Console(1).Count = 3001 Then Console(1).RemoveAt(0)
                 End If
-                If AppId = AppNames.BRS Then
+                If AppId = Q.AppNames.BRS Then
                     Console(0).Add(data)
                     'here we can do error detection
                     If QB.settings.WalletException And LastException.AddHours(1) < Now Then
                         If data.StartsWith("Exception in") Then
                             LastException = Now
-                            ProcHandler.ReStartProcess(AppNames.BRS)
+                            ProcHandler.ReStartProcess(Q.AppNames.BRS)
                         End If
                     End If
 
@@ -374,12 +377,12 @@
             Return
         End If
         MsgBox(Data)
-        If AppId = AppNames.BRS Then
+        If AppId = Q.AppNames.BRS Then
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
         End If
-        If QB.settings.DbType = DbType.pMariaDB Then
-            If AppId = AppNames.MariaPortable Then
+        If QB.settings.DbType = Q.DbType.pMariaDB Then
+            If AppId = Q.AppNames.MariaPortable Then
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
                 btnStartStop.Text = "Start Wallet"
@@ -395,11 +398,11 @@
     End Sub
     Private Sub StartWallet()
 
-        If QB.settings.DbType = DbType.pMariaDB Then 'send startsequence
+        If QB.settings.DbType = Q.DbType.pMariaDB Then 'send startsequence
             Dim pset(1) As clsProcessHandler.pSettings
             pset(0) = New clsProcessHandler.pSettings
             'mariadb
-            pset(0).AppId = AppNames.MariaPortable
+            pset(0).AppId = Q.AppNames.MariaPortable
             pset(0).AppPath = BaseDir & "MariaDb\bin\mysqld.exe"
             pset(0).Cores = 0
             pset(0).Params = "--console"
@@ -408,8 +411,8 @@
             pset(0).StartsignalMaxTime = 60
 
             pset(1) = New clsProcessHandler.pSettings
-            pset(1).AppId = AppNames.BRS
-            If QB.settings.JavaType = AppNames.JavaInstalled Then
+            pset(1).AppId = Q.AppNames.BRS
+            If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
                 pset(1).AppPath = "java"
             Else
                 pset(1).AppPath = BaseDir & "Java\bin\java.exe"
@@ -425,8 +428,8 @@
 
         Else 'normal start
             Dim Pset As New clsProcessHandler.pSettings
-            Pset.AppId = AppNames.BRS
-            If QB.settings.JavaType = AppNames.JavaInstalled Then
+            Pset.AppId = Q.AppNames.BRS
+            If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
                 Pset.AppPath = "java"
             Else
                 Pset.AppPath = BaseDir & "Java\bin\java.exe"
@@ -442,13 +445,13 @@
         End If
     End Sub
     Public Sub StopWallet()
-        If QB.settings.DbType = DbType.pMariaDB Then 'send startsequence
+        If QB.settings.DbType = Q.DbType.pMariaDB Then 'send startsequence
             Dim Pid(1) As Object
-            Pid(0) = AppNames.BRS
-            Pid(1) = AppNames.MariaPortable
+            Pid(0) = Q.AppNames.BRS
+            Pid(1) = Q.AppNames.MariaPortable
             ProcHandler.StopProcessSquence(Pid)
         Else
-            ProcHandler.StopProcess(AppNames.BRS)
+            ProcHandler.StopProcess(Q.AppNames.BRS)
         End If
     End Sub
 #End Region
@@ -457,20 +460,20 @@
     Public Sub SetDbInfo()
 
         Select Case QB.settings.DbType
-            Case DbType.FireBird
-                lblDbName.Text = App.GetDbNameFromType(DbType.FireBird)
+            Case Q.DbType.FireBird
+                lblDbName.Text = App.GetDbNameFromType(Q.DbType.FireBird)
                 LblDbStatus.Text = "Embeded"
                 LblDbStatus.ForeColor = Color.DarkGreen
-            Case DbType.pMariaDB
-                lblDbName.Text = App.GetDbNameFromType(DbType.pMariaDB)
+            Case Q.DbType.pMariaDB
+                lblDbName.Text = App.GetDbNameFromType(Q.DbType.pMariaDB)
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
-            Case DbType.MariaDB
-                lblDbName.Text = App.GetDbNameFromType(DbType.MariaDB)
+            Case Q.DbType.MariaDB
+                lblDbName.Text = App.GetDbNameFromType(Q.DbType.MariaDB)
                 LblDbStatus.Text = "Unknown"
                 LblDbStatus.ForeColor = Color.DarkOrange
-            Case DbType.H2
-                lblDbName.Text = App.GetDbNameFromType(DbType.H2)
+            Case Q.DbType.H2
+                lblDbName.Text = App.GetDbNameFromType(Q.DbType.H2)
                 LblDbStatus.Text = "Embeded"
                 LblDbStatus.ForeColor = Color.DarkGreen
         End Select
@@ -562,6 +565,10 @@
 
     Private Sub StopWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopWalletToolStripMenuItem.Click
         StartStop()
+    End Sub
+
+    Private Sub AddAccountToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAccountToolStripMenuItem.Click
+        frmAccounts.Show()
     End Sub
 
 

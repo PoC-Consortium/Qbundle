@@ -137,10 +137,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsAccounts.vb" />
     <Compile Include="clsApp.vb" />
     <Compile Include="clsHttp.vb" />
     <Compile Include="clsProcessHandler.vb" />
+    <Compile Include="clsQ.vb" />
     <Compile Include="clsServiceHandler.vb" />
+    <Compile Include="frmAccounts.Designer.vb">
+      <DependentUpon>frmAccounts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAccounts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmChangeDatabase.Designer.vb">
       <DependentUpon>frmChangeDatabase.vb</DependentUpon>
     </Compile>
@@ -228,6 +236,9 @@
     <Compile Include="clsSettings.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAccounts.resx">
+      <DependentUpon>frmAccounts.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChangeDatabase.resx">
       <DependentUpon>frmChangeDatabase.vb</DependentUpon>
     </EmbeddedResource>

@@ -8,19 +8,22 @@ Known problems:
 
 To Be done:
 Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
-Rename to Qbundle
-Add support for both AIO and Launcher style (choose at first time)
 Add support for Blago Miner (first step)
 Add support for XPlotter (first step)
+Account Manager
 Add a components download window where you can select to download/update a component.
 More visuals when wallet is running. Like Mining info Network diff
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
-Make NRS exception handling to cover more error types.
-Environment check
+Make BRS exception handling to cover more error types.
+Environment check (check enough ram and disk space)
+First setup choise of wallet / Launcher style
+
+
 
 ~V1.3
-
-
+Rename to Qbundle
+Added support for Dev version of nrs
+Wallet Layout added
 
 V1.2
 + Getting started Wizard.

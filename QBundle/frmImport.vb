@@ -98,7 +98,7 @@
         AddHandler ProcHandler.Started, AddressOf Starting
         AddHandler ProcHandler.Stopped, AddressOf Stopped
         AddHandler ProcHandler.Update, AddressOf ProcEvents
-        If QB.settings.DbType = DbType.pMariaDB Then
+        If QB.settings.DbType = Q.DbType.pMariaDB Then
             StartMaria()
         Else
             StartImport()
@@ -121,8 +121,8 @@
     Private Sub ImportFromFile(ByVal FileName As String)
 
         Dim Pset As New clsProcessHandler.pSettings
-        Pset.AppId = AppNames.Import
-        If QB.settings.JavaType = AppNames.JavaInstalled Then
+        Pset.AppId = Q.AppNames.Import
+        If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
             Pset.AppPath = "java"
         Else
             Pset.AppPath = BaseDir & "Java\bin\java.exe"
@@ -146,7 +146,7 @@
         End If
         'we have aborted return to download again
         IsAborted = True
-        If DbType.pMariaDB Then StopMaria()
+        If Q.DbType.pMariaDB Then StopMaria()
 
         Running = False
         r1.Enabled = True
@@ -210,7 +210,7 @@
         End If
 
         Select Case AppId
-            Case AppNames.Import
+            Case Q.AppNames.Import
                 lblStatus.Text = "Starting to import."
                 pb1.Value = 0
         End Select
@@ -223,14 +223,14 @@
             Return
         End If
 
-        If AppId = AppNames.Import Then
-            If QB.settings.DbType = DbType.pMariaDB Then
+        If AppId = Q.AppNames.Import Then
+            If QB.settings.DbType = Q.DbType.pMariaDB Then
                 StopMaria()
             Else
                 Complete()
             End If
         End If
-        If AppId = AppNames.MariaPortable Then
+        If AppId = Q.AppNames.MariaPortable Then
             Complete()
         End If
     End Sub
@@ -266,7 +266,7 @@
         'threadsafe here
         Dim darray() As String = Nothing
         Dim percent As Integer = 0
-        If AppId = AppNames.Import Then 'we need to filter messages
+        If AppId = Q.AppNames.Import Then 'we need to filter messages
             Select Case Operation
                 Case ProcOp.Stopped
                 Case ProcOp.FoundSignal
@@ -315,7 +315,7 @@
                     Running = False
             End Select
         End If
-        If AppId = AppNames.MariaPortable Then
+        If AppId = Q.AppNames.MariaPortable Then
             If Operation = ProcOp.FoundSignal Then
                 StartImport()
             End If
@@ -328,7 +328,7 @@
             Return
         End If
 
-        If AppId = AppNames.Import Then
+        If AppId = Q.AppNames.Import Then
             MsgBox(Data)
         End If
 
@@ -344,7 +344,7 @@
             AddHandler ProcHandler.Started, AddressOf Starting
             AddHandler ProcHandler.Stopped, AddressOf Stopped
             AddHandler ProcHandler.Update, AddressOf ProcEvents
-            If QB.settings.DbType = DbType.pMariaDB Then
+            If QB.settings.DbType = Q.DbType.pMariaDB Then
                 StartMaria()
             Else
                 StartImport()
@@ -358,7 +358,7 @@
             If QB.Generic.SanityCheck Then
                 lblStatus.Text = "Starting MariaDB"
                 Dim pr As New clsProcessHandler.pSettings
-                pr.AppId = AppNames.MariaPortable
+                pr.AppId = Q.AppNames.MariaPortable
                 pr.AppPath = BaseDir & "MariaDb\bin\mysqld.exe"
                 pr.Cores = 0
                 pr.Params = "--console"
@@ -376,7 +376,7 @@
     End Sub
     Private Sub StopMaria()
         lblStatus.Text = "Stopping MariaDB"
-        ProcHandler.StopProcess(AppNames.MariaPortable)
+        ProcHandler.StopProcess(Q.AppNames.MariaPortable)
     End Sub
 
 

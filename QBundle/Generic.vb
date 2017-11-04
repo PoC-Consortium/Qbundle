@@ -37,8 +37,8 @@ Friend Class Generic
                                     QB.settings.DbUser = "burstwallet"
                                     QB.settings.DbPass = "burstwallet"
                                     QB.settings.DbServer = "localhost:3306"
-                                    QB.settings.DbType = DbType.pMariaDB
-                                    QB.settings.JavaType = AppNames.JavaPortable
+                                    QB.settings.DbType = Q.DbType.pMariaDB
+                                    QB.settings.JavaType = Q.AppNames.JavaPortable
                                 End If
                             Next
                             IO.File.Delete(BaseDir & "\Settings.ini")
@@ -102,7 +102,7 @@ Friend Class Generic
         End If
 
         Select Case QB.settings.DbType
-            Case DbType.FireBird
+            Case Q.DbType.FireBird
                 Try
                     If Not IO.Directory.Exists(BaseDir & "burst_db") Then
                         IO.Directory.CreateDirectory(BaseDir & "burst_db")
@@ -114,17 +114,17 @@ Friend Class Generic
                 Data &= "brs.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
                 Data &= "brs.dbUsername = " & vbCrLf
                 Data &= "brs.dbPassword = " & vbCrLf & vbCrLf
-            Case DbType.pMariaDB
+            Case Q.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
                 Data &= "brs.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
                 Data &= "brs.dbUsername = burstwallet" & vbCrLf
                 Data &= "brs.dbPassword = burstwallet" & vbCrLf & vbCrLf
-            Case DbType.MariaDB
+            Case Q.DbType.MariaDB
                 Data &= "#Using installed MariaDb" & vbCrLf
                 Data &= "brs.dbUrl=jdbc:mariadb://" & QB.settings.DbServer & "/" & QB.settings.DbName & vbCrLf
                 Data &= "brs.dbUsername = " & QB.settings.DbUser & vbCrLf
                 Data &= "brs.dbPassword = " & QB.settings.DbPass & vbCrLf & vbCrLf
-            Case DbType.H2
+            Case Q.DbType.H2
                 Data &= "#Using H2" & vbCrLf
                 Data &= "brs.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
                 Data &= "brs.dbUsername = sa" & vbCrLf
@@ -332,7 +332,7 @@ Friend Class Generic
             End If
         Next
 
-        If QB.settings.DbType = DbType.pMariaDB And Ok = True Then
+        If QB.settings.DbType = Q.DbType.pMariaDB And Ok = True Then
             cmdline = ""
             Msg = ""
             searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='mysqld.exe'")

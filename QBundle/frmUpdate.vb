@@ -23,7 +23,7 @@
                 Exit Sub
             End If
         End If
-        If App.ShouldUpdate(AppNames.Launcher) Then
+        If App.ShouldUpdate(Q.AppNames.Launcher) Then
             If MsgBox("Burst wallet launcher will automatically restart after update." & vbCrLf & " Do you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
                 Exit Sub
             End If
@@ -31,13 +31,13 @@
         btnUpdate.Enabled = False
         If frmMain.Running Then
             lblStatus.Text = "Waiting for wallet to stop"
-            If QB.settings.DbType = DbType.pMariaDB Then 'send startsequence
+            If QB.settings.DbType = Q.DbType.pMariaDB Then 'send startsequence
                 Dim Pid(1) As Object
-                Pid(0) = AppNames.BRS
-                Pid(1) = AppNames.MariaPortable
+                Pid(0) = Q.AppNames.BRS
+                Pid(1) = Q.AppNames.MariaPortable
                 ProcHandler.StopProcessSquence(Pid)
             Else
-                ProcHandler.StopProcess(AppNames.BRS)
+                ProcHandler.StopProcess(Q.AppNames.BRS)
             End If
             tmr.Interval = 500
             tmr.Start()
@@ -58,7 +58,7 @@
 
     Private Function CheckAndUpdateLW() As Boolean
 
-        Dim StrApp As String() = [Enum].GetNames(GetType(AppNames)) 'only used to count
+        Dim StrApp As String() = [Enum].GetNames(GetType(Q.AppNames)) 'only used to count
         Dim L(2) As String
         Dim AnyUpdates As Boolean = False
         Lw1.Items.Clear()
@@ -91,7 +91,7 @@
     Private Sub DoUpdate()
 
         Dim S As frmDownloadExtract
-        Dim AppCount As Integer = UBound([Enum].GetNames(GetType(AppNames)))
+        Dim AppCount As Integer = UBound([Enum].GetNames(GetType(Q.AppNames)))
         CheckAndUpdateLW()
         Dim res As DialogResult
         For t As Integer = 0 To AppCount
@@ -111,7 +111,7 @@
             End If
         Next
 
-        If App.isUpdated(AppNames.Launcher) Then
+        If App.isUpdated(Q.AppNames.Launcher) Then
             'we should restart now since we have updates pending on ourselfs
             Dim wdir As String = Application.StartupPath
             If Not wdir.EndsWith("\") Then wdir &= "\"

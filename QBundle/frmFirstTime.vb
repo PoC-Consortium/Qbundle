@@ -21,16 +21,16 @@
         P3.BackColor = Color.White
         SelectedDBType = Dbver
         Select Case Dbver
-            Case DbType.H2
+            Case Q.DbType.H2
                 r0.Checked = True
                 P0.BackColor = SystemColors.GradientInactiveCaption
-            Case DbType.FireBird
+            Case Q.DbType.FireBird
                 r1.Checked = True
                 P1.BackColor = SystemColors.GradientInactiveCaption
-            Case DbType.pMariaDB
+            Case Q.DbType.pMariaDB
                 r2.Checked = True
                 P2.BackColor = SystemColors.GradientInactiveCaption
-            Case DbType.MariaDB
+            Case Q.DbType.MariaDB
                 r3.Checked = True
                 P3.BackColor = SystemColors.GradientInactiveCaption
         End Select
@@ -38,58 +38,58 @@
 
     'h2
     Private Sub lblH2Desc_Click(sender As Object, e As EventArgs) Handles lblH2Desc.Click
-        ChangeButton(DbType.H2)
+        ChangeButton(Q.DbType.H2)
     End Sub
     Private Sub lblH2Header_Click(sender As Object, e As EventArgs) Handles lblH2Header.Click
-        ChangeButton(DbType.H2)
+        ChangeButton(Q.DbType.H2)
     End Sub
     Private Sub r4_Click(sender As Object, e As EventArgs) Handles r0.Click
-        ChangeButton(DbType.H2)
+        ChangeButton(Q.DbType.H2)
     End Sub
     Private Sub P0_Click(sender As Object, e As EventArgs) Handles P0.Click
-        ChangeButton(DbType.H2)
+        ChangeButton(Q.DbType.H2)
     End Sub
 
     'FireBird
     Private Sub P1_Click(sender As Object, e As EventArgs) Handles P1.Click
-        ChangeButton(DbType.FireBird)
+        ChangeButton(Q.DbType.FireBird)
     End Sub
     Private Sub r1_Click(sender As Object, e As EventArgs) Handles r1.Click
-        ChangeButton(DbType.FireBird)
+        ChangeButton(Q.DbType.FireBird)
     End Sub
     Private Sub lblFireBirdHeader_Click(sender As Object, e As EventArgs) Handles lblFireBirdHeader.Click
-        ChangeButton(DbType.FireBird)
+        ChangeButton(Q.DbType.FireBird)
     End Sub
     Private Sub lblFireBirdDesc_Click(sender As Object, e As EventArgs) Handles lblFireBirdDesc.Click
-        ChangeButton(DbType.FireBird)
+        ChangeButton(Q.DbType.FireBird)
     End Sub
 
     'PMaria
     Private Sub P2_Click(sender As Object, e As EventArgs) Handles P2.Click
-        ChangeButton(DbType.pMariaDB)
+        ChangeButton(Q.DbType.pMariaDB)
     End Sub
     Private Sub lblPMariaHeader_Click(sender As Object, e As EventArgs) Handles lblPMariaHeader.Click
-        ChangeButton(DbType.pMariaDB)
+        ChangeButton(Q.DbType.pMariaDB)
     End Sub
     Private Sub lblPMariaDesc_Click(sender As Object, e As EventArgs) Handles lblPMariaDesc.Click
-        ChangeButton(DbType.pMariaDB)
+        ChangeButton(Q.DbType.pMariaDB)
     End Sub
     Private Sub r2_click(sender As Object, e As EventArgs) Handles r2.Click
-        ChangeButton(DbType.pMariaDB)
+        ChangeButton(Q.DbType.pMariaDB)
     End Sub
 
     'DB Own
     Private Sub P3_Click(sender As Object, e As EventArgs) Handles P3.Click
-        ChangeButton(DbType.MariaDB)
+        ChangeButton(Q.DbType.MariaDB)
     End Sub
     Private Sub lblOwnHeader_Click(sender As Object, e As EventArgs) Handles lblOwnHeader.Click
-        ChangeButton(DbType.MariaDB)
+        ChangeButton(Q.DbType.MariaDB)
     End Sub
     Private Sub lblOwnDesc_Click(sender As Object, e As EventArgs) Handles lblOwnDesc.Click
-        ChangeButton(DbType.MariaDB)
+        ChangeButton(Q.DbType.MariaDB)
     End Sub
     Private Sub r3_Click(sender As Object, e As EventArgs) Handles r3.Click
-        ChangeButton(DbType.MariaDB)
+        ChangeButton(Q.DbType.MariaDB)
     End Sub
 
 #End Region
@@ -114,10 +114,10 @@
         pnlMariaSettings.Visible = False
 
         'Set java panael
-        If App.isInstalled(AppNames.JavaInstalled) Then
+        If App.isInstalled(Q.AppNames.JavaInstalled) Then
             pnlJava.BackColor = Color.PaleGreen
             lblJavaStatus.Text = "Java was found installed."
-        ElseIf App.isInstalled(AppNames.JavaPortable) Then
+        ElseIf App.isInstalled(Q.AppNames.JavaPortable) Then
             pnlJava.BackColor = Color.PaleGreen
             lblJavaStatus.Text = "Java was found in a portable version."
         Else
@@ -131,16 +131,16 @@
         'set DB panel
 
         Select Case SelectedDBType
-            Case DbType.H2
+            Case Q.DbType.H2
                 pnlDb.BackColor = Color.PaleGreen
                 lblDbHeader.Text = "H2"
                 lblDBstatus.Text = "H2 embedded does not require aditional components."
-            Case DbType.FireBird
+            Case Q.DbType.FireBird
                 pnlDb.BackColor = Color.PaleGreen
                 lblDbHeader.Text = "Firebird"
                 lblDBstatus.Text = "Firebird embedded does not require aditional components."
-            Case DbType.pMariaDB
-                If App.isInstalled(AppNames.MariaPortable) Then
+            Case Q.DbType.pMariaDB
+                If App.isInstalled(Q.AppNames.MariaPortable) Then
                     pnlDb.BackColor = Color.PaleGreen
                     lblDbHeader.Text = "MariaDB"
                     lblDBstatus.Text = "MariaDB was found as a portable version."
@@ -151,7 +151,7 @@
                     btnDone.Enabled = False
                     btnDownload.Enabled = True
                 End If
-            Case DbType.MariaDB 'we require settings
+            Case Q.DbType.MariaDB 'we require settings
                 btnDone.Enabled = False
                 lblDbHeader.Text = "MariaDB / Mysql"
                 lblDBstatus.Text = "Use settings below to configure the database settings."
@@ -181,9 +181,9 @@
         btnDownload.Enabled = False
         btnDone.Enabled = False
         App.SetLocalInfo()
-        If Not App.isInstalled(AppNames.JavaInstalled) And Not App.isInstalled(AppNames.JavaPortable) Then
+        If Not App.isInstalled(Q.AppNames.JavaInstalled) And Not App.isInstalled(Q.AppNames.JavaPortable) Then
             S = New frmDownloadExtract
-            S.Appid = AppNames.JavaPortable
+            S.Appid = Q.AppNames.JavaPortable
             res = S.ShowDialog()
             If res = DialogResult.Abort Then
                 lblStatusInfo.Text = "Error: Internet is unreachable or repository offline."
@@ -209,9 +209,9 @@
             lblJavaStatus.Text = "Java was found in a portable version."
         End If
         App.SetLocalInfo()
-        If SelectedDBType = DbType.pMariaDB And Not App.isInstalled(AppNames.MariaPortable) Then
+        If SelectedDBType = Q.DbType.pMariaDB And Not App.isInstalled(Q.AppNames.MariaPortable) Then
             S = New frmDownloadExtract
-            S.Appid = AppNames.MariaPortable
+            S.Appid = Q.AppNames.MariaPortable
             S.DialogResult = Nothing
             res = S.ShowDialog()
             If res = DialogResult.Abort Then
@@ -237,19 +237,19 @@
             lblDBstatus.Text = "MariaDB was found as a portable version."
         End If
         App.SetLocalInfo()
-        If SelectedDBType = DbType.MariaDB And DbVerified Then
+        If SelectedDBType = Q.DbType.MariaDB And DbVerified Then
             btnDone.Enabled = True
-        ElseIf SelectedDBType <> DbType.MariaDB Then
+        ElseIf SelectedDBType <> Q.DbType.MariaDB Then
             btnDone.Enabled = True
         End If
 
     End Sub
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
         QB.settings.DbType = SelectedDBType
-        If App.isInstalled(AppNames.JavaInstalled) Then
-            QB.settings.JavaType = AppNames.JavaInstalled
+        If App.isInstalled(Q.AppNames.JavaInstalled) Then
+            QB.settings.JavaType = Q.AppNames.JavaInstalled
         Else
-            QB.settings.JavaType = AppNames.JavaPortable
+            QB.settings.JavaType = Q.AppNames.JavaPortable
         End If
         QB.settings.CheckForUpdates = chkUpdates.Checked
         QB.settings.DbName = txtDbName.Text
@@ -308,7 +308,7 @@
         End If
         'also check that we have downloaded all
         If DbVerified = True Then
-            If App.isInstalled(AppNames.JavaInstalled) Or App.isInstalled(AppNames.JavaPortable) Then
+            If App.isInstalled(Q.AppNames.JavaInstalled) Or App.isInstalled(Q.AppNames.JavaPortable) Then
                 btnDone.Enabled = True
             End If
         Else
