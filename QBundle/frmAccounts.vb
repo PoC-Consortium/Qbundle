@@ -19,6 +19,9 @@
         'loadaccounts
 
 
+
+
+
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -27,7 +30,6 @@
         S.Burst = txtPass.Text
         S.Pin = txtPin.Text
         L.Add(S)
-
         Dim F As Integer = 1
     End Sub
 End Class

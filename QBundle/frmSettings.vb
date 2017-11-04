@@ -30,10 +30,10 @@ Public Class frmSettings
 
 #Region " Clickable objects "
     Private Sub rJava0_Click(sender As Object, e As EventArgs) Handles rJava0.Click
-        ChangeJavaType(Q.AppNames.JavaInstalled)
+        ChangeJavaType(QGlobal.AppNames.JavaInstalled)
     End Sub
     Private Sub rJava1_Click(sender As Object, e As EventArgs) Handles rJava1.Click
-        ChangeJavaType(Q.AppNames.JavaPortable)
+        ChangeJavaType(QGlobal.AppNames.JavaPortable)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -94,39 +94,39 @@ Public Class frmSettings
         Dim buffer As String = ""
 
         'generic
-        QB.settings.CheckForUpdates = chkCheckForUpdates.Checked
-        QB.settings.AlwaysAdmin = chkAlwaysAdmin.Checked
-        QB.settings.WalletException = chkWalletException.Checked
+        Q.settings.CheckForUpdates = chkCheckForUpdates.Checked
+        Q.settings.AlwaysAdmin = chkAlwaysAdmin.Checked
+        Q.settings.WalletException = chkWalletException.Checked
         'nrs
 
-        QB.settings.AutoIp = chkAutoIP.Checked
-        QB.settings.DynPlatform = chkDynPlatform.Checked
+        Q.settings.AutoIp = chkAutoIP.Checked
+        Q.settings.DynPlatform = chkDynPlatform.Checked
         'nrs advanced
-        QB.settings.Cpulimit = nrCores.Value
-        QB.settings.useOpenCL = chkOpenCL.Checked
+        Q.settings.Cpulimit = nrCores.Value
+        Q.settings.useOpenCL = chkOpenCL.Checked
         'nrs net
         If cmbListen.SelectedIndex = 0 Then
-            QB.settings.ListenIf = "0.0.0.0" & ";" & CStr(nrListenPort.Value)
+            Q.settings.ListenIf = "0.0.0.0" & ";" & CStr(nrListenPort.Value)
         Else
-            QB.settings.ListenIf = cmbListen.Items.Item(cmbListen.SelectedIndex) & ";" & CStr(nrListenPort.Value)
+            Q.settings.ListenIf = cmbListen.Items.Item(cmbListen.SelectedIndex) & ";" & CStr(nrListenPort.Value)
         End If
         If cmbPeerIP.SelectedIndex = 0 Then
-            QB.settings.ListenPeer = "0.0.0.0" & ";" & CStr(nrPeerPort.Value)
+            Q.settings.ListenPeer = "0.0.0.0" & ";" & CStr(nrPeerPort.Value)
         Else
-            QB.settings.ListenPeer = cmbPeerIP.Items.Item(cmbPeerIP.SelectedIndex) & ";" & CStr(nrPeerPort.Value)
+            Q.settings.ListenPeer = cmbPeerIP.Items.Item(cmbPeerIP.SelectedIndex) & ";" & CStr(nrPeerPort.Value)
         End If
         For x As Integer = 0 To lstConnectFrom.Items.Count - 1
             buffer &= lstConnectFrom.Items.Item(x) & ";"
         Next
 
-        QB.settings.ConnectFrom = buffer
-        QB.settings.DbServer = txtDbServer.Text
-        QB.settings.DbName = txtDbName.Text
-        QB.settings.DbUser = txtDbUser.Text
-        QB.settings.DbPass = txtDbPass.Text
+        Q.settings.ConnectFrom = buffer
+        Q.settings.DbServer = txtDbServer.Text
+        Q.settings.DbName = txtDbName.Text
+        Q.settings.DbUser = txtDbUser.Text
+        Q.settings.DbPass = txtDbPass.Text
 
-        QB.settings.JavaType = JavaType
-        QB.settings.SaveSettings()
+        Q.settings.JavaType = JavaType
+        Q.settings.SaveSettings()
 
         'ok lets fix firewall if its intended to be like that
         Me.Close()
@@ -134,37 +134,37 @@ Public Class frmSettings
 
     End Sub
     Private Sub LoadSettings()
-        If Not App.isInstalled(Q.AppNames.JavaInstalled) Then rJava0.Enabled = False
-        If Not App.isInstalled(Q.AppNames.JavaPortable) Then rJava1.Enabled = False
-        If QB.settings.DbType = Q.DbType.MariaDB Then
+        If Not Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then rJava0.Enabled = False
+        If Not Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then rJava1.Enabled = False
+        If Q.settings.DbType = QGlobal.DbType.MariaDB Then
             pnlMaria.Enabled = True
             pnlDbSettings.Enabled = True
         Else
             pnlMaria.Enabled = True
             pnlDbSettings.Enabled = False
         End If
-        lblDb.Text = App.GetDbNameFromType(QB.settings.DbType)
+        lblDb.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
 
-        chkCheckForUpdates.Checked = QB.settings.CheckForUpdates
-        chkAlwaysAdmin.Checked = QB.settings.AlwaysAdmin
-        chkWalletException.Checked = QB.settings.WalletException
+        chkCheckForUpdates.Checked = Q.settings.CheckForUpdates
+        chkAlwaysAdmin.Checked = Q.settings.AlwaysAdmin
+        chkWalletException.Checked = Q.settings.WalletException
 
-        chkAutoIP.Checked = QB.settings.CheckForUpdates
-        chkDynPlatform.Checked = QB.settings.DynPlatform
-        txtDbServer.Text = QB.settings.DbServer
-        txtDbName.Text = QB.settings.DbName
-        txtDbUser.Text = QB.settings.DbUser
-        txtDbPass.Text = QB.settings.DbPass
-        ChangeJavaType(QB.settings.JavaType)
-        If App.CheckOpenCL() Then
-            chkOpenCL.Checked = QB.settings.useOpenCL
+        chkAutoIP.Checked = Q.settings.CheckForUpdates
+        chkDynPlatform.Checked = Q.settings.DynPlatform
+        txtDbServer.Text = Q.settings.DbServer
+        txtDbName.Text = Q.settings.DbName
+        txtDbUser.Text = Q.settings.DbUser
+        txtDbPass.Text = Q.settings.DbPass
+        ChangeJavaType(Q.settings.JavaType)
+        If Q.App.CheckOpenCL() Then
+            chkOpenCL.Checked = Q.settings.useOpenCL
         Else
             chkOpenCL.Enabled = False
             chkOpenCL.Checked = False
         End If
 
         nrCores.Maximum = Environment.ProcessorCount
-        nrCores.Value = QB.settings.Cpulimit
+        nrCores.Value = Q.settings.Cpulimit
         lblMaxCores.Text = CStr(Environment.ProcessorCount) & " cores."
         Select Case Environment.ProcessorCount
             Case 1
@@ -191,13 +191,13 @@ Public Class frmSettings
         rJava0.Checked = False
         rJava1.Checked = False
         Select Case id
-            Case Q.AppNames.JavaInstalled
+            Case QGlobal.AppNames.JavaInstalled
                 rJava0.Checked = True
-            Case Q.AppNames.JavaPortable
+            Case QGlobal.AppNames.JavaPortable
                 rJava1.Checked = True
             Case Else
                 rJava1.Checked = True
-                id = Q.AppNames.JavaPortable
+                id = QGlobal.AppNames.JavaPortable
         End Select
         JavaType = id
     End Sub
@@ -234,7 +234,7 @@ Public Class frmSettings
 
         Dim S() As String = Nothing
         Try
-            S = Split(QB.settings.ListenPeer, ";")
+            S = Split(Q.settings.ListenPeer, ";")
             nrPeerPort.Value = Val(S(1))
             If S(0) = "0.0.0.0" Then
                 cmbPeerIP.SelectedIndex = 0
@@ -249,7 +249,7 @@ Public Class frmSettings
 
 
         Try
-            S = Split(QB.settings.ListenIf, ";")
+            S = Split(Q.settings.ListenIf, ";")
             nrListenPort.Value = Val(S(1))
             If S(0) = "0.0.0.0" Then
                 cmbListen.SelectedIndex = 0
@@ -266,7 +266,7 @@ Public Class frmSettings
     End Sub
     Private Sub SetAllowedIP()
 
-        Dim s() As String = Split(QB.settings.ConnectFrom, ";")
+        Dim s() As String = Split(Q.settings.ConnectFrom, ";")
         lstConnectFrom.Items.Clear()
         For Each netw As String In s
             If Trim(netw) <> "" Then

@@ -25,33 +25,33 @@
     End Sub
     Private Sub frmChangeDatabase_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        SelDB = QB.settings.DbType
+        SelDB = Q.settings.DbType
 
         'check if mariadbp is installed
         Select Case SelDB
-            Case Q.DbType.H2
+            Case QGlobal.DbType.H2
                 rDB1.Enabled = False
                 rDB1.Text = rDB1.Text & " (Currently used)"
-            Case Q.DbType.FireBird
+            Case QGlobal.DbType.FireBird
                 rDB2.Enabled = False
                 rDB2.Text = rDB2.Text & " (Currently used)"
-            Case Q.DbType.pMariaDB
+            Case QGlobal.DbType.pMariaDB
                 rDB3.Enabled = False
                 rDB3.Text = rDB3.Text & " (Currently used)"
-            Case Q.DbType.MariaDB
+            Case QGlobal.DbType.MariaDB
                 rDB4.Enabled = False
                 rDB4.Text = rDB4.Text & " (Currently used)"
                 pnlMariaSettings.Enabled = True
         End Select
-        If Not App.isInstalled(Q.AppNames.MariaPortable) Then
+        If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
             rDB3.Enabled = False
             rDB3.Text = rDB3.Text & " (Not installed)"
         End If
-        lblCurDB.Text = App.GetDbNameFromType(QB.settings.DbType)
-        If Not QB.settings.DbType = Q.DbType.H2 Then
-            setdb(Q.DbType.H2)
+        lblCurDB.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
+        If Not Q.settings.DbType = QGlobal.DbType.H2 Then
+            setdb(QGlobal.DbType.H2)
         Else
-            setdb(Q.DbType.FireBird)
+            setdb(QGlobal.DbType.FireBird)
         End If
 
         OP = 0
@@ -68,32 +68,32 @@
         pnlMariaSettings.Enabled = False
         SelDB = id
         Select Case SelDB
-            Case Q.DbType.H2
+            Case QGlobal.DbType.H2
                 rDB1.Checked = True
-                lblFromTo.Text = App.GetDbNameFromType(QB.settings.DbType) & " to " & App.GetDbNameFromType(Q.DbType.H2)
-            Case Q.DbType.FireBird
+                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.H2)
+            Case QGlobal.DbType.FireBird
                 rDB2.Checked = True
-                lblFromTo.Text = App.GetDbNameFromType(QB.settings.DbType) & " to " & App.GetDbNameFromType(Q.DbType.FireBird)
-            Case Q.DbType.pMariaDB
+                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.FireBird)
+            Case QGlobal.DbType.pMariaDB
                 rDB3.Checked = True
-                lblFromTo.Text = App.GetDbNameFromType(QB.settings.DbType) & " to " & App.GetDbNameFromType(Q.DbType.pMariaDB)
-            Case Q.DbType.MariaDB
+                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.pMariaDB)
+            Case QGlobal.DbType.MariaDB
                 rDB4.Checked = True
-                lblFromTo.Text = App.GetDbNameFromType(QB.settings.DbType) & " to " & App.GetDbNameFromType(Q.DbType.MariaDB)
+                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.MariaDB)
                 pnlMariaSettings.Enabled = True
         End Select
     End Sub
     Private Sub rDB1_Click(sender As Object, e As EventArgs) Handles rDB1.Click
-        setdb(Q.DbType.H2)
+        setdb(QGlobal.DbType.H2)
     End Sub
     Private Sub rDB2_Click(sender As Object, e As EventArgs) Handles rDB2.Click
-        setdb(Q.DbType.FireBird)
+        setdb(QGlobal.DbType.FireBird)
     End Sub
     Private Sub rDB3_Click(sender As Object, e As EventArgs) Handles rDB3.Click
-        setdb(Q.DbType.pMariaDB)
+        setdb(QGlobal.DbType.pMariaDB)
     End Sub
     Private Sub rDB4_Click(sender As Object, e As EventArgs) Handles rDB4.Click
-        setdb(Q.DbType.MariaDB)
+        setdb(QGlobal.DbType.MariaDB)
     End Sub
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         pnlWiz1.Hide()
@@ -122,7 +122,7 @@
         End If
         If OP = 0 Then
 
-            OldDB = QB.settings.DbType
+            OldDB = Q.settings.DbType
             If frmMain.Running Then
                 If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") Then
                     lblStatus.Text = "Waiting for wallet to stop."
@@ -134,22 +134,24 @@
                     Exit Sub
                 End If
             End If
-            AddHandler ProcHandler.Aborting, AddressOf Aborted
-            AddHandler ProcHandler.Started, AddressOf Starting
-            AddHandler ProcHandler.Stopped, AddressOf Stopped
-            AddHandler ProcHandler.Update, AddressOf ProcEvents
-            If SelDB = Q.DbType.pMariaDB Or OldDB = Q.DbType.pMariaDB Then
+
+
+            AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
+            AddHandler Q.ProcHandler.Started, AddressOf Starting
+            AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
+            AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
+            If SelDB = QGlobal.DbType.pMariaDB Or OldDB = QGlobal.DbType.pMariaDB Then
                 StartMaria()
             Else
                 StartExport()
             End If
         Else
-            QB.settings.DbType = SelDB
-            QB.settings.DbName = txtDbName.Text
-            QB.settings.DbPass = txtDbPass.Text
-            QB.settings.DbUser = txtDbUser.Text
-            QB.settings.DbServer = txtDbAddress.Text
-            QB.settings.SaveSettings()
+            Q.settings.DbType = SelDB
+            Q.settings.DbName = txtDbName.Text
+            Q.settings.DbPass = txtDbPass.Text
+            Q.settings.DbUser = txtDbUser.Text
+            Q.settings.DbServer = txtDbAddress.Text
+            Q.settings.SaveSettings()
             QB.Generic.WriteNRSConfig()
             frmMain.SetDbInfo()
             Me.Close()
@@ -168,18 +170,18 @@
 
         StartTime = Now
         Dim Pset As New clsProcessHandler.pSettings
-        Pset.AppId = Q.AppNames.Export
-        If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
+        Pset.AppId = QGlobal.AppNames.Export
+        If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
             Pset.AppPath = "java"
         Else
-            Pset.AppPath = BaseDir & "Java\bin\java.exe"
+            Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
         End If
-        Pset.Cores = QB.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.CreateBinDump " & BaseDir & "Convertion.bbd"
+        Pset.Cores = Q.settings.Cpulimit
+        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.CreateBinDump " & QGlobal.BaseDir & "Convertion.bbd"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
-        Pset.WorkingDirectory = BaseDir
-        ProcHandler.StartProcess(Pset)
+        Pset.WorkingDirectory = QGlobal.BaseDir
+        Q.ProcHandler.StartProcess(Pset)
 
         Running = True
 
@@ -191,11 +193,11 @@
         If frmMain.Running = False Then
             WaitTimer.Stop()
             WaitTimer.Enabled = False
-            AddHandler ProcHandler.Aborting, AddressOf Aborted
-            AddHandler ProcHandler.Started, AddressOf Starting
-            AddHandler ProcHandler.Stopped, AddressOf Stopped
-            AddHandler ProcHandler.Update, AddressOf ProcEvents
-            If SelDB = Q.DbType.pMariaDB Or OldDB = Q.DbType.pMariaDB Then
+            AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
+            AddHandler Q.ProcHandler.Started, AddressOf Starting
+            AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
+            AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
+            If SelDB = QGlobal.DbType.pMariaDB Or OldDB = QGlobal.DbType.pMariaDB Then
                 StartMaria()
             Else
                 StartExport()
@@ -210,10 +212,10 @@
         End If
 
         Select Case AppId
-            Case Q.AppNames.Export
+            Case QGlobal.AppNames.Export
                 lblStatus.Text = "Starting to export"
                 pb1.Value = 0
-            Case Q.AppNames.Import
+            Case QGlobal.AppNames.Import
                 lblStatus.Text = "Starting to Import"
                 pb1.Value = 0
         End Select
@@ -225,24 +227,24 @@
             Me.Invoke(d, New Object() {AppId})
             Return
         End If
-        If AppId = Q.AppNames.Export Then
-            QB.settings.DbType = SelDB
-            QB.settings.DbName = txtDbName.Text
-            QB.settings.DbPass = txtDbPass.Text
-            QB.settings.DbUser = txtDbUser.Text
-            QB.settings.DbServer = txtDbAddress.Text
-            QB.settings.SaveSettings()
+        If AppId = QGlobal.AppNames.Export Then
+            Q.settings.DbType = SelDB
+            Q.settings.DbName = txtDbName.Text
+            Q.settings.DbPass = txtDbPass.Text
+            Q.settings.DbUser = txtDbUser.Text
+            Q.settings.DbServer = txtDbAddress.Text
+            Q.settings.SaveSettings()
             QB.Generic.WriteNRSConfig()
             StartImport()
         End If
-        If AppId = Q.AppNames.Import Then
-            If SelDB = Q.DbType.pMariaDB Or OldDB = Q.DbType.pMariaDB Then
+        If AppId = QGlobal.AppNames.Import Then
+            If SelDB = QGlobal.DbType.pMariaDB Or OldDB = QGlobal.DbType.pMariaDB Then
                 StopMaria() 'even if we dont use it we call it
             Else
                 Complete()
             End If
         End If
-        If AppId = Q.AppNames.MariaPortable Then
+        If AppId = QGlobal.AppNames.MariaPortable Then
             Complete()
         End If
     End Sub
@@ -254,10 +256,10 @@
         btnStart.Enabled = True
         pb1.Value = 100
         Running = False
-        RemoveHandler ProcHandler.Aborting, AddressOf Aborted
-        RemoveHandler ProcHandler.Started, AddressOf Starting
-        RemoveHandler ProcHandler.Stopped, AddressOf Stopped
-        RemoveHandler ProcHandler.Update, AddressOf ProcEvents
+        RemoveHandler Q.ProcHandler.Aborting, AddressOf Aborted
+        RemoveHandler Q.ProcHandler.Started, AddressOf Starting
+        RemoveHandler Q.ProcHandler.Stopped, AddressOf Stopped
+        RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
     End Sub
     Private Sub ProcEvents(ByVal AppId As Integer, ByVal Operation As Integer, ByVal data As String)
         If Me.InvokeRequired Then
@@ -267,10 +269,10 @@
         End If
         Dim darray() As String = Nothing
         Dim percent As Integer = 0
-        If AppId = Q.AppNames.Export Then
+        If AppId = QGlobal.AppNames.Export Then
             Select Case Operation
 
-                Case ProcOp.ConsoleOut And ProcOp.ConsoleErr
+                Case QGlobal.ProcOp.ConsoleOut And QGlobal.ProcOp.ConsoleErr
                     Try
                         darray = Split(data, " ")
                         If UBound(darray) = 8 Then
@@ -287,13 +289,13 @@
                     Catch ex As Exception
                         lblStatus.Text = "Error parsing data. Job still continues."
                     End Try
-                Case ProcOp.Err
+                Case QGlobal.ProcOp.Err
                     Running = False
             End Select
         End If
-        If AppId = Q.AppNames.Import Then 'we need to filter messages
+        If AppId = QGlobal.AppNames.Import Then 'we need to filter messages
             Select Case Operation
-                Case ProcOp.ConsoleOut And ProcOp.ConsoleErr
+                Case QGlobal.ProcOp.ConsoleOut And QGlobal.ProcOp.ConsoleErr
                     Try
                         darray = Split(data, " ")
                         If UBound(darray) = 8 Then
@@ -316,13 +318,13 @@
                     Catch ex As Exception
                         lblStatus.Text = "Error parsing data. Job still continues."
                     End Try
-                Case ProcOp.Err
+                Case QGlobal.ProcOp.Err
                     Running = False
             End Select
         End If
-        If AppId = Q.AppNames.MariaPortable Then
+        If AppId = QGlobal.AppNames.MariaPortable Then
             Select Case Operation
-                Case ProcOp.FoundSignal
+                Case QGlobal.ProcOp.FoundSignal
                     StartExport()
             End Select
         End If
@@ -335,25 +337,25 @@
             Return
         End If
 
-        If AppId = Q.AppNames.Export Or AppId = Q.AppNames.Import Then
+        If AppId = QGlobal.AppNames.Export Or AppId = QGlobal.AppNames.Import Then
             MsgBox(Data)
         End If
 
     End Sub
     Private Sub StartImport()
         Dim Pset As New clsProcessHandler.pSettings
-        Pset.AppId = Q.AppNames.Import
-        If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
+        Pset.AppId = QGlobal.AppNames.Import
+        If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
             Pset.AppPath = "java"
         Else
-            Pset.AppPath = BaseDir & "Java\bin\java.exe"
+            Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
         End If
-        Pset.Cores = QB.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.LoadBinDump " & BaseDir & "Convertion.bbd -y"
+        Pset.Cores = Q.settings.Cpulimit
+        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.LoadBinDump " & QGlobal.BaseDir & "Convertion.bbd -y"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
-        Pset.WorkingDirectory = BaseDir
-        ProcHandler.StartProcess(Pset)
+        Pset.WorkingDirectory = QGlobal.BaseDir
+        Q.ProcHandler.StartProcess(Pset)
     End Sub
 
     Private Sub StartMaria()
@@ -362,14 +364,14 @@
             If QB.Generic.SanityCheck Then
                 lblStatus.Text = "Starting MariaDB"
                 Dim pr As New clsProcessHandler.pSettings
-                pr.AppId = Q.AppNames.MariaPortable
-                pr.AppPath = BaseDir & "MariaDb\bin\mysqld.exe"
+                pr.AppId = QGlobal.AppNames.MariaPortable
+                pr.AppPath = QGlobal.BaseDir & "MariaDb\bin\mysqld.exe"
                 pr.Cores = 0
                 pr.Params = "--console"
-                pr.WorkingDirectory = BaseDir & "MariaDb\bin\"
+                pr.WorkingDirectory = QGlobal.BaseDir & "MariaDb\bin\"
                 pr.StartSignal = "ready for connections"
                 pr.StartsignalMaxTime = 60
-                ProcHandler.StartProcess(pr)
+                Q.ProcHandler.StartProcess(pr)
             End If
         Catch ex As Exception
             MsgBox("Unable to start Maria Portable.")
@@ -378,7 +380,7 @@
     End Sub
     Private Sub StopMaria()
         lblStatus.Text = "Stopping MariaDB"
-        ProcHandler.StopProcess(Q.AppNames.MariaPortable)
+        Q.ProcHandler.StopProcess(QGlobal.AppNames.MariaPortable)
     End Sub
 
 End Class

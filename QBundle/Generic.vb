@@ -3,13 +3,10 @@
 Friend Class Generic
     Public Shared DebugMe As Boolean
     Friend Shared Sub CheckUpgrade()
-
         Dim CurVer As Integer = Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major * 10
         CurVer += Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor
-
-        Dim OldVer As Integer = QB.settings.Upgradev
+        Dim OldVer As Integer = Q.settings.Upgradev
         If CurVer <= OldVer Then Exit Sub
-
         Do
             Select Case OldVer
                 Case 11 'upgrade from 11 to 12
@@ -17,9 +14,9 @@ Friend Class Generic
                     'if there is we use maria and local java
                     Try
                         'only execute this if there is a settings.ini.
-                        If IO.File.Exists(BaseDir & "\Settings.ini") Then
-                            Dim lines() As String = IO.File.ReadAllLines(BaseDir & "\Settings.ini")
-                            QB.settings.FirstRun = False
+                        If IO.File.Exists(QGlobal.BaseDir & "\Settings.ini") Then
+                            Dim lines() As String = IO.File.ReadAllLines(QGlobal.BaseDir & "\Settings.ini")
+                            Q.settings.FirstRun = False
                             'CheckForUpdates, True, 3
                             Dim cell() As String
                             For Each line As String In lines
@@ -28,21 +25,21 @@ Friend Class Generic
                                     Select Case cell(0)
                                         Case "CheckForUpdates"
                                             If cell(1) = "True" Then
-                                                QB.settings.CheckForUpdates = True
+                                                Q.settings.CheckForUpdates = True
                                             Else
-                                                QB.settings.CheckForUpdates = False
+                                                Q.settings.CheckForUpdates = False
                                             End If
                                     End Select
-                                    QB.settings.DbName = "burstwallet"
-                                    QB.settings.DbUser = "burstwallet"
-                                    QB.settings.DbPass = "burstwallet"
-                                    QB.settings.DbServer = "localhost:3306"
-                                    QB.settings.DbType = Q.DbType.pMariaDB
-                                    QB.settings.JavaType = Q.AppNames.JavaPortable
+                                    Q.settings.DbName = "burstwallet"
+                                    Q.settings.DbUser = "burstwallet"
+                                    Q.settings.DbPass = "burstwallet"
+                                    Q.settings.DbServer = "localhost:3306"
+                                    Q.settings.DbType = QGlobal.DbType.pMariaDB
+                                    Q.settings.JavaType = QGlobal.AppNames.JavaPortable
                                 End If
                             Next
-                            IO.File.Delete(BaseDir & "\Settings.ini")
-                            QB.settings.SaveSettings()
+                            IO.File.Delete(QGlobal.BaseDir & "\Settings.ini")
+                            Q.settings.SaveSettings()
                         End If
                     Catch ex As Exception
                         If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -56,8 +53,8 @@ Friend Class Generic
             If CurVer = OldVer Then Exit Do
         Loop
 
-        QB.settings.Upgradev = CurVer
-        QB.settings.SaveSettings()
+        Q.settings.Upgradev = CurVer
+        Q.settings.SaveSettings()
 
     End Sub
     Friend Shared Sub WriteNRSConfig()
@@ -67,24 +64,24 @@ Friend Class Generic
 
         'Peer settings
         Data &= "#Peer network" & vbCrLf
-        Buffer = Split(QB.settings.ListenPeer, ";")
+        Buffer = Split(Q.settings.ListenPeer, ";")
         Data &= "brs.peerServerPort = " & Buffer(1) & vbCrLf
         Data &= "brs.peerServerHost = " & Buffer(0) & vbCrLf & vbCrLf
 
         'API settings
         Data &= "#API network" & vbCrLf
-        Buffer = Split(QB.settings.ListenIf, ";")
+        Buffer = Split(Q.settings.ListenIf, ";")
         Data &= "brs.apiServerPort = " & Buffer(1) & vbCrLf
         Data &= "brs.apiServerHost = " & Buffer(0) & vbCrLf
-        If QB.settings.ConnectFrom.Contains("0.0.0.0") Then
+        If Q.settings.ConnectFrom.Contains("0.0.0.0") Then
             Data &= "brs.allowedBotHosts = *" & vbCrLf & vbCrLf
         Else
-            Data &= "brs.allowedBotHosts = " & QB.settings.ConnectFrom & vbCrLf & vbCrLf
+            Data &= "brs.allowedBotHosts = " & Q.settings.ConnectFrom & vbCrLf & vbCrLf
         End If
 
 
         'autoip
-        If QB.settings.AutoIp Then
+        If Q.settings.AutoIp Then
             Dim ip As String = GetMyIp()
             If ip <> "" Then
                 Data &= "#Auto IP set" & vbCrLf
@@ -93,19 +90,19 @@ Friend Class Generic
         End If
 
         'Dyn platform
-        If QB.settings.AutoIp Then
+        If Q.settings.AutoIp Then
             Dim ip As String = GetMyIp()
             If ip <> "" Then
                 Data &= "#Dynamic platform" & vbCrLf
-                Data &= "brs.myPlatform = WCB-" & App.GetDbNameFromType(QB.settings.DbType) & vbCrLf & vbCrLf
+                Data &= "brs.myPlatform = WCB-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
             End If
         End If
 
-        Select Case QB.settings.DbType
-            Case Q.DbType.FireBird
+        Select Case Q.settings.DbType
+            Case QGlobal.DbType.FireBird
                 Try
-                    If Not IO.Directory.Exists(BaseDir & "burst_db") Then
-                        IO.Directory.CreateDirectory(BaseDir & "burst_db")
+                    If Not IO.Directory.Exists(QGlobal.BaseDir & "burst_db") Then
+                        IO.Directory.CreateDirectory(QGlobal.BaseDir & "burst_db")
                     End If
                 Catch ex As Exception
                     If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -114,24 +111,24 @@ Friend Class Generic
                 Data &= "brs.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
                 Data &= "brs.dbUsername = " & vbCrLf
                 Data &= "brs.dbPassword = " & vbCrLf & vbCrLf
-            Case Q.DbType.pMariaDB
+            Case QGlobal.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
                 Data &= "brs.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
                 Data &= "brs.dbUsername = burstwallet" & vbCrLf
                 Data &= "brs.dbPassword = burstwallet" & vbCrLf & vbCrLf
-            Case Q.DbType.MariaDB
+            Case QGlobal.DbType.MariaDB
                 Data &= "#Using installed MariaDb" & vbCrLf
-                Data &= "brs.dbUrl=jdbc:mariadb://" & QB.settings.DbServer & "/" & QB.settings.DbName & vbCrLf
-                Data &= "brs.dbUsername = " & QB.settings.DbUser & vbCrLf
-                Data &= "brs.dbPassword = " & QB.settings.DbPass & vbCrLf & vbCrLf
-            Case Q.DbType.H2
+                Data &= "brs.dbUrl=jdbc:mariadb://" & Q.settings.DbServer & "/" & Q.settings.DbName & vbCrLf
+                Data &= "brs.dbUsername = " & Q.settings.DbUser & vbCrLf
+                Data &= "brs.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
+            Case QGlobal.DbType.H2
                 Data &= "#Using H2" & vbCrLf
                 Data &= "brs.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
                 Data &= "brs.dbUsername = sa" & vbCrLf
                 Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
         End Select
 
-        If QB.settings.useOpenCL Then
+        If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
             Data &= "burst.oclAuto = true" & vbCrLf
             Data &= "burst.oclVerify = true" & vbCrLf & vbCrLf
@@ -140,7 +137,7 @@ Friend Class Generic
 
         Try
 
-            IO.File.WriteAllText(BaseDir & "conf\brs.properties", Data)
+            IO.File.WriteAllText(QGlobal.BaseDir & "conf\brs.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
@@ -195,15 +192,15 @@ Friend Class Generic
         Dim s() As String
         Dim buffer As String
         If IsAdmin() Then
-            s = Split(QB.settings.ListenPeer, ";")
+            s = Split(Q.settings.ListenPeer, ";")
             If s(0) = "0.0.0.0" Then s(0) = "*"
             If Not SetFirewall("Burst Peers", s(1), s(0), "") Then
                 MsgBox("Failed to apply firewall rules.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Firewall")
                 End
             End If
-            s = Split(QB.settings.ListenIf, ";")
+            s = Split(Q.settings.ListenIf, ";")
             If s(0) = "0.0.0.0" Then s(0) = "*"
-            buffer = Trim(QB.settings.ConnectFrom)
+            buffer = Trim(Q.settings.ConnectFrom)
             If Buffer <> "" Then
                 Buffer = Buffer.Replace(";", ",")
                 Buffer = Buffer.Replace(" ", "")
@@ -218,7 +215,7 @@ Friend Class Generic
             'start it as admin
             Try
                 Dim p As Process = New Process
-                p.StartInfo.WorkingDirectory = BaseDir
+                p.StartInfo.WorkingDirectory = QGlobal.BaseDir
                 p.StartInfo.Arguments = "ADDFW"
                 p.StartInfo.UseShellExecute = True
                 'p.StartInfo.CreateNoWindow = True 'we need window for messages(?)
@@ -280,7 +277,7 @@ Friend Class Generic
                     End
                 Case "InstallService"
                     Try
-                        Dim Srv As String = BaseDir & "BurstService.exe"
+                        Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
                         Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {Srv})
                         MsgBox("Sucessfully installed burst wallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
                     Catch ex As Exception
@@ -288,7 +285,7 @@ Friend Class Generic
                     End Try
                 Case "UnInstallService"
                     Try
-                        Dim Srv As String = BaseDir & "BurstService.exe"
+                        Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
                         Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {"/u", Srv})
                         MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
                     Catch ex As Exception
@@ -332,7 +329,7 @@ Friend Class Generic
             End If
         Next
 
-        If QB.settings.DbType = Q.DbType.pMariaDB And Ok = True Then
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB And Ok = True Then
             cmdline = ""
             Msg = ""
             searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='mysqld.exe'")
@@ -371,8 +368,8 @@ Friend Class Generic
     End Function
     Friend Shared Function CheckWritePermission() As Boolean
         Try
-            IO.File.WriteAllText(BaseDir & "testfile", "test")
-            IO.File.Delete(BaseDir & "testfile")
+            IO.File.WriteAllText(QGlobal.BaseDir & "testfile", "test")
+            IO.File.Delete(QGlobal.BaseDir & "testfile")
             Return True
         Catch ex As Exception
             Return False
@@ -384,7 +381,7 @@ Friend Class Generic
             Dim strErr As String = "------------------------- " & Now.ToString & " --------------------------" & vbCrLf
             strErr &= "Message: " & msg & vbCrLf
             strErr &= "StackTrace:" & strace & vbCrLf
-            IO.File.AppendAllText(BaseDir & "\bwl_debug.txt", strErr)
+            IO.File.AppendAllText(QGlobal.BaseDir & "\bwl_debug.txt", strErr)
         Catch ex As Exception
             MsgBox(msg)
         End Try
@@ -395,7 +392,7 @@ Friend Class Generic
 
         Try
             Dim p As Process = New Process
-            p.StartInfo.WorkingDirectory = BaseDir
+            p.StartInfo.WorkingDirectory = QGlobal.BaseDir
             p.StartInfo.UseShellExecute = True
             If QB.Generic.DebugMe Then p.StartInfo.Arguments = "Debug"
             p.StartInfo.FileName = Application.ExecutablePath

@@ -12,12 +12,12 @@ Public Class clsServiceHandler
     Public Function InstallService() As Boolean
         Try
             If QB.Generic.IsAdmin Then
-                Dim Srv As String = BaseDir & "BurstService.exe"
+                Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
                 Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {Srv})
                 Return True
             Else
                 Dim p As Process = New Process
-                p.StartInfo.WorkingDirectory = BaseDir
+                p.StartInfo.WorkingDirectory = QGlobal.BaseDir
                 p.StartInfo.Arguments = "InstallService"
                 p.StartInfo.UseShellExecute = True
                 p.StartInfo.CreateNoWindow = True
@@ -35,12 +35,12 @@ Public Class clsServiceHandler
     Public Function UninstallService() As Boolean
         Try
             If QB.Generic.IsAdmin Then
-                Dim Srv As String = BaseDir & "BurstService.exe"
+                Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
                 Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {"/u", Srv})
                 Return True
             Else
                 Dim p As Process = New Process
-                p.StartInfo.WorkingDirectory = BaseDir
+                p.StartInfo.WorkingDirectory = QGlobal.BaseDir
                 p.StartInfo.Arguments = "InstallService"
                 p.StartInfo.UseShellExecute = True
                 p.StartInfo.CreateNoWindow = True

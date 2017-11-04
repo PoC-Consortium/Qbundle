@@ -234,6 +234,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="clsSettings.vb" />
+    <Compile Include="QGlobal.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAccounts.resx">

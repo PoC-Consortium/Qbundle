@@ -12,9 +12,9 @@
     Private TimeElapsed As New Stopwatch
     Private Sub frmDownloadExtract_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        AddHandler App.Progress, AddressOf Progress
-        AddHandler App.DownloadDone, AddressOf Done
-        AddHandler App.Aborted, AddressOf Aborting
+        AddHandler Q.App.Progress, AddressOf Progress
+        AddHandler Q.App.DownloadDone, AddressOf Done
+        AddHandler Q.App.Aborted, AddressOf Aborting
         lblSpeed.Text = "0 KB/sec"
         lblRead.Text = "0 / 0 bytes"
         lblProgress.Text = "0%"
@@ -24,11 +24,11 @@
 
         Pb1.Value = 0
         If Url <> "" Then
-            App.DownloadFile(Url)
+            Q.App.DownloadFile(Url)
             DownloadName = IO.Path.GetFileName(Url) 'just download
         Else
-            App.DownloadApp(Appid) 'download and extract
-            DownloadName = App.GetAppNameFromId(Appid)
+            Q.App.DownloadApp(Appid) 'download and extract
+            DownloadName = Q.App.GetAppNameFromId(Appid)
         End If
         If OverideFilename <> "" Then
             DownloadName = OverideFilename
@@ -44,9 +44,9 @@
         lblProgress.Text = "100%"
         Pb1.Value = 100
         Try
-            RemoveHandler App.Progress, AddressOf Progress
-            RemoveHandler App.DownloadDone, AddressOf Done
-            RemoveHandler App.Aborted, AddressOf Aborting
+            RemoveHandler Q.App.Progress, AddressOf Progress
+            RemoveHandler Q.App.DownloadDone, AddressOf Done
+            RemoveHandler Q.App.Aborted, AddressOf Aborting
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
@@ -104,6 +104,6 @@
 
     Private Sub btnAbort_Click(sender As Object, e As EventArgs) Handles btnAbort.Click
         Me.DialogResult = DialogResult.Cancel
-        App.AbortDownload()
+        Q.App.AbortDownload()
     End Sub
 End Class

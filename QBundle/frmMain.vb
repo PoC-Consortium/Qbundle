@@ -14,16 +14,17 @@
 
 #Region " Form Events "
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Q = New clsQ
 
-        BaseDir = Application.StartupPath
-        If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
-        settings = New clsSettings
-        settings.LoadSettings()
-        Accounts = New clsAccounts
-        Accounts.LoadAccounts()
+        QGlobal.BaseDir = Application.StartupPath
+        If Not QGlobal.BaseDir.EndsWith("\") Then QGlobal.BaseDir &= "\"
+        Q.settings = New clsSettings
+        Q.settings.LoadSettings()
+        Q.Accounts = New clsAccounts
+        Q.Accounts.LoadAccounts()
 
         QB.Generic.CheckCommandArgs()
-        If settings.AlwaysAdmin And Not QB.Generic.IsAdmin Then
+        If Q.settings.AlwaysAdmin And Not QB.Generic.IsAdmin Then
             'restartme as admin
             QB.Generic.RestartAsAdmin()
             End
@@ -38,54 +39,54 @@
         '################################
         'Start classes
         '################################
-        App = New clsApp
-        App.SetLocalInfo()
+        Q.App = New clsApp
+        Q.App.SetLocalInfo()
         For i As Integer = 0 To UBound(Console)
             Console(i) = New List(Of String)
         Next
         QB.Generic.CheckUpgrade() 'if there is any upgradescenarios
-        If QB.settings.FirstRun Then
+        If Q.settings.FirstRun Then
             frmFirstTime.ShowDialog()
         End If
-        If QB.settings.FirstRun Then
+        If Q.settings.FirstRun Then
             End
         End If
 
 
 
-        If QB.settings.CheckForUpdates Then
-            App.StartUpdateNotifications()
-            AddHandler App.UpdateAvailable, AddressOf NewUpdatesAvilable
+        If Q.settings.CheckForUpdates Then
+            Q.App.StartUpdateNotifications()
+            AddHandler Q.App.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
         SetDbInfo()
-        lblWallet.Text = "Burst wallet v" & App.GetLocalVersion(Q.AppNames.BRS, False)
+        lblWallet.Text = "Burst wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, False)
 
-        If QB.settings.Cpulimit = 0 Or QB.settings.Cpulimit > Environment.ProcessorCount Then 'need to set correct cpu
+        If Q.settings.Cpulimit = 0 Or Q.settings.Cpulimit > Environment.ProcessorCount Then 'need to set correct cpu
             Select Case Environment.ProcessorCount
                 Case 1
-                    QB.settings.Cpulimit = 1
+                    Q.settings.Cpulimit = 1
                 Case 2
-                    QB.settings.Cpulimit = 1
+                    Q.settings.Cpulimit = 1
                 Case 4
-                    QB.settings.Cpulimit = 3
+                    Q.settings.Cpulimit = 3
                 Case Else
-                    QB.settings.Cpulimit = Environment.ProcessorCount - 2
+                    Q.settings.Cpulimit = Environment.ProcessorCount - 2
             End Select
         End If
         APITimer = New Timer
-        ProcHandler = New clsProcessHandler
-        AddHandler ProcHandler.Started, AddressOf Starting
-        AddHandler ProcHandler.Stopped, AddressOf Stopped
-        AddHandler ProcHandler.Update, AddressOf ProcEvents
-        AddHandler ProcHandler.Aborting, AddressOf Aborted
+        Q.ProcHandler = New clsProcessHandler
+        AddHandler Q.ProcHandler.Started, AddressOf Starting
+        AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
+        AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
+        AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
 
 
         StopWalletToolStripMenuItem.Enabled = False
-        If QB.settings.QBMode = 0 Then
+        If Q.settings.QBMode = 0 Then
             StartStop()
 
         End If
-        SetMode(QB.settings.QBMode)
+        SetMode(Q.settings.QBMode)
 
 
     End Sub
@@ -99,8 +100,8 @@
                 Me.MaximizeBox = True
                 Me.Width = 1024
                 Me.Height = 768
-                QB.settings.QBMode = 0
-                QB.settings.SaveSettings()
+                Q.settings.QBMode = 0
+                Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
                 Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
                 pnlAIO.Visible = True
@@ -111,8 +112,8 @@
                 Me.MaximizeBox = False
                 Me.Width = 464
                 Me.Height = 181
-                QB.settings.QBMode = 1
-                QB.settings.SaveSettings()
+                Q.settings.QBMode = 1
+                Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
                 Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
                 pnlAIO.Visible = False
@@ -170,7 +171,7 @@
     'labels
     Private Sub lblGotoWallet_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblGotoWallet.LinkClicked
 
-        Dim s() As String = Split(QB.settings.ListenIf, ";")
+        Dim s() As String = Split(Q.settings.ListenIf, ";")
         Dim url As String = Nothing
         If s(0) = "0.0.0.0" Then
             url = "http://127.0.0.1:" & s(1)
@@ -234,10 +235,10 @@
         End If
 
         Select Case AppId
-            Case Q.AppNames.BRS
+            Case QGlobal.AppNames.BRS
                 lblNrsStatus.Text = "Starting"
                 lblNrsStatus.ForeColor = Color.DarkOrange
-            Case Q.AppNames.MariaPortable
+            Case QGlobal.AppNames.MariaPortable
                 LblDbStatus.Text = "Starting"
                 LblDbStatus.ForeColor = Color.DarkOrange
         End Select
@@ -251,14 +252,14 @@
             Return
         End If
 
-        If AppId = Q.AppNames.BRS Then
+        If AppId = QGlobal.AppNames.BRS Then
             APITimer.Enabled = False
             APITimer.Stop()
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
         End If
-        If QB.settings.DbType = Q.DbType.pMariaDB Then
-            If AppId = Q.AppNames.MariaPortable Then
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
+            If AppId = QGlobal.AppNames.MariaPortable Then
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
                 btnStartStop.Text = "Start Wallet"
@@ -282,24 +283,24 @@
         End If
         'threadsafe here
         Select Case Operation
-            Case ProcOp.Stopped  'Stoped
-                If AppId = Q.AppNames.BRS Then
+            Case QGlobal.ProcOp.Stopped  'Stoped
+                If AppId = QGlobal.AppNames.BRS Then
                     LblDbStatus.Text = "Stopped"
                     LblDbStatus.ForeColor = Color.Red
                     APITimer.Enabled = False
                     APITimer.Stop()
                 End If
-                If AppId = Q.AppNames.MariaPortable Then
+                If AppId = QGlobal.AppNames.MariaPortable Then
                     lblNrsStatus.Text = "Stopped"
                     lblNrsStatus.ForeColor = Color.Red
                 End If
-            Case ProcOp.FoundSignal
-                If AppId = Q.AppNames.MariaPortable Then
+            Case QGlobal.ProcOp.FoundSignal
+                If AppId = QGlobal.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Running"
                     LblDbStatus.ForeColor = Color.DarkGreen
 
                 End If
-                If AppId = Q.AppNames.BRS Then
+                If AppId = QGlobal.AppNames.BRS Then
                     lblNrsStatus.Text = "Running"
                     lblNrsStatus.ForeColor = Color.DarkGreen
                     btnStartStop.Text = "Stop Wallet"
@@ -309,7 +310,7 @@
                     APITimer.Interval = "1000"
                     APITimer.Enabled = True
                     APITimer.Start()
-                    Dim s() As String = Split(QB.settings.ListenIf, ";")
+                    Dim s() As String = Split(Q.settings.ListenIf, ";")
                     Dim url As String = Nothing
                     If s(0) = "0.0.0.0" Then
                         url = "http://127.0.0.1:" & s(1)
@@ -318,53 +319,53 @@
                     End If
                     wb1.Navigate(url)
                 End If
-            Case ProcOp.Stopping
-                If AppId = Q.AppNames.MariaPortable Then
+            Case QGlobal.ProcOp.Stopping
+                If AppId = QGlobal.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Stopping"
                     LblDbStatus.ForeColor = Color.DarkOrange
                 End If
-                If AppId = Q.AppNames.BRS Then
+                If AppId = QGlobal.AppNames.BRS Then
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
                     APITimer.Enabled = False
                     APITimer.Stop()
                 End If
-            Case ProcOp.ConsoleOut
-                If AppId = Q.AppNames.MariaPortable Then
+            Case QGlobal.ProcOp.ConsoleOut
+                If AppId = QGlobal.AppNames.MariaPortable Then
                     Console(1).Add(data)
                     If Console(1).Count = 3001 Then Console(1).RemoveAt(0)
                 End If
-                If AppId = Q.AppNames.BRS Then
+                If AppId = QGlobal.AppNames.BRS Then
                     Console(0).Add(data)
                     'here we can do error detection
-                    If QB.settings.WalletException And LastException.AddHours(1) < Now Then
+                    If Q.settings.WalletException And LastException.AddHours(1) < Now Then
                         If data.StartsWith("Exception in") Then
                             LastException = Now
-                            ProcHandler.ReStartProcess(Q.AppNames.BRS)
+                            Q.ProcHandler.ReStartProcess(QGlobal.AppNames.BRS)
                         End If
                     End If
 
                     If Console(0).Count = 3001 Then Console(0).RemoveAt(0)
                 End If
-            Case ProcOp.ConsoleErr
-                If AppId = Q.AppNames.MariaPortable Then
+            Case QGlobal.ProcOp.ConsoleErr
+                If AppId = QGlobal.AppNames.MariaPortable Then
                     Console(1).Add(data)
                     If Console(1).Count = 3001 Then Console(1).RemoveAt(0)
                 End If
-                If AppId = Q.AppNames.BRS Then
+                If AppId = QGlobal.AppNames.BRS Then
                     Console(0).Add(data)
                     'here we can do error detection
-                    If QB.settings.WalletException And LastException.AddHours(1) < Now Then
+                    If Q.settings.WalletException And LastException.AddHours(1) < Now Then
                         If data.StartsWith("Exception in") Then
                             LastException = Now
-                            ProcHandler.ReStartProcess(Q.AppNames.BRS)
+                            Q.ProcHandler.ReStartProcess(QGlobal.AppNames.BRS)
                         End If
                     End If
 
                     If Console(0).Count = 3001 Then Console(0).RemoveAt(0)
                 End If
 
-            Case ProcOp.Err  'Error
+            Case QGlobal.ProcOp.Err  'Error
                 MsgBox("A Unhandled error happend when services tried to start. Console view might give clue to what is wrong. Some services might still be running.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
                 Running = False
         End Select
@@ -377,12 +378,12 @@
             Return
         End If
         MsgBox(Data)
-        If AppId = Q.AppNames.BRS Then
+        If AppId = QGlobal.AppNames.BRS Then
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
         End If
-        If QB.settings.DbType = Q.DbType.pMariaDB Then
-            If AppId = Q.AppNames.MariaPortable Then
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
+            If AppId = QGlobal.AppNames.MariaPortable Then
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
                 btnStartStop.Text = "Start Wallet"
@@ -398,60 +399,60 @@
     End Sub
     Private Sub StartWallet()
 
-        If QB.settings.DbType = Q.DbType.pMariaDB Then 'send startsequence
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
             Dim pset(1) As clsProcessHandler.pSettings
             pset(0) = New clsProcessHandler.pSettings
             'mariadb
-            pset(0).AppId = Q.AppNames.MariaPortable
-            pset(0).AppPath = BaseDir & "MariaDb\bin\mysqld.exe"
+            pset(0).AppId = QGlobal.AppNames.MariaPortable
+            pset(0).AppPath = QGlobal.BaseDir & "MariaDb\bin\mysqld.exe"
             pset(0).Cores = 0
             pset(0).Params = "--console"
-            pset(0).WorkingDirectory = BaseDir & "MariaDb\bin\"
+            pset(0).WorkingDirectory = QGlobal.BaseDir & "MariaDb\bin\"
             pset(0).StartSignal = "ready for connections"
             pset(0).StartsignalMaxTime = 60
 
             pset(1) = New clsProcessHandler.pSettings
-            pset(1).AppId = Q.AppNames.BRS
-            If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
+            pset(1).AppId = QGlobal.AppNames.BRS
+            If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
                 pset(1).AppPath = "java"
             Else
-                pset(1).AppPath = BaseDir & "Java\bin\java.exe"
+                pset(1).AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
             End If
-            pset(1).Cores = QB.settings.Cpulimit
+            pset(1).Cores = Q.settings.Cpulimit
             pset(1).Params = "-cp burst.jar;lib\*;conf brs.Burst"
             pset(1).StartSignal = "Started API server at"
             pset(1).StartsignalMaxTime = 300
-            pset(1).WorkingDirectory = BaseDir
+            pset(1).WorkingDirectory = QGlobal.BaseDir
 
-            ProcHandler.StartProcessSquence(pset)
+            Q.ProcHandler.StartProcessSquence(pset)
 
 
         Else 'normal start
             Dim Pset As New clsProcessHandler.pSettings
-            Pset.AppId = Q.AppNames.BRS
-            If QB.settings.JavaType = Q.AppNames.JavaInstalled Then
+            Pset.AppId = QGlobal.AppNames.BRS
+            If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
                 Pset.AppPath = "java"
             Else
-                Pset.AppPath = BaseDir & "Java\bin\java.exe"
+                Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
             End If
-            Pset.Cores = QB.settings.Cpulimit
+            Pset.Cores = Q.settings.Cpulimit
             Pset.Params = "-cp burst.jar;lib\;conf brs.Burst"
             Pset.StartSignal = "Started API server at"
             Pset.StartsignalMaxTime = 300
-            Pset.WorkingDirectory = BaseDir
+            Pset.WorkingDirectory = QGlobal.BaseDir
 
-            ProcHandler.StartProcess(Pset)
+            Q.ProcHandler.StartProcess(Pset)
 
         End If
     End Sub
     Public Sub StopWallet()
-        If QB.settings.DbType = Q.DbType.pMariaDB Then 'send startsequence
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
             Dim Pid(1) As Object
-            Pid(0) = Q.AppNames.BRS
-            Pid(1) = Q.AppNames.MariaPortable
-            ProcHandler.StopProcessSquence(Pid)
+            Pid(0) = QGlobal.AppNames.BRS
+            Pid(1) = QGlobal.AppNames.MariaPortable
+            Q.ProcHandler.StopProcessSquence(Pid)
         Else
-            ProcHandler.StopProcess(Q.AppNames.BRS)
+            Q.ProcHandler.StopProcess(QGlobal.AppNames.BRS)
         End If
     End Sub
 #End Region
@@ -459,21 +460,21 @@
 #Region " Misc "
     Public Sub SetDbInfo()
 
-        Select Case QB.settings.DbType
-            Case Q.DbType.FireBird
-                lblDbName.Text = App.GetDbNameFromType(Q.DbType.FireBird)
+        Select Case Q.settings.DbType
+            Case QGlobal.DbType.FireBird
+                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.FireBird)
                 LblDbStatus.Text = "Embeded"
                 LblDbStatus.ForeColor = Color.DarkGreen
-            Case Q.DbType.pMariaDB
-                lblDbName.Text = App.GetDbNameFromType(Q.DbType.pMariaDB)
+            Case QGlobal.DbType.pMariaDB
+                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.pMariaDB)
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
-            Case Q.DbType.MariaDB
-                lblDbName.Text = App.GetDbNameFromType(Q.DbType.MariaDB)
+            Case QGlobal.DbType.MariaDB
+                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.MariaDB)
                 LblDbStatus.Text = "Unknown"
                 LblDbStatus.ForeColor = Color.DarkOrange
-            Case Q.DbType.H2
-                lblDbName.Text = App.GetDbNameFromType(Q.DbType.H2)
+            Case QGlobal.DbType.H2
+                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.H2)
                 LblDbStatus.Text = "Embeded"
                 LblDbStatus.ForeColor = Color.DarkGreen
         End Select
@@ -507,7 +508,7 @@
     Private Sub GetApiData()
         Try
             Dim http As New clsHttp
-            Dim s() As String = Split(QB.settings.ListenIf, ";")
+            Dim s() As String = Split(Q.settings.ListenIf, ";")
             Dim url As String = Nothing
             If s(0) = "0.0.0.0" Then
                 url = "http://127.0.0.1:" & s(1)
@@ -547,14 +548,14 @@
     End Sub
 
     Private Sub SwitchToAIOStyleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SwitchToAIOStyleToolStripMenuItem.Click
-        QB.settings.QBMode = 0
-        QB.settings.SaveSettings()
+        Q.settings.QBMode = 0
+        Q.settings.SaveSettings()
         SetMode(0)
     End Sub
 
     Private Sub SwitchToLauncherStyleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SwitchToLauncherStyleToolStripMenuItem.Click
-        QB.settings.QBMode = 1
-        QB.settings.SaveSettings()
+        Q.settings.QBMode = 1
+        Q.settings.SaveSettings()
         SetMode(1)
     End Sub
 

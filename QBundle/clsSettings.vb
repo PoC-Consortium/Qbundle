@@ -208,7 +208,7 @@
         _DbUser = ""
         _DbPass = ""
 
-        _JavaType = AppNames.JavaInstalled
+        _JavaType = QGlobal.AppNames.JavaInstalled
 
         _FirstRun = True
         _CheckForUpdates = True
@@ -219,8 +219,8 @@
     End Sub
     Friend Sub LoadSettings()
         Try
-            If IO.File.Exists(BaseDir & "\BWL.ini") Then
-                Dim lines() As String = IO.File.ReadAllLines(BaseDir & "\BWL.ini")
+            If IO.File.Exists(QGlobal.BaseDir & "\BWL.ini") Then
+                Dim lines() As String = IO.File.ReadAllLines(QGlobal.BaseDir & "\BWL.ini")
                 For Each line As String In lines 'lets populate
                     Try
                         Dim Cell() As String = Split(line, "=")
@@ -240,11 +240,9 @@
             For Each prop In RP
                 Sdata &= prop.Name & "=" & prop.GetValue(Me) & vbCrLf
             Next
-            IO.File.WriteAllText(BaseDir & "\BWL.ini", Sdata)
+            IO.File.WriteAllText(QGlobal.BaseDir & "\BWL.ini", Sdata)
         Catch ex As Exception
 
         End Try
     End Sub
-
-
 End Class

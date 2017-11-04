@@ -10,7 +10,7 @@ Public Class clsProcessHandler
     ' Generic Processhandler class
     '
     Sub New()
-        ReDim P(UBound([Enum].GetNames(GetType(AppNames))))
+        ReDim P(UBound([Enum].GetNames(GetType(QGlobal.AppNames))))
     End Sub
 
     Public Sub StartProcess(ByVal Pcls As pSettings)
@@ -44,7 +44,7 @@ Public Class clsProcessHandler
             If P(AppId).IsRunning Then
                 P(AppId).StopProc()
                 Do
-                    If P(AppId).State = ProcOp.Stopped Then Exit Do
+                    If P(AppId).State = QGlobal.ProcOp.Stopped Then Exit Do
                     Thread.Sleep(500)
                 Loop
             End If
@@ -88,9 +88,9 @@ Public Class clsProcessHandler
             Do
                 Thread.Sleep(1000)
                 If P(Proc.AppId).IsRunning Then Exit Do
-                If P(Proc.AppId).State <> ProcOp.Running Then Exit Do
+                If P(Proc.AppId).State <> QGlobal.ProcOp.Running Then Exit Do
             Loop
-            If P(Proc.AppId).State <> ProcOp.Running Then Exit For 'abort
+            If P(Proc.AppId).State <> QGlobal.ProcOp.Running Then Exit For 'abort
         Next
     End Sub
 
@@ -126,19 +126,19 @@ Public Class clsProcessHandler
     Private Sub ProcUpdate(ByVal AppId As Integer, ByVal Operation As Integer, ByVal Data As String)
         'Streamlineing threads output
         Select Case Operation
-            Case ProcOp.Running
+            Case QGlobal.ProcOp.Running
                 RaiseEvent Started(AppId)
-            Case ProcOp.FoundSignal
+            Case QGlobal.ProcOp.FoundSignal
                 RaiseEvent Update(AppId, Operation, Data)
-            Case ProcOp.Stopping
+            Case QGlobal.ProcOp.Stopping
                 RaiseEvent Update(AppId, Operation, Data)
-            Case ProcOp.Stopped
+            Case QGlobal.ProcOp.Stopped
                 RaiseEvent Stopped(AppId)
-            Case ProcOp.Err
+            Case QGlobal.ProcOp.Err
                 RaiseEvent Aborting(AppId, Data)
-            Case ProcOp.ConsoleOut
+            Case QGlobal.ProcOp.ConsoleOut
                 RaiseEvent Update(AppId, Operation, Data)
-            Case ProcOp.ConsoleErr
+            Case QGlobal.ProcOp.ConsoleErr
                 RaiseEvent Update(AppId, Operation, Data)
         End Select
 
@@ -205,7 +205,7 @@ Public Class clsProcessHandler
         End Function
 
         Public Sub Work()
-            _state = ProcOp.Running
+            _state = QGlobal.ProcOp.Running
             FoundStartSignal = False
             Abort = False
             p = New Process
@@ -228,20 +228,20 @@ Public Class clsProcessHandler
                 '     p.BeginOutputReadLine()
             Catch ex As Exception
                 'if we have error here exit right away.
-                RaiseEvent UpdateConsole(Appid, ProcOp.Err, ex.Message)
-                RaiseEvent UpdateConsole(Appid, ProcOp.Stopped, "")
+                RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Err, ex.Message)
+                RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Stopped, "")
                 Abort = True
                 Exit Sub
             End Try
 
-            RaiseEvent UpdateConsole(Appid, ProcOp.Running, "")
+            RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Running, "")
 
             'if no startsignal then just asume we did
             If StartSignal = "" Then FoundStartSignal = True
             Dim SSMTEndTime As Date = Now.AddSeconds(SSMTEnd)
             Do 'just wait and see if we have exit.
                 If FoundStartSignal = False And Now > SSMTEndTime Then
-                    RaiseEvent UpdateConsole(Appid, ProcOp.Err, "Process did not completely start in reasonable time. Shutting down.")
+                    RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Err, "Process did not completely start in reasonable time. Shutting down.")
                     Exit Do
                 End If
                 Thread.Sleep(500)
@@ -250,11 +250,11 @@ Public Class clsProcessHandler
             Loop
 
             If Not p.HasExited Then
-                RaiseEvent UpdateConsole(Appid, ProcOp.Stopping, "")
+                RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Stopping, "")
                 ShutDown(25000, 10000) '25 sec and 10 sec
             End If
-            _state = ProcOp.Stopped
-            RaiseEvent UpdateConsole(Appid, ProcOp.Stopped, "")
+            _state = QGlobal.ProcOp.Stopped
+            RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Stopped, "")
         End Sub
         Public Function IsRunning() As Boolean
             Try
@@ -303,12 +303,12 @@ Public Class clsProcessHandler
                 If FoundStartSignal = False Then
                     If e.Data.Contains(StartSignal) Then
                         FoundStartSignal = True
-                        RaiseEvent UpdateConsole(Appid, ProcOp.FoundSignal, "")
+                        RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.FoundSignal, "")
                     End If
 
                 End If
 
-                RaiseEvent UpdateConsole(Appid, ProcOp.ConsoleOut, e.Data)
+                RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleOut, e.Data)
             End If
         End Sub
         Sub ErroutHandler(sender As Object, e As DataReceivedEventArgs)
@@ -317,11 +317,11 @@ Public Class clsProcessHandler
                 If FoundStartSignal = False Then
                     If e.Data.Contains(StartSignal) Then
                         FoundStartSignal = True
-                        RaiseEvent UpdateConsole(Appid, ProcOp.FoundSignal, "")
+                        RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.FoundSignal, "")
                     End If
                 End If
 
-                RaiseEvent UpdateConsole(Appid, ProcOp.ConsoleErr, e.Data)
+                RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleErr, e.Data)
             End If
         End Sub
     End Class

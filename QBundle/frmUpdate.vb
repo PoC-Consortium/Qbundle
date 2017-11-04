@@ -4,7 +4,7 @@
     Private WithEvents tmr As New Timer
     Private Sub frmUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If Not App.SetRemoteInfo() Then
+        If Not Q.App.SetRemoteInfo() Then
             MsgBox("There was an error getting update info. Check internet connection and try again.")
             Me.Close()
         End If
@@ -23,7 +23,7 @@
                 Exit Sub
             End If
         End If
-        If App.ShouldUpdate(Q.AppNames.Launcher) Then
+        If Q.App.ShouldUpdate(QGlobal.AppNames.Launcher) Then
             If MsgBox("Burst wallet launcher will automatically restart after update." & vbCrLf & " Do you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
                 Exit Sub
             End If
@@ -31,13 +31,13 @@
         btnUpdate.Enabled = False
         If frmMain.Running Then
             lblStatus.Text = "Waiting for wallet to stop"
-            If QB.settings.DbType = Q.DbType.pMariaDB Then 'send startsequence
+            If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
                 Dim Pid(1) As Object
-                Pid(0) = Q.AppNames.BRS
-                Pid(1) = Q.AppNames.MariaPortable
-                ProcHandler.StopProcessSquence(Pid)
+                Pid(0) = QGlobal.AppNames.BRS
+                Pid(1) = QGlobal.AppNames.MariaPortable
+                Q.ProcHandler.StopProcessSquence(Pid)
             Else
-                ProcHandler.StopProcess(Q.AppNames.BRS)
+                Q.ProcHandler.StopProcess(QGlobal.AppNames.BRS)
             End If
             tmr.Interval = 500
             tmr.Start()
@@ -58,19 +58,19 @@
 
     Private Function CheckAndUpdateLW() As Boolean
 
-        Dim StrApp As String() = [Enum].GetNames(GetType(Q.AppNames)) 'only used to count
+        Dim StrApp As String() = [Enum].GetNames(GetType(QGlobal.AppNames)) 'only used to count
         Dim L(2) As String
         Dim AnyUpdates As Boolean = False
         Lw1.Items.Clear()
         For t As Integer = 0 To UBound(StrApp)
-            If App.isInstalled(t) Then 'no reason to test non installed
-                If App.HasRepository(t) Then 'Is it available at repo?
-                    L(0) = App.GetAppNameFromId(t)
-                    L(1) = App.GetLocalVersion(t)
-                    L(2) = App.GetRemoteVersion(t)
+            If Q.App.isInstalled(t) Then 'no reason to test non installed
+                If Q.App.HasRepository(t) Then 'Is it available at repo?
+                    L(0) = Q.App.GetAppNameFromId(t)
+                    L(1) = Q.App.GetLocalVersion(t)
+                    L(2) = Q.App.GetRemoteVersion(t)
                     Dim itm As New ListViewItem(L)
 
-                    If App.ShouldUpdate(t) Then
+                    If Q.App.ShouldUpdate(t) Then
                         itm.SubItems(1).ForeColor = Color.DarkRed
                         AnyUpdates = True
                     Else
@@ -91,11 +91,11 @@
     Private Sub DoUpdate()
 
         Dim S As frmDownloadExtract
-        Dim AppCount As Integer = UBound([Enum].GetNames(GetType(Q.AppNames)))
+        Dim AppCount As Integer = UBound([Enum].GetNames(GetType(QGlobal.AppNames)))
         CheckAndUpdateLW()
         Dim res As DialogResult
         For t As Integer = 0 To AppCount
-            If App.ShouldUpdate(t) Then
+            If Q.App.ShouldUpdate(t) Then
                 S = New frmDownloadExtract
                 S.Appid = t
                 res = S.ShowDialog
@@ -111,7 +111,7 @@
             End If
         Next
 
-        If App.isUpdated(Q.AppNames.Launcher) Then
+        If Q.App.isUpdated(QGlobal.AppNames.Launcher) Then
             'we should restart now since we have updates pending on ourselfs
             Dim wdir As String = Application.StartupPath
             If Not wdir.EndsWith("\") Then wdir &= "\"

@@ -24,7 +24,7 @@ Public Class clsApp
     Public Sub New()
 
         'our appstore
-        Dim l As String() = [Enum].GetNames(GetType(Q.AppNames))
+        Dim l As String() = [Enum].GetNames(GetType(QGlobal.AppNames))
         ReDim _Apps(UBound(l))
         l = Nothing
         For i As Integer = 0 To UBound(_Apps)
@@ -79,9 +79,9 @@ Public Class clsApp
                 If Trim(Line) <> "" Then
                     Dim Cell() As String = Split(Line, "|")
                     Try
-                        AppId = [Enum].Parse(GetType(Q.AppNames), Cell(0)) 'converting name to appid
+                        AppId = [Enum].Parse(GetType(QGlobal.AppNames), Cell(0)) 'converting name to appid
                     Catch ex As Exception
-                        If Cell(0) = "NRS" Then AppId = Q.AppNames.BRS
+                        If Cell(0) = "NRS" Then AppId = QGlobal.AppNames.BRS
                     End Try
 
                     _Apps(AppId).RemoteVersion = Cell(1)
@@ -102,8 +102,8 @@ Public Class clsApp
         Try
             Dim Major As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major)
             Dim Minor As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor)
-            _Apps(Q.AppNames.Launcher).LocalFound = True
-            _Apps(Q.AppNames.Launcher).LocalVersion = Major & "." & Minor
+            _Apps(QGlobal.AppNames.Launcher).LocalFound = True
+            _Apps(QGlobal.AppNames.Launcher).LocalVersion = Major & "." & Minor
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
@@ -111,15 +111,15 @@ Public Class clsApp
     Private Sub Nrs()
 
         Try
-            If File.Exists(BaseDir & "burst.jar") Then 'check if burst jar is here then we have nrs?
-                _Apps(Q.AppNames.BRS).LocalFound = True
+            If File.Exists(QGlobal.BaseDir & "burst.jar") Then 'check if burst jar is here then we have nrs?
+                _Apps(QGlobal.AppNames.BRS).LocalFound = True
                 'try to set version since we have burst.jar
-                If File.Exists(BaseDir & "conf\version") Then
-                    Dim Version As String = File.ReadAllText(BaseDir & "conf\version")
-                    _Apps(Q.AppNames.BRS).LocalVersion = Version
+                If File.Exists(QGlobal.BaseDir & "conf\version") Then
+                    Dim Version As String = File.ReadAllText(QGlobal.BaseDir & "conf\version")
+                    _Apps(QGlobal.AppNames.BRS).LocalVersion = Version
                 Else
                     'asume version 1.3.4cg
-                    _Apps(Q.AppNames.BRS).LocalVersion = "1.3.6cg"
+                    _Apps(QGlobal.AppNames.BRS).LocalVersion = "1.3.6cg"
                 End If
             End If
         Catch ex As Exception
@@ -156,19 +156,19 @@ Public Class clsApp
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
-        _Apps(Q.AppNames.JavaInstalled).LocalFound = JavaFound
+        _Apps(QGlobal.AppNames.JavaInstalled).LocalFound = JavaFound
     End Sub
     Private Sub JavaPortable()
         Try
-            If File.Exists(BaseDir & "Java\bin\java.exe") Then
-                _Apps(Q.AppNames.JavaPortable).LocalFound = True
+            If File.Exists(QGlobal.BaseDir & "Java\bin\java.exe") Then
+                _Apps(QGlobal.AppNames.JavaPortable).LocalFound = True
                 'try find Javaversion
-                If File.Exists(BaseDir & "Java\release") Then
-                    Dim Lines() As String = File.ReadAllLines(BaseDir & "Java\release")
-                    _Apps(Q.AppNames.JavaPortable).LocalVersion = Lines(0)
+                If File.Exists(QGlobal.BaseDir & "Java\release") Then
+                    Dim Lines() As String = File.ReadAllLines(QGlobal.BaseDir & "Java\release")
+                    _Apps(QGlobal.AppNames.JavaPortable).LocalVersion = Lines(0)
                 Else
                     'asume 1.8.0_131
-                    _Apps(Q.AppNames.JavaPortable).LocalVersion = "1.8.0_131"
+                    _Apps(QGlobal.AppNames.JavaPortable).LocalVersion = "1.8.0_131"
                 End If
             End If
         Catch ex As Exception
@@ -177,15 +177,15 @@ Public Class clsApp
     End Sub
     Private Sub MariaDB()
         Try
-            If File.Exists(BaseDir & "MariaDb\bin\mysqld.exe") Then
-                _Apps(Q.AppNames.MariaPortable).LocalFound = True
+            If File.Exists(QGlobal.BaseDir & "MariaDb\bin\mysqld.exe") Then
+                _Apps(QGlobal.AppNames.MariaPortable).LocalFound = True
                 'try find MariaVersion
-                If File.Exists(BaseDir & "MariaDb\release") Then
-                    Dim version As String = File.ReadAllText(BaseDir & "MariaDb\release")
-                    _Apps(Q.AppNames.MariaPortable).LocalVersion = version
+                If File.Exists(QGlobal.BaseDir & "MariaDb\release") Then
+                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "MariaDb\release")
+                    _Apps(QGlobal.AppNames.MariaPortable).LocalVersion = version
                 Else
                     'asume 5.5.29
-                    _Apps(Q.AppNames.MariaPortable).LocalVersion = "5.5.29"
+                    _Apps(QGlobal.AppNames.MariaPortable).LocalVersion = "5.5.29"
                 End If
 
             End If
@@ -210,11 +210,11 @@ Public Class clsApp
     End Sub
     Public Sub DownloadFile(ByVal Url As String)
         _Aborted = False
-        _Apps(Q.AppNames.DownloadFile).RemoteUrl = Url
+        _Apps(QGlobal.AppNames.DownloadFile).RemoteUrl = Url
         Dim trda As Thread
         trda = New Thread(AddressOf DownloadOnly)
         trda.IsBackground = True
-        trda.Start(Q.AppNames.DownloadFile)
+        trda.Start(QGlobal.AppNames.DownloadFile)
         trda = Nothing
     End Sub
     Private Sub DownloadOnly(ByVal obj As Object)
@@ -231,7 +231,7 @@ Public Class clsApp
         Dim appid As Integer = CType(obj, Integer)
         'we are now in threaded environment
         'if we do not have remoteinfo lets get it.
-        If _Apps(Q.AppNames.BRS).RemoteUrl = "" Then
+        If _Apps(QGlobal.AppNames.BRS).RemoteUrl = "" Then
             If Not SetRemoteInfo() Then
                 RaiseEvent Aborted(appid)
                 Exit Sub
@@ -256,7 +256,7 @@ Public Class clsApp
     Private Function Download(ByVal AppId As Integer, Optional ByVal FromRepos As Boolean = True) As Boolean
 
         Dim DLOk As Integer = False
-        Dim filename As String = BaseDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
+        Dim filename As String = QGlobal.BaseDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
         Dim File As FileStream = Nothing
         For x = 0 To UBound(_Repositories) 'try next repo if fail.
             Try
@@ -311,8 +311,8 @@ Public Class clsApp
     Private Function Extract(ByVal AppId As Integer) As Boolean
         Dim AllOk As Boolean = False
         Try
-            Dim filename As String = BaseDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
-            Dim target As String = BaseDir & _Apps(AppId).ExtractToDir
+            Dim filename As String = QGlobal.BaseDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
+            Dim target As String = QGlobal.BaseDir & _Apps(AppId).ExtractToDir
             Dim Archive As ZipArchive = ZipFile.OpenRead(filename)
             Dim totalfiles As Integer = Archive.Entries.Count
             Dim counter As Integer = 0
@@ -345,7 +345,7 @@ Public Class clsApp
     End Function
     Private Sub DeleteFile(ByVal appid As Integer)
         Try
-            Dim filename As String = BaseDir & Path.GetFileName(_Apps(appid).RemoteUrl)
+            Dim filename As String = QGlobal.BaseDir & Path.GetFileName(_Apps(appid).RemoteUrl)
             If File.Exists(filename) Then
                 File.Delete(filename)
             End If
@@ -359,10 +359,10 @@ Public Class clsApp
 #Region " Updates "
     Public Sub StartUpdateNotifications()
 
-        If Not _UpdateNotifyState = States.Stopped Then
+        If Not _UpdateNotifyState = QGlobal.States.Stopped Then
             Exit Sub
         End If
-        _UpdateNotifyState = States.Running
+        _UpdateNotifyState = QGlobal.States.Running
 
         Dim trda As Thread
         trda = New Thread(AddressOf UpdateNotifyTimer)
@@ -371,7 +371,7 @@ Public Class clsApp
         trda = Nothing
     End Sub
     Public Sub StopUpdateNotifications()
-        _UpdateNotifyState = States.Abort
+        _UpdateNotifyState = QGlobal.States.Abort
 
     End Sub
     Private Sub UpdateNotifyTimer()
@@ -392,11 +392,11 @@ Public Class clsApp
             Do 'sleepthread
                 Thread.Sleep(600000) 'sleep for 10 minutes
                 If Now >= Nextcheck Then Exit Do
-                If _UpdateNotifyState = States.Abort Then Exit Do
+                If _UpdateNotifyState = QGlobal.States.Abort Then Exit Do
             Loop
-            If _UpdateNotifyState = States.Abort Then Exit Do
+            If _UpdateNotifyState = QGlobal.States.Abort Then Exit Do
         Loop
-        _UpdateNotifyState = States.Stopped
+        _UpdateNotifyState = QGlobal.States.Stopped
     End Sub
 #End Region
 
@@ -462,15 +462,15 @@ Public Class clsApp
     Public Function GetAppNameFromId(ByVal AppId As Integer) As String
         'Used when AppId needs resolves to human readable names
         Select Case AppId
-            Case Q.AppNames.BRS
+            Case QGlobal.AppNames.BRS
                 Return "BRS"
-            Case Q.AppNames.JavaInstalled
+            Case QGlobal.AppNames.JavaInstalled
                 Return "Java"
-            Case Q.AppNames.JavaPortable
+            Case QGlobal.AppNames.JavaPortable
                 Return "Portable Java"
-            Case Q.AppNames.MariaPortable
+            Case QGlobal.AppNames.MariaPortable
                 Return "Portable MariaDB"
-            Case Q.AppNames.Launcher
+            Case QGlobal.AppNames.Launcher
                 Return "Qbundle"
 
         End Select
@@ -479,13 +479,13 @@ Public Class clsApp
     Public Function GetDbNameFromType(ByVal Dtype As Integer) As String
 
         Select Case Dtype
-            Case Q.DbType.H2
+            Case QGlobal.DbType.H2
                 Return "H2"
-            Case Q.DbType.FireBird
+            Case QGlobal.DbType.FireBird
                 Return "FireBird"
-            Case Q.DbType.MariaDB
+            Case QGlobal.DbType.MariaDB
                 Return "MariaDB"
-            Case Q.DbType.pMariaDB
+            Case QGlobal.DbType.pMariaDB
                 Return "MariaDB"
         End Select
         Return ""

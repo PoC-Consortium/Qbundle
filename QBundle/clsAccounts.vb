@@ -58,7 +58,7 @@ Public Class clsAccounts
     End Function
     Public Sub SaveAccounts()
         Dim x As New XmlSerializer(GetType(clsAccounts))
-        Dim writer As TextWriter = New StreamWriter(BaseDir & "Acconts.xml")
+        Dim writer As TextWriter = New StreamWriter(QGlobal.BaseDir & "Acconts.xml")
         x.Serialize(writer, Me)
         writer.Close()
         writer.Dispose()
@@ -66,7 +66,7 @@ Public Class clsAccounts
     End Sub
     Public Sub LoadAccounts()
         Dim x As New XmlSerializer(GetType(clsAccounts))
-        Dim Reader As TextReader = New StreamReader(BaseDir & "Acconts.xml")
+        Dim Reader As TextReader = New StreamReader(QGlobal.BaseDir & "Acconts.xml")
         '  Me = DirectCast(x.Deserialize(Reader), clsAccounts)
         Reader.Close()
         Reader.Dispose()

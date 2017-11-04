@@ -4,14 +4,14 @@
         Try
             cmbLog.SelectedIndex = 0
             txtLog.Text = String.Join(vbCrLf, frmMain.Console(0))
-            AddHandler ProcHandler.Update, AddressOf ProcEvents
+            AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
-            RemoveHandler ProcHandler.Update, AddressOf ProcEvents
+            RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
@@ -33,14 +33,14 @@
         'threadsafe here
         Try
             Select Case Operation
-                Case ProcOp.ConsoleOut And ProcOp.ConsoleErr
+                Case QGlobal.ProcOp.ConsoleOut And QGlobal.ProcOp.ConsoleErr
                     If Generic.DebugMe = True Then
                         txtLog.AppendText(data & vbCrLf)
                     Else
-                        If AppId = AppNames.MariaPortable And cmbLog.SelectedIndex = 1 Then
+                        If AppId = QGlobal.AppNames.MariaPortable And cmbLog.SelectedIndex = 1 Then
                             txtLog.AppendText(data & vbCrLf)
                         End If
-                        If AppId = AppNames.BRS And cmbLog.SelectedIndex = 0 Then
+                        If AppId = QGlobal.AppNames.BRS And cmbLog.SelectedIndex = 0 Then
                             txtLog.AppendText(data & vbCrLf)
                         End If
                     End If
