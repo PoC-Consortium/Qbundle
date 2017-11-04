@@ -37,6 +37,12 @@ Partial Class frmMain
         Me.ExitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountMangerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoginAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Account1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Account2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Account3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StopWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -71,12 +77,8 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.AccountMangerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AddAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LoginAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Account1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Account2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Account3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlotterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -207,6 +209,44 @@ Partial Class frmMain
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
+        'AccountMangerToolStripMenuItem
+        '
+        Me.AccountMangerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAccountToolStripMenuItem, Me.LoginAccountToolStripMenuItem})
+        Me.AccountMangerToolStripMenuItem.Name = "AccountMangerToolStripMenuItem"
+        Me.AccountMangerToolStripMenuItem.Size = New System.Drawing.Size(108, 20)
+        Me.AccountMangerToolStripMenuItem.Text = "Account Manger"
+        '
+        'AddAccountToolStripMenuItem
+        '
+        Me.AddAccountToolStripMenuItem.Name = "AddAccountToolStripMenuItem"
+        Me.AddAccountToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddAccountToolStripMenuItem.Text = "Manager"
+        '
+        'LoginAccountToolStripMenuItem
+        '
+        Me.LoginAccountToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Account1ToolStripMenuItem, Me.Account2ToolStripMenuItem, Me.Account3ToolStripMenuItem})
+        Me.LoginAccountToolStripMenuItem.Name = "LoginAccountToolStripMenuItem"
+        Me.LoginAccountToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoginAccountToolStripMenuItem.Text = "Login Account"
+        '
+        'Account1ToolStripMenuItem
+        '
+        Me.Account1ToolStripMenuItem.Name = "Account1ToolStripMenuItem"
+        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account1ToolStripMenuItem.Text = "Account 1"
+        '
+        'Account2ToolStripMenuItem
+        '
+        Me.Account2ToolStripMenuItem.Name = "Account2ToolStripMenuItem"
+        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account2ToolStripMenuItem.Text = "Account 2"
+        '
+        'Account3ToolStripMenuItem
+        '
+        Me.Account3ToolStripMenuItem.Name = "Account3ToolStripMenuItem"
+        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account3ToolStripMenuItem.Text = "Account 3"
+        '
         'WalletToolStripMenuItem
         '
         Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartWalletToolStripMenuItem, Me.StopWalletToolStripMenuItem})
@@ -258,7 +298,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigureWindowsFirewallToolStripMenuItem, Me.ViewConsolesToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigureWindowsFirewallToolStripMenuItem, Me.ViewConsolesToolStripMenuItem, Me.PlotterToolStripMenuItem, Me.MinerToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
@@ -304,13 +344,13 @@ Partial Class frmMain
         'ContributorsToolStripMenuItem
         '
         Me.ContributorsToolStripMenuItem.Name = "ContributorsToolStripMenuItem"
-        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.ContributorsToolStripMenuItem.Text = "Contributors"
         '
         'DeveloperToolStripMenuItem
         '
         Me.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem"
-        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.DeveloperToolStripMenuItem.Text = "Developer"
         '
         'FileToolStripMenuItem
@@ -442,43 +482,17 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(679, 403)
         Me.wb1.TabIndex = 0
         '
-        'AccountMangerToolStripMenuItem
+        'PlotterToolStripMenuItem
         '
-        Me.AccountMangerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAccountToolStripMenuItem, Me.LoginAccountToolStripMenuItem})
-        Me.AccountMangerToolStripMenuItem.Name = "AccountMangerToolStripMenuItem"
-        Me.AccountMangerToolStripMenuItem.Size = New System.Drawing.Size(108, 20)
-        Me.AccountMangerToolStripMenuItem.Text = "Account Manger"
+        Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.PlotterToolStripMenuItem.Text = "Plotter"
         '
-        'AddAccountToolStripMenuItem
+        'MinerToolStripMenuItem
         '
-        Me.AddAccountToolStripMenuItem.Name = "AddAccountToolStripMenuItem"
-        Me.AddAccountToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.AddAccountToolStripMenuItem.Text = "Manager"
-        '
-        'LoginAccountToolStripMenuItem
-        '
-        Me.LoginAccountToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Account1ToolStripMenuItem, Me.Account2ToolStripMenuItem, Me.Account3ToolStripMenuItem})
-        Me.LoginAccountToolStripMenuItem.Name = "LoginAccountToolStripMenuItem"
-        Me.LoginAccountToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.LoginAccountToolStripMenuItem.Text = "Login Account"
-        '
-        'Account1ToolStripMenuItem
-        '
-        Me.Account1ToolStripMenuItem.Name = "Account1ToolStripMenuItem"
-        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Account1ToolStripMenuItem.Text = "Account 1"
-        '
-        'Account2ToolStripMenuItem
-        '
-        Me.Account2ToolStripMenuItem.Name = "Account2ToolStripMenuItem"
-        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Account2ToolStripMenuItem.Text = "Account 2"
-        '
-        'Account3ToolStripMenuItem
-        '
-        Me.Account3ToolStripMenuItem.Name = "Account3ToolStripMenuItem"
-        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Account3ToolStripMenuItem.Text = "Account 3"
+        Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'frmMain
         '
@@ -565,4 +579,6 @@ Partial Class frmMain
     Friend WithEvents Account1ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Account2ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Account3ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PlotterToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MinerToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -569,6 +569,10 @@
         frmAccounts.Show()
     End Sub
 
+    Private Sub PlotterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotterToolStripMenuItem.Click
+        frmPlotter.Show()
+    End Sub
+
 
 #End Region
 

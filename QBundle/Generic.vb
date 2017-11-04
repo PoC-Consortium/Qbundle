@@ -218,7 +218,6 @@ Friend Class Generic
                 p.StartInfo.WorkingDirectory = QGlobal.BaseDir
                 p.StartInfo.Arguments = "ADDFW"
                 p.StartInfo.UseShellExecute = True
-                'p.StartInfo.CreateNoWindow = True 'we need window for messages(?)
                 p.StartInfo.FileName = Application.ExecutablePath
                 p.StartInfo.Verb = "runas"
                 p.Start()

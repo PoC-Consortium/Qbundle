@@ -10,8 +10,9 @@ To Be done:
 Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
 Add support for Blago Miner (first step)
 Add support for XPlotter (first step)
-Account Manager
 Add a components download window where you can select to download/update a component.
+Encrypt / Decrypt Passwors in account manager
+
 More visuals when wallet is running. Like Mining info Network diff
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
 Make BRS exception handling to cover more error types.
@@ -21,9 +22,10 @@ First setup choise of wallet / Launcher style
 
 
 ~V1.3
-Rename to Qbundle
-Added support for Dev version of nrs
-Wallet Layout added
+* Rename to Qbundle
+* Added support for Dev version of nrs
++ Wallet Layout added
++ Account Manager
 
 V1.2
 + Getting started Wizard.

@@ -204,6 +204,12 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPlotter.Designer.vb">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlotter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSettings.Designer.vb">
       <DependentUpon>frmSettings.vb</DependentUpon>
     </Compile>
@@ -267,6 +273,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPlotter.resx">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +306,7 @@
     <Content Include="burstlogo.ico" />
     <Content Include="burstnewlogo.ico" />
     <Content Include="Changelog.txt" />
+    <Content Include="Resources\blago.jpg" />
     <None Include="Resources\Download.png" />
     <None Include="Resources\vps_168_57.jpg" />
     <None Include="Resources\gb.png" />
