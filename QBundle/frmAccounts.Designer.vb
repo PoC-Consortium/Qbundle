@@ -147,9 +147,9 @@ Partial Class frmAccounts
         '
         Me.btnNew.Location = New System.Drawing.Point(18, 191)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(94, 26)
+        Me.btnNew.Size = New System.Drawing.Size(148, 26)
         Me.btnNew.TabIndex = 8
-        Me.btnNew.Text = "Generate new"
+        Me.btnNew.Text = "Generate new passphrase"
         Me.btnNew.UseVisualStyleBackColor = True
         '
         'frmAccounts

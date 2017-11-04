@@ -18,10 +18,10 @@
 
         QGlobal.BaseDir = Application.StartupPath
         If Not QGlobal.BaseDir.EndsWith("\") Then QGlobal.BaseDir &= "\"
-        Q.settings = New clsSettings
-        Q.settings.LoadSettings()
-        Q.Accounts = New clsAccounts
-        Q.Accounts.LoadAccounts()
+        ' Q.settings = New clsSettings
+        ' Q.settings.LoadSettings()
+        ' Q.Accounts = New clsAccounts
+        ' Q.LoadAccounts()
 
         QB.Generic.CheckCommandArgs()
         If Q.settings.AlwaysAdmin And Not QB.Generic.IsAdmin Then
@@ -91,8 +91,6 @@
 
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
-
-
         Select Case NewMode
             Case 0 ' AIO Mode
 
@@ -183,7 +181,6 @@
     Private Sub lblUpdates_Click(sender As Object, e As EventArgs) Handles lblUpdates.Click
         frmUpdate.Show()
     End Sub
-
     'toolstrips
     Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
         Me.Close()
