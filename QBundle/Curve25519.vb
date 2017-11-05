@@ -1,4 +1,5 @@
 ﻿' Ported from C# to VB by Quibus, 19/08/2017
+' Requires C# Behaviour. Integer overflow detection must be disabled 
 
 ' Ported parts from Java to C# And refactored by Hans Wolff, 17/09/2013 
 
