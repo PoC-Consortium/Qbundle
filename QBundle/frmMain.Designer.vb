@@ -39,7 +39,7 @@ Partial Class frmMain
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountMangerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LoginAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLoginAccount = New System.Windows.Forms.ToolStripMenuItem()
         Me.Account1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Account2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Account3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -211,7 +211,7 @@ Partial Class frmMain
         '
         'AccountMangerToolStripMenuItem
         '
-        Me.AccountMangerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAccountToolStripMenuItem, Me.LoginAccountToolStripMenuItem})
+        Me.AccountMangerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAccountToolStripMenuItem, Me.mnuLoginAccount})
         Me.AccountMangerToolStripMenuItem.Name = "AccountMangerToolStripMenuItem"
         Me.AccountMangerToolStripMenuItem.Size = New System.Drawing.Size(108, 20)
         Me.AccountMangerToolStripMenuItem.Text = "Account Manger"
@@ -222,29 +222,29 @@ Partial Class frmMain
         Me.AddAccountToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AddAccountToolStripMenuItem.Text = "Manager"
         '
-        'LoginAccountToolStripMenuItem
+        'mnuLoginAccount
         '
-        Me.LoginAccountToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Account1ToolStripMenuItem, Me.Account2ToolStripMenuItem, Me.Account3ToolStripMenuItem})
-        Me.LoginAccountToolStripMenuItem.Name = "LoginAccountToolStripMenuItem"
-        Me.LoginAccountToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.LoginAccountToolStripMenuItem.Text = "Login Account"
+        Me.mnuLoginAccount.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Account1ToolStripMenuItem, Me.Account2ToolStripMenuItem, Me.Account3ToolStripMenuItem})
+        Me.mnuLoginAccount.Name = "mnuLoginAccount"
+        Me.mnuLoginAccount.Size = New System.Drawing.Size(152, 22)
+        Me.mnuLoginAccount.Text = "Login Account"
         '
         'Account1ToolStripMenuItem
         '
         Me.Account1ToolStripMenuItem.Name = "Account1ToolStripMenuItem"
-        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Account1ToolStripMenuItem.Text = "Account 1"
         '
         'Account2ToolStripMenuItem
         '
         Me.Account2ToolStripMenuItem.Name = "Account2ToolStripMenuItem"
-        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Account2ToolStripMenuItem.Text = "Account 2"
         '
         'Account3ToolStripMenuItem
         '
         Me.Account3ToolStripMenuItem.Name = "Account3ToolStripMenuItem"
-        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Account3ToolStripMenuItem.Text = "Account 3"
         '
         'WalletToolStripMenuItem
@@ -479,6 +479,7 @@ Partial Class frmMain
         Me.wb1.Location = New System.Drawing.Point(0, 0)
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wb1.Name = "wb1"
+        Me.wb1.ScriptErrorsSuppressed = True
         Me.wb1.Size = New System.Drawing.Size(679, 403)
         Me.wb1.TabIndex = 0
         '
@@ -575,7 +576,7 @@ Partial Class frmMain
     Friend WithEvents wb1 As WebBrowser
     Friend WithEvents AccountMangerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AddAccountToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LoginAccountToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuLoginAccount As ToolStripMenuItem
     Friend WithEvents Account1ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Account2ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Account3ToolStripMenuItem As ToolStripMenuItem

@@ -11,6 +11,7 @@
     Public Repositories() As String
     Private LastException As Date
     Private WithEvents APITimer As Timer
+    Private WithEvents ShutdownWallet As Timer
 
 #Region " Form Events "
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -74,13 +75,14 @@
             End Select
         End If
         APITimer = New Timer
+        ShutdownWallet = New Timer
         Q.ProcHandler = New clsProcessHandler
         AddHandler Q.ProcHandler.Started, AddressOf Starting
         AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
         AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
         AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
 
-
+        SetLoginMenu()
         StopWalletToolStripMenuItem.Enabled = False
         If Q.settings.QBMode = 0 Then
             StartStop()
@@ -125,14 +127,26 @@
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
             If Running Then
-                MsgBox("You must stop the wallet before you can close the launcher", MsgBoxStyle.OkOnly, "Exit")
                 e.Cancel = True
+                If MsgBox("Do you want to shutdown the wallet?", MsgBoxStyle.YesNo, "Exit") = MsgBoxResult.No Then
+                    Exit Sub
+                End If
+                ShutdownWallet.Interval = 100
+                ShutdownWallet.Enabled = True
+                ShutdownWallet.Start()
+                StopWallet()
+                Me.Hide()
                 Exit Sub
             End If
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
 
+    End Sub
+    Private Sub ShudownWallet_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShutdownWallet.Tick
+        If Running = False Then
+            Me.Close()
+        End If
     End Sub
 #End Region
 
@@ -455,6 +469,40 @@
 #End Region
 
 #Region " Misc "
+    Public Sub SetLoginMenu()
+        mnuLoginAccount.DropDownItems.Clear()
+        Dim mnuitm As ToolStripMenuItem
+        For Each account As QB.clsAccounts.Account In Q.Accounts.AccArray
+            mnuitm = New ToolStripMenuItem
+            mnuitm.Name = account.AccountName
+            mnuitm.Text = account.AccountName
+            AddHandler(mnuitm.Click), AddressOf LoadWallet
+            mnuLoginAccount.DropDownItems.Add(mnuitm)
+        Next
+    End Sub
+    Private Sub LoadWallet(sender As Object, e As EventArgs)
+
+        Dim pin As String = InputBox("Enter the pin for the account " & sender.text, "Enter Pin", "")
+        If pin.Length > 5 Then
+            Dim Pass As String = Q.Accounts.GetPassword(sender.name, pin)
+            If Pass.Length > 0 Then
+                If Q.settings.QBMode = 0 Then
+
+                    Dim ObjArr(0) As Object
+                    ObjArr(0) = CObj(New String(Pass))
+                    wb1.Document.InvokeScript("NRS.login", ObjArr)
+
+
+                Else 'coppy to clipboard
+
+
+                End If
+
+
+            End If
+        End If
+
+    End Sub
     Public Sub SetDbInfo()
 
         Select Case Q.settings.DbType

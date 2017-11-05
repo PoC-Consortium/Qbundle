@@ -12,6 +12,7 @@
         If MsgBox("Are you sure you want to delete account " & lstAccounts.Items.Item(lstAccounts.SelectedIndex).ToString & "?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Delete account") = MsgBoxResult.Yes Then
             Q.Accounts.DeleteAccount(lstAccounts.Items.Item(lstAccounts.SelectedIndex))
             ReloadAccountList()
+            frmMain.SetLoginMenu()
         End If
     End Sub
 
@@ -54,6 +55,7 @@
         Q.Accounts.AddAccount(txtName.Text, txtPass.Text, txtPin.Text)
         lstAccounts.Items.Add(txtName.Text)
         Q.Accounts.SaveAccounts()
+        frmMain.SetLoginMenu()
     End Sub
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
