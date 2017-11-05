@@ -23,25 +23,25 @@ Partial Class frmPlotter
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPlotter))
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnStartPotting = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.txtPath = New System.Windows.Forms.TextBox()
+        Me.txtAccount = New System.Windows.Forms.TextBox()
+        Me.btnPath = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.lstPlots = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.HScrollBar1 = New System.Windows.Forms.HScrollBar()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.chkAddtoPlottfiles = New System.Windows.Forms.CheckBox()
+        Me.txtStartNonce = New System.Windows.Forms.TextBox()
+        Me.lblSize = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.btnAccounts = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.HSSize = New System.Windows.Forms.HScrollBar()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -51,18 +51,22 @@ Partial Class frmPlotter
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.lblTotalNonces = New System.Windows.Forms.Label()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Button1
+        'btnStartPotting
         '
-        Me.Button1.Location = New System.Drawing.Point(213, 224)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(119, 34)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Start Plotting"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnStartPotting.Location = New System.Drawing.Point(213, 248)
+        Me.btnStartPotting.Name = "btnStartPotting"
+        Me.btnStartPotting.Size = New System.Drawing.Size(119, 34)
+        Me.btnStartPotting.TabIndex = 0
+        Me.btnStartPotting.Text = "Start Plotting"
+        Me.btnStartPotting.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -73,29 +77,29 @@ Partial Class frmPlotter
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Numeric account nr"
         '
-        'TextBox1
+        'txtPath
         '
-        Me.TextBox1.Location = New System.Drawing.Point(11, 37)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(288, 20)
-        Me.TextBox1.TabIndex = 8
+        Me.txtPath.Location = New System.Drawing.Point(11, 37)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.Size = New System.Drawing.Size(288, 20)
+        Me.txtPath.TabIndex = 8
         '
-        'TextBox2
+        'txtAccount
         '
-        Me.TextBox2.Location = New System.Drawing.Point(11, 81)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(288, 20)
-        Me.TextBox2.TabIndex = 9
+        Me.txtAccount.Location = New System.Drawing.Point(11, 81)
+        Me.txtAccount.Name = "txtAccount"
+        Me.txtAccount.Size = New System.Drawing.Size(288, 20)
+        Me.txtAccount.TabIndex = 9
         '
-        'Button2
+        'btnPath
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(302, 36)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(30, 22)
-        Me.Button2.TabIndex = 11
-        Me.Button2.Text = "..."
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPath.Location = New System.Drawing.Point(302, 36)
+        Me.btnPath.Name = "btnPath"
+        Me.btnPath.Size = New System.Drawing.Size(30, 22)
+        Me.btnPath.TabIndex = 11
+        Me.btnPath.Text = "..."
+        Me.btnPath.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -108,83 +112,95 @@ Partial Class frmPlotter
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button5)
-        Me.GroupBox1.Controls.Add(Me.Button4)
-        Me.GroupBox1.Controls.Add(Me.ListBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 285)
+        Me.GroupBox1.Controls.Add(Me.btnRemove)
+        Me.GroupBox1.Controls.Add(Me.btnImport)
+        Me.GroupBox1.Controls.Add(Me.lstPlots)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 312)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(615, 84)
         Me.GroupBox1.TabIndex = 13
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
         '
-        'ListBox1
+        'btnRemove
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(6, 19)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(495, 56)
-        Me.ListBox1.TabIndex = 0
+        Me.btnRemove.Location = New System.Drawing.Point(511, 48)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(88, 27)
+        Me.btnRemove.TabIndex = 2
+        Me.btnRemove.Text = "Remove plotfile"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
+        'btnImport
+        '
+        Me.btnImport.Location = New System.Drawing.Point(511, 19)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(88, 27)
+        Me.btnImport.TabIndex = 1
+        Me.btnImport.Text = "Import plotfile"
+        Me.btnImport.UseVisualStyleBackColor = True
+        '
+        'lstPlots
+        '
+        Me.lstPlots.FormattingEnabled = True
+        Me.lstPlots.Location = New System.Drawing.Point(6, 19)
+        Me.lstPlots.Name = "lstPlots"
+        Me.lstPlots.Size = New System.Drawing.Size(495, 56)
+        Me.lstPlots.TabIndex = 0
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Controls.Add(Me.TextBox3)
         Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.NumericUpDown1)
+        Me.GroupBox2.Controls.Add(Me.lblTotalNonces)
+        Me.GroupBox2.Controls.Add(Me.chkAddtoPlottfiles)
+        Me.GroupBox2.Controls.Add(Me.txtStartNonce)
+        Me.GroupBox2.Controls.Add(Me.lblSize)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.Button3)
+        Me.GroupBox2.Controls.Add(Me.btnAccounts)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.TextBox2)
+        Me.GroupBox2.Controls.Add(Me.txtAccount)
         Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.HScrollBar1)
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Controls.Add(Me.HSSize)
+        Me.GroupBox2.Controls.Add(Me.txtPath)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.btnPath)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.btnStartPotting)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 14)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(344, 264)
+        Me.GroupBox2.Size = New System.Drawing.Size(344, 292)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Create new plotfile"
         '
-        'HScrollBar1
+        'chkAddtoPlottfiles
         '
-        Me.HScrollBar1.Location = New System.Drawing.Point(13, 128)
-        Me.HScrollBar1.Maximum = 999999999
-        Me.HScrollBar1.Name = "HScrollBar1"
-        Me.HScrollBar1.Size = New System.Drawing.Size(319, 21)
-        Me.HScrollBar1.TabIndex = 18
-        Me.HScrollBar1.Value = 1
+        Me.chkAddtoPlottfiles.AutoSize = True
+        Me.chkAddtoPlottfiles.Checked = True
+        Me.chkAddtoPlottfiles.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAddtoPlottfiles.Location = New System.Drawing.Point(13, 265)
+        Me.chkAddtoPlottfiles.Name = "chkAddtoPlottfiles"
+        Me.chkAddtoPlottfiles.Size = New System.Drawing.Size(195, 17)
+        Me.chkAddtoPlottfiles.TabIndex = 26
+        Me.chkAddtoPlottfiles.Text = "Add to my plotfiles at ""Start plotting"""
+        Me.chkAddtoPlottfiles.UseVisualStyleBackColor = True
         '
-        'Label2
+        'txtStartNonce
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 112)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(148, 13)
-        Me.Label2.TabIndex = 19
-        Me.Label2.Text = "Choose the size of the plotfile:"
+        Me.txtStartNonce.Location = New System.Drawing.Point(13, 175)
+        Me.txtStartNonce.Name = "txtStartNonce"
+        Me.txtStartNonce.Size = New System.Drawing.Size(319, 20)
+        Me.txtStartNonce.TabIndex = 25
         '
-        'Label7
+        'lblSize
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 205)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 13)
-        Me.Label7.TabIndex = 21
-        Me.Label7.Text = "Total nonces:"
-        '
-        'Button3
-        '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(302, 80)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(30, 22)
-        Me.Button3.TabIndex = 22
-        Me.Button3.Text = "..."
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.lblSize.AutoSize = True
+        Me.lblSize.Location = New System.Drawing.Point(156, 112)
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Size = New System.Drawing.Size(10, 13)
+        Me.lblSize.TabIndex = 24
+        Me.lblSize.Text = "-"
         '
         'Label1
         '
@@ -195,51 +211,42 @@ Partial Class frmPlotter
         Me.Label1.TabIndex = 23
         Me.Label1.Text = "Start nonce:"
         '
-        'Label4
+        'btnAccounts
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(156, 112)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(33, 13)
-        Me.Label4.TabIndex = 24
-        Me.Label4.Text = "0 GiB"
+        Me.btnAccounts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAccounts.Location = New System.Drawing.Point(302, 80)
+        Me.btnAccounts.Name = "btnAccounts"
+        Me.btnAccounts.Size = New System.Drawing.Size(30, 22)
+        Me.btnAccounts.TabIndex = 22
+        Me.btnAccounts.Text = "..."
+        Me.btnAccounts.UseVisualStyleBackColor = True
         '
-        'TextBox3
+        'Label7
         '
-        Me.TextBox3.Location = New System.Drawing.Point(13, 175)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(319, 20)
-        Me.TextBox3.TabIndex = 25
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(10, 200)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(72, 13)
+        Me.Label7.TabIndex = 21
+        Me.Label7.Text = "Total nonces:"
         '
-        'Button4
+        'Label2
         '
-        Me.Button4.Location = New System.Drawing.Point(511, 19)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(88, 27)
-        Me.Button4.TabIndex = 1
-        Me.Button4.Text = "Import plotfile"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(10, 112)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(148, 13)
+        Me.Label2.TabIndex = 19
+        Me.Label2.Text = "Choose the size of the plotfile:"
         '
-        'Button5
+        'HSSize
         '
-        Me.Button5.Location = New System.Drawing.Point(511, 48)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(88, 27)
-        Me.Button5.TabIndex = 2
-        Me.Button5.Text = "Remove plotfile"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(13, 232)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(195, 17)
-        Me.CheckBox1.TabIndex = 26
-        Me.CheckBox1.Text = "Add to my plotfiles at ""Start plotting"""
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.HSSize.Location = New System.Drawing.Point(13, 128)
+        Me.HSSize.Maximum = 999999999
+        Me.HSSize.Name = "HSSize"
+        Me.HSSize.Size = New System.Drawing.Size(319, 21)
+        Me.HSSize.TabIndex = 18
+        Me.HSSize.Value = 1
         '
         'Label6
         '
@@ -328,12 +335,38 @@ Partial Class frmPlotter
         Me.Label15.TabIndex = 23
         Me.Label15.Text = "Guide"
         '
+        'lblTotalNonces
+        '
+        Me.lblTotalNonces.AutoSize = True
+        Me.lblTotalNonces.Location = New System.Drawing.Point(83, 200)
+        Me.lblTotalNonces.Name = "lblTotalNonces"
+        Me.lblTotalNonces.Size = New System.Drawing.Size(10, 13)
+        Me.lblTotalNonces.TabIndex = 27
+        Me.lblTotalNonces.Text = "-"
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(57, 224)
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(48, 20)
+        Me.NumericUpDown1.TabIndex = 28
+        Me.NumericUpDown1.Value = New Decimal(New Integer() {4, 0, 0, 0})
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(10, 226)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 13)
+        Me.Label4.TabIndex = 29
+        Me.Label4.Text = "Threads"
+        '
         'frmPlotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(637, 373)
+        Me.ClientSize = New System.Drawing.Size(637, 401)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label14)
@@ -354,29 +387,30 @@ Partial Class frmPlotter
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnStartPotting As Button
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Button2 As Button
+    Friend WithEvents txtPath As TextBox
+    Friend WithEvents txtAccount As TextBox
+    Friend WithEvents btnPath As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents lstPlots As ListBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents HScrollBar1 As HScrollBar
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents HSSize As HScrollBar
+    Friend WithEvents btnAccounts As Button
+    Friend WithEvents btnRemove As Button
+    Friend WithEvents btnImport As Button
+    Friend WithEvents chkAddtoPlottfiles As CheckBox
+    Friend WithEvents txtStartNonce As TextBox
+    Friend WithEvents lblSize As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label8 As Label
@@ -387,4 +421,7 @@ Partial Class frmPlotter
     Friend WithEvents Label13 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
+    Friend WithEvents lblTotalNonces As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents NumericUpDown1 As NumericUpDown
 End Class

@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports System.Numerics
 Imports System.Security.Cryptography
 Imports System.Xml.Serialization
 <Serializable>
@@ -8,11 +9,49 @@ Public Class clsAccounts
     Public Structure Account
         Public AccountName As String
         Public BurstPassword As String
+        Public PublicKey As String
+        Public AccountID As String
+        Public RSAddress As String
     End Structure
 
     Public Sub AddAccount(ByVal name As String, ByVal Passphrase As String, ByVal Pin As String)
+
+        Dim AccountID As String
+        Dim AccountAddress As String
+        Dim KeySeed As String
+        Dim PrivateKey As Byte()
+        Dim PublicKey As Byte()
+        Dim PublicKeyHash As Byte()
+
+        KeySeed = Passphrase
+        Dim cSHA256 As SHA256 = SHA256Managed.Create()
+
+        'create private key
+        PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
+
+        'create public key
+        PublicKey = Curve25519.GetPublicKey(PrivateKey)
+
+        'create public key hash
+        PublicKeyHash = cSHA256.ComputeHash(PublicKey)
+
+        'create numeric account id
+        Dim b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
+        If (b(b.Length - 1) And &H80) <> 0 Then
+            Array.Resize(Of Byte)(b, b.Length + 1)
+        End If
+        Dim Bint As New BigInteger(b)
+        '  Dim lBint As ULong = CULng(Bint) 'needs to be unsinged due to size of the number
+        AccountID = Bint.ToString
+        'create Address
+        AccountAddress = ReedSolomon.encode(Bint.ToString)
+
+
         Dim Acc As New Account
         Acc.AccountName = name
+        Acc.PublicKey = BytesToHexString(PublicKey)
+        Acc.AccountID = AccountID
+        Acc.RSAddress = AccountAddress
         Acc.BurstPassword = Enc(Passphrase, Pin)
         AccArray.Add(Acc)
     End Sub
@@ -34,7 +73,16 @@ Public Class clsAccounts
         Next
         Return ""
     End Function
-
+    Private Function BytesToHexString(ByVal bArray As Byte()) As String
+        Dim HexString As String = ""
+        Dim buffer As String = ""
+        For Each b As Byte In bArray
+            buffer = Conversion.Hex(b)
+            If buffer.Length = 1 Then buffer = "0" & buffer
+            HexString &= buffer
+        Next
+        Return HexString
+    End Function
 
 
     Public Sub SaveAccounts()

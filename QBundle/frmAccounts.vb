@@ -52,6 +52,9 @@
             MsgBox("You need to enter a valid Pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "No valid pin.")
             Exit Sub
         End If
+        'compute BURST-RS and Accountnr
+
+
         Q.Accounts.AddAccount(txtName.Text, txtPass.Text, txtPin.Text)
         lstAccounts.Items.Add(txtName.Text)
         Q.Accounts.SaveAccounts()

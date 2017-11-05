@@ -26,6 +26,8 @@
     Private _Repo As String
     Private _QBMode As Integer
 
+    'Plotting And Mining
+    Private _Plots As String
 
     'NRS
     Public Property AutoIp() As Boolean
@@ -192,6 +194,17 @@
         End Set
     End Property
 
+    'Plotting And Mining
+    Public Property Plots() As String
+        Get
+            Return _Plots
+        End Get
+        Set(ByVal value As String)
+            _Plots = value
+        End Set
+    End Property
+
+
     Friend Sub New()
         _autoip = True
         _WalletException = True
@@ -217,6 +230,9 @@
         _Repo = "http://files.getburst.net;http://files2.getburst.net"
         _QBMode = 1 '0 = AIO 1 = Launcher
     End Sub
+
+
+
     Friend Sub LoadSettings()
         Try
             If IO.File.Exists(QGlobal.BaseDir & "\BWL.ini") Then

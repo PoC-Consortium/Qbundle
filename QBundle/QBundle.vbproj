@@ -115,6 +115,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -143,6 +144,7 @@
     <Compile Include="clsProcessHandler.vb" />
     <Compile Include="clsQ.vb" />
     <Compile Include="clsServiceHandler.vb" />
+    <Compile Include="Curve25519.vb" />
     <Compile Include="frmAccounts.Designer.vb">
       <DependentUpon>frmAccounts.vb</DependentUpon>
     </Compile>
@@ -241,6 +243,7 @@
     </Compile>
     <Compile Include="clsSettings.vb" />
     <Compile Include="QGlobal.vb" />
+    <Compile Include="ReedSolomon.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAccounts.resx">
