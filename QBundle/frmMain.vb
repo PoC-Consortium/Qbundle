@@ -12,24 +12,16 @@
     Private LastException As Date
     Private WithEvents APITimer As Timer
     Private WithEvents ShutdownWallet As Timer
-
+    Private WithEvents PasswordTimer As Timer
 #Region " Form Events "
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Q = New clsQ
-
-        QGlobal.BaseDir = Application.StartupPath
-        If Not QGlobal.BaseDir.EndsWith("\") Then QGlobal.BaseDir &= "\"
-        ' Q.settings = New clsSettings
-        ' Q.settings.LoadSettings()
-        ' Q.Accounts = New clsAccounts
-        ' Q.LoadAccounts()
-
         QB.Generic.CheckCommandArgs()
         If Q.settings.AlwaysAdmin And Not QB.Generic.IsAdmin Then
-            'restartme as admin
             QB.Generic.RestartAsAdmin()
             End
         End If
+
         If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
         LastException = Now 'for brs exception monitoring
 
@@ -37,14 +29,13 @@
             MsgBox("Burst Wallet launcher do not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
             End
         End If
-        '################################
-        'Start classes
-        '################################
-        Q.App = New clsApp
+
         Q.App.SetLocalInfo()
+
         For i As Integer = 0 To UBound(Console)
             Console(i) = New List(Of String)
         Next
+
         QB.Generic.CheckUpgrade() 'if there is any upgradescenarios
         If Q.settings.FirstRun Then
             frmFirstTime.ShowDialog()
@@ -76,7 +67,8 @@
         End If
         APITimer = New Timer
         ShutdownWallet = New Timer
-        Q.ProcHandler = New clsProcessHandler
+        PasswordTimer = New Timer
+
         AddHandler Q.ProcHandler.Started, AddressOf Starting
         AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
         AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
@@ -147,6 +139,11 @@
         If Running = False Then
             Me.Close()
         End If
+    End Sub
+    Private Sub PasswordTimer_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasswordTimer.Tick
+        My.Computer.Clipboard.SetText("")
+        PasswordTimer.Stop()
+        PasswordTimer.Enabled = False
     End Sub
 #End Region
 
@@ -487,18 +484,25 @@
             Dim Pass As String = Q.Accounts.GetPassword(sender.name, pin)
             If Pass.Length > 0 Then
                 If Q.settings.QBMode = 0 Then
+                    Try
+                        Dim element As HtmlElement = wb1.Document.GetElementById("remember_password")
+                        If Not Convert.ToBoolean(element.GetAttribute("checked")) Then
+                            element.InvokeMember("click")
+                        End If
+                        Dim codeString As String() = {[String].Format(" {0}('{1}') ", "NRS.login", Pass)}
+                        Me.wb1.Document.InvokeScript("eval", codeString)
+                        Pass = ""
+                    Catch ex As Exception
 
-                    Dim ObjArr(0) As Object
-                    ObjArr(0) = CObj(New String(Pass))
-                    wb1.Document.InvokeScript("NRS.login", ObjArr)
-
-
+                    End Try
                 Else 'coppy to clipboard
-
-
+                    MsgBox("Your passphrase is copied to clipoard. And will be erased after 30 seconds.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Clipboard")
+                    My.Computer.Clipboard.SetText(Pass)
+                    PasswordTimer.Start()
+                    PasswordTimer.Enabled = True
                 End If
-
-
+            Else
+                MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
             End If
         End If
 

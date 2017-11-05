@@ -54,6 +54,8 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfigureWindowsFirewallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewConsolesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlotterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SwitchToAIOStyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SwitchToLauncherStyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,8 +79,6 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.PlotterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -206,7 +206,7 @@ Partial Class frmMain
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'AccountMangerToolStripMenuItem
@@ -232,19 +232,19 @@ Partial Class frmMain
         'Account1ToolStripMenuItem
         '
         Me.Account1ToolStripMenuItem.Name = "Account1ToolStripMenuItem"
-        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Account1ToolStripMenuItem.Text = "Account 1"
         '
         'Account2ToolStripMenuItem
         '
         Me.Account2ToolStripMenuItem.Name = "Account2ToolStripMenuItem"
-        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Account2ToolStripMenuItem.Text = "Account 2"
         '
         'Account3ToolStripMenuItem
         '
         Me.Account3ToolStripMenuItem.Name = "Account3ToolStripMenuItem"
-        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Account3ToolStripMenuItem.Text = "Account 3"
         '
         'WalletToolStripMenuItem
@@ -257,13 +257,13 @@ Partial Class frmMain
         'StartWalletToolStripMenuItem
         '
         Me.StartWalletToolStripMenuItem.Name = "StartWalletToolStripMenuItem"
-        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.StartWalletToolStripMenuItem.Text = "Start Wallet"
         '
         'StopWalletToolStripMenuItem
         '
         Me.StopWalletToolStripMenuItem.Name = "StopWalletToolStripMenuItem"
-        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.StopWalletToolStripMenuItem.Text = "Stop Wallet"
         '
         'ToolsToolStripMenuItem
@@ -314,6 +314,18 @@ Partial Class frmMain
         Me.ViewConsolesToolStripMenuItem.Name = "ViewConsolesToolStripMenuItem"
         Me.ViewConsolesToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
         Me.ViewConsolesToolStripMenuItem.Text = "View Consoles"
+        '
+        'PlotterToolStripMenuItem
+        '
+        Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.PlotterToolStripMenuItem.Text = "Plotter"
+        '
+        'MinerToolStripMenuItem
+        '
+        Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'WindowToolStripMenuItem
         '
@@ -479,21 +491,8 @@ Partial Class frmMain
         Me.wb1.Location = New System.Drawing.Point(0, 0)
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wb1.Name = "wb1"
-        Me.wb1.ScriptErrorsSuppressed = True
         Me.wb1.Size = New System.Drawing.Size(679, 403)
         Me.wb1.TabIndex = 0
-        '
-        'PlotterToolStripMenuItem
-        '
-        Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
-        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.PlotterToolStripMenuItem.Text = "Plotter"
-        '
-        'MinerToolStripMenuItem
-        '
-        Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
-        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'frmMain
         '
