@@ -57,13 +57,16 @@ Public Class clsApp
         JavaPortable()
         'check portable maria
         MariaDB()
+
+        XPlotter()
+
     End Sub
     Public Function SetRemoteInfo() As Boolean
         Dim data As String = ""
         Dim AllOk As Boolean = False
         For i = 0 To UBound(_Repositories)
             Dim Http As New clsHttp
-            data = Http.GetUrl(_Repositories(i) & "AppInfo")
+            data = Http.GetUrl(_Repositories(i) & "QInfo")
             If Http.Errmsg <> "" Then ErrMSg = Http.Errmsg
             Http = Nothing
             If data.Length <> 0 Then Exit For
@@ -75,20 +78,18 @@ Public Class clsApp
         If data.Length <> 0 Then
             Dim Lines() As String = Split(data, vbCrLf)
             For Each Line In Lines
-
                 If Trim(Line) <> "" Then
-                    Dim Cell() As String = Split(Line, "|")
                     Try
-                        AppId = [Enum].Parse(GetType(QGlobal.AppNames), Cell(0)) 'converting name to appid
+                        Dim Cell() As String = Split(Line, "|")
+                        AppId = [Enum].Parse(GetType(QGlobal.AppNames), Cell(0)) 'converting name to appid 'if not exist it will move on
+                        _Apps(AppId).RemoteVersion = Cell(1)
+                        _Apps(AppId).ExtractToDir = Cell(2)
+                        _Apps(AppId).RemoteUrl = Cell(3)
+                        _Apps(AppId).Updated = False 'reset updates
+                        AllOk = True
                     Catch ex As Exception
-                        If Cell(0) = "NRS" Then AppId = QGlobal.AppNames.BRS
+                        If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
                     End Try
-
-                    _Apps(AppId).RemoteVersion = Cell(1)
-                    _Apps(AppId).ExtractToDir = Cell(2)
-                    _Apps(AppId).RemoteUrl = Cell(3)
-                    _Apps(AppId).Updated = False 'reset updates
-                    AllOk = True
                 End If
             Next
         End If
@@ -186,6 +187,24 @@ Public Class clsApp
                 Else
                     'asume 5.5.29
                     _Apps(QGlobal.AppNames.MariaPortable).LocalVersion = "5.5.29"
+                End If
+
+            End If
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+    End Sub
+    Private Sub Xplotter()
+        Try
+            If File.Exists(QGlobal.BaseDir & "Xplotter\XPlotter_avx.exe") Then
+                _Apps(QGlobal.AppNames.Xplotter).LocalFound = True
+                'try find MariaVersion
+                If File.Exists(QGlobal.BaseDir & "Xplotter\release") Then
+                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "Xplotter\release")
+                    _Apps(QGlobal.AppNames.Xplotter).LocalVersion = version
+                Else
+                    'asume 1.0
+                    _Apps(QGlobal.AppNames.Xplotter).LocalVersion = "1.0"
                 End If
 
             End If
@@ -353,7 +372,6 @@ Public Class clsApp
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
-
 #End Region
 
 #Region " Updates "
@@ -472,7 +490,8 @@ Public Class clsApp
                 Return "Portable MariaDB"
             Case QGlobal.AppNames.Launcher
                 Return "Qbundle"
-
+            Case QGlobal.AppNames.Xplotter
+                Return "Xplotter"
         End Select
         Return ""
     End Function

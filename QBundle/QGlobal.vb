@@ -18,6 +18,7 @@
         Import = 5 'Export / import db
         Export = 6
         DownloadFile = 7 'Download whatever
+        Xplotter = 8
     End Enum
     Public Enum States
         Stopped = 0

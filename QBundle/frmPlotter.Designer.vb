@@ -22,6 +22,7 @@ Partial Class frmPlotter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPlotter))
         Me.btnStartPotting = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -34,6 +35,9 @@ Partial Class frmPlotter
         Me.btnImport = New System.Windows.Forms.Button()
         Me.lstPlots = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.nrThreads = New System.Windows.Forms.NumericUpDown()
+        Me.lblTotalNonces = New System.Windows.Forms.Label()
         Me.chkAddtoPlottfiles = New System.Windows.Forms.CheckBox()
         Me.txtStartNonce = New System.Windows.Forms.TextBox()
         Me.lblSize = New System.Windows.Forms.Label()
@@ -51,12 +55,10 @@ Partial Class frmPlotter
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.lblTotalNonces = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnStartPotting
@@ -151,7 +153,7 @@ Partial Class frmPlotter
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.NumericUpDown1)
+        Me.GroupBox2.Controls.Add(Me.nrThreads)
         Me.GroupBox2.Controls.Add(Me.lblTotalNonces)
         Me.GroupBox2.Controls.Add(Me.chkAddtoPlottfiles)
         Me.GroupBox2.Controls.Add(Me.txtStartNonce)
@@ -174,6 +176,33 @@ Partial Class frmPlotter
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Create new plotfile"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(10, 227)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 13)
+        Me.Label4.TabIndex = 29
+        Me.Label4.Text = "Threads"
+        '
+        'nrThreads
+        '
+        Me.nrThreads.Location = New System.Drawing.Point(57, 224)
+        Me.nrThreads.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nrThreads.Name = "nrThreads"
+        Me.nrThreads.Size = New System.Drawing.Size(48, 20)
+        Me.nrThreads.TabIndex = 28
+        Me.nrThreads.Value = New Decimal(New Integer() {4, 0, 0, 0})
+        '
+        'lblTotalNonces
+        '
+        Me.lblTotalNonces.AutoSize = True
+        Me.lblTotalNonces.Location = New System.Drawing.Point(83, 200)
+        Me.lblTotalNonces.Name = "lblTotalNonces"
+        Me.lblTotalNonces.Size = New System.Drawing.Size(10, 13)
+        Me.lblTotalNonces.TabIndex = 27
+        Me.lblTotalNonces.Text = "-"
+        '
         'chkAddtoPlottfiles
         '
         Me.chkAddtoPlottfiles.AutoSize = True
@@ -192,6 +221,7 @@ Partial Class frmPlotter
         Me.txtStartNonce.Name = "txtStartNonce"
         Me.txtStartNonce.Size = New System.Drawing.Size(319, 20)
         Me.txtStartNonce.TabIndex = 25
+        Me.txtStartNonce.Text = "0"
         '
         'lblSize
         '
@@ -335,31 +365,11 @@ Partial Class frmPlotter
         Me.Label15.TabIndex = 23
         Me.Label15.Text = "Guide"
         '
-        'lblTotalNonces
+        'cmlAccounts
         '
-        Me.lblTotalNonces.AutoSize = True
-        Me.lblTotalNonces.Location = New System.Drawing.Point(83, 200)
-        Me.lblTotalNonces.Name = "lblTotalNonces"
-        Me.lblTotalNonces.Size = New System.Drawing.Size(10, 13)
-        Me.lblTotalNonces.TabIndex = 27
-        Me.lblTotalNonces.Text = "-"
-        '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(57, 224)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(48, 20)
-        Me.NumericUpDown1.TabIndex = 28
-        Me.NumericUpDown1.Value = New Decimal(New Integer() {4, 0, 0, 0})
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 226)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(46, 13)
-        Me.Label4.TabIndex = 29
-        Me.Label4.Text = "Threads"
+        Me.cmlAccounts.Name = "cmlAccounts"
+        Me.cmlAccounts.Size = New System.Drawing.Size(153, 26)
+        Me.cmlAccounts.Text = "Choose Account"
         '
         'frmPlotter
         '
@@ -387,7 +397,7 @@ Partial Class frmPlotter
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -423,5 +433,6 @@ Partial Class frmPlotter
     Friend WithEvents Label15 As Label
     Friend WithEvents lblTotalNonces As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents nrThreads As NumericUpDown
+    Friend WithEvents cmlAccounts As ContextMenuStrip
 End Class

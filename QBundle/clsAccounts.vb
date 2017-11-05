@@ -41,9 +41,9 @@ Public Class clsAccounts
             Array.Resize(Of Byte)(b, b.Length + 1)
         End If
         Dim Bint As New BigInteger(b)
-        '  Dim lBint As ULong = CULng(Bint) 'needs to be unsinged due to size of the number
+        'Account ID
         AccountID = Bint.ToString
-        'create Address
+        'Create RS-Address
         AccountAddress = ReedSolomon.encode(Bint.ToString)
 
 
@@ -82,6 +82,34 @@ Public Class clsAccounts
             HexString &= buffer
         Next
         Return HexString
+    End Function
+
+    Public Function GetAccountID(ByVal Name As String) As String
+        For Each acc As Account In AccArray
+            If acc.AccountName = Name Then
+                Return acc.AccountID
+                Exit For
+            End If
+        Next
+        Return ""
+    End Function
+    Public Function GetAccountRS(ByVal Name As String) As String
+        For Each acc As Account In AccArray
+            If acc.AccountName = Name Then
+                Return acc.RSAddress
+                Exit For
+            End If
+        Next
+        Return ""
+    End Function
+    Public Function GetPublicKey(ByVal Name As String) As String
+        For Each acc As Account In AccArray
+            If acc.AccountName = Name Then
+                Return acc.PublicKey
+                Exit For
+            End If
+        Next
+        Return ""
     End Function
 
 
