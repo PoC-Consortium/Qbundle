@@ -141,7 +141,7 @@
         End If
     End Sub
     Private Sub PasswordTimer_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasswordTimer.Tick
-        My.Computer.Clipboard.SetText("")
+        My.Computer.Clipboard.SetText("-")
         PasswordTimer.Stop()
         PasswordTimer.Enabled = False
     End Sub
