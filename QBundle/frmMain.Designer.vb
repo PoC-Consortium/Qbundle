@@ -79,6 +79,7 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
+        Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -298,7 +299,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigureWindowsFirewallToolStripMenuItem, Me.ViewConsolesToolStripMenuItem, Me.PlotterToolStripMenuItem, Me.MinerToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigureWindowsFirewallToolStripMenuItem, Me.ViewConsolesToolStripMenuItem, Me.PlotterToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
@@ -494,6 +495,12 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(603, 228)
         Me.wb1.TabIndex = 0
         '
+        'SetRewardassignmentToolStripMenuItem
+        '
+        Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Text = "Set rewardassignment"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -581,4 +588,5 @@ Partial Class frmMain
     Friend WithEvents Account3ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PlotterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MinerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetRewardassignmentToolStripMenuItem As ToolStripMenuItem
 End Class

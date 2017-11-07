@@ -207,10 +207,22 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMiner.Designer.vb">
+      <DependentUpon>frmMiner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMiner.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPlotter.Designer.vb">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </Compile>
     <Compile Include="frmPlotter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetrewardassignment.Designer.vb">
+      <DependentUpon>frmSetrewardassignment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetrewardassignment.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSettings.Designer.vb">
@@ -277,8 +289,14 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMiner.resx">
+      <DependentUpon>frmMiner.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetrewardassignment.resx">
+      <DependentUpon>frmSetrewardassignment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>

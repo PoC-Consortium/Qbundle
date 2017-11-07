@@ -625,6 +625,10 @@
         frmPlotter.Show()
     End Sub
 
+    Private Sub SetRewardassignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRewardassignmentToolStripMenuItem.Click
+        frmSetrewardassignment.Show()
+    End Sub
+
 
 #End Region
 

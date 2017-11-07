@@ -205,7 +205,11 @@ Public Class frmPlotter
             p.StartInfo.WorkingDirectory = QGlobal.BaseDir & "Xplotter"
             p.StartInfo.Arguments = "-id " & txtAccount.Text & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & txtPath.Text & " -mem " & nrRam.Value.ToString & "G"
             p.StartInfo.UseShellExecute = True
-            p.StartInfo.FileName = QGlobal.BaseDir & "Xplotter\XPlotter_avx.exe"
+            If QGlobal.CPUInstructions.AVX Then
+                p.StartInfo.FileName = QGlobal.BaseDir & "Xplotter\XPlotter_avx.exe"
+            Else
+                p.StartInfo.FileName = QGlobal.BaseDir & "Xplotter\XPlotter_sse.exe"
+            End If
             p.StartInfo.Verb = "runas"
             p.Start()
         Catch ex As Exception
