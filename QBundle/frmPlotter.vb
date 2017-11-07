@@ -71,15 +71,14 @@ Public Class frmPlotter
                 nrThreads.Value = Environment.ProcessorCount - 1
         End Select
 
+        lstPlots.Items.Clear()
         If Q.settings.Plots <> "" Then
-            lstPlots.Items.Clear()
             Dim buffer() As String = Split(Q.settings.Plots, "|")
             For Each plot As String In buffer
-                If plot <> "" Then
+                If plot.Length > 1 Then
                     lstPlots.Items.Add(plot)
                 End If
             Next
-
         End If
 
         cmlAccounts.Items.Clear()
@@ -129,8 +128,6 @@ Public Class frmPlotter
             End If
         End If
         'ok Xplotter is now installed
-
-        'XPlotter_avx.exe -id 17930413153828766298 -sn 603000000 -n 800000 -t 6 -path H:\plots -mem 6G
 
         'check path
         Dim Path As String = txtPath.Text
@@ -229,11 +226,13 @@ Public Class frmPlotter
             If Q.settings.Plots.Length > 0 Then
                 Plotfiles = Split(Q.settings.Plots, "|")
                 For Each Plot As String In Plotfiles
-                    Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
-                    If UBound(N) = 3 Then
-                        If N(0) = Trim(AccountID) Then
-                            PEndNonce = CDbl(N(1)) + CDbl(N(2))
-                            If PEndNonce > HighestEndNonce Then HighestEndNonce = PEndNonce
+                    If Plot.Length > 1 Then
+                        Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
+                        If UBound(N) = 3 Then
+                            If N(0) = Trim(AccountID) Then
+                                PEndNonce = CDbl(N(1)) + CDbl(N(2))
+                                If PEndNonce > HighestEndNonce Then HighestEndNonce = PEndNonce
+                            End If
                         End If
                     End If
                 Next
@@ -266,22 +265,24 @@ Public Class frmPlotter
             If Q.settings.Plots.Length > 0 Then
                 Plotfiles = Split(Q.settings.Plots, "|")
                 For Each Plot As String In Plotfiles
-                    Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
-                    If UBound(N) = 3 Then
-                        If N(0) = Trim(AccountID) Then
-                            PStartNonce = CDbl(N(1))
-                            PEndNonce = PStartNonce + CDbl(N(2)) - 1
-                            If StartNonce >= PStartNonce And StartNonce <= PEndNonce Then
-                                'startnonce within a plotrange
-                                Return False
-                            End If
-                            If EndNonce >= PStartNonce And EndNonce <= PEndNonce Then
-                                'Endnonce within a plotrange
-                                Return False
-                            End If
-                            If PStartNonce > StartNonce And PEndNonce < EndNonce Then
-                                'We overlap totaly
-                                Return False
+                    If Plot.Length > 1 Then
+                        Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
+                        If UBound(N) = 3 Then
+                            If N(0) = Trim(AccountID) Then
+                                PStartNonce = CDbl(N(1))
+                                PEndNonce = PStartNonce + CDbl(N(2)) - 1
+                                If StartNonce >= PStartNonce And StartNonce <= PEndNonce Then
+                                    'startnonce within a plotrange
+                                    Return False
+                                End If
+                                If EndNonce >= PStartNonce And EndNonce <= PEndNonce Then
+                                    'Endnonce within a plotrange
+                                    Return False
+                                End If
+                                If PStartNonce > StartNonce And PEndNonce < EndNonce Then
+                                    'We overlap totaly
+                                    Return False
+                                End If
                             End If
                         End If
                     End If
