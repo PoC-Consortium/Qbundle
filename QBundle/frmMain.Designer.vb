@@ -168,7 +168,7 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem, Me.AccountMangerToolStripMenuItem, Me.WalletToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.AboutToolStripMenuItem2})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(681, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(605, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -418,9 +418,9 @@ Partial Class frmMain
         '
         Me.StatusStrip1.BackColor = System.Drawing.Color.White
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 431)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 256)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(681, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(605, 22)
         Me.StatusStrip1.TabIndex = 5
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -482,7 +482,7 @@ Partial Class frmMain
         Me.pnlAIO.Controls.Add(Me.wb1)
         Me.pnlAIO.Location = New System.Drawing.Point(2, 25)
         Me.pnlAIO.Name = "pnlAIO"
-        Me.pnlAIO.Size = New System.Drawing.Size(679, 403)
+        Me.pnlAIO.Size = New System.Drawing.Size(603, 228)
         Me.pnlAIO.TabIndex = 10
         '
         'wb1
@@ -491,7 +491,7 @@ Partial Class frmMain
         Me.wb1.Location = New System.Drawing.Point(0, 0)
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wb1.Name = "wb1"
-        Me.wb1.Size = New System.Drawing.Size(679, 403)
+        Me.wb1.Size = New System.Drawing.Size(603, 228)
         Me.wb1.TabIndex = 0
         '
         'frmMain
@@ -499,7 +499,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(681, 453)
+        Me.ClientSize = New System.Drawing.Size(605, 278)
         Me.Controls.Add(Me.pnlLauncher)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)

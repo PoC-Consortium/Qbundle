@@ -1,6 +1,5 @@
 **/bin/**
 **/obj/**
 **/Debug/**
-.vs/BurstWalletLauncher/v15/sqlite3/storage.ide
-.vs/BurstWalletLauncher/v15/sqlite3/storage.ide
-
+/.vs/**
+.vs/QBundle/v14/.suo
