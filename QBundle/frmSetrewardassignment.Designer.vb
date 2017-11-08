@@ -22,18 +22,21 @@ Partial Class frmSetrewardassignment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSetrewardassignment))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbWallet = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.txtPool = New System.Windows.Forms.TextBox()
+        Me.btnPool = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtAccount = New System.Windows.Forms.TextBox()
         Me.btnAccounts = New System.Windows.Forms.Button()
+        Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.cmlPools = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -42,10 +45,10 @@ Partial Class frmSetrewardassignment
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.ComboBox1)
+        Me.GroupBox2.Controls.Add(Me.cmbWallet)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
-        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.txtPool)
+        Me.GroupBox2.Controls.Add(Me.btnPool)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.txtAccount)
         Me.GroupBox2.Controls.Add(Me.btnAccounts)
@@ -85,49 +88,49 @@ Partial Class frmSetrewardassignment
         Me.Label2.TabIndex = 30
         Me.Label2.Text = "Select wallet to use:"
         '
-        'ComboBox1
+        'cmbWallet
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Local wallet", "Online wallet Cryptoguru", "Online wallet Burst-team", "Online wallet Burstnation"})
-        Me.ComboBox1.Location = New System.Drawing.Point(15, 136)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(321, 21)
-        Me.ComboBox1.TabIndex = 29
+        Me.cmbWallet.FormattingEnabled = True
+        Me.cmbWallet.Items.AddRange(New Object() {"Local wallet", "Online wallet Cryptoguru", "Online wallet Burst-team", "Online wallet Burstnation"})
+        Me.cmbWallet.Location = New System.Drawing.Point(15, 136)
+        Me.cmbWallet.Name = "cmbWallet"
+        Me.cmbWallet.Size = New System.Drawing.Size(321, 21)
+        Me.cmbWallet.TabIndex = 29
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(13, 73)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(248, 13)
+        Me.Label1.Size = New System.Drawing.Size(210, 13)
         Me.Label1.TabIndex = 26
-        Me.Label1.Text = "Select a pool or solo account you assign reward to."
+        Me.Label1.Text = "Pool account or your account if solo mining"
         '
-        'TextBox1
+        'txtPool
         '
-        Me.TextBox1.Location = New System.Drawing.Point(15, 89)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(288, 20)
-        Me.TextBox1.TabIndex = 27
+        Me.txtPool.Location = New System.Drawing.Point(15, 89)
+        Me.txtPool.Name = "txtPool"
+        Me.txtPool.Size = New System.Drawing.Size(288, 20)
+        Me.txtPool.TabIndex = 27
         '
-        'Button1
+        'btnPool
         '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(306, 88)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(30, 22)
-        Me.Button1.TabIndex = 28
-        Me.Button1.Text = "..."
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnPool.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPool.Location = New System.Drawing.Point(306, 88)
+        Me.btnPool.Name = "btnPool"
+        Me.btnPool.Size = New System.Drawing.Size(30, 22)
+        Me.btnPool.TabIndex = 28
+        Me.btnPool.Text = "..."
+        Me.btnPool.UseVisualStyleBackColor = True
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(13, 21)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(148, 13)
+        Me.Label3.Size = New System.Drawing.Size(74, 13)
         Me.Label3.TabIndex = 23
-        Me.Label3.Text = "Select the account to change"
+        Me.Label3.Text = "Your account:"
         '
         'txtAccount
         '
@@ -145,6 +148,16 @@ Partial Class frmSetrewardassignment
         Me.btnAccounts.TabIndex = 25
         Me.btnAccounts.Text = "..."
         Me.btnAccounts.UseVisualStyleBackColor = True
+        '
+        'cmlAccounts
+        '
+        Me.cmlAccounts.Name = "cmlAccounts"
+        Me.cmlAccounts.Size = New System.Drawing.Size(61, 4)
+        '
+        'cmlPools
+        '
+        Me.cmlPools.Name = "cmlPools"
+        Me.cmlPools.Size = New System.Drawing.Size(61, 4)
         '
         'frmSetrewardassignment
         '
@@ -169,11 +182,13 @@ Partial Class frmSetrewardassignment
     Friend WithEvents Label5 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbWallet As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents txtPool As TextBox
+    Friend WithEvents btnPool As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents txtAccount As TextBox
     Friend WithEvents btnAccounts As Button
+    Friend WithEvents cmlAccounts As ContextMenuStrip
+    Friend WithEvents cmlPools As ContextMenuStrip
 End Class
