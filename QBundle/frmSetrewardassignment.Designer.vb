@@ -26,7 +26,7 @@ Partial Class frmSetrewardassignment
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSetrewardassignment))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSend = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbWallet = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -43,7 +43,7 @@ Partial Class frmSetrewardassignment
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.btnSend)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.cmbWallet)
         Me.GroupBox2.Controls.Add(Me.Label1)
@@ -70,14 +70,14 @@ Partial Class frmSetrewardassignment
     "ext." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "After setting reward assignment you have to wait 4 blocks. About 16 minute" &
     "s." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This will cost 1 burst."
         '
-        'Button2
+        'btnSend
         '
-        Me.Button2.Location = New System.Drawing.Point(128, 228)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(132, 30)
-        Me.Button2.TabIndex = 31
-        Me.Button2.Text = "Set reward assignment"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnSend.Location = New System.Drawing.Point(128, 228)
+        Me.btnSend.Name = "btnSend"
+        Me.btnSend.Size = New System.Drawing.Size(132, 30)
+        Me.btnSend.TabIndex = 31
+        Me.btnSend.Text = "Set reward assignment"
+        Me.btnSend.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -180,7 +180,7 @@ Partial Class frmSetrewardassignment
 
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnSend As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents cmbWallet As ComboBox
     Friend WithEvents Label1 As Label

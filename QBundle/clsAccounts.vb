@@ -112,7 +112,29 @@ Public Class clsAccounts
         Return ""
     End Function
 
+    Public Function GetRSFromPassPhrase(ByVal Passphrase As String) As String
+        Dim AccountID As String
+        Dim AccountAddress As String
+        Dim KeySeed As String
+        Dim PrivateKey As Byte()
+        Dim PublicKey As Byte()
+        Dim PublicKeyHash As Byte()
 
+        KeySeed = Passphrase
+        Dim cSHA256 As SHA256 = SHA256Managed.Create()
+        PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
+        PublicKey = Curve25519.GetPublicKey(PrivateKey)
+        PublicKeyHash = cSHA256.ComputeHash(PublicKey)
+        Dim b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
+        If (b(b.Length - 1) And &H80) <> 0 Then
+            Array.Resize(Of Byte)(b, b.Length + 1)
+        End If
+        Dim Bint As New BigInteger(b)
+        AccountID = Bint.ToString
+        AccountAddress = ReedSolomon.encode(Bint.ToString)
+
+        Return AccountAddress
+    End Function
     Public Sub SaveAccounts()
         Dim x As New XmlSerializer(GetType(ArrayList), New Type() {GetType(Account)})
         Dim writer As TextWriter = New StreamWriter(QGlobal.BaseDir & "Acconts.xml")

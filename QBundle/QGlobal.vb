@@ -15,7 +15,12 @@
         Friend BurstAddress As String
         Friend DeadLine As String
     End Structure
+    Friend Structure strucWallets
+        Friend Name As String
+        Friend Address As String
+    End Structure
     Friend Shared Pools() As strucPools
+    Friend Shared Wallets() As strucWallets
 
     Public Enum DbType As Integer
         H2 = 0
@@ -54,6 +59,7 @@
         If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
 
         InitPools()
+        InitOnlineWallets()
         InitCPUInstructions()
 
     End Sub
@@ -174,5 +180,31 @@
 
 
     End Sub
+    Private Shared Sub InitOnlineWallets()
 
+        ReDim Wallets(7)
+        Wallets(0).Name = "Local wallet"
+
+        Wallets(1).Name = "Cryptoguru online wallet"
+        Wallets(1).Address = "https://wallet.burst.cryptoguru.org:8125"
+
+        Wallets(2).Name = "Burstnation wallet 1"
+        Wallets(2).Address = "https://wallet1.burstnation.com:8125"
+
+        Wallets(3).Name = "Poolofd32th wallet 1"
+        Wallets(3).Address = "https://wallet.poolofd32th.club"
+
+        Wallets(4).Name = "Poolofd32th wallet 2"
+        Wallets(4).Address = "https://wallet2.poolofd32th.club"
+
+        Wallets(5).Name = "Burst-team Wallet 3"
+        Wallets(5).Address = "https://wallet3.burst-team.us:2083"
+
+        Wallets(6).Name = "Burst-team Wallet 4"
+        Wallets(6).Address = "https://wallet4.burst-team.us:2083"
+
+        Wallets(7).Name = "Burst-team Wallet 5"
+        Wallets(7).Address = "https://wallet5.burst-team.us:2083"
+
+    End Sub
 End Class

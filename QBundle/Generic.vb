@@ -401,8 +401,43 @@ Friend Class Generic
             MsgBox("Failed to start burst wallet launcher as administrator.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Admin")
         End Try
     End Sub
-    Public Function GetLatencyMs(ByRef hostNameOrAddress As String) As Long
+    Public Shared Function GetLatencyMs(ByRef hostNameOrAddress As String) As Long
         Dim ping As New System.Net.NetworkInformation.Ping
         Return ping.Send(hostNameOrAddress, 300).RoundtripTime
     End Function
+    Public Shared Function URLEncode(ByVal StringToEncode As String) As String
+        Dim TempAns As String = ""
+        Try
+            Dim CurChr As Integer = 0
+            CurChr = 1
+            Do Until CurChr - 1 = Len(StringToEncode)
+                Select Case Asc(Mid(StringToEncode, CurChr, 1))
+                    Case 48 To 57, 65 To 90, 97 To 122
+                        TempAns = TempAns & Mid(StringToEncode, CurChr, 1)
+                    Case 32
+                        TempAns = TempAns & "%" & Hex(32)
+                    Case Else
+                        Dim a As String = Mid(StringToEncode, CurChr, 1)
+                        Dim b As String = CStr(Asc(a))
+                        Dim c As String = Hex(b)
+                        If Len(c) = 1 Then c = "0" & c
+                        TempAns = TempAns & "%" & c
+                End Select
+                CurChr = CurChr + 1
+            Loop
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Return TempAns
+    End Function
+    Public Shared Sub UpdateLocalWallet()
+        Dim s() As String = Split(Q.settings.ListenIf, ";")
+        Dim url As String = Nothing
+        If s(0) = "0.0.0.0" Then
+            url = "http://127.0.0.1:" & s(1)
+        Else
+            url = "http://" & s(0) & ":" & s(1)
+        End If
+        QGlobal.Wallets(0).Address = url
+    End Sub
 End Class

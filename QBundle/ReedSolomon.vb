@@ -18,8 +18,7 @@ Public Class ReedSolomon
     Private Shared ReadOnly base_10_length As Integer = 19
 
     Public Shared Function encode(plain As ULong) As String
-        ' an id should not be negative!
-        'Dim plain_string As String = ConvertToUlong(plain)
+
         Dim plain_string As String = CStr(plain)
         Dim length As Integer = plain_string.Length
         Dim plain_string_10(base_10_length) As Integer
@@ -143,7 +142,6 @@ Public Class ReedSolomon
         bigInt = BigInteger.Parse(plain_string_builder)
         Dim retval As ULong = bigInt
 
-        'BigInteger bigInt = New BigInteger(plain_string_builder.Reverse().ToString());
         Return retval
     End Function
 
@@ -183,18 +181,6 @@ Public Class ReedSolomon
 
 
 
-
-
-
-    '  Private Shared Function ConvertToUlong(objectId As Long) As String
-
-
-    '      If (objectId >= 0) Then {
-    '       Return String.valueOf(objectId);
-    '       }
-    '       BigInteger id = BigInteger.valueOf(objectId).add(two64);
-    '       Return id.toString();
-    '  End Function
 
 
 
