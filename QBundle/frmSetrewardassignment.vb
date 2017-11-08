@@ -34,6 +34,7 @@
         Next
 
         cmbWallet.Items.Clear()
+        Generic.UpdateLocalWallet()
         For t As Integer = 0 To UBound(QGlobal.Wallets)
             cmbWallet.Items.Add(QGlobal.Wallets(t).Name)
         Next
@@ -70,52 +71,87 @@
 
             Dim Passphrase As String = ""
             'check first for account and ask for pin
-            For Each account As QB.clsAccounts.Account In Q.Accounts.AccArray
-                If account.RSAddress = txtAccount.Text Then
-                    Dim tmp As String = InputBox("Enter pin for account " & account.AccountName & " (" & account.RSAddress & ")", "Enter Pin", "")
-                    If tmp.Length > 0 Then
-                        Passphrase = tmp
-                    Else
-                        MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
-                        Exit Sub
+            If txtAccount.Text.Length > 0 And UCase(txtAccount.Text).StartsWith("BURST-") Then
+                For Each account As QB.clsAccounts.Account In Q.Accounts.AccArray
+                    If account.RSAddress = txtAccount.Text Then
+                        Dim pin As String = InputBox("Enter pin for account " & account.AccountName & " (" & account.RSAddress & ")", "Enter Pin", "")
+                        If pin.Length > 0 Then
+                            Dim tmp As String = Q.Accounts.GetPassword(account.AccountName, pin)
+                            If tmp.Length > 0 Then
+                                Passphrase = tmp
+                            Else
+
+                                MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
+                                Exit Sub
+                            End If
+                        Else
+                            MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
+                            Exit Sub
+                        End If
+                        Exit For
                     End If
-                    Exit For
-                End If
-            Next
-            'If no account then ask for passphrase
-            If Passphrase.Length = 0 Then
-                Dim tmp As String = InputBox("Enter Passphrase for account (" & txtAccount.Text & ")", "Enter Pin", "")
-                If tmp.Length > 0 Then
-                    If UCase(txtAccount.Text) = UCase("BURST-" & Q.Accounts.GetRSFromPassPhrase(tmp)) Then
-                        Passphrase = tmp
+                Next
+                'If no account then ask for passphrase
+                If Passphrase.Length = 0 Then
+                    Dim tmp As String = InputBox("Enter Passphrase for account (" & txtAccount.Text & ")", "Enter Pin", "")
+                    If tmp.Length > 0 Then
+                        If UCase(txtAccount.Text) = UCase("BURST-" & Q.Accounts.GetRSFromPassPhrase(tmp)) Then
+                            Passphrase = tmp
+                        Else
+                            MsgBox("You entered the wrong passphrase.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong passphrase")
+                            Exit Sub
+                        End If
                     Else
                         MsgBox("You entered the wrong passphrase.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong passphrase")
                         Exit Sub
                     End If
+                End If
+            Else
+                MsgBox("You must enter your account.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong account.")
+                Exit Sub
+            End If
+            'now get AccountID from AccountRS for pool if not defined yet
+
+            Dim AccID As String = ""
+            'if only numeric the ok
+            If txtPool.Text.Length > 0 Then
+                If IsNumeric(txtPool.Text) And txtPool.Text.Length < 21 Then
+                    AccID = txtPool.Text
+                ElseIf UCase(txtPool.Text).StartsWith("BURST-") And txtPool.Text.Length = 26 Then
+                    AccID = Q.Accounts.ConvertRSToId(txtPool.Text)
                 Else
-                    MsgBox("You entered the wrong passphrase.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong passphrase")
+                    MsgBox("You seem to have entered an invalid pool address.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pool address.")
                     Exit Sub
                 End If
+            Else
+                MsgBox("You need to enter a pool address.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pool address.")
+                Exit Sub
             End If
 
-            'else ask for passphrase
 
             Dim http As New clsHttp
-            Dim postData As String = "recipient=" & Generic.URLEncode(txtPool.Text)
-            postData &= "&secretPhrase=" & Generic.URLEncode(Passphrase)
-            postData &= "&requestType=" & Generic.URLEncode("setRewardRecipient")
 
-            postData &= "&deadline=" & Generic.URLEncode("1440")
-            postData &= "&feeNQT=" & Generic.URLEncode("100000000")
+
+
+
+
+            Dim postData As String = "recipient=" & http.URLEncode(AccID)
+            postData &= "&secretPhrase=" & http.URLEncode(Passphrase)
+            postData &= "&requestType=" & http.URLEncode("setRewardRecipient")
+
+            postData &= "&deadline=" & http.URLEncode("1440")
+            postData &= "&feeNQT=" & http.URLEncode("100000000")
             postData &= "&submit="
             Dim result As String = http.PostUrl(QGlobal.Wallets(cmbWallet.SelectedIndex).Address & "/burst", postData)
             If result.Length > 0 Then
-                'we need to check response to know what to check for
+                If result.Contains("error") Then
+                    MsgBox("Rewardassignment did not succeed.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Error :(")
+                Else
+                    MsgBox("Rewardassignment has been set.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "All done.")
+                End If
             Else
-                MsgBox("Wallet seem to be offline. Try another wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No connection")
+                    MsgBox("Wallet seem to be offline. Try another wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No connection")
             End If
-
-
         Catch ex As Exception
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try

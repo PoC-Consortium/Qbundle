@@ -64,11 +64,9 @@ Partial Class frmSetrewardassignment
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(8, 168)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(369, 52)
+        Me.Label5.Size = New System.Drawing.Size(381, 52)
         Me.Label5.TabIndex = 33
-        Me.Label5.Text = "Information:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Setting reward assignment you send the account passphrase in cleart" &
-    "ext." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "After setting reward assignment you have to wait 4 blocks. About 16 minute" &
-    "s." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This will cost 1 burst."
+        Me.Label5.Text = resources.GetString("Label5.Text")
         '
         'btnSend
         '

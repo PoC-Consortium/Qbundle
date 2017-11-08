@@ -51,7 +51,7 @@ Public Class clsAccounts
         Acc.AccountName = name
         Acc.PublicKey = BytesToHexString(PublicKey)
         Acc.AccountID = AccountID
-        Acc.RSAddress = AccountAddress
+        Acc.RSAddress = "BURST-" & AccountAddress
         Acc.BurstPassword = Enc(Passphrase, Pin)
         AccArray.Add(Acc)
     End Sub
@@ -156,8 +156,15 @@ Public Class clsAccounts
 
         End Try
     End Sub
-
-
+    Public Function ConvertIdToRS(ByVal id As String) As String
+        Return ReedSolomon.encode(id)
+    End Function
+    Public Function ConvertRSToId(ByVal Address As String) As String
+        If UCase(Address).StartsWith("BURST-") Then
+            Address = Address.Substring(6) 'Remove BURST- before sending it for convertion.
+        End If
+        Return ReedSolomon.decode(Address)
+    End Function
     Public Function Enc(ByVal input As String, ByVal Keyval As String) As String
         Dim PreKeySeed As String = "9Q&Eag8Lq=+d*Jb6?+E?CNqRY82pFYGJ"
         If Keyval.Length < 32 Then Keyval = PreKeySeed.Substring(0, PreKeySeed.Length - Keyval.Length) & Keyval
