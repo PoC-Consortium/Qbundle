@@ -8,6 +8,15 @@
         Friend AVX2 As Boolean
     End Structure
     Friend Shared CPUInstructions As strucCPUInstructions
+    Friend Structure strucPools
+        Friend Name As String
+        Friend Address As String
+        Friend Port As String
+        Friend BurstAddress As String
+        Friend DeadLine As String
+    End Structure
+    Friend Shared Pools() As strucPools
+
     Public Enum DbType As Integer
         H2 = 0
         FireBird = 1
@@ -39,4 +48,131 @@
         ConsoleErr = 6
         ConsoleOut = 7
     End Enum
+
+    Friend Shared Sub Init()
+        BaseDir = AppDomain.CurrentDomain.BaseDirectory
+        If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
+
+        InitPools()
+        InitCPUInstructions()
+
+    End Sub
+    Private Shared Sub InitPools()
+
+        ReDim Pools(9)
+
+        Pools(0).Name = "CryptoGuru Pool"
+        Pools(0).Address = "burst.cryptoguru.org"
+        Pools(0).Port = "8124"
+        Pools(0).BurstAddress = "BURST-8KLL-PBYV-6DBC-AM942"
+        Pools(0).DeadLine = ""
+
+        Pools(1).Name = "Fastpool.info"
+        Pools(1).Address = "wallet.fastpool.info"
+        Pools(1).Port = "8080"
+        Pools(1).BurstAddress = "BURST-YMJP-8NNG-6HCJ-29XYJ"
+        Pools(1).DeadLine = ""
+
+        Pools(2).Name = "Burst Minig club"
+        Pools(2).Address = "pool.burstmining.club"
+        Pools(2).Port = "8124"
+        Pools(2).BurstAddress = "BURST-RNMB-9FJW-3BJW-F3Z3M"
+        Pools(2).DeadLine = "129600"
+
+        Pools(3).Name = "Dobropool aka 100PB online"
+        Pools(3).Address = "100pb.online"
+        Pools(3).Port = "8124"
+        Pools(3).BurstAddress = "BURST-TNHA-2CVB-UQQ8-A9XCQ"
+        Pools(3).DeadLine = "604800"
+
+        Pools(4).Name = "pool poolofd32th"
+        Pools(4).Address = "pool.poolofd32th.club"
+        Pools(4).Port = "8124"
+        Pools(4).BurstAddress = "BURST-E925-FACX-C2X8-49772"
+        Pools(4).DeadLine = "2592000"
+
+        Pools(5).Name = "xen poolofd32th"
+        Pools(5).Address = "xen.poolofd32th.club"
+        Pools(5).Port = "8124"
+        Pools(5).BurstAddress = "BURST-LBQ2-XLPT-S2S8-64ZG5"
+        Pools(5).DeadLine = "2592000"
+
+        Pools(6).Name = "pool.burstcoin.space"
+        Pools(6).Address = "pool.burstcoin.space"
+        Pools(6).Port = "8124"
+        Pools(6).BurstAddress = "BURST-SPAC-EWWF-CRX2-78Z6Z"
+        Pools(6).DeadLine = "2592000"
+
+        Pools(7).Name = "pool.burstcoin.ro"
+        Pools(7).Address = "pool.burstcoin.ro"
+        Pools(7).Port = "8080"
+        Pools(7).BurstAddress = "BURST-GG4B-34Y9-ZXGV-FNTNJ"
+        Pools(7).DeadLine = "7889231"
+
+        Pools(8).Name = "falconburstpool.xyz"
+        Pools(8).Address = "falconburstpool.xyz"
+        Pools(8).Port = "8080"
+        Pools(8).BurstAddress = "BURST-UTS4-HPFZ-XJHL-B9BB2"
+        Pools(8).DeadLine = "43200000"
+
+        Pools(9).Name = "pool.burstpay.net"
+        Pools(9).Address = "pool.burstpay.net"
+        Pools(9).Port = "8124"
+        Pools(9).BurstAddress = "BURST-E4ZX-KCBL-5F8A-CPU6G"
+        Pools(9).DeadLine = "2592000"
+
+
+
+
+    End Sub
+    Private Shared Sub InitCPUInstructions()
+
+        Try
+            Dim b As Byte() = My.Resources.CPU
+            IO.File.WriteAllBytes(BaseDir & "readCPUInstructions.exe", b)
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Try
+            Dim p As New Process
+            Dim result As String = ""
+            p.StartInfo.RedirectStandardError = True
+            p.StartInfo.RedirectStandardOutput = True
+            p.StartInfo.UseShellExecute = False
+            p.StartInfo.CreateNoWindow = True
+            p.StartInfo.FileName = BaseDir & "readCPUInstructions.exe"
+            p.Start()
+            p.WaitForExit()
+            result = p.StandardOutput.ReadToEnd
+            p.Dispose()
+            p.Dispose()
+
+            If result.Contains("AVX supported") Then
+                CPUInstructions.AVX = True
+            Else
+                CPUInstructions.AVX = False
+            End If
+            If result.Contains("SSE supported") Then
+                CPUInstructions.SSE = True
+            Else
+                CPUInstructions.SSE = False
+            End If
+            If result.Contains("AVX2 supported") Then
+                CPUInstructions.AVX2 = True
+            Else
+                CPUInstructions.AVX2 = False
+            End If
+
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Try
+            IO.File.Delete(BaseDir & "readCPUInstructions.exe")
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+
+
+    End Sub
+
 End Class

@@ -8,17 +8,14 @@ Friend Class clsQ
     Public settings As clsSettings
     Public Accounts As clsAccounts
     Public Sub New()
-        QGlobal.BaseDir = AppDomain.CurrentDomain.BaseDirectory
-        If Not QGlobal.BaseDir.EndsWith("\") Then QGlobal.BaseDir &= "\"
+        QGlobal.Init()
 
         Me.App = New clsApp
         Me.ProcHandler = New clsProcessHandler
-
         Me.settings = New clsSettings
         Me.settings.LoadSettings()
         Me.Accounts = New clsAccounts
         Me.Accounts.LoadAccounts()
-
     End Sub
 
 

@@ -59,7 +59,7 @@ Public Class clsApp
         MariaDB()
 
         XPlotter()
-        ReadCPUInstruction()
+
     End Sub
     Public Function SetRemoteInfo() As Boolean
         Dim data As String = ""
@@ -212,53 +212,7 @@ Public Class clsApp
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
-    Private Sub ReadCPUInstruction()
 
-        Try
-            Dim b As Byte() = My.Resources.CPU
-            IO.File.WriteAllBytes(QGlobal.BaseDir & "readCPUInstructions.exe", b)
-        Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
-        End Try
-        Try
-            Dim p As New Process
-            Dim result As String = ""
-            p.StartInfo.RedirectStandardError = True
-            p.StartInfo.RedirectStandardOutput = True
-            p.StartInfo.UseShellExecute = False
-            p.StartInfo.CreateNoWindow = True
-            p.StartInfo.FileName = QGlobal.BaseDir & "readCPUInstructions.exe"
-            p.Start()
-            p.WaitForExit()
-            result = p.StandardOutput.ReadToEnd
-            p.Dispose()
-            p.Dispose()
-
-            If result.Contains("AVX supported") Then
-                QGlobal.CPUInstructions.AVX = True
-            Else
-                QGlobal.CPUInstructions.AVX = False
-            End If
-            If result.Contains("SSE supported") Then
-                QGlobal.CPUInstructions.SSE = True
-            Else
-                QGlobal.CPUInstructions.SSE = False
-            End If
-            If result.Contains("AVX2 supported") Then
-                QGlobal.CPUInstructions.AVX2 = True
-            Else
-                QGlobal.CPUInstructions.AVX2 = False
-            End If
-
-        Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
-        End Try
-        Try
-            IO.File.Delete(QGlobal.BaseDir & "readCPUInstructions.exe")
-        Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
-        End Try
-    End Sub
 #End Region
 
 #Region " Download and unpack "
