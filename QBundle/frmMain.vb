@@ -629,6 +629,10 @@
         frmSetrewardassignment.Show()
     End Sub
 
+    Private Sub MinerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MinerToolStripMenuItem.Click
+        frmMiner.Show()
+    End Sub
+
 
 #End Region
 

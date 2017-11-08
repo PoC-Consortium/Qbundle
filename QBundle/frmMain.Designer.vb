@@ -56,6 +56,7 @@ Partial Class frmMain
         Me.ViewConsolesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlotterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SwitchToAIOStyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SwitchToLauncherStyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -79,7 +80,6 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -328,6 +328,12 @@ Partial Class frmMain
         Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
         Me.MinerToolStripMenuItem.Text = "Miner"
         '
+        'SetRewardassignmentToolStripMenuItem
+        '
+        Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Text = "Set rewardassignment"
+        '
         'WindowToolStripMenuItem
         '
         Me.WindowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SwitchToAIOStyleToolStripMenuItem, Me.SwitchToLauncherStyleToolStripMenuItem})
@@ -494,12 +500,6 @@ Partial Class frmMain
         Me.wb1.Name = "wb1"
         Me.wb1.Size = New System.Drawing.Size(603, 228)
         Me.wb1.TabIndex = 0
-        '
-        'SetRewardassignmentToolStripMenuItem
-        '
-        Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
-        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.SetRewardassignmentToolStripMenuItem.Text = "Set rewardassignment"
         '
         'frmMain
         '

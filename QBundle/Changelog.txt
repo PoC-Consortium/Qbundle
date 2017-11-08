@@ -26,6 +26,7 @@ Add a components download window where you can select to download/update a compo
 + Account Manager with AES 256bit encryption
 + Add support for XPlotter (first step)
 + Added CPU Instructionset detection
++ Added Change reward recipient.
 
 V1.2
 + Getting started Wizard.
