@@ -93,7 +93,7 @@
                 Next
                 'If no account then ask for passphrase
                 If Passphrase.Length = 0 Then
-                    Dim tmp As String = InputBox("Enter Passphrase for account (" & txtAccount.Text & ")", "Enter Pin", "")
+                    Dim tmp As String = InputBox("Enter Passphrase for account (" & txtAccount.Text & ")", "Enter Passphrase", "")
                     If tmp.Length > 0 Then
                         If UCase(txtAccount.Text) = UCase("BURST-" & Q.Accounts.GetRSFromPassPhrase(tmp)) Then
                             Passphrase = tmp
