@@ -59,7 +59,7 @@ Public Class clsApp
         MariaDB()
 
         XPlotter()
-
+        BlagoMiner()
     End Sub
     Public Function SetRemoteInfo() As Boolean
         Dim data As String = ""
@@ -212,7 +212,24 @@ Public Class clsApp
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
+    Private Sub BlagoMiner()
+        Try
+            If File.Exists(QGlobal.BaseDir & "BlagoMiner\BlagoMinerAVX2.exe") Then
+                _Apps(QGlobal.AppNames.BlagoMiner).LocalFound = True
+                'try find MariaVersion
+                If File.Exists(QGlobal.BaseDir & "BlagoMiner\release") Then
+                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "BlagoMiner\release")
+                    _Apps(QGlobal.AppNames.BlagoMiner).LocalVersion = version
+                Else
+                    'asume 1.0
+                    _Apps(QGlobal.AppNames.BlagoMiner).LocalVersion = "1.0"
+                End If
 
+            End If
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+    End Sub
 #End Region
 
 #Region " Download and unpack "

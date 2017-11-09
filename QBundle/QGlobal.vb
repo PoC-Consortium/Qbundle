@@ -38,6 +38,7 @@
         Export = 6
         DownloadFile = 7 'Download whatever
         Xplotter = 8
+        BlagoMiner = 9
     End Enum
     Public Enum States
         Stopped = 0
@@ -71,13 +72,13 @@
         Pools(0).Address = "burst.cryptoguru.org"
         Pools(0).Port = "8124"
         Pools(0).BurstAddress = "BURST-8KLL-PBYV-6DBC-AM942"
-        Pools(0).DeadLine = ""
+        Pools(0).DeadLine = "80000000"
 
         Pools(1).Name = "Fastpool.info"
         Pools(1).Address = "wallet.fastpool.info"
         Pools(1).Port = "8080"
         Pools(1).BurstAddress = "BURST-YMJP-8NNG-6HCJ-29XYJ"
-        Pools(1).DeadLine = ""
+        Pools(1).DeadLine = "80000000"
 
         Pools(2).Name = "Burst Minig club"
         Pools(2).Address = "pool.burstmining.club"
