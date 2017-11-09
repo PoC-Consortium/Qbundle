@@ -214,15 +214,15 @@ Public Class clsApp
     End Sub
     Private Sub BlagoMiner()
         Try
-            If File.Exists(QGlobal.BaseDir & "BlagoMiner\BlagoMinerAVX2.exe") Then
+            If File.Exists(QGlobal.BaseDir & "BlagoMiner\BlagoMiner_AVX2.exe") Then
                 _Apps(QGlobal.AppNames.BlagoMiner).LocalFound = True
                 'try find MariaVersion
-                If File.Exists(QGlobal.BaseDir & "BlagoMiner\release") Then
-                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "BlagoMiner\release")
+                If File.Exists(QGlobal.BaseDir & "BlagoMiner\version") Then
+                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "BlagoMiner\version")
                     _Apps(QGlobal.AppNames.BlagoMiner).LocalVersion = version
                 Else
                     'asume 1.0
-                    _Apps(QGlobal.AppNames.BlagoMiner).LocalVersion = "1.0"
+                    _Apps(QGlobal.AppNames.BlagoMiner).LocalVersion = "1.170820"
                 End If
 
             End If

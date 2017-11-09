@@ -91,7 +91,7 @@
         End If
 
         If rbSolo.Checked Then
-            'do checks for solo
+            'Do checks for solo
             If Not frmMain.Running Then
                 MsgBox("Your local wallet is not running. Please start your local wallet and make sure it is synced.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "No wallet to mine against")
                 Exit Sub
@@ -187,7 +187,7 @@
         If Not Q.App.isInstalled(QGlobal.AppNames.BlagoMiner) Then
             If MsgBox(msg, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Download Miner") = MsgBoxResult.Yes Then
                 Dim s As frmDownloadExtract = New frmDownloadExtract
-                s.Appid = QGlobal.AppNames.Xplotter
+                s.Appid = QGlobal.AppNames.BlagoMiner
                 Dim res As DialogResult
                 res = s.ShowDialog
                 If res = DialogResult.Cancel Then
@@ -211,7 +211,7 @@
         If PassPhrase.Length > 0 Then
             System.IO.File.WriteAllText(QGlobal.BaseDir & "\BlagoMiner\passphrases.txt", PassPhrase)
         End If
-
+        WriteConfig()
         Try
             Dim p As Process = New Process
             p.StartInfo.WorkingDirectory = QGlobal.BaseDir & "BlagoMiner"
@@ -239,8 +239,13 @@
     End Function
     Private Sub WriteConfig()
         Dim plots As String = ""
+        Dim Buffer(lstPlots.Items.Count - 1) As String
         For t As Integer = 0 To lstPlots.Items.Count - 1
-            plots &= Chr(34) & IO.Path.GetDirectoryName(lstPlots.Items.Item(t)) & Chr(34) & ","
+            If Buffer.Contains(IO.Path.GetDirectoryName(lstPlots.Items.Item(t))) Then
+            Else
+                Buffer(t) = IO.Path.GetDirectoryName(lstPlots.Items.Item(t))
+                plots &= Chr(34) & IO.Path.GetDirectoryName(lstPlots.Items.Item(t)) & Chr(34) & ","
+            End If
         Next
         plots = Replace(plots, "\", "\\")
         plots = plots.Substring(0, plots.Length - 1)
@@ -292,6 +297,9 @@
         cfg &= "   " & Chr(34) & "WinSizeX" & Chr(34) & ": 76," & vbCrLf
         cfg &= "   " & Chr(34) & "WinSizeY" & Chr(34) & ": 60" & vbCrLf
         cfg &= "}" & vbCrLf
+
+        System.IO.File.WriteAllText(QGlobal.BaseDir & "BlagoMiner\miner.conf", cfg)
+
     End Sub
 
     Private Sub rbPool_CheckedChanged(sender As Object, e As EventArgs) Handles rbPool.Click
@@ -314,6 +322,10 @@
         txtInfoServer.Text = buffer(0)
         txtDeadLine.Text = "86400"
 
+
+    End Sub
+
+    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
 
     End Sub
 End Class

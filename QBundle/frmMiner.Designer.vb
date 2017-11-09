@@ -52,6 +52,10 @@ Partial Class frmMiner
         Me.rbPool = New System.Windows.Forms.RadioButton()
         Me.rbSolo = New System.Windows.Forms.RadioButton()
         Me.cmlServers = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
@@ -105,7 +109,7 @@ Partial Class frmMiner
         Me.btnPool.Name = "btnPool"
         Me.btnPool.Size = New System.Drawing.Size(134, 22)
         Me.btnPool.TabIndex = 31
-        Me.btnPool.Text = "Select predfined server"
+        Me.btnPool.Text = "Select predfined pool"
         Me.btnPool.UseVisualStyleBackColor = True
         '
         'grpMiner
@@ -338,12 +342,54 @@ Partial Class frmMiner
         Me.cmlServers.Name = "cmlServers"
         Me.cmlServers.Size = New System.Drawing.Size(61, 4)
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(432, 16)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(97, 18)
+        Me.Label8.TabIndex = 33
+        Me.Label8.Text = "Solo mining"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(432, 124)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(97, 18)
+        Me.Label9.TabIndex = 34
+        Me.Label9.Text = "Pool mining"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(432, 34)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(210, 78)
+        Me.Label10.TabIndex = 35
+        Me.Label10.Text = resources.GetString("Label10.Text")
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(432, 144)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(192, 26)
+        Me.Label11.TabIndex = 36
+        Me.Label11.Text = "Make sure you have set correct server " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "information or use a predefined pool." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
         'frmMiner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(642, 389)
+        Me.ClientSize = New System.Drawing.Size(652, 393)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.grpMiner)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -351,7 +397,7 @@ Partial Class frmMiner
         Me.MaximizeBox = False
         Me.Name = "frmMiner"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Blago Miner"
+        Me.Text = "Miner"
         Me.GroupBox1.ResumeLayout(False)
         Me.grpMiner.ResumeLayout(False)
         Me.grpMiner.PerformLayout()
@@ -361,6 +407,7 @@ Partial Class frmMiner
         CType(Me.nrUpdatePort, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nrMiningPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -392,4 +439,8 @@ Partial Class frmMiner
     Friend WithEvents btnStartMine As Button
     Friend WithEvents cmlServers As ContextMenuStrip
     Friend WithEvents pnlPool As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
 End Class
