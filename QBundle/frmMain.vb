@@ -3,7 +3,7 @@
     Private Delegate Sub DStarting(ByVal [AppId] As Integer)
     Private Delegate Sub DStoped(ByVal [AppId] As Integer)
     Private Delegate Sub DAborted(ByVal [AppId] As Integer, ByVal [data] As String)
-    Private Delegate Sub DAPIResult(ByVal [data] As String)
+    Private Delegate Sub DAPIResult(ByVal [Height] As String, ByVal [TimeStamp] As String)
     Private Delegate Sub DNewUpdatesAvilable()
     Public Console(1) As List(Of String)
     Public Running As Boolean
@@ -98,11 +98,15 @@
                 Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
                 pnlAIO.Visible = True
                 pnlLauncher.Visible = False
+                lblWalletIS.Visible = True
+                lblSplitterWallet.Visible = True
+                lblWalletStatus.Visible = True
+
 
             Case 1 ' Launcher Mode
                 Me.FormBorderStyle = FormBorderStyle.FixedDialog
                 Me.MaximizeBox = False
-                Me.Width = 464
+                Me.Width = 513 ' 580 '464
                 Me.Height = 181
                 Q.settings.QBMode = 1
                 Q.settings.SaveSettings()
@@ -110,6 +114,9 @@
                 Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
                 pnlAIO.Visible = False
                 pnlLauncher.Visible = True
+                lblWalletIS.Visible = False
+                lblSplitterWallet.Visible = False
+                lblWalletStatus.Visible = False
         End Select
 
 
@@ -246,6 +253,7 @@
             Case QGlobal.AppNames.BRS
                 lblNrsStatus.Text = "Starting"
                 lblNrsStatus.ForeColor = Color.DarkOrange
+                lblWalletStatus.Text = "Starting"
             Case QGlobal.AppNames.MariaPortable
                 LblDbStatus.Text = "Starting"
                 LblDbStatus.ForeColor = Color.DarkOrange
@@ -265,6 +273,7 @@
             APITimer.Stop()
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
+            lblWalletStatus.Text = "Stopped"
         End If
         If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
             If AppId = QGlobal.AppNames.MariaPortable Then
@@ -301,6 +310,7 @@
                 If AppId = QGlobal.AppNames.MariaPortable Then
                     lblNrsStatus.Text = "Stopped"
                     lblNrsStatus.ForeColor = Color.Red
+                    lblWalletStatus.Text = "Stopped"
                 End If
             Case QGlobal.ProcOp.FoundSignal
                 If AppId = QGlobal.AppNames.MariaPortable Then
@@ -311,6 +321,7 @@
                 If AppId = QGlobal.AppNames.BRS Then
                     lblNrsStatus.Text = "Running"
                     lblNrsStatus.ForeColor = Color.DarkGreen
+                    lblWalletStatus.Text = "Running"
                     btnStartStop.Text = "Stop Wallet"
                     Running = True
                     btnStartStop.Enabled = True
@@ -335,6 +346,7 @@
                 If AppId = QGlobal.AppNames.BRS Then
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
+                    lblWalletStatus.Text = "Stopping"
                     APITimer.Enabled = False
                     APITimer.Stop()
                 End If
@@ -389,6 +401,7 @@
         If AppId = QGlobal.AppNames.BRS Then
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
+            lblWalletStatus.Text = "Stopped"
         End If
         If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
             If AppId = QGlobal.AppNames.MariaPortable Then
@@ -565,30 +578,46 @@
                 url = "http://" & s(0) & ":" & s(1)
             End If
             Dim Result() As String = Split(http.GetUrl(url & "/burst?requestType=getBlocks&lastIndex=1"), ",")
-            Dim msg As String = ""
-
+            Dim Height As String = ""
+            Dim TimeStamp As String = ""
             For Each Line As String In Result
                 If Line.StartsWith(Chr(34) & "height" & Chr(34)) Then
-                    '"height":414439
-                    msg = Line.Substring(9)
+                    Height = Line.Substring(9)
+                End If
+                If Line.StartsWith(Chr(34) & "timestamp" & Chr(34)) Then
+                    TimeStamp = Replace(Line.Substring(12), "}", "")
+                End If
+                If Line.StartsWith(Chr(34) & "previousBlockHash" & Chr(34)) Then
                     Exit For
                 End If
             Next
 
-            APIResult(msg)
+
+            APIResult(Height, TimeStamp)
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub APIResult(ByVal Data As String)
+    Private Sub APIResult(ByVal Data As String, ByVal TimeStamp As String)
         Try
             If Me.InvokeRequired Then
                 Dim d As New DAPIResult(AddressOf APIResult)
-                Me.Invoke(d, New Object() {Data})
+                Me.Invoke(d, New Object() {Data, TimeStamp})
                 Return
             End If
             lblBlockInfo.Text = Data
+            Dim BlockDate As Date = New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp))
+            If Now.AddHours(-1) > BlockDate Then
+                lblBlockDate.Text = BlockDate.ToString & " (Not synced)"
+                lblBlockDate.ForeColor = Color.DarkRed
+            Else
+                lblBlockDate.Text = BlockDate.ToString
+                lblBlockDate.ForeColor = Color.DarkGreen
+            End If
+
+
+
         Catch ex As Exception
 
         End Try

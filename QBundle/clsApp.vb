@@ -510,6 +510,8 @@ Public Class clsApp
                 Return "Qbundle"
             Case QGlobal.AppNames.Xplotter
                 Return "Xplotter"
+            Case QGlobal.AppNames.BlagoMiner
+                Return "Blago Miner"
         End Select
         Return ""
     End Function

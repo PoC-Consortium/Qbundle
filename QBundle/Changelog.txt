@@ -7,15 +7,14 @@ Known problems:
 
 
 To Be done:
-Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
-Add support for Blago Miner (first step)
+First setup choise of wallet / Launcher style
 
+Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
 Make BRS exception handling to cover more error types.
 Environment check (check enough ram and disk space)
-First setup choise of wallet / Launcher style
 
-Low prio:
+Low prio if ever:
 Add a components download window where you can select to download/update a component.
 
 
@@ -27,6 +26,8 @@ Add a components download window where you can select to download/update a compo
 + Add support for XPlotter (first step)
 + Added CPU Instructionset detection
 + Added Change reward recipient.
++ Added Miner for blago
+
 
 V1.2
 + Getting started Wizard.
