@@ -74,18 +74,18 @@ Partial Class frmMain
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBlockInfo = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.lblWallet = New System.Windows.Forms.Label()
-        Me.lblUpdates = New System.Windows.Forms.Label()
-        Me.pnlLauncher = New System.Windows.Forms.Panel()
-        Me.pnlAIO = New System.Windows.Forms.Panel()
-        Me.wb1 = New System.Windows.Forms.WebBrowser()
         Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBlockDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblSplitterWallet = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblWalletIS = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblWalletStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblWallet = New System.Windows.Forms.Label()
+        Me.lblUpdates = New System.Windows.Forms.Label()
+        Me.pnlLauncher = New System.Windows.Forms.Panel()
+        Me.pnlAIO = New System.Windows.Forms.Panel()
+        Me.wb1 = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -213,7 +213,7 @@ Partial Class frmMain
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'AccountMangerToolStripMenuItem
@@ -264,13 +264,13 @@ Partial Class frmMain
         'StartWalletToolStripMenuItem
         '
         Me.StartWalletToolStripMenuItem.Name = "StartWalletToolStripMenuItem"
-        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.StartWalletToolStripMenuItem.Text = "Start Wallet"
         '
         'StopWalletToolStripMenuItem
         '
         Me.StopWalletToolStripMenuItem.Name = "StopWalletToolStripMenuItem"
-        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.StopWalletToolStripMenuItem.Text = "Stop Wallet"
         '
         'ToolsToolStripMenuItem
@@ -449,6 +449,42 @@ Partial Class frmMain
         Me.lblBlockInfo.Size = New System.Drawing.Size(12, 17)
         Me.lblBlockInfo.Text = "-"
         '
+        'ToolStripStatusLabel3
+        '
+        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 17)
+        Me.ToolStripStatusLabel3.Text = "|"
+        '
+        'ToolStripStatusLabel4
+        '
+        Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
+        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(63, 17)
+        Me.ToolStripStatusLabel4.Text = "Last block:"
+        '
+        'lblBlockDate
+        '
+        Me.lblBlockDate.Name = "lblBlockDate"
+        Me.lblBlockDate.Size = New System.Drawing.Size(12, 17)
+        Me.lblBlockDate.Text = "-"
+        '
+        'lblSplitterWallet
+        '
+        Me.lblSplitterWallet.Name = "lblSplitterWallet"
+        Me.lblSplitterWallet.Size = New System.Drawing.Size(10, 17)
+        Me.lblSplitterWallet.Text = "|"
+        '
+        'lblWalletIS
+        '
+        Me.lblWalletIS.Name = "lblWalletIS"
+        Me.lblWalletIS.Size = New System.Drawing.Size(54, 17)
+        Me.lblWalletIS.Text = "Wallet is:"
+        '
+        'lblWalletStatus
+        '
+        Me.lblWalletStatus.Name = "lblWalletStatus"
+        Me.lblWalletStatus.Size = New System.Drawing.Size(51, 17)
+        Me.lblWalletStatus.Text = "Stopped"
+        '
         'ToolStripStatusLabel2
         '
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
@@ -507,42 +543,6 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(495, 228)
         Me.wb1.TabIndex = 0
         '
-        'ToolStripStatusLabel3
-        '
-        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 17)
-        Me.ToolStripStatusLabel3.Text = "|"
-        '
-        'ToolStripStatusLabel4
-        '
-        Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
-        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(63, 17)
-        Me.ToolStripStatusLabel4.Text = "Last block:"
-        '
-        'lblBlockDate
-        '
-        Me.lblBlockDate.Name = "lblBlockDate"
-        Me.lblBlockDate.Size = New System.Drawing.Size(12, 17)
-        Me.lblBlockDate.Text = "-"
-        '
-        'lblSplitterWallet
-        '
-        Me.lblSplitterWallet.Name = "lblSplitterWallet"
-        Me.lblSplitterWallet.Size = New System.Drawing.Size(10, 17)
-        Me.lblSplitterWallet.Text = "|"
-        '
-        'lblWalletIS
-        '
-        Me.lblWalletIS.Name = "lblWalletIS"
-        Me.lblWalletIS.Size = New System.Drawing.Size(54, 17)
-        Me.lblWalletIS.Text = "Wallet is:"
-        '
-        'lblWalletStatus
-        '
-        Me.lblWalletStatus.Name = "lblWalletStatus"
-        Me.lblWalletStatus.Size = New System.Drawing.Size(51, 17)
-        Me.lblWalletStatus.Text = "Stopped"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -559,7 +559,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Qbundle v1.3 | Burstcoin Wallet v1.3.6cg"
+        Me.Text = "Qbundle v1.3 | Burstcoin Wallet v1.3.6cg (Beta 1)"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
