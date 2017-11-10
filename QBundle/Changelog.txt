@@ -7,20 +7,18 @@ Known problems:
 
 
 To Be done:
-First setup choise of wallet / Launcher style
-
 Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
-Make BRS exception handling to cover more error types.
 Environment check (check enough ram and disk space)
 
 Low prio if ever:
 Add a components download window where you can select to download/update a component.
-
+First setup choise of wallet / Launcher style
 
 ~V1.3
 * Rename to Qbundle
 * Added support for Dev version of nrs
+* Improved Exception monitoring
 + Wallet Layout added
 + Account Manager with AES 256bit encryption
 + Add support for XPlotter (first step)

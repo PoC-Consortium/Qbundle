@@ -213,7 +213,7 @@ Partial Class frmMain
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'AccountMangerToolStripMenuItem
@@ -239,19 +239,19 @@ Partial Class frmMain
         'Account1ToolStripMenuItem
         '
         Me.Account1ToolStripMenuItem.Name = "Account1ToolStripMenuItem"
-        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Account1ToolStripMenuItem.Text = "Account 1"
         '
         'Account2ToolStripMenuItem
         '
         Me.Account2ToolStripMenuItem.Name = "Account2ToolStripMenuItem"
-        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Account2ToolStripMenuItem.Text = "Account 2"
         '
         'Account3ToolStripMenuItem
         '
         Me.Account3ToolStripMenuItem.Name = "Account3ToolStripMenuItem"
-        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Account3ToolStripMenuItem.Text = "Account 3"
         '
         'WalletToolStripMenuItem
@@ -264,13 +264,13 @@ Partial Class frmMain
         'StartWalletToolStripMenuItem
         '
         Me.StartWalletToolStripMenuItem.Name = "StartWalletToolStripMenuItem"
-        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.StartWalletToolStripMenuItem.Text = "Start Wallet"
         '
         'StopWalletToolStripMenuItem
         '
         Me.StopWalletToolStripMenuItem.Name = "StopWalletToolStripMenuItem"
-        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.StopWalletToolStripMenuItem.Text = "Stop Wallet"
         '
         'ToolsToolStripMenuItem
@@ -369,13 +369,13 @@ Partial Class frmMain
         'ContributorsToolStripMenuItem
         '
         Me.ContributorsToolStripMenuItem.Name = "ContributorsToolStripMenuItem"
-        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ContributorsToolStripMenuItem.Text = "Contributors"
         '
         'DeveloperToolStripMenuItem
         '
         Me.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem"
-        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DeveloperToolStripMenuItem.Text = "Developer"
         '
         'FileToolStripMenuItem
@@ -431,7 +431,7 @@ Partial Class frmMain
         '
         Me.StatusStrip1.BackColor = System.Drawing.Color.White
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4, Me.lblBlockDate, Me.lblSplitterWallet, Me.lblWalletIS, Me.lblWalletStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 256)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 148)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(497, 22)
         Me.StatusStrip1.TabIndex = 5
@@ -531,7 +531,7 @@ Partial Class frmMain
         Me.pnlAIO.Controls.Add(Me.wb1)
         Me.pnlAIO.Location = New System.Drawing.Point(2, 25)
         Me.pnlAIO.Name = "pnlAIO"
-        Me.pnlAIO.Size = New System.Drawing.Size(495, 228)
+        Me.pnlAIO.Size = New System.Drawing.Size(495, 120)
         Me.pnlAIO.TabIndex = 10
         '
         'wb1
@@ -540,7 +540,7 @@ Partial Class frmMain
         Me.wb1.Location = New System.Drawing.Point(0, 0)
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wb1.Name = "wb1"
-        Me.wb1.Size = New System.Drawing.Size(495, 228)
+        Me.wb1.Size = New System.Drawing.Size(495, 120)
         Me.wb1.TabIndex = 0
         '
         'frmMain
@@ -548,7 +548,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(497, 278)
+        Me.ClientSize = New System.Drawing.Size(497, 170)
         Me.Controls.Add(Me.pnlLauncher)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)

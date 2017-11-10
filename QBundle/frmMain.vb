@@ -359,7 +359,7 @@
                     Console(0).Add(data)
                     'here we can do error detection
                     If Q.settings.WalletException And LastException.AddHours(1) < Now Then
-                        If data.StartsWith("Exception in") Then
+                        If data.StartsWith("Exception in") Or data.StartsWith("java.lang.RuntimeException") Then
                             LastException = Now
                             Q.ProcHandler.ReStartProcess(QGlobal.AppNames.BRS)
                         End If
@@ -376,7 +376,7 @@
                     Console(0).Add(data)
                     'here we can do error detection
                     If Q.settings.WalletException And LastException.AddHours(1) < Now Then
-                        If data.StartsWith("Exception in") Then
+                        If data.StartsWith("Exception in") Or data.StartsWith("java.lang.RuntimeException") Then
                             LastException = Now
                             Q.ProcHandler.ReStartProcess(QGlobal.AppNames.BRS)
                         End If
