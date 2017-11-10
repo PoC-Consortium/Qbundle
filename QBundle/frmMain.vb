@@ -76,9 +76,9 @@
 
         SetLoginMenu()
         StopWalletToolStripMenuItem.Enabled = False
+        Running = Q.Service.IsServiceRunning
         If Q.settings.QBMode = 0 Then
-            StartStop()
-
+            If Running = False Then StartWallet()
         End If
         SetMode(Q.settings.QBMode)
 
@@ -162,27 +162,16 @@
     End Sub
     Private Sub StartStop()
         If Running Then
-            lblGotoWallet.Visible = False
-            btnStartStop.Text = "Stopping"
-            btnStartStop.Enabled = False
-            APITimer.Enabled = False
-            APITimer.Stop()
             StopWallet()
-            'stopsequence
-            '0 NRS
-            '1 Mariap if needed
-
         Else
-            If Not QB.Generic.SanityCheck() Then Exit Sub
-            QB.Generic.WriteNRSConfig()
             StartWallet()
-            Running = True
-            btnStartStop.Enabled = False
-            btnStartStop.Text = "Starting"
-            StartWalletToolStripMenuItem.Enabled = False
-            StopWalletToolStripMenuItem.Enabled = True
         End If
     End Sub
+
+
+
+
+
 
     'labels
     Private Sub lblGotoWallet_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblGotoWallet.LinkClicked
@@ -419,62 +408,80 @@
 
     End Sub
     Private Sub StartWallet()
-
-        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
-            Dim pset(1) As clsProcessHandler.pSettings
-            pset(0) = New clsProcessHandler.pSettings
-            'mariadb
-            pset(0).AppId = QGlobal.AppNames.MariaPortable
-            pset(0).AppPath = QGlobal.BaseDir & "MariaDb\bin\mysqld.exe"
-            pset(0).Cores = 0
-            pset(0).Params = "--console"
-            pset(0).WorkingDirectory = QGlobal.BaseDir & "MariaDb\bin\"
-            pset(0).StartSignal = "ready for connections"
-            pset(0).StartsignalMaxTime = 60
-
-            pset(1) = New clsProcessHandler.pSettings
-            pset(1).AppId = QGlobal.AppNames.BRS
-            If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
-                pset(1).AppPath = "java"
-            Else
-                pset(1).AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
+        If Not QB.Generic.SanityCheck() Then Exit Sub
+        QB.Generic.WriteNRSConfig()
+        If Q.Service.IsInstalled Then
+            Q.Service.StartService()
+        Else
+            If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
+                Dim pset(1) As clsProcessHandler.pSettings
+                pset(0) = New clsProcessHandler.pSettings
+                'mariadb
+                pset(0).AppId = QGlobal.AppNames.MariaPortable
+                pset(0).AppPath = QGlobal.BaseDir & "MariaDb\bin\mysqld.exe"
+                pset(0).Cores = 0
+                pset(0).Params = "--console"
+                pset(0).WorkingDirectory = QGlobal.BaseDir & "MariaDb\bin\"
+                pset(0).StartSignal = "ready for connections"
+                pset(0).StartsignalMaxTime = 60
+                pset(1) = New clsProcessHandler.pSettings
+                pset(1).AppId = QGlobal.AppNames.BRS
+                If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
+                    pset(1).AppPath = "java"
+                Else
+                    pset(1).AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
+                End If
+                pset(1).Cores = Q.settings.Cpulimit
+                pset(1).Params = "-cp burst.jar;lib\*;conf brs.Burst"
+                pset(1).StartSignal = "Started API server at"
+                pset(1).StartsignalMaxTime = 300
+                pset(1).WorkingDirectory = QGlobal.BaseDir
+                Q.ProcHandler.StartProcessSquence(pset)
+            Else 'normal start
+                Dim Pset As New clsProcessHandler.pSettings
+                Pset.AppId = QGlobal.AppNames.BRS
+                If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
+                    Pset.AppPath = "java"
+                Else
+                    Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
+                End If
+                Pset.Cores = Q.settings.Cpulimit
+                Pset.Params = "-cp burst.jar;lib\;conf brs.Burst"
+                Pset.StartSignal = "Started API server at"
+                Pset.StartsignalMaxTime = 300
+                Pset.WorkingDirectory = QGlobal.BaseDir
+                Q.ProcHandler.StartProcess(Pset)
             End If
-            pset(1).Cores = Q.settings.Cpulimit
-            pset(1).Params = "-cp burst.jar;lib\*;conf brs.Burst"
-            pset(1).StartSignal = "Started API server at"
-            pset(1).StartsignalMaxTime = 300
-            pset(1).WorkingDirectory = QGlobal.BaseDir
-
-            Q.ProcHandler.StartProcessSquence(pset)
-
-
-        Else 'normal start
-            Dim Pset As New clsProcessHandler.pSettings
-            Pset.AppId = QGlobal.AppNames.BRS
-            If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
-                Pset.AppPath = "java"
-            Else
-                Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
-            End If
-            Pset.Cores = Q.settings.Cpulimit
-            Pset.Params = "-cp burst.jar;lib\;conf brs.Burst"
-            Pset.StartSignal = "Started API server at"
-            Pset.StartsignalMaxTime = 300
-            Pset.WorkingDirectory = QGlobal.BaseDir
-
-            Q.ProcHandler.StartProcess(Pset)
-
+            btnStartStop.Enabled = False
+            btnStartStop.Text = "Starting"
         End If
+        Running = True
+        StartWalletToolStripMenuItem.Enabled = False
+        StopWalletToolStripMenuItem.Enabled = True
+
     End Sub
     Public Sub StopWallet()
-        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
-            Dim Pid(1) As Object
-            Pid(0) = QGlobal.AppNames.BRS
-            Pid(1) = QGlobal.AppNames.MariaPortable
-            Q.ProcHandler.StopProcessSquence(Pid)
+        lblGotoWallet.Visible = False
+
+        APITimer.Enabled = False
+        APITimer.Stop()
+
+        If Q.Service.IsInstalled Then
+            Q.Service.StopService()
         Else
-            Q.ProcHandler.StopProcess(QGlobal.AppNames.BRS)
+            btnStartStop.Text = "Stopping"
+            btnStartStop.Enabled = False
+            If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
+                Dim Pid(1) As Object
+                Pid(0) = QGlobal.AppNames.BRS
+                Pid(1) = QGlobal.AppNames.MariaPortable
+                Q.ProcHandler.StopProcessSquence(Pid)
+            Else
+                Q.ProcHandler.StopProcess(QGlobal.AppNames.BRS)
+            End If
         End If
+
+
     End Sub
 #End Region
 
@@ -660,6 +667,16 @@
 
     Private Sub MinerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MinerToolStripMenuItem.Click
         frmMiner.Show()
+    End Sub
+
+    Private Sub InstallAsAServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallAsAServiceToolStripMenuItem.Click
+        Q.Service.InstallService()
+
+    End Sub
+
+    Private Sub UninstallServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UninstallServiceToolStripMenuItem.Click
+        Q.Service.UninstallService()
+
     End Sub
 
 

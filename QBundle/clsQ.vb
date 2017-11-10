@@ -7,6 +7,7 @@ Friend Class clsQ
     Public WithEvents App As clsApp
     Public settings As clsSettings
     Public Accounts As clsAccounts
+    Public Service As clsServiceHandler
     Public Sub New()
         QGlobal.Init()
 
@@ -16,6 +17,7 @@ Friend Class clsQ
         Me.settings.LoadSettings()
         Me.Accounts = New clsAccounts
         Me.Accounts.LoadAccounts()
+        Me.Service = New clsServiceHandler
     End Sub
 
 

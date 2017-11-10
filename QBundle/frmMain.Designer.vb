@@ -86,6 +86,9 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
+        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -256,7 +259,7 @@ Partial Class frmMain
         '
         'WalletToolStripMenuItem
         '
-        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartWalletToolStripMenuItem, Me.StopWalletToolStripMenuItem})
+        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartWalletToolStripMenuItem, Me.StopWalletToolStripMenuItem, Me.ServiceToolStripMenuItem})
         Me.WalletToolStripMenuItem.Name = "WalletToolStripMenuItem"
         Me.WalletToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.WalletToolStripMenuItem.Text = "Wallet"
@@ -543,6 +546,25 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(495, 120)
         Me.wb1.TabIndex = 0
         '
+        'ServiceToolStripMenuItem
+        '
+        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
+        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
+        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ServiceToolStripMenuItem.Text = "Service"
+        '
+        'InstallAsAServiceToolStripMenuItem
+        '
+        Me.InstallAsAServiceToolStripMenuItem.Name = "InstallAsAServiceToolStripMenuItem"
+        Me.InstallAsAServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.InstallAsAServiceToolStripMenuItem.Text = "Install as a service"
+        '
+        'UninstallServiceToolStripMenuItem
+        '
+        Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
+        Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -637,4 +659,7 @@ Partial Class frmMain
     Friend WithEvents lblSplitterWallet As ToolStripStatusLabel
     Friend WithEvents lblWalletIS As ToolStripStatusLabel
     Friend WithEvents lblWalletStatus As ToolStripStatusLabel
+    Friend WithEvents ServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InstallAsAServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UninstallServiceToolStripMenuItem As ToolStripMenuItem
 End Class

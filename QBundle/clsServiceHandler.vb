@@ -5,6 +5,9 @@ Imports System.Threading
 
 Public Class clsServiceHandler
     Public Event MonitorEvents(ByVal Operation As Integer, ByVal Data As String) '0 service information '1 pipe information
+    Public Event Update(ByVal Pid As Integer, ByVal Status As Integer, ByVal Data As String) 'used to signal wallet status
+
+
     Private pipeClient As NamedPipeClientStream
     Private PipeBuffer() As Byte
     Private ShouldPipeRun As Boolean
@@ -35,19 +38,19 @@ Public Class clsServiceHandler
     Public Function UninstallService() As Boolean
         Try
             If QB.Generic.IsAdmin Then
+
                 Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
                 Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {"/u", Srv})
                 Return True
             Else
                 Dim p As Process = New Process
                 p.StartInfo.WorkingDirectory = QGlobal.BaseDir
-                p.StartInfo.Arguments = "InstallService"
+                p.StartInfo.Arguments = "UnInstallService"
                 p.StartInfo.UseShellExecute = True
                 p.StartInfo.CreateNoWindow = True
                 p.StartInfo.FileName = Application.ExecutablePath
                 p.StartInfo.Verb = "runas"
                 p.Start()
-
                 Return True
             End If
         Catch ex As Exception
@@ -55,36 +58,104 @@ Public Class clsServiceHandler
         End Try
         Return False
     End Function
-    Public Sub StartService()
+    Public Sub StartService(Optional ByVal Monitor As Boolean = True)
         If Not IsServiceRunning() And IsInstalled() Then
             Dim service As ServiceController = New ServiceController("Burst Service")
             If service.Status.Equals(ServiceControllerStatus.Stopped) Or service.Status.Equals(ServiceControllerStatus.StopPending) Then
-                service.Start()
+                If QB.Generic.IsAdmin Then
+                    service.Start()
+                Else
+                    Dim p As Process = New Process
+                    p.StartInfo.WorkingDirectory = QGlobal.BaseDir
+                    p.StartInfo.Arguments = "StartService"
+                    p.StartInfo.UseShellExecute = True
+                    p.StartInfo.CreateNoWindow = True
+                    p.StartInfo.FileName = Application.ExecutablePath
+                    p.StartInfo.Verb = "runas"
+                    p.Start()
+                End If
+
+                If Monitor Then
+                    Dim trda As Thread
+                    trda = New Thread(AddressOf WaitForStart)
+                    trda.IsBackground = True
+                    trda.Start()
+                    trda = Nothing
+                End If
+
             End If
         End If
     End Sub
-    Public Sub StopService()
+    Public Sub StopService(Optional ByVal Monitor As Boolean = True)
         If IsServiceRunning() And IsInstalled() Then
             Dim service As ServiceController = New ServiceController("Burst Service")
             If service.Status.Equals(ServiceControllerStatus.Running) Or service.Status.Equals(ServiceControllerStatus.StartPending) Then
-                service.Stop()
+
+                If QB.Generic.IsAdmin Then
+                    service.Stop()
+                Else
+                    Dim p As Process = New Process
+                    p.StartInfo.WorkingDirectory = QGlobal.BaseDir
+                    p.StartInfo.Arguments = "StopService"
+                    p.StartInfo.UseShellExecute = True
+                    p.StartInfo.CreateNoWindow = True
+                    p.StartInfo.FileName = Application.ExecutablePath
+                    p.StartInfo.Verb = "runas"
+                    p.Start()
+                End If
+
+                If Monitor Then
+                    Dim trda As Thread
+                    trda = New Thread(AddressOf WaitForStop)
+                    trda.IsBackground = True
+                    trda.Start()
+                    trda = Nothing
+                End If
             End If
-        End If
+            End If
     End Sub
     Public Function IsInstalled() As Boolean
-        Dim service As ServiceController = New ServiceController("Burst Service")
-        If service.Status = Nothing Then
-            Return False
-        End If
-        Return True
-    End Function
-    Public Function IsServiceRunning() As Boolean
-        Dim service As ServiceController = New ServiceController("Burst Service")
-        If service.Status.Equals(ServiceControllerStatus.Running) Or service.Status.Equals(ServiceControllerStatus.StartPending) Then
+        Try
+            Dim service As ServiceController = New ServiceController("Burst Service")
+            If service.Status = Nothing Then
+                Return False
+            End If
             Return True
-        End If
+        Catch ex As Exception
+
+        End Try
         Return False
     End Function
+    Public Function IsServiceRunning() As Boolean
+        Try
+            Dim service As ServiceController = New ServiceController("Burst Service")
+            If service.Status.Equals(ServiceControllerStatus.Running) Then 'Or service.Status.Equals(ServiceControllerStatus.StartPending)
+                Return True
+            End If
+        Catch ex As Exception
+        End Try
+        Return False
+    End Function
+
+    Public Sub WaitForStart()
+        Do
+            Thread.Sleep(1000)
+            If IsServiceRunning() Then
+                Exit Do
+            End If
+        Loop
+        RaiseEvent Update(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
+    End Sub
+    Public Sub WaitForStop()
+        Do
+            Thread.Sleep(1000)
+            If Not IsServiceRunning() Then
+                Exit Do
+            End If
+        Loop
+        RaiseEvent Update(QGlobal.AppNames.BRS, QGlobal.ProcOp.Stopped, "")
+    End Sub
+
 #End Region
 
 #Region " Public Wallet Sub / Functions "

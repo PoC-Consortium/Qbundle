@@ -275,24 +275,29 @@ Friend Class Generic
                     End Try
                     End
                 Case "InstallService"
-                    Try
-                        Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
-                        Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {Srv})
-                        MsgBox("Sucessfully installed burst wallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    Catch ex As Exception
+                    If Q.Service.InstallService() Then
+                        MsgBox("Sucessfully installed burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
+                    Else
                         MsgBox("Unable to install burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    End Try
+                    End If
+                    End
+
                 Case "UnInstallService"
-                    Try
-                        Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
-                        Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {"/u", Srv})
+                    If Q.Service.UninstallService Then
                         MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    Catch ex As Exception
+                    Else
                         MsgBox("Unable to remove burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    End Try
+                    End If
+                    End
+
+                Case "StartService"
+                    Q.Service.StartService()
+                    End
+                Case "StopService"
+                    Q.Service.StopService()
+                    End
                 Case "Debug"
                     QB.Generic.DebugMe = True
-
             End Select
 
         End If
