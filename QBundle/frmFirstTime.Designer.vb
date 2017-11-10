@@ -78,18 +78,18 @@ Partial Class frmFirstTime
         Me.rYes = New System.Windows.Forms.RadioButton()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.pnlMode = New System.Windows.Forms.Panel()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.pnlLauncher = New System.Windows.Forms.Panel()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.pnlWallet = New System.Windows.Forms.Panel()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.pnlWallet = New System.Windows.Forms.Panel()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.pnlLauncher = New System.Windows.Forms.Panel()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.pnlMode = New System.Windows.Forms.Panel()
         Me.pnlWiz1.SuspendLayout()
         Me.P1.SuspendLayout()
         Me.P3.SuspendLayout()
@@ -103,9 +103,9 @@ Partial Class frmFirstTime
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PnlWiz3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.pnlMode.SuspendLayout()
-        Me.pnlLauncher.SuspendLayout()
         Me.pnlWallet.SuspendLayout()
+        Me.pnlLauncher.SuspendLayout()
+        Me.pnlMode.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlWiz1
@@ -674,60 +674,15 @@ Partial Class frmFirstTime
         Me.Label1.TabIndex = 15
         Me.Label1.Text = "Getting quickstarted?"
         '
-        'pnlMode
+        'Label20
         '
-        Me.pnlMode.Controls.Add(Me.Button3)
-        Me.pnlMode.Controls.Add(Me.CheckBox1)
-        Me.pnlMode.Controls.Add(Me.pnlLauncher)
-        Me.pnlMode.Controls.Add(Me.pnlWallet)
-        Me.pnlMode.Controls.Add(Me.Label20)
-        Me.pnlMode.Location = New System.Drawing.Point(664, 385)
-        Me.pnlMode.Name = "pnlMode"
-        Me.pnlMode.Size = New System.Drawing.Size(420, 380)
-        Me.pnlMode.TabIndex = 15
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(308, 343)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(104, 31)
-        Me.Button3.TabIndex = 12
-        Me.Button3.Text = "Continue >>"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(28, 350)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(199, 17)
-        Me.CheckBox1.TabIndex = 11
-        Me.CheckBox1.Text = "Turn on software update notification."
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'pnlLauncher
-        '
-        Me.pnlLauncher.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlLauncher.Controls.Add(Me.Label10)
-        Me.pnlLauncher.Controls.Add(Me.Label6)
-        Me.pnlLauncher.Controls.Add(Me.RadioButton3)
-        Me.pnlLauncher.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.pnlLauncher.Location = New System.Drawing.Point(9, 194)
-        Me.pnlLauncher.Name = "pnlLauncher"
-        Me.pnlLauncher.Size = New System.Drawing.Size(403, 124)
-        Me.pnlLauncher.TabIndex = 9
-        '
-        'RadioButton3
-        '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(18, 12)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(14, 13)
-        Me.RadioButton3.TabIndex = 0
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Rockwell", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(6, 11)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(274, 27)
+        Me.Label20.TabIndex = 7
+        Me.Label20.Text = "Please select your style"
         '
         'pnlWallet
         '
@@ -741,16 +696,6 @@ Partial Class frmFirstTime
         Me.pnlWallet.Name = "pnlWallet"
         Me.pnlWallet.Size = New System.Drawing.Size(403, 142)
         Me.pnlWallet.TabIndex = 8
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Rockwell", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(6, 11)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(274, 27)
-        Me.Label20.TabIndex = 7
-        Me.Label20.Text = "Please select your style"
         '
         'RadioButton1
         '
@@ -782,6 +727,28 @@ Partial Class frmFirstTime
         Me.Label4.Text = "In wallet mode you will access the wallet through the built in webbrowser. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Acco" &
     "unt manager will assist you with fast logins." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Best experience for new users."
         '
+        'pnlLauncher
+        '
+        Me.pnlLauncher.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlLauncher.Controls.Add(Me.Label10)
+        Me.pnlLauncher.Controls.Add(Me.Label6)
+        Me.pnlLauncher.Controls.Add(Me.RadioButton3)
+        Me.pnlLauncher.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.pnlLauncher.Location = New System.Drawing.Point(9, 194)
+        Me.pnlLauncher.Name = "pnlLauncher"
+        Me.pnlLauncher.Size = New System.Drawing.Size(403, 124)
+        Me.pnlLauncher.TabIndex = 9
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(18, 12)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(14, 13)
+        Me.RadioButton3.TabIndex = 0
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -802,6 +769,39 @@ Partial Class frmFirstTime
         Me.Label10.Text = "In Launcher mode you will access the wallet through your " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "favourite webbroser.  " &
     "Account manager will help you with " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "passprases. Good experience for seasoned us" &
     "ers."
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(28, 350)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(199, 17)
+        Me.CheckBox1.TabIndex = 11
+        Me.CheckBox1.Text = "Turn on software update notification."
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(308, 343)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(104, 31)
+        Me.Button3.TabIndex = 12
+        Me.Button3.Text = "Continue >>"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'pnlMode
+        '
+        Me.pnlMode.Controls.Add(Me.Button3)
+        Me.pnlMode.Controls.Add(Me.CheckBox1)
+        Me.pnlMode.Controls.Add(Me.pnlLauncher)
+        Me.pnlMode.Controls.Add(Me.pnlWallet)
+        Me.pnlMode.Controls.Add(Me.Label20)
+        Me.pnlMode.Location = New System.Drawing.Point(664, 385)
+        Me.pnlMode.Name = "pnlMode"
+        Me.pnlMode.Size = New System.Drawing.Size(420, 380)
+        Me.pnlMode.TabIndex = 15
         '
         'frmFirstTime
         '
@@ -848,12 +848,12 @@ Partial Class frmFirstTime
         Me.PnlWiz3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.pnlMode.ResumeLayout(False)
-        Me.pnlMode.PerformLayout()
-        Me.pnlLauncher.ResumeLayout(False)
-        Me.pnlLauncher.PerformLayout()
         Me.pnlWallet.ResumeLayout(False)
         Me.pnlWallet.PerformLayout()
+        Me.pnlLauncher.ResumeLayout(False)
+        Me.pnlLauncher.PerformLayout()
+        Me.pnlMode.ResumeLayout(False)
+        Me.pnlMode.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -914,16 +914,16 @@ Partial Class frmFirstTime
     Friend WithEvents rNo As RadioButton
     Friend WithEvents rYes As RadioButton
     Friend WithEvents Label2 As Label
-    Friend WithEvents pnlMode As Panel
-    Friend WithEvents Button3 As Button
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents pnlLauncher As Panel
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents pnlWallet As Panel
-    Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents Label20 As Label
+    Friend WithEvents pnlWallet As Panel
+    Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents pnlLauncher As Panel
     Friend WithEvents Label10 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents pnlMode As Panel
 End Class

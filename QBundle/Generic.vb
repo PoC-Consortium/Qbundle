@@ -94,7 +94,7 @@ Friend Class Generic
             Dim ip As String = GetMyIp()
             If ip <> "" Then
                 Data &= "#Dynamic platform" & vbCrLf
-                Data &= "brs.myPlatform = WCB-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
+                Data &= "brs.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
             End If
         End If
 
@@ -130,8 +130,8 @@ Friend Class Generic
 
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
-            Data &= "burst.oclAuto = true" & vbCrLf
-            Data &= "burst.oclVerify = true" & vbCrLf & vbCrLf
+            Data &= "brs.oclAuto = true" & vbCrLf
+            Data &= "brs.oclVerify = true" & vbCrLf & vbCrLf
 
         End If
 

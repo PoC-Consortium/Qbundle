@@ -323,8 +323,11 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Q.settings.QBMode = 0
+        Q.settings.useOpenCL = True
         Q.settings.SaveSettings()
         'writing brs.properties since we need it for tools.
+
         QB.Generic.WriteNRSConfig()
         If rYes.Checked Then
             frmImport.Show()

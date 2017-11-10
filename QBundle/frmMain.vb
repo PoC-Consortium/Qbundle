@@ -609,10 +609,10 @@
             lblBlockInfo.Text = Data
             Dim BlockDate As Date = New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp))
             If Now.AddHours(-1) > BlockDate Then
-                lblBlockDate.Text = BlockDate.ToString & " (Not synced)"
+                lblBlockDate.Text = BlockDate.ToString & " (Synchronizing blockchain)"
                 lblBlockDate.ForeColor = Color.DarkRed
             Else
-                lblBlockDate.Text = BlockDate.ToString
+                lblBlockDate.Text = BlockDate.ToString & "(Fully Syncronized)"
                 lblBlockDate.ForeColor = Color.DarkGreen
             End If
 
