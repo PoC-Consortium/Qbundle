@@ -6,7 +6,7 @@ Imports System.Threading
 Public Class clsServiceHandler
     Public Event MonitorEvents(ByVal Operation As Integer, ByVal Data As String) '0 service information '1 pipe information
     Public Event Update(ByVal Pid As Integer, ByVal Status As Integer, ByVal Data As String) 'used to signal wallet status
-
+    Public Event Stopped(ByVal Pid As Integer)
 
     Private pipeClient As NamedPipeClientStream
     Private PipeBuffer() As Byte
@@ -38,7 +38,6 @@ Public Class clsServiceHandler
     Public Function UninstallService() As Boolean
         Try
             If QB.Generic.IsAdmin Then
-
                 Dim Srv As String = QGlobal.BaseDir & "BurstService.exe"
                 Configuration.Install.ManagedInstallerClass.InstallHelper(New String() {"/u", Srv})
                 Return True
@@ -153,7 +152,7 @@ Public Class clsServiceHandler
                 Exit Do
             End If
         Loop
-        RaiseEvent Update(QGlobal.AppNames.BRS, QGlobal.ProcOp.Stopped, "")
+        RaiseEvent Stopped(QGlobal.AppNames.BRS)
     End Sub
 
 #End Region

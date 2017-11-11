@@ -74,9 +74,13 @@
         AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
         AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
 
+        AddHandler Q.Service.Stopped, AddressOf Stopped
+        AddHandler Q.Service.Update, AddressOf ProcEvents
+
         SetLoginMenu()
         StopWalletToolStripMenuItem.Enabled = False
         Running = Q.Service.IsServiceRunning
+        If Running Then ProcEvents(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
         If Q.settings.QBMode = 0 Then
             If Running = False Then StartWallet()
         End If
@@ -125,7 +129,7 @@
     End Sub
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
-            If Running Then
+            If Running And Not Q.Service.IsServiceRunning Then
                 e.Cancel = True
                 If MsgBox("Do you want to shutdown the wallet?", MsgBoxStyle.YesNo, "Exit") = MsgBoxResult.No Then
                     Exit Sub
@@ -167,11 +171,6 @@
             StartWallet()
         End If
     End Sub
-
-
-
-
-
 
     'labels
     Private Sub lblGotoWallet_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblGotoWallet.LinkClicked
@@ -262,7 +261,7 @@
             APITimer.Stop()
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
-            lblWalletStatus.Text = "Stopped"
+
         End If
         If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
             If AppId = QGlobal.AppNames.MariaPortable Then
@@ -278,7 +277,9 @@
             Running = False
             StartWalletToolStripMenuItem.Enabled = True
             StopWalletToolStripMenuItem.Enabled = False
+            lblWalletStatus.Text = "Stopped"
         End If
+
 
     End Sub
     Private Sub ProcEvents(ByVal AppId As Integer, ByVal Operation As Integer, ByVal data As String)
@@ -293,6 +294,7 @@
                 If AppId = QGlobal.AppNames.BRS Then
                     LblDbStatus.Text = "Stopped"
                     LblDbStatus.ForeColor = Color.Red
+                    lblWalletStatus.Text = "Stopped"
                     APITimer.Enabled = False
                     APITimer.Stop()
                 End If
@@ -670,8 +672,15 @@
     End Sub
 
     Private Sub InstallAsAServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallAsAServiceToolStripMenuItem.Click
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
+            MsgBox("You can not run MariaDB portable together with this service function.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Wrong DB version")
+            Exit Sub
+        End If
+        If Running Then
+            MsgBox("You must stop the wallet before you can install it as a service.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Wrong DB version")
+            Exit Sub
+        End If
         Q.Service.InstallService()
-
     End Sub
 
     Private Sub UninstallServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UninstallServiceToolStripMenuItem.Click

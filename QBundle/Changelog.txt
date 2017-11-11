@@ -7,13 +7,11 @@ Known problems:
 
 
 To Be done:
-Add support to install as a service. (Partially done! PipeServer+Pipeclient complete needs implementation in service wrapper and qbundle?)
+pipeclient+server implementation in service
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
 Environment check (check enough ram and disk space)
 
 Low prio if ever:
-Add a components download window where you can select to download/update a component.
-First setup choise of wallet / Launcher style
 
 ~V1.3
 * Rename to Qbundle
@@ -25,7 +23,7 @@ First setup choise of wallet / Launcher style
 + Added CPU Instructionset detection
 + Added Change reward recipient.
 + Added Miner for blago
-
++ Added Support to install as a service.
 
 V1.2
 + Getting started Wizard.
