@@ -199,6 +199,11 @@ Public Class clsProcessHandler
             Catch ex As Exception
                 If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try
+            Try
+                p.Kill() 'fixing no java cleanup.
+            Catch ex As Exception
+
+            End Try
         End Sub
         Private Function OnExit(CtrlType As CtrlTypes)
             Return True

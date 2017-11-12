@@ -409,6 +409,8 @@
         QB.Generic.WriteWalletConfig()
         If Q.Service.IsInstalled Then
             Q.Service.StartService()
+            btnStartStop.Enabled = False
+            btnStartStop.Text = "Starting"
         Else
             If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
                 Dim pset(1) As clsProcessHandler.pSettings
@@ -464,6 +466,8 @@
 
         If Q.Service.IsInstalled Then
             Q.Service.StopService()
+            btnStartStop.Text = "Stopping"
+            btnStartStop.Enabled = False
         Else
             btnStartStop.Text = "Stopping"
             btnStartStop.Enabled = False

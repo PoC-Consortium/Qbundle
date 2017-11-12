@@ -109,8 +109,8 @@ Friend Class Generic
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
                 Data &= "brs.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
-                Data &= "brs.dbUsername = " & vbCrLf
-                Data &= "brs.dbPassword = " & vbCrLf & vbCrLf
+                Data &= "brs.dbUsername = sa" & vbCrLf
+                Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
             Case QGlobal.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
                 Data &= "brs.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
@@ -200,8 +200,8 @@ Friend Class Generic
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
                 Data &= "nxt.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
-                Data &= "nxt.dbUsername = " & vbCrLf
-                Data &= "nxt.dbPassword = " & vbCrLf & vbCrLf
+                Data &= "nxt.dbUsername = sa" & vbCrLf
+                Data &= "nxt.dbPassword = sa" & vbCrLf & vbCrLf
             Case QGlobal.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
                 Data &= "nxt.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf

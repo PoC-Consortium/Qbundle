@@ -135,8 +135,19 @@ Public Class clsServiceHandler
         End Try
         Return False
     End Function
+    Public Function IsServiceStopping() As Boolean
+        Try
+            Dim service As ServiceController = New ServiceController("Burst Service")
+            If service.Status.Equals(ServiceControllerStatus.Running) Or service.Status.Equals(ServiceControllerStatus.StartPending) Or service.Status.Equals(ServiceControllerStatus.StopPending) Then
+                Return True
+            End If
+        Catch ex As Exception
+        End Try
+        Return False
+    End Function
 
     Public Sub WaitForStart()
+
         Do
             Thread.Sleep(1000)
             If IsServiceRunning() Then
@@ -146,9 +157,10 @@ Public Class clsServiceHandler
         RaiseEvent Update(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
     End Sub
     Public Sub WaitForStop()
+        RaiseEvent Update(QGlobal.AppNames.BRS, QGlobal.ProcOp.Stopping, "")
         Do
             Thread.Sleep(1000)
-            If Not IsServiceRunning() Then
+            If Not IsServiceStopping() Then
                 Exit Do
             End If
         Loop
