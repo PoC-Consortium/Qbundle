@@ -328,7 +328,7 @@
         Q.settings.SaveSettings()
         'writing brs.properties since we need it for tools.
 
-        QB.Generic.WriteNRSConfig()
+        QB.Generic.WriteWalletConfig()
         If rYes.Checked Then
             frmImport.Show()
 

@@ -411,7 +411,7 @@
     End Sub
     Private Sub StartWallet()
         If Not QB.Generic.SanityCheck() Then Exit Sub
-        QB.Generic.WriteNRSConfig()
+        QB.Generic.WriteWalletConfig()
         If Q.Service.IsInstalled Then
             Q.Service.StartService()
         Else
@@ -434,7 +434,7 @@
                     pset(1).AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
                 End If
                 pset(1).Cores = Q.settings.Cpulimit
-                pset(1).Params = "-cp burst.jar;lib\*;conf brs.Burst"
+                pset(1).Params = QGlobal.WalletLaunchString.NormalLaunch
                 pset(1).StartSignal = "Started API server at"
                 pset(1).StartsignalMaxTime = 300
                 pset(1).WorkingDirectory = QGlobal.BaseDir
@@ -448,7 +448,7 @@
                     Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
                 End If
                 Pset.Cores = Q.settings.Cpulimit
-                Pset.Params = "-cp burst.jar;lib\;conf brs.Burst"
+                Pset.Params = QGlobal.WalletLaunchString.NormalLaunch
                 Pset.StartSignal = "Started API server at"
                 Pset.StartsignalMaxTime = 300
                 Pset.WorkingDirectory = QGlobal.BaseDir

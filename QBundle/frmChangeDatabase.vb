@@ -152,7 +152,7 @@
             Q.settings.DbUser = txtDbUser.Text
             Q.settings.DbServer = txtDbAddress.Text
             Q.settings.SaveSettings()
-            QB.Generic.WriteNRSConfig()
+            QB.Generic.WriteWalletConfig()
             frmMain.SetDbInfo()
             Me.Close()
         End If
@@ -177,7 +177,7 @@
             Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.CreateBinDump " & QGlobal.BaseDir & "Convertion.bbd"
+        Pset.Params = QGlobal.WalletLaunchString.Export & QGlobal.BaseDir & "Convertion.bbd"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.BaseDir
@@ -234,7 +234,7 @@
             Q.settings.DbUser = txtDbUser.Text
             Q.settings.DbServer = txtDbAddress.Text
             Q.settings.SaveSettings()
-            QB.Generic.WriteNRSConfig()
+            QB.Generic.WriteWalletConfig()
             StartImport()
         End If
         If AppId = QGlobal.AppNames.Import Then
@@ -351,7 +351,7 @@
             Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.LoadBinDump " & QGlobal.BaseDir & "Convertion.bbd -y"
+        Pset.Params = QGlobal.WalletLaunchString.Import & QGlobal.BaseDir & "Convertion.bbd -y"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.BaseDir

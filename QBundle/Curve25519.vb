@@ -179,39 +179,41 @@ Public Class Curve25519
             Return 0
         End Function
 
-        Private Shared Function Egcd32(x As Byte(), y As Byte(), a As Byte(), b As Byte()) As Byte()
-            Dim bn As Integer = 32
-            Dim i As Integer
-            For i = 0 To 31
-                x(i) = y(i) = 0
-            Next
-            x(0) = 1
-            Dim an As Integer = GetNumSize(a, 32)
+    Private Shared Function Egcd32(x As Byte(), y As Byte(), a As Byte(), b As Byte()) As Byte()
+        Dim bn As Integer = 32
+        Dim i As Integer
+        For i = 0 To 31
+            x(i) = y(i) = 0
+        Next
+        x(0) = 1
+        Dim an As Integer = GetNumSize(a, 32)
+        If an = 0 Then
+            Return y
+        End If
+        ' division by zero 
+        Dim temp = New Byte(31) {}
+        While True
+            Dim qn As Integer = bn - an + 1
+            DivMod(temp, b, bn, a, an)
+            bn = GetNumSize(b, bn)
+            If bn = 0 Then
+                Return x
+            End If
+            MultiplyArray32(y, x, temp, qn, -1)
+
+            qn = an - bn + 1
+            DivMod(temp, a, an, b, bn)
+            an = GetNumSize(a, an)
             If an = 0 Then
                 Return y
             End If
-            ' division by zero 
-            Dim temp = New Byte(31) {}
-            While True
-                Dim qn As Integer = bn - an + 1
-                DivMod(temp, b, bn, a, an)
-                bn = GetNumSize(b, bn)
-                If bn = 0 Then
-                    Return x
-                End If
-                MultiplyArray32(y, x, temp, qn, -1)
+            MultiplyArray32(x, y, temp, qn, -1)
+        End While
+        'fix for empty return
+        Return New Byte() {}
+    End Function
 
-                qn = an - bn + 1
-                DivMod(temp, a, an, b, bn)
-                an = GetNumSize(a, an)
-                If an = 0 Then
-                    Return y
-                End If
-                MultiplyArray32(x, y, temp, qn, -1)
-            End While
-        End Function
-
-        Private Const P25 As Integer = 33554431
+    Private Const P25 As Integer = 33554431
         Private Const P26 As Integer = 67108863
 
         Private Shared Sub Unpack(x As Long10, m As Byte())

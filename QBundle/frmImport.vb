@@ -19,12 +19,6 @@
         RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
         cmbRepo.Items.Add("Cryptoguru repository")
         cmbRepo.SelectedIndex = 0
-        'r1.Checked = False
-        'r2.Checked = True
-
-        'r1.Enabled = False
-
-        'cmbRepo.Enabled = False
 
     End Sub
     Private Sub frmImport_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -128,7 +122,7 @@
             Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;conf brs.db.quicksync.LoadBinDump " & FileName & " -y"
+        Pset.Params = QGlobal.WalletLaunchString.Import & FileName & " -y"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.BaseDir

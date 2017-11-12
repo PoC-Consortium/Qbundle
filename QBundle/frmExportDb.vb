@@ -77,7 +77,7 @@
             Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = "-cp burst.jar;lib\*;conf brs.db.quicksync.CreateBinDump " & txtFilename.Text
+        Pset.Params = QGlobal.WalletLaunchString.Export & txtFilename.Text
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.BaseDir

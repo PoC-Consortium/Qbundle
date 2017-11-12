@@ -57,7 +57,7 @@ Friend Class Generic
         Q.settings.SaveSettings()
 
     End Sub
-    Friend Shared Sub WriteNRSConfig()
+    Friend Shared Sub WriteBRSConfig()
         Dim Data As String = ""
         Dim Buffer() As String = Nothing
         'writing brs.properties
@@ -138,6 +138,97 @@ Friend Class Generic
         Try
 
             IO.File.WriteAllText(QGlobal.BaseDir & "conf\brs.properties", Data)
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+
+
+
+    End Sub
+    Friend Shared Sub WriteWalletConfig()
+        WriteNRSConfig()
+    End Sub
+    Friend Shared Sub WriteNRSConfig()
+        Dim Data As String = ""
+        Dim Buffer() As String = Nothing
+        'writing brs.properties
+
+        'Peer settings
+        Data &= "#Peer network" & vbCrLf
+        Buffer = Split(Q.settings.ListenPeer, ";")
+        Data &= "nxt.peerServerPort = " & Buffer(1) & vbCrLf
+        Data &= "nxt.peerServerHost = " & Buffer(0) & vbCrLf & vbCrLf
+
+        'API settings
+        Data &= "#API network" & vbCrLf
+        Buffer = Split(Q.settings.ListenIf, ";")
+        Data &= "nxt.apiServerPort = " & Buffer(1) & vbCrLf
+        Data &= "nxt.apiServerHost = " & Buffer(0) & vbCrLf
+        If Q.settings.ConnectFrom.Contains("0.0.0.0") Then
+            Data &= "nxt.allowedBotHosts = *" & vbCrLf & vbCrLf
+        Else
+            Data &= "nxt.allowedBotHosts = " & Q.settings.ConnectFrom & vbCrLf & vbCrLf
+        End If
+
+
+        'autoip
+        If Q.settings.AutoIp Then
+            Dim ip As String = GetMyIp()
+            If ip <> "" Then
+                Data &= "#Auto IP set" & vbCrLf
+                Data &= "nxt.myAddress = " & ip & vbCrLf & vbCrLf
+            End If
+        End If
+
+        'Dyn platform
+        If Q.settings.AutoIp Then
+            Dim ip As String = GetMyIp()
+            If ip <> "" Then
+                Data &= "#Dynamic platform" & vbCrLf
+                Data &= "nxt.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
+            End If
+        End If
+
+        Select Case Q.settings.DbType
+            Case QGlobal.DbType.FireBird
+                Try
+                    If Not IO.Directory.Exists(QGlobal.BaseDir & "burst_db") Then
+                        IO.Directory.CreateDirectory(QGlobal.BaseDir & "burst_db")
+                    End If
+                Catch ex As Exception
+                    If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                End Try
+                Data &= "#Using Firebird" & vbCrLf
+                Data &= "nxt.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
+                Data &= "nxt.dbUsername = " & vbCrLf
+                Data &= "nxt.dbPassword = " & vbCrLf & vbCrLf
+            Case QGlobal.DbType.pMariaDB
+                Data &= "#Using MariaDb Portable" & vbCrLf
+                Data &= "nxt.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
+                Data &= "nxt.dbUsername = burstwallet" & vbCrLf
+                Data &= "nxt.dbPassword = burstwallet" & vbCrLf & vbCrLf
+            Case QGlobal.DbType.MariaDB
+                Data &= "#Using installed MariaDb" & vbCrLf
+                Data &= "nxt.dbUrl=jdbc:mariadb://" & Q.settings.DbServer & "/" & Q.settings.DbName & vbCrLf
+                Data &= "nxt.dbUsername = " & Q.settings.DbUser & vbCrLf
+                Data &= "nxt.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
+            Case QGlobal.DbType.H2
+                Data &= "#Using H2" & vbCrLf
+                Data &= "nxt.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
+                Data &= "nxt.dbUsername = sa" & vbCrLf
+                Data &= "nxt.dbPassword = sa" & vbCrLf & vbCrLf
+        End Select
+
+        If Q.settings.useOpenCL Then
+            Data &= "#CPU Offload" & vbCrLf
+            Data &= "burst.oclAuto = true" & vbCrLf
+            Data &= "burst.oclVerify = true" & vbCrLf & vbCrLf
+
+        End If
+
+        Try
+
+            IO.File.WriteAllText(QGlobal.BaseDir & "conf\nxt.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try

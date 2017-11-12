@@ -21,6 +21,12 @@
     End Structure
     Friend Shared Pools() As strucPools
     Friend Shared Wallets() As strucWallets
+    Friend Structure strucWalletLaunch
+        Friend NormalLaunch As String
+        Friend Export As String
+        Friend Import As String
+    End Structure
+    Friend Shared WalletLaunchString As strucWalletLaunch
 
     Public Enum DbType As Integer
         H2 = 0
@@ -58,7 +64,9 @@
     Friend Shared Sub Init()
         BaseDir = AppDomain.CurrentDomain.BaseDirectory
         If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
-
+        WalletLaunchString.NormalLaunch = "-cp burst.jar;conf nxt.Nxt" '"-cp burst.jar;conf brs.Burst"
+        WalletLaunchString.Import = "-cp burst.jar;conf nxt.db.quicksync.LoadBinDump " '"-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
+        WalletLaunchString.Export = "-cp burst.jar;conf nxt.db.quicksync.CreateBinDump " '"-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
         InitPools()
         InitOnlineWallets()
         InitCPUInstructions()
