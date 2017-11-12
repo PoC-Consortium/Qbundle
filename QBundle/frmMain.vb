@@ -257,8 +257,7 @@
         End If
 
         If AppId = QGlobal.AppNames.BRS Then
-            APITimer.Enabled = False
-            APITimer.Stop()
+            StopAPIFetch()
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
 
@@ -295,8 +294,7 @@
                     LblDbStatus.Text = "Stopped"
                     LblDbStatus.ForeColor = Color.Red
                     lblWalletStatus.Text = "Stopped"
-                    APITimer.Enabled = False
-                    APITimer.Stop()
+                    StopAPIFetch()
                 End If
                 If AppId = QGlobal.AppNames.MariaPortable Then
                     lblNrsStatus.Text = "Stopped"
@@ -317,9 +315,7 @@
                     Running = True
                     btnStartStop.Enabled = True
                     lblGotoWallet.Visible = True
-                    APITimer.Interval = "1000"
-                    APITimer.Enabled = True
-                    APITimer.Start()
+                    StartAPIFetch()
                     Dim s() As String = Split(Q.settings.ListenIf, ";")
                     Dim url As String = Nothing
                     If s(0) = "0.0.0.0" Then
@@ -338,8 +334,7 @@
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
                     lblWalletStatus.Text = "Stopping"
-                    APITimer.Enabled = False
-                    APITimer.Stop()
+                    StopAPIFetch()
                 End If
             Case QGlobal.ProcOp.ConsoleOut
                 If AppId = QGlobal.AppNames.MariaPortable Then
@@ -465,8 +460,7 @@
     Public Sub StopWallet()
         lblGotoWallet.Visible = False
 
-        APITimer.Enabled = False
-        APITimer.Stop()
+        StopAPIFetch()
 
         If Q.Service.IsInstalled Then
             Q.Service.StopService()
@@ -567,7 +561,19 @@
 #End Region
 
 #Region " Get Block Info "
+    Public Sub StartAPIFetch()
+        APITimer.Interval = "1000"
+        APITimer.Enabled = True
+        APITimer.Start()
 
+    End Sub
+    Public Sub StopAPIFetch()
+        APITimer.Enabled = False
+        APITimer.Stop()
+
+        lblBlockDate.Text = Replace(lblBlockDate.Text, " (Synchronizing blockchain)", "")
+        lblBlockDate.Text = Replace(lblBlockDate.Text, " (Fully Syncronized)", "")
+    End Sub
     Private Sub APITimer_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles APITimer.Tick
         Dim trda As System.Threading.Thread
         trda = New System.Threading.Thread(AddressOf GetApiData)
@@ -621,7 +627,7 @@
                 lblBlockDate.Text = BlockDate.ToString & " (Synchronizing blockchain)"
                 lblBlockDate.ForeColor = Color.DarkRed
             Else
-                lblBlockDate.Text = BlockDate.ToString & "(Fully Syncronized)"
+                lblBlockDate.Text = BlockDate.ToString & " (Fully Syncronized)"
                 lblBlockDate.ForeColor = Color.DarkGreen
             End If
 
@@ -680,11 +686,15 @@
             MsgBox("You must stop the wallet before you can install it as a service.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Wrong DB version")
             Exit Sub
         End If
-        Q.Service.InstallService()
+        If Q.Service.InstallService() Then
+            MsgBox("Sucessfully installed burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
+        End If
     End Sub
 
     Private Sub UninstallServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UninstallServiceToolStripMenuItem.Click
-        Q.Service.UninstallService()
+        If Q.Service.UninstallService() Then
+            MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
+        End If
 
     End Sub
 

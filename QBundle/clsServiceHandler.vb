@@ -27,7 +27,7 @@ Public Class clsServiceHandler
                 p.StartInfo.FileName = Application.ExecutablePath
                 p.StartInfo.Verb = "runas"
                 p.Start()
-                Return True
+                Return False
             End If
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -50,7 +50,7 @@ Public Class clsServiceHandler
                 p.StartInfo.FileName = Application.ExecutablePath
                 p.StartInfo.Verb = "runas"
                 p.Start()
-                Return True
+                Return False
             End If
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
