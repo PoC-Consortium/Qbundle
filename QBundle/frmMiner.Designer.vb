@@ -356,7 +356,7 @@ Partial Class frmMiner
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(432, 124)
+        Me.Label9.Location = New System.Drawing.Point(432, 137)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(97, 18)
         Me.Label9.TabIndex = 34
@@ -367,18 +367,19 @@ Partial Class frmMiner
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(432, 34)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(210, 78)
+        Me.Label10.Size = New System.Drawing.Size(203, 91)
         Me.Label10.TabIndex = 35
         Me.Label10.Text = resources.GetString("Label10.Text")
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(432, 144)
+        Me.Label11.Location = New System.Drawing.Point(432, 157)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(192, 26)
+        Me.Label11.Size = New System.Drawing.Size(192, 52)
         Me.Label11.TabIndex = 36
-        Me.Label11.Text = "Make sure you have set correct server " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "information or use a predefined pool." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label11.Text = "Make sure you have set correct server " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "information or use a predefined pool." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Al" &
+    "so, be sure to have set the correct" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Rewardrecipient for your account."
         '
         'frmMiner
         '
