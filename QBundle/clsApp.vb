@@ -144,6 +144,7 @@ Public Class clsApp
             p.Start()
             p.WaitForExit()
             result = LCase(p.StandardError.ReadLine())
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug("Java installed version ", result)
             If result <> "" Then
                 If LCase(result).Contains("java version") Then
                     result = result.Replace("java version", "")
