@@ -17,6 +17,7 @@ Low prio if ever:
 * Rename to Qbundle
 * Added support for Dev version of nrs
 * Improved Exception monitoring
+* Improved Processhandling
 + Wallet Layout added
 + Account Manager with AES 256bit encryption
 + Add support for XPlotter (first step)
@@ -24,6 +25,7 @@ Low prio if ever:
 + Added Change reward recipient.
 + Added Miner for blago
 + Added Support to install as a service.
+* Other minor changes.
 
 V1.2
 + Getting started Wizard.
