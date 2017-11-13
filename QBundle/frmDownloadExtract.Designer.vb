@@ -131,9 +131,9 @@ Partial Class frmDownloadExtract
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(117, 68)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(46, 13)
+        Me.Label4.Size = New System.Drawing.Size(51, 13)
         Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Progres:"
+        Me.Label4.Text = "Progress:"
         '
         'Label3
         '

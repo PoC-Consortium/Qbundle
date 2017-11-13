@@ -95,7 +95,7 @@
                 Me.FormBorderStyle = FormBorderStyle.Sizable
                 Me.MaximizeBox = True
                 Me.Width = 1024
-                Me.Height = 768
+                Me.Height = 980
                 Q.settings.QBMode = 0
                 Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
@@ -213,20 +213,7 @@
     Private Sub DeveloperToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeveloperToolStripMenuItem.Click
         frmDeveloper.Show()
     End Sub
-    Private Sub ConfigureWindowsFirewallToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigureWindowsFirewallToolStripMenuItem.Click
 
-        Dim msg As String = "Would you like to autmatically configure windows firewall with your wallet connection settings?" & vbCrLf
-        msg &= "This will require Administrative priveleges."
-
-        If MsgBox(msg, MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Windows firewall") = MsgBoxResult.Yes Then
-
-            QB.Generic.SetFirewallFromSettings()
-
-        End If
-    End Sub
-    Private Sub ViewConsolesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewConsolesToolStripMenuItem.Click
-        frmConsole.Show()
-    End Sub
 #End Region
 
 #Region " Wallet Events "
@@ -700,6 +687,22 @@
             MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
         End If
 
+    End Sub
+
+    Private Sub ConfigureWindowsFirewallToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ConfigureWindowsFirewallToolStripMenuItem1.Click
+
+        Dim msg As String = "Would you like to autmatically configure windows firewall with your wallet connection settings?" & vbCrLf
+        msg &= "This will require Administrative priveleges."
+
+        If MsgBox(msg, MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Windows firewall") = MsgBoxResult.Yes Then
+
+            QB.Generic.SetFirewallFromSettings()
+
+        End If
+    End Sub
+
+    Private Sub ViewConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewConsoleToolStripMenuItem.Click
+        frmConsole.Show()
     End Sub
 
 

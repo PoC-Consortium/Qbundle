@@ -78,7 +78,7 @@ Partial Class frmMiner
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(511, 48)
+        Me.btnRemove.Location = New System.Drawing.Point(511, 49)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 27)
         Me.btnRemove.TabIndex = 2
@@ -87,7 +87,7 @@ Partial Class frmMiner
         '
         'btnImport
         '
-        Me.btnImport.Location = New System.Drawing.Point(511, 19)
+        Me.btnImport.Location = New System.Drawing.Point(511, 18)
         Me.btnImport.Name = "btnImport"
         Me.btnImport.Size = New System.Drawing.Size(88, 27)
         Me.btnImport.TabIndex = 1
@@ -398,7 +398,7 @@ Partial Class frmMiner
         Me.MaximizeBox = False
         Me.Name = "frmMiner"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Miner"
+        Me.Text = "Miner (Blago CPU Miner)"
         Me.GroupBox1.ResumeLayout(False)
         Me.grpMiner.ResumeLayout(False)
         Me.grpMiner.PerformLayout()

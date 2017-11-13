@@ -37,23 +37,23 @@ Partial Class frmMain
         Me.ExitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfigureWindowsFirewallToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountMangerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLoginAccount = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Account1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Account2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Account3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StopWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportDatabaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ChangeDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConfigureWindowsFirewallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewConsolesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlotterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -86,9 +86,6 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -208,7 +205,7 @@ Partial Class frmMain
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ConfigureWindowsFirewallToolStripMenuItem1, Me.ViewConsoleToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "Edit"
@@ -216,8 +213,20 @@ Partial Class frmMain
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'ConfigureWindowsFirewallToolStripMenuItem1
+        '
+        Me.ConfigureWindowsFirewallToolStripMenuItem1.Name = "ConfigureWindowsFirewallToolStripMenuItem1"
+        Me.ConfigureWindowsFirewallToolStripMenuItem1.Size = New System.Drawing.Size(220, 22)
+        Me.ConfigureWindowsFirewallToolStripMenuItem1.Text = "Configure Windows firewall"
+        '
+        'ViewConsoleToolStripMenuItem
+        '
+        Me.ViewConsoleToolStripMenuItem.Name = "ViewConsoleToolStripMenuItem"
+        Me.ViewConsoleToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.ViewConsoleToolStripMenuItem.Text = "View Console"
         '
         'AccountMangerToolStripMenuItem
         '
@@ -234,28 +243,9 @@ Partial Class frmMain
         '
         'mnuLoginAccount
         '
-        Me.mnuLoginAccount.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Account1ToolStripMenuItem, Me.Account2ToolStripMenuItem, Me.Account3ToolStripMenuItem})
         Me.mnuLoginAccount.Name = "mnuLoginAccount"
         Me.mnuLoginAccount.Size = New System.Drawing.Size(152, 22)
         Me.mnuLoginAccount.Text = "Login Account"
-        '
-        'Account1ToolStripMenuItem
-        '
-        Me.Account1ToolStripMenuItem.Name = "Account1ToolStripMenuItem"
-        Me.Account1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Account1ToolStripMenuItem.Text = "Account 1"
-        '
-        'Account2ToolStripMenuItem
-        '
-        Me.Account2ToolStripMenuItem.Name = "Account2ToolStripMenuItem"
-        Me.Account2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Account2ToolStripMenuItem.Text = "Account 2"
-        '
-        'Account3ToolStripMenuItem
-        '
-        Me.Account3ToolStripMenuItem.Name = "Account3ToolStripMenuItem"
-        Me.Account3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Account3ToolStripMenuItem.Text = "Account 3"
         '
         'WalletToolStripMenuItem
         '
@@ -275,6 +265,25 @@ Partial Class frmMain
         Me.StopWalletToolStripMenuItem.Name = "StopWalletToolStripMenuItem"
         Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.StopWalletToolStripMenuItem.Text = "Stop Wallet"
+        '
+        'ServiceToolStripMenuItem
+        '
+        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
+        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
+        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ServiceToolStripMenuItem.Text = "Service"
+        '
+        'InstallAsAServiceToolStripMenuItem
+        '
+        Me.InstallAsAServiceToolStripMenuItem.Name = "InstallAsAServiceToolStripMenuItem"
+        Me.InstallAsAServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.InstallAsAServiceToolStripMenuItem.Text = "Install as a service"
+        '
+        'UninstallServiceToolStripMenuItem
+        '
+        Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
+        Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
         '
         'ToolsToolStripMenuItem
         '
@@ -308,39 +317,27 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigureWindowsFirewallToolStripMenuItem, Me.ViewConsolesToolStripMenuItem, Me.PlotterToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
         '
-        'ConfigureWindowsFirewallToolStripMenuItem
-        '
-        Me.ConfigureWindowsFirewallToolStripMenuItem.Name = "ConfigureWindowsFirewallToolStripMenuItem"
-        Me.ConfigureWindowsFirewallToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.ConfigureWindowsFirewallToolStripMenuItem.Text = "Configure Windows Firewall"
-        '
-        'ViewConsolesToolStripMenuItem
-        '
-        Me.ViewConsolesToolStripMenuItem.Name = "ViewConsolesToolStripMenuItem"
-        Me.ViewConsolesToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.ViewConsolesToolStripMenuItem.Text = "View Consoles"
-        '
         'PlotterToolStripMenuItem
         '
         Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
-        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.PlotterToolStripMenuItem.Text = "Plotter"
         '
         'MinerToolStripMenuItem
         '
         Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
-        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'SetRewardassignmentToolStripMenuItem
         '
         Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
-        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.SetRewardassignmentToolStripMenuItem.Text = "Set rewardassignment"
         '
         'WindowToolStripMenuItem
@@ -543,27 +540,9 @@ Partial Class frmMain
         Me.wb1.Location = New System.Drawing.Point(0, 0)
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wb1.Name = "wb1"
+        Me.wb1.ScriptErrorsSuppressed = True
         Me.wb1.Size = New System.Drawing.Size(495, 120)
         Me.wb1.TabIndex = 0
-        '
-        'ServiceToolStripMenuItem
-        '
-        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
-        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
-        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ServiceToolStripMenuItem.Text = "Service"
-        '
-        'InstallAsAServiceToolStripMenuItem
-        '
-        Me.InstallAsAServiceToolStripMenuItem.Name = "InstallAsAServiceToolStripMenuItem"
-        Me.InstallAsAServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.InstallAsAServiceToolStripMenuItem.Text = "Install as a service"
-        '
-        'UninstallServiceToolStripMenuItem
-        '
-        Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
-        Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
         '
         'frmMain
         '
@@ -581,7 +560,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Qbundle v1.3 | Burstcoin Wallet v1.3.6cg (Beta 1)"
+        Me.Text = "Qbundle v1.3 | Burstcoin Wallet v1.3.6cg (Beta 3)"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
@@ -629,10 +608,8 @@ Partial Class frmMain
     Friend WithEvents ChangeDatabaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
     Friend WithEvents ToolsToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ConfigureWindowsFirewallToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DeveloperToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblUpdates As Label
-    Friend WithEvents ViewConsolesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents lblBlockInfo As ToolStripStatusLabel
     Friend WithEvents WalletToolStripMenuItem As ToolStripMenuItem
@@ -647,9 +624,6 @@ Partial Class frmMain
     Friend WithEvents AccountMangerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AddAccountToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuLoginAccount As ToolStripMenuItem
-    Friend WithEvents Account1ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Account2ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Account3ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PlotterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MinerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetRewardassignmentToolStripMenuItem As ToolStripMenuItem
@@ -662,4 +636,6 @@ Partial Class frmMain
     Friend WithEvents ServiceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InstallAsAServiceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UninstallServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ConfigureWindowsFirewallToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ViewConsoleToolStripMenuItem As ToolStripMenuItem
 End Class
