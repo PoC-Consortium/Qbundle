@@ -17,14 +17,16 @@ Low prio if ever:
 * Rename to Qbundle
 * Improved Exception monitoring
 * Improved Processhandling
-+ Wallet Layout added
-+ Account Manager with AES 256bit encryption
-+ Added CPU Instructionset detection
-+ Added support for XPlotter
-+ Added Change reward recipient
+
++ Full wallet mode.
++ Account Manager with AES 256bit encryption.
++ Added CPU Instructionset detection.
++ Added support for XPlotter.
++ Added Change Reward Recipient.
 + Added Support for blagos miner.
 + Added Support to install as a service.
-* Other minor changes.
+
+
 
 V1.2
 + Getting started Wizard.

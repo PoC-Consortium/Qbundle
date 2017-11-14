@@ -331,9 +331,7 @@
         QB.Generic.WriteWalletConfig()
         If rYes.Checked Then
             frmImport.Show()
-
         End If
-
         Me.Close()
     End Sub
 End Class

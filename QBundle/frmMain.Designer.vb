@@ -43,8 +43,7 @@ Partial Class frmMain
         Me.AddAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLoginAccount = New System.Windows.Forms.ToolStripMenuItem()
         Me.WalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StartWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StopWalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsStartStop = New System.Windows.Forms.ToolStripMenuItem()
         Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -175,7 +174,7 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem, Me.AccountMangerToolStripMenuItem, Me.WalletToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.AboutToolStripMenuItem2})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(497, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(504, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -249,22 +248,16 @@ Partial Class frmMain
         '
         'WalletToolStripMenuItem
         '
-        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartWalletToolStripMenuItem, Me.StopWalletToolStripMenuItem, Me.ServiceToolStripMenuItem})
+        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsStartStop, Me.ServiceToolStripMenuItem})
         Me.WalletToolStripMenuItem.Name = "WalletToolStripMenuItem"
         Me.WalletToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.WalletToolStripMenuItem.Text = "Wallet"
         '
-        'StartWalletToolStripMenuItem
+        'tsStartStop
         '
-        Me.StartWalletToolStripMenuItem.Name = "StartWalletToolStripMenuItem"
-        Me.StartWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.StartWalletToolStripMenuItem.Text = "Start Wallet"
-        '
-        'StopWalletToolStripMenuItem
-        '
-        Me.StopWalletToolStripMenuItem.Name = "StopWalletToolStripMenuItem"
-        Me.StopWalletToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.StopWalletToolStripMenuItem.Text = "Stop Wallet"
+        Me.tsStartStop.Name = "tsStartStop"
+        Me.tsStartStop.Size = New System.Drawing.Size(152, 22)
+        Me.tsStartStop.Text = "Start Wallet"
         '
         'ServiceToolStripMenuItem
         '
@@ -325,20 +318,20 @@ Partial Class frmMain
         'PlotterToolStripMenuItem
         '
         Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
-        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.PlotterToolStripMenuItem.Text = "Plotter"
         '
         'MinerToolStripMenuItem
         '
         Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
-        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'SetRewardassignmentToolStripMenuItem
         '
         Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
-        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
-        Me.SetRewardassignmentToolStripMenuItem.Text = "Set rewardassignment"
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Text = "Set Reward Recipient"
         '
         'WindowToolStripMenuItem
         '
@@ -433,20 +426,22 @@ Partial Class frmMain
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4, Me.lblBlockDate, Me.lblSplitterWallet, Me.lblWalletIS, Me.lblWalletStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 148)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(497, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(504, 22)
         Me.StatusStrip1.TabIndex = 5
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripStatusLabel1
         '
+        Me.ToolStripStatusLabel1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(112, 17)
-        Me.ToolStripStatusLabel1.Text = "Wallet block height:"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(75, 17)
+        Me.ToolStripStatusLabel1.Text = "Block height:"
         '
         'lblBlockInfo
         '
+        Me.lblBlockInfo.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBlockInfo.Name = "lblBlockInfo"
-        Me.lblBlockInfo.Size = New System.Drawing.Size(12, 17)
+        Me.lblBlockInfo.Size = New System.Drawing.Size(11, 17)
         Me.lblBlockInfo.Text = "-"
         '
         'ToolStripStatusLabel3
@@ -457,14 +452,16 @@ Partial Class frmMain
         '
         'ToolStripStatusLabel4
         '
+        Me.ToolStripStatusLabel4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
         Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(63, 17)
-        Me.ToolStripStatusLabel4.Text = "Last block:"
+        Me.ToolStripStatusLabel4.Text = "Block time:"
         '
         'lblBlockDate
         '
+        Me.lblBlockDate.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBlockDate.Name = "lblBlockDate"
-        Me.lblBlockDate.Size = New System.Drawing.Size(12, 17)
+        Me.lblBlockDate.Size = New System.Drawing.Size(11, 17)
         Me.lblBlockDate.Text = "-"
         '
         'lblSplitterWallet
@@ -475,12 +472,14 @@ Partial Class frmMain
         '
         'lblWalletIS
         '
+        Me.lblWalletIS.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWalletIS.Name = "lblWalletIS"
         Me.lblWalletIS.Size = New System.Drawing.Size(54, 17)
         Me.lblWalletIS.Text = "Wallet is:"
         '
         'lblWalletStatus
         '
+        Me.lblWalletStatus.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWalletStatus.Name = "lblWalletStatus"
         Me.lblWalletStatus.Size = New System.Drawing.Size(51, 17)
         Me.lblWalletStatus.Text = "Stopped"
@@ -531,7 +530,7 @@ Partial Class frmMain
         Me.pnlAIO.Controls.Add(Me.wb1)
         Me.pnlAIO.Location = New System.Drawing.Point(2, 25)
         Me.pnlAIO.Name = "pnlAIO"
-        Me.pnlAIO.Size = New System.Drawing.Size(495, 120)
+        Me.pnlAIO.Size = New System.Drawing.Size(502, 120)
         Me.pnlAIO.TabIndex = 10
         '
         'wb1
@@ -541,7 +540,7 @@ Partial Class frmMain
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wb1.Name = "wb1"
         Me.wb1.ScriptErrorsSuppressed = True
-        Me.wb1.Size = New System.Drawing.Size(495, 120)
+        Me.wb1.Size = New System.Drawing.Size(502, 120)
         Me.wb1.TabIndex = 0
         '
         'frmMain
@@ -549,7 +548,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(497, 170)
+        Me.ClientSize = New System.Drawing.Size(504, 170)
         Me.Controls.Add(Me.pnlLauncher)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -560,7 +559,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Qbundle v1.3 | Burstcoin Wallet v1.3.6cg (Beta 3)"
+        Me.Text = "Qbundle v1.3 | Burstcoin Wallet v1.3.6cg (Beta 4)"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
@@ -613,8 +612,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents lblBlockInfo As ToolStripStatusLabel
     Friend WithEvents WalletToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StartWalletToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StopWalletToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsStartStop As ToolStripMenuItem
     Friend WithEvents WindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SwitchToAIOStyleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SwitchToLauncherStyleToolStripMenuItem As ToolStripMenuItem

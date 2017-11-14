@@ -41,7 +41,7 @@
             frmFirstTime.ShowDialog()
         End If
         If Q.settings.FirstRun Then
-            End
+            End 'we have canceled firstrun screen
         End If
 
         If Q.settings.CheckForUpdates Then
@@ -76,7 +76,7 @@
         AddHandler Q.Service.Update, AddressOf ProcEvents
 
         SetLoginMenu()
-        StopWalletToolStripMenuItem.Enabled = False
+
         Running = Q.Service.IsServiceRunning
         If Running Then ProcEvents(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
         If Q.settings.QBMode = 0 Then
@@ -242,30 +242,63 @@
         End If
 
         If AppId = QGlobal.AppNames.BRS Then
-            StopAPIFetch()
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
-
         End If
         If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
             If AppId = QGlobal.AppNames.MariaPortable Then
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
-                btnStartStop.Text = "Start Wallet"
-                btnStartStop.Enabled = True
-                Running = False
+                UpdateUIState(QGlobal.ProcOp.Stopped)
             End If
         Else
-            btnStartStop.Text = "Start Wallet"
-            btnStartStop.Enabled = True
-            Running = False
-            StartWalletToolStripMenuItem.Enabled = True
-            StopWalletToolStripMenuItem.Enabled = False
-            lblWalletStatus.Text = "Stopped"
+            UpdateUIState(QGlobal.ProcOp.Stopped)
         End If
 
 
     End Sub
+
+    Private Sub UpdateUIState(ByVal State As Integer)
+
+        Select Case State
+            Case QGlobal.ProcOp.Stopped
+                Running = False
+
+                btnStartStop.Text = "Start wallet"
+                btnStartStop.Enabled = True
+
+                tsStartStop.Enabled = True
+                tsStartStop.Text = "Start wallet"
+
+                lblWalletStatus.Text = "Stopped"
+
+                lblGotoWallet.Visible = False
+
+            Case QGlobal.ProcOp.FoundSignal ' Running
+
+                btnStartStop.Text = "Stop wallet"
+                btnStartStop.Enabled = True
+
+                tsStartStop.Enabled = True
+                tsStartStop.Text = "Stop wallet"
+
+                lblWalletStatus.Text = "Stopped"
+
+                lblNrsStatus.Text = "Running"
+                lblNrsStatus.ForeColor = Color.DarkGreen
+                lblWalletStatus.Text = "Running"
+                Running = True
+                lblGotoWallet.Visible = True
+
+
+
+
+        End Select
+
+
+    End Sub
+
+
     Private Sub ProcEvents(ByVal AppId As Integer, ByVal Operation As Integer, ByVal data As String)
         If Me.InvokeRequired Then
             Dim d As New DUpdate(AddressOf ProcEvents)
@@ -275,17 +308,16 @@
         'threadsafe here
         Select Case Operation
             Case QGlobal.ProcOp.Stopped  'Stoped
-                If AppId = QGlobal.AppNames.BRS Then
-                    LblDbStatus.Text = "Stopped"
-                    LblDbStatus.ForeColor = Color.Red
-                    lblWalletStatus.Text = "Stopped"
-                    StopAPIFetch()
-                End If
-                If AppId = QGlobal.AppNames.MariaPortable Then
-                    lblNrsStatus.Text = "Stopped"
-                    lblNrsStatus.ForeColor = Color.Red
-                    lblWalletStatus.Text = "Stopped"
-                End If
+                '   If AppId = QGlobal.AppNames.BRS Then
+                '   LblDbStatus.Text = "Stopped"
+                '   LblDbStatus.ForeColor = Color.Red
+                '   lblWalletStatus.Text = "Stopped"
+                '   End If
+                '   If AppId = QGlobal.AppNames.MariaPortable Then
+                '   lblNrsStatus.Text = "Stopped"
+                '   lblNrsStatus.ForeColor = Color.Red
+                '   lblWalletStatus.Text = "Stopped"
+             '   End If
             Case QGlobal.ProcOp.FoundSignal
                 If AppId = QGlobal.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Running"
@@ -293,13 +325,10 @@
 
                 End If
                 If AppId = QGlobal.AppNames.BRS Then
-                    lblNrsStatus.Text = "Running"
-                    lblNrsStatus.ForeColor = Color.DarkGreen
-                    lblWalletStatus.Text = "Running"
-                    btnStartStop.Text = "Stop Wallet"
-                    Running = True
-                    btnStartStop.Enabled = True
-                    lblGotoWallet.Visible = True
+
+                    UpdateUIState(QGlobal.ProcOp.FoundSignal)
+
+
                     StartAPIFetch()
                     Dim s() As String = Split(Q.settings.ListenIf, ";")
                     Dim url As String = Nothing
@@ -315,11 +344,12 @@
                     LblDbStatus.Text = "Stopping"
                     LblDbStatus.ForeColor = Color.DarkOrange
                 End If
+
                 If AppId = QGlobal.AppNames.BRS Then
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
                     lblWalletStatus.Text = "Stopping"
-                    StopAPIFetch()
+
                 End If
             Case QGlobal.ProcOp.ConsoleOut
                 If AppId = QGlobal.AppNames.MariaPortable Then
@@ -368,7 +398,7 @@
             Me.Invoke(d, New Object() {AppId, Data})
             Return
         End If
-        MsgBox(Data)
+
         If AppId = QGlobal.AppNames.BRS Then
             lblNrsStatus.Text = "Stopped"
             lblNrsStatus.ForeColor = Color.Red
@@ -378,14 +408,10 @@
             If AppId = QGlobal.AppNames.MariaPortable Then
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
-                btnStartStop.Text = "Start Wallet"
-                btnStartStop.Enabled = True
-                Running = False
+                UpdateUIState(QGlobal.ProcOp.Stopped)
             End If
         Else
-            btnStartStop.Text = "Start Wallet"
-            btnStartStop.Enabled = True
-            Running = False
+            UpdateUIState(QGlobal.ProcOp.Stopped)
         End If
 
     End Sub
@@ -394,8 +420,6 @@
         QB.Generic.WriteWalletConfig()
         If Q.Service.IsInstalled Then
             Q.Service.StartService()
-            btnStartStop.Enabled = False
-            btnStartStop.Text = "Starting"
         Else
             If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
                 Dim pset(1) As clsProcessHandler.pSettings
@@ -436,26 +460,23 @@
                 Pset.WorkingDirectory = QGlobal.BaseDir
                 Q.ProcHandler.StartProcess(Pset)
             End If
-            btnStartStop.Enabled = False
-            btnStartStop.Text = "Starting"
+
         End If
+
+        'Update buttons and gui
         Running = True
-        StartWalletToolStripMenuItem.Enabled = False
-        StopWalletToolStripMenuItem.Enabled = True
+        tsStartStop.Enabled = False
+        btnStartStop.Enabled = False
+        btnStartStop.Text = "Starting"
+
 
     End Sub
     Public Sub StopWallet()
-        lblGotoWallet.Visible = False
 
         StopAPIFetch()
-
         If Q.Service.IsInstalled Then
             Q.Service.StopService()
-            btnStartStop.Text = "Stopping"
-            btnStartStop.Enabled = False
         Else
-            btnStartStop.Text = "Stopping"
-            btnStartStop.Enabled = False
             If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
                 Dim Pid(1) As Object
                 Pid(0) = QGlobal.AppNames.BRS
@@ -465,6 +486,14 @@
                 Q.ProcHandler.StopProcess(QGlobal.AppNames.BRS)
             End If
         End If
+
+        'Update buttons and gui
+        lblGotoWallet.Visible = False
+        btnStartStop.Text = "Stopping"
+        btnStartStop.Enabled = False
+        tsStartStop.Enabled = False
+
+
 
 
     End Sub
@@ -637,14 +666,11 @@
         SetMode(1)
     End Sub
 
-    Private Sub StartWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartWalletToolStripMenuItem.Click
-        StartStop()
-
-    End Sub
-
-    Private Sub StopWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopWalletToolStripMenuItem.Click
+    Private Sub StartWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsStartStop.Click
         StartStop()
     End Sub
+
+
 
     Private Sub AddAccountToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAccountToolStripMenuItem.Click
         frmAccounts.Show()

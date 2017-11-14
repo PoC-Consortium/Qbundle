@@ -64,7 +64,7 @@ Partial Class frmSetrewardassignment
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(8, 168)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(381, 52)
+        Me.Label5.Size = New System.Drawing.Size(368, 52)
         Me.Label5.TabIndex = 33
         Me.Label5.Text = resources.GetString("Label5.Text")
         '
@@ -74,7 +74,7 @@ Partial Class frmSetrewardassignment
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(132, 30)
         Me.btnSend.TabIndex = 31
-        Me.btnSend.Text = "Set reward assignment"
+        Me.btnSend.Text = "Set Reward Recipient"
         Me.btnSend.UseVisualStyleBackColor = True
         '
         'Label2
@@ -100,9 +100,9 @@ Partial Class frmSetrewardassignment
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(13, 73)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(210, 13)
+        Me.Label1.Size = New System.Drawing.Size(304, 13)
         Me.Label1.TabIndex = 26
-        Me.Label1.Text = "Pool account or your account if solo mining"
+        Me.Label1.Text = "Pool account or your account if solo mining (Reward Recipient)"
         '
         'txtPool
         '
@@ -169,7 +169,7 @@ Partial Class frmSetrewardassignment
         Me.MaximizeBox = False
         Me.Name = "frmSetrewardassignment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Set rewardassignment"
+        Me.Text = "Set Reward Recipient"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)

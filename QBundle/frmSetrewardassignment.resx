@@ -119,8 +119,8 @@
   </resheader>
   <data name="Label5.Text" xml:space="preserve">
     <value>Information:
-When setting reward assignment you send the account passphrase in cleartext.
-After setting reward assignment you have to wait 4 blocks. About 16 minutes.
+When setting reward recipient you send the account passphrase in cleartext.
+After setting reward recipient you have to wait 4 blocks. About 16 minutes.
 This will cost 1 burst. All online wallets uses https.</value>
   </data>
   <metadata name="cmlAccounts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

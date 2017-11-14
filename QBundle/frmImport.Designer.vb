@@ -258,7 +258,7 @@ Partial Class frmImport
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(489, 396)
+        Me.ClientSize = New System.Drawing.Size(487, 397)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pb1)
         Me.Controls.Add(Me.Label6)
@@ -267,6 +267,7 @@ Partial Class frmImport
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "frmImport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import database"
