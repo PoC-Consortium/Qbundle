@@ -505,7 +505,7 @@
                 Else 'coppy to clipboard
                     MsgBox("Your passphrase is copied to clipoard. And will be erased after 30 seconds.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Clipboard")
                     My.Computer.Clipboard.SetText(Pass)
-                    PasswordTimer.Start()
+                    PasswordTimer.Interval = 30000
                     PasswordTimer.Enabled = True
                 End If
             Else
@@ -622,8 +622,6 @@
                 lblBlockDate.ForeColor = Color.DarkGreen
             End If
 
-
-
         Catch ex As Exception
 
         End Try
@@ -704,6 +702,8 @@
     Private Sub ViewConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewConsoleToolStripMenuItem.Click
         frmConsole.Show()
     End Sub
+
+
 
 
 #End Region
