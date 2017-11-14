@@ -25,7 +25,7 @@
     Private _AlwaysAdmin As Boolean
     Private _Repo As String
     Private _QBMode As Integer
-
+    Private _Debug As Boolean
     'Plotting And Mining
     Private _Plots As String
 
@@ -193,6 +193,14 @@
             _QBMode = value
         End Set
     End Property
+    Public Property DebugMode() As Boolean
+        Get
+            Return _Debug
+        End Get
+        Set(ByVal value As Boolean)
+            _Debug = value
+        End Set
+    End Property
 
     'Plotting And Mining
     Public Property Plots() As String
@@ -229,6 +237,7 @@
         _AlwaysAdmin = False
         _Repo = "http://files.getburst.net;http://files2.getburst.net"
         _QBMode = 1 '0 = AIO 1 = Launcher
+        _Debug = False
     End Sub
 
 
@@ -245,6 +254,11 @@
                     End Try
                 Next
             End If
+        Catch ex As Exception
+
+        End Try
+        Try
+            If _Debug = True Then Generic.DebugMe = True
         Catch ex As Exception
 
         End Try

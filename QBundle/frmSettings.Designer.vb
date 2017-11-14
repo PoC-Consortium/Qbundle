@@ -94,6 +94,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.chkDebug = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -788,13 +789,14 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkDebug)
         Me.Panel2.Controls.Add(Me.chkAlwaysAdmin)
         Me.Panel2.Controls.Add(Me.Label10)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.chkCheckForUpdates)
         Me.Panel2.Location = New System.Drawing.Point(24, 44)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(699, 106)
+        Me.Panel2.Size = New System.Drawing.Size(699, 133)
         Me.Panel2.TabIndex = 10
         '
         'chkAlwaysAdmin
@@ -849,6 +851,16 @@ Partial Class frmSettings
         Me.Label1.Size = New System.Drawing.Size(181, 25)
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
+        '
+        'chkDebug
+        '
+        Me.chkDebug.AutoSize = True
+        Me.chkDebug.Location = New System.Drawing.Point(12, 95)
+        Me.chkDebug.Name = "chkDebug"
+        Me.chkDebug.Size = New System.Drawing.Size(222, 17)
+        Me.chkDebug.TabIndex = 5
+        Me.chkDebug.Text = "Debug mode. (save Qbundle errors to file)"
+        Me.chkDebug.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -960,4 +972,5 @@ Partial Class frmSettings
     Friend WithEvents Label34 As Label
     Friend WithEvents chkAlwaysAdmin As CheckBox
     Friend WithEvents chkWalletException As CheckBox
+    Friend WithEvents chkDebug As CheckBox
 End Class

@@ -597,11 +597,9 @@
                     Exit For
                 End If
             Next
-
-
             APIResult(Height, TimeStamp)
         Catch ex As Exception
-
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
 
@@ -623,7 +621,7 @@
             End If
 
         Catch ex As Exception
-
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
 
 
