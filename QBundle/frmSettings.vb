@@ -126,8 +126,13 @@ Public Class frmSettings
         Q.settings.DbPass = txtDbPass.Text
 
         Q.settings.JavaType = JavaType
+        Q.settings.DebugMode = chkDebug.Checked
         Q.settings.SaveSettings()
-
+        If Q.settings.DebugMode Then
+            Generic.DebugMe = True
+        Else
+            Generic.DebugMe = False
+        End If
         'ok lets fix firewall if its intended to be like that
         Me.Close()
 
@@ -147,6 +152,7 @@ Public Class frmSettings
 
         chkCheckForUpdates.Checked = Q.settings.CheckForUpdates
         chkAlwaysAdmin.Checked = Q.settings.AlwaysAdmin
+        chkDebug.Checked = Q.settings.DebugMode
         chkWalletException.Checked = Q.settings.WalletException
 
         chkAutoIP.Checked = Q.settings.CheckForUpdates

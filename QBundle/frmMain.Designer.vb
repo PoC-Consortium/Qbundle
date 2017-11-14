@@ -369,13 +369,13 @@ Partial Class frmMain
         'ContributorsToolStripMenuItem
         '
         Me.ContributorsToolStripMenuItem.Name = "ContributorsToolStripMenuItem"
-        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.ContributorsToolStripMenuItem.Text = "Contributors"
         '
         'DeveloperToolStripMenuItem
         '
         Me.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem"
-        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.DeveloperToolStripMenuItem.Text = "Developer"
         '
         'FileToolStripMenuItem
