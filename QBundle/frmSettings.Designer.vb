@@ -804,7 +804,7 @@ Partial Class frmSettings
         Me.chkAlwaysAdmin.Name = "chkAlwaysAdmin"
         Me.chkAlwaysAdmin.Size = New System.Drawing.Size(290, 17)
         Me.chkAlwaysAdmin.TabIndex = 4
-        Me.chkAlwaysAdmin.Text = "Always start launcher to run with administrator privileges."
+        Me.chkAlwaysAdmin.Text = "Always start Qbundle to run with administrator privileges."
         Me.chkAlwaysAdmin.UseVisualStyleBackColor = True
         '
         'Label10

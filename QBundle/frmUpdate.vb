@@ -24,7 +24,7 @@
             End If
         End If
         If Q.App.ShouldUpdate(QGlobal.AppNames.Launcher) Then
-            If MsgBox("Burst wallet launcher will automatically restart after update." & vbCrLf & " Do you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+            If MsgBox("Qbundle will automatically restart after update." & vbCrLf & " Do you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
                 Exit Sub
             End If
         End If

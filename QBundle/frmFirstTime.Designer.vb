@@ -245,7 +245,7 @@ Partial Class frmFirstTime
         Me.lblPMariaDesc.Name = "lblPMariaDesc"
         Me.lblPMariaDesc.Size = New System.Drawing.Size(292, 26)
         Me.lblPMariaDesc.TabIndex = 3
-        Me.lblPMariaDesc.Text = "MariaDB is used for more experienced users." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Wallet launcher will download, setup" &
+        Me.lblPMariaDesc.Text = "MariaDB is used for more experienced users." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle will download, setup" &
     " and control this for you."
         '
         'lblPMariaHeader
@@ -340,7 +340,7 @@ Partial Class frmFirstTime
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(185, 19)
         Me.Label7.TabIndex = 8
-        Me.Label7.Text = "Burst Wallet Launcher"
+        Me.Label7.Text = "Qbundle"
         '
         'Label8
         '

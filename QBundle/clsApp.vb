@@ -500,7 +500,7 @@ Public Class clsApp
         'Used when AppId needs resolves to human readable names
         Select Case AppId
             Case QGlobal.AppNames.BRS
-                Return "BRS"
+                Return "Wallet"
             Case QGlobal.AppNames.JavaInstalled
                 Return "Java"
             Case QGlobal.AppNames.JavaPortable

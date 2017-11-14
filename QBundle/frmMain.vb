@@ -26,7 +26,7 @@
         LastException = Now 'for brs exception monitoring
 
         If Not QB.Generic.CheckWritePermission Then
-            MsgBox("Burst Wallet launcher do not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
+            MsgBox("Qbundle do not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
             End
         End If
 
@@ -43,8 +43,6 @@
         If Q.settings.FirstRun Then
             End
         End If
-
-
 
         If Q.settings.CheckForUpdates Then
             Q.App.StartUpdateNotifications()

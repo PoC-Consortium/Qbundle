@@ -41,11 +41,14 @@ Friend Class Generic
                             IO.File.Delete(QGlobal.BaseDir & "\Settings.ini")
                             Q.settings.SaveSettings()
                         End If
+
+
+
                     Catch ex As Exception
                         If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
                     End Try
 
-
+                Case 12 'from 12-13
 
 
             End Select
@@ -405,7 +408,7 @@ Friend Class Generic
         For Each p As ManagementObject In searcher.[Get]()
             cmdline = p("CommandLine")
             If cmdline.ToLower.Contains("burst.jar") Then
-                Msg = "The launcher has detected that another burst wallet is running." & vbCrLf
+                Msg = "Qbundle has detected that another burst wallet is running." & vbCrLf
                 Msg &= "If the other wallet use the same setting as this one. it will not work." & vbCrLf
                 Msg &= "Would you like to stop the other wallet?" & vbCrLf & vbCrLf
                 Msg &= "Yes = Stop the other wallet and start this one." & vbCrLf
@@ -430,7 +433,7 @@ Friend Class Generic
             searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='mysqld.exe'")
             For Each p As ManagementObject In searcher.[Get]()
                 ' cmdline = p("CommandLine")
-                Msg = "The launcher has detected that another Mysql/MariaDB is running." & vbCrLf
+                Msg = "Qbundle has detected that another Mysql/MariaDB is running." & vbCrLf
                 Msg &= "If the other database use the same setting as this one. it will not work." & vbCrLf
                 Msg &= "Would you like to stop the other database?" & vbCrLf & vbCrLf
                 Msg &= "Yes = Stop the other database and start this one." & vbCrLf
@@ -494,7 +497,7 @@ Friend Class Generic
             p.StartInfo.Verb = "runas"
             p.Start()
         Catch ex As Exception
-            MsgBox("Failed to start burst wallet launcher as administrator.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Admin")
+            MsgBox("Failed to start Qbundle as administrator.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Admin")
         End Try
     End Sub
     Public Shared Function GetLatencyMs(ByRef hostNameOrAddress As String) As Long

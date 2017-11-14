@@ -79,7 +79,7 @@ Partial Class frmDeveloper
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(326, 23)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Burst Wallet Launcher Developer"
+        Me.Label2.Text = "Qbundle Developer"
         '
         'Label1
         '
@@ -88,7 +88,7 @@ Partial Class frmDeveloper
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(264, 13)
         Me.Label1.TabIndex = 4
-        Me.Label1.Text = "The launcher and service component is developed by:"
+        Me.Label1.Text = "Qbundle and service component is developed by:"
         '
         'Label3
         '

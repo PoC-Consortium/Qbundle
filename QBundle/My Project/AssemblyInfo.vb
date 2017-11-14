@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Burst Wallet Launcher")>
-<Assembly: AssemblyDescription("Launcher for the burstcoin NRS wallet")>
+<Assembly: AssemblyTitle("Qbundle")>
+<Assembly: AssemblyDescription("Frontend for Burstcoin Java wallet")>
 <Assembly: AssemblyCompany("Quibus")>
-<Assembly: AssemblyProduct("Burst Wallet Launcher")>
+<Assembly: AssemblyProduct("Qbundle")>
 <Assembly: AssemblyCopyright("Copyright ©  2017")>
 <Assembly: AssemblyTrademark("Quibus")>
 
