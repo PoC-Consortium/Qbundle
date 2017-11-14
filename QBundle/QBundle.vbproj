@@ -140,7 +140,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsAccounts.vb" />
     <Compile Include="clsApp.vb" />
     <Compile Include="clsHttp.vb" />

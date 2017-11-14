@@ -581,7 +581,7 @@
             Else
                 url = "http://" & s(0) & ":" & s(1)
             End If
-            Dim Result() As String = Split(http.GetUrl(url & "/burst?requestType=getBlocks&lastIndex=1"), ",")
+            Dim Result() As String = Split(http.GetUrl(url & "/burst?requestType=getBlock&lastIndex=1"), ",")
             Dim Height As String = ""
             Dim TimeStamp As String = ""
             For Each Line As String In Result
@@ -609,7 +609,7 @@
                 Return
             End If
             lblBlockInfo.Text = Data
-            Dim BlockDate As Date = New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp))
+            Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
                 lblBlockDate.Text = BlockDate.ToString & " (Synchronizing blockchain)"
                 lblBlockDate.ForeColor = Color.DarkRed
