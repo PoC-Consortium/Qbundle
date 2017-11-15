@@ -100,6 +100,7 @@
         If QB.Generic.DebugMe Then
             Me.Text = Me.Text & " (DebugMode)"
         End If
+        ' Me.DialogResult = DialogResult.No
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
@@ -330,8 +331,11 @@
 
         QB.Generic.WriteWalletConfig()
         If rYes.Checked Then
-            frmImport.Show()
+            Me.DialogResult = DialogResult.Yes
+        Else
+            Me.DialogResult = DialogResult.No
+            'frmImport.Show()
         End If
-        Me.Close()
+        '  Me.Close()
     End Sub
 End Class

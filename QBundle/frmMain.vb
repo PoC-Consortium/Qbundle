@@ -37,8 +37,9 @@
         Next
 
         QB.Generic.CheckUpgrade() 'if there is any upgradescenarios
+        Dim StartImport As DialogResult = DialogResult.No
         If Q.settings.FirstRun Then
-            frmFirstTime.ShowDialog()
+            StartImport = frmFirstTime.ShowDialog()
         End If
         If Q.settings.FirstRun Then
             End 'we have canceled firstrun screen
@@ -79,11 +80,13 @@
 
         Running = Q.Service.IsServiceRunning
         If Running Then ProcEvents(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
-        If Q.settings.QBMode = 0 Then
+        If Q.settings.QBMode = 0 And StartImport = DialogResult.No Then
             If Running = False Then StartWallet()
         End If
         SetMode(Q.settings.QBMode)
-
+        If StartImport = DialogResult.Yes Then
+            frmImport.Show()
+        End If
 
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
