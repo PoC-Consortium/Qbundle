@@ -14,18 +14,19 @@ Environment check (check enough ram and disk space)
 Low prio if ever:
 
 ~V1.3
-* Rename to Qbundle
-* Improved Exception monitoring
-* Improved Processhandling
-
 + Full wallet mode.
 + Account Manager with AES 256bit encryption.
 + Added CPU Instructionset detection.
 + Added support for XPlotter.
-+ Added Change Reward Recipient.
-+ Added Support for blagos miner.
-+ Added Support to install as a service.
-+ Setting to allow usage of remote wallet.
++ Added Reward Recipient handling.
++ Added Support for Blago's miner.
++ Added Support to install wallet as a windows service.
++ Setting to allow usage of remote wallet for verifications.
++ View to see if wallet is synced.
+
+* Changed name to Qbundle
+* Improved Exception monitoring
+* Improved Processhandling
 
 
 V1.2

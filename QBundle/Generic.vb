@@ -49,7 +49,7 @@ Friend Class Generic
                     End Try
 
                 Case 12 'from 12-13
-
+                    Q.settings.UseOnlineWallet = Q.settings.CheckForUpdates
 
             End Select
             OldVer += 1

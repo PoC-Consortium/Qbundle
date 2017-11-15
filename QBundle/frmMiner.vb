@@ -159,8 +159,6 @@
                 lstPlots.Items.Add(ofd.FileName)
                 Q.settings.Plots &= ofd.FileName & "|"
                 Q.settings.SaveSettings()
-
-
                 If lstPlots.Items.Count = 1 Then
                     If frmMain.Running And frmMain.FullySynced Then
                         CheckRewardAssignment(0)
@@ -168,8 +166,6 @@
                         CheckRewardAssignment(1)
                     End If
                 End If
-
-
             End If
         End If
     End Sub
