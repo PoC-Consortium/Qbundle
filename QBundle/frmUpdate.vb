@@ -111,13 +111,19 @@
             Dim wdir As String = Application.StartupPath
             If Not wdir.EndsWith("\") Then wdir &= "\"
             If IO.File.Exists(wdir & "Restarter.exe") Then
-                Dim p As Process = New Process
-                p.StartInfo.WorkingDirectory = wdir
-                p.StartInfo.Arguments = "BWLUpdate" & " " & IO.Path.GetFileName(Application.ExecutablePath)
-                p.StartInfo.UseShellExecute = True
-                p.StartInfo.FileName = wdir & "Restarter.exe"
-                p.Start()
-                End
+                Try
+                    Dim p As Process = New Process
+                    p.StartInfo.WorkingDirectory = wdir
+                    p.StartInfo.Arguments = "BWLUpdate" & " " & IO.Path.GetFileName(Application.ExecutablePath)
+                    p.StartInfo.UseShellExecute = True
+                    p.StartInfo.FileName = wdir & "Restarter.exe"
+                    p.Start()
+                    Threading.Thread.Sleep(500)
+                    End
+                Catch ex As Exception
+                    MsgBox("Restartprocess went wrong")
+                    If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                End Try
             End If
         End If
         frmMain.lblUpdates.Visible = False
