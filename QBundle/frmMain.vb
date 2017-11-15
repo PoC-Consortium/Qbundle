@@ -418,7 +418,7 @@
         End If
 
     End Sub
-    Private Sub StartWallet()
+    Friend Sub StartWallet()
         If Not QB.Generic.SanityCheck() Then Exit Sub
         QB.Generic.WriteWalletConfig()
         If Q.Service.IsInstalled Then
@@ -474,7 +474,7 @@
 
 
     End Sub
-    Public Sub StopWallet()
+    Friend Sub StopWallet()
 
         StopAPIFetch()
         If Q.Service.IsInstalled Then

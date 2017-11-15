@@ -44,6 +44,7 @@ Partial Class frmImport
         Me.pb1 = New System.Windows.Forms.ProgressBar()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnStart = New System.Windows.Forms.Button()
+        Me.chkStartWallet = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -133,6 +134,7 @@ Partial Class frmImport
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkStartWallet)
         Me.Panel2.Controls.Add(Me.btnBrowse)
         Me.Panel2.Controls.Add(Me.txtFile)
         Me.Panel2.Controls.Add(Me.txtUrl)
@@ -143,14 +145,14 @@ Partial Class frmImport
         Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Location = New System.Drawing.Point(8, 158)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(472, 195)
+        Me.Panel2.Size = New System.Drawing.Size(472, 220)
         Me.Panel2.TabIndex = 12
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(417, 161)
+        Me.btnBrowse.Location = New System.Drawing.Point(417, 160)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(33, 20)
+        Me.btnBrowse.Size = New System.Drawing.Size(33, 22)
         Me.btnBrowse.TabIndex = 13
         Me.btnBrowse.Text = "..."
         Me.btnBrowse.UseVisualStyleBackColor = True
@@ -222,7 +224,7 @@ Partial Class frmImport
         'lblStatus
         '
         Me.lblStatus.AutoSize = True
-        Me.lblStatus.Location = New System.Drawing.Point(43, 356)
+        Me.lblStatus.Location = New System.Drawing.Point(43, 381)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(24, 13)
         Me.lblStatus.TabIndex = 18
@@ -230,7 +232,7 @@ Partial Class frmImport
         '
         'pb1
         '
-        Me.pb1.Location = New System.Drawing.Point(8, 372)
+        Me.pb1.Location = New System.Drawing.Point(8, 397)
         Me.pb1.Name = "pb1"
         Me.pb1.Size = New System.Drawing.Size(368, 17)
         Me.pb1.TabIndex = 17
@@ -238,7 +240,7 @@ Partial Class frmImport
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(7, 356)
+        Me.Label6.Location = New System.Drawing.Point(7, 381)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(40, 13)
         Me.Label6.TabIndex = 16
@@ -246,19 +248,31 @@ Partial Class frmImport
         '
         'btnStart
         '
-        Me.btnStart.Location = New System.Drawing.Point(382, 360)
+        Me.btnStart.Location = New System.Drawing.Point(382, 385)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(98, 30)
         Me.btnStart.TabIndex = 15
         Me.btnStart.Text = "Start Import"
         Me.btnStart.UseVisualStyleBackColor = True
         '
+        'chkStartWallet
+        '
+        Me.chkStartWallet.AutoSize = True
+        Me.chkStartWallet.Checked = True
+        Me.chkStartWallet.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStartWallet.Location = New System.Drawing.Point(32, 191)
+        Me.chkStartWallet.Name = "chkStartWallet"
+        Me.chkStartWallet.Size = New System.Drawing.Size(178, 17)
+        Me.chkStartWallet.TabIndex = 14
+        Me.chkStartWallet.Text = "Start wallet when import is done."
+        Me.chkStartWallet.UseVisualStyleBackColor = True
+        '
         'frmImport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(487, 397)
+        Me.ClientSize = New System.Drawing.Size(487, 422)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pb1)
         Me.Controls.Add(Me.Label6)
@@ -302,4 +316,5 @@ Partial Class frmImport
     Friend WithEvents pb1 As ProgressBar
     Friend WithEvents Label6 As Label
     Friend WithEvents btnStart As Button
+    Friend WithEvents chkStartWallet As CheckBox
 End Class

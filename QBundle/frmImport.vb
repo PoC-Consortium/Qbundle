@@ -237,6 +237,9 @@
             btnStart.Enabled = True
             pb1.Value = 100
             Running = False
+            If chkStartWallet.Checked = True Then
+                frmMain.StartWallet()
+            End If
         Else
             SetSelect(SelectedType)
             '            btnStart.Text = "Close"
