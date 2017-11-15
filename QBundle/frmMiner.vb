@@ -31,6 +31,22 @@
             rbSolo.Text = "Solo Mining (Local wallet is running but not fully syncronized)"
         End If
 
+        '/burst?requestType=getRewardRecipient&account=BURST-TTKX-6DD4-KGG9-22PS4
+        '{"rewardRecipient":"99818213238171197","requestProcessingTime":0}
+        'get reardrecipient
+
+        '/burst?requestType=getAccount&account=BURST-TTKX-6DD4-KGG9-22PS4
+        ' {"unconfirmedBalanceNQT""1473523894921","guaranteedBalanceNQT""1473523894921","effectiveBalanceNXT"1473523894921,"accountRS":"BURST-TTKX-6DD4-KGG9-22PS4","name":"<AccountName>","forgedBalanceNQT":"0","balanceNQT":"1473523894921","publicKey":"1234","requestProcessingTime":0,"account":"99818213238171197"}
+        'get account name
+
+
+
+        If rbSolo.Enabled = True Then
+
+        Else
+
+        End If
+
     End Sub
     Private Sub SelectPoolID(sender As Object, e As EventArgs)
 

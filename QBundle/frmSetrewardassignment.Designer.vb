@@ -37,11 +37,13 @@ Partial Class frmSetrewardassignment
         Me.btnAccounts = New System.Windows.Forms.Button()
         Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cmlPools = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.btnSend)
         Me.GroupBox2.Controls.Add(Me.Label2)
@@ -70,7 +72,7 @@ Partial Class frmSetrewardassignment
         '
         'btnSend
         '
-        Me.btnSend.Location = New System.Drawing.Point(128, 228)
+        Me.btnSend.Location = New System.Drawing.Point(248, 227)
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(132, 30)
         Me.btnSend.TabIndex = 31
@@ -157,6 +159,15 @@ Partial Class frmSetrewardassignment
         Me.cmlPools.Name = "cmlPools"
         Me.cmlPools.Size = New System.Drawing.Size(61, 4)
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(11, 227)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(137, 30)
+        Me.Button1.TabIndex = 34
+        Me.Button1.Text = "Check reward recipient"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmSetrewardassignment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -189,4 +200,5 @@ Partial Class frmSetrewardassignment
     Friend WithEvents btnAccounts As Button
     Friend WithEvents cmlAccounts As ContextMenuStrip
     Friend WithEvents cmlPools As ContextMenuStrip
+    Friend WithEvents Button1 As Button
 End Class
