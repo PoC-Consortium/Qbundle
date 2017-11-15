@@ -92,7 +92,6 @@
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
             Case 0 ' AIO Mode
-
                 Me.FormBorderStyle = FormBorderStyle.Sizable
                 Me.MaximizeBox = True
                 Me.Width = 1024
@@ -106,8 +105,8 @@
                 lblWalletIS.Visible = True
                 lblSplitterWallet.Visible = True
                 lblWalletStatus.Visible = True
-
-
+                WalletModeToolStripMenuItem.Checked = True
+                LauncherModeToolStripMenuItem.Checked = False
             Case 1 ' Launcher Mode
                 Me.FormBorderStyle = FormBorderStyle.FixedDialog
                 Me.MaximizeBox = False
@@ -122,6 +121,8 @@
                 lblWalletIS.Visible = False
                 lblSplitterWallet.Visible = False
                 lblWalletStatus.Visible = False
+                WalletModeToolStripMenuItem.Checked = False
+                LauncherModeToolStripMenuItem.Checked = True
         End Select
 
 
@@ -657,17 +658,7 @@
 
     End Sub
 
-    Private Sub SwitchToAIOStyleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SwitchToAIOStyleToolStripMenuItem.Click
-        Q.settings.QBMode = 0
-        Q.settings.SaveSettings()
-        SetMode(0)
-    End Sub
 
-    Private Sub SwitchToLauncherStyleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SwitchToLauncherStyleToolStripMenuItem.Click
-        Q.settings.QBMode = 1
-        Q.settings.SaveSettings()
-        SetMode(1)
-    End Sub
 
     Private Sub StartWalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsStartStop.Click
         StartStop()
@@ -726,6 +717,14 @@
 
     Private Sub ViewConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewConsoleToolStripMenuItem.Click
         frmConsole.Show()
+    End Sub
+
+    Private Sub WalletModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WalletModeToolStripMenuItem.Click
+        SetMode(0)
+    End Sub
+
+    Private Sub LauncherModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LauncherModeToolStripMenuItem.Click
+        SetMode(1)
     End Sub
 
 
