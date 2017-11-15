@@ -25,6 +25,7 @@ Partial Class frmSetrewardassignment
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSetrewardassignment))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnSend = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -37,7 +38,6 @@ Partial Class frmSetrewardassignment
         Me.btnAccounts = New System.Windows.Forms.Button()
         Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cmlPools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,6 +60,15 @@ Partial Class frmSetrewardassignment
         Me.GroupBox2.TabIndex = 16
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Set reward assignment"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(11, 227)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(137, 30)
+        Me.Button1.TabIndex = 34
+        Me.Button1.Text = "Check reward recipient"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -158,15 +167,6 @@ Partial Class frmSetrewardassignment
         '
         Me.cmlPools.Name = "cmlPools"
         Me.cmlPools.Size = New System.Drawing.Size(61, 4)
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(11, 227)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(137, 30)
-        Me.Button1.TabIndex = 34
-        Me.Button1.Text = "Check reward recipient"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmSetrewardassignment
         '

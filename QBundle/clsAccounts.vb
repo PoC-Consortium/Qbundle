@@ -93,9 +93,9 @@ Public Class clsAccounts
         Next
         Return ""
     End Function
-    Public Function GetAccountRS(ByVal Name As String) As String
+    Public Function GetAccountRS(ByVal AccountID As String) As String
         For Each acc As Account In AccArray
-            If acc.AccountName = Name Then
+            If acc.AccountName = AccountID Then
                 Return acc.RSAddress
                 Exit For
             End If

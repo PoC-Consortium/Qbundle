@@ -31,23 +31,95 @@
             rbSolo.Text = "Solo Mining (Local wallet is running but not fully syncronized)"
         End If
 
-        '/burst?requestType=getRewardRecipient&account=BURST-TTKX-6DD4-KGG9-22PS4
-        '{"rewardRecipient":"99818213238171197","requestProcessingTime":0}
-        'get reardrecipient
-
-        '/burst?requestType=getAccount&account=BURST-TTKX-6DD4-KGG9-22PS4
-        ' {"unconfirmedBalanceNQT""1473523894921","guaranteedBalanceNQT""1473523894921","effectiveBalanceNXT"1473523894921,"accountRS":"BURST-TTKX-6DD4-KGG9-22PS4","name":"<AccountName>","forgedBalanceNQT":"0","balanceNQT":"1473523894921","publicKey":"1234","requestProcessingTime":0,"account":"99818213238171197"}
-        'get account name
-
-
-
-        If rbSolo.Enabled = True Then
-
-        Else
-
+        lblReward.Visible = False
+        If lstPlots.Items.Count > 0 Then
+            If frmMain.Running And frmMain.FullySynced Then
+                CheckRewardAssignment(0)
+            ElseIf Q.settings.UseOnlineWallet Then
+                CheckRewardAssignment(1)
+            End If
         End If
+    End Sub
+
+    Private Sub CheckRewardAssignment(ByVal WalletId As Integer)
+
+        'get accountid from plotfile
+
+        Try
+            Dim PlotAccount As String = GetAccountIdFromPlot(lstPlots.Items.Item(0))
+
+            Dim http As New clsHttp
+            Dim buffer() As String = Nothing
+            Dim AccountID As String = ""
+            Dim PoolRS As String = ""
+            Dim result() As String = Split(Replace(http.GetUrl(QGlobal.Wallets(WalletId).Address & "/burst?requestType=getRewardRecipient&account=" & PlotAccount), Chr(34), ""), ",")
+            If result(0).StartsWith("{rewardRecipient:") Then
+                AccountID = Mid(result(0), 18)
+            Else
+                Exit Sub
+            End If
+            'check if it solomining first
+            If AccountID = PlotAccount Then
+                Dim msg As String
+                msg = "Your reward recipient Is set to" & vbCrLf
+                msg &= "Account: " & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
+                msg &= "Only solomining available"
+                lblReward.Text = msg
+                lblReward.Visible = True
+                rbPool.Enabled = False
+                If rbSolo.Enabled = False Then
+                    btnStartMine.Enabled = False
+                Else
+                    rbSolo.Checked = True
+                    rbPool.Checked = False
+                End If
+            End If
+
+
+            For t As Integer = 0 To UBound(QGlobal.Pools)
+                If QGlobal.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
+                    Dim msg As String
+                    msg = "Your reward recipient Is set to" & vbCrLf
+                    msg &= "Account: " & QGlobal.Pools(t).BurstAddress & vbCrLf
+                    msg &= "Name: " & QGlobal.Pools(t).Name
+                    lblReward.Text = msg
+                    lblReward.Visible = True
+                    SelectPoolByAccountID(AccountID)
+                    Exit Sub
+                End If
+            Next
+
+            result = Split(Replace(http.GetUrl(QGlobal.Wallets(WalletId).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
+            If UBound(result) > 0 Then
+                For t As Integer = 0 To UBound(result)
+                    If result(t).StartsWith("name:") Then
+                        Dim msg As String
+                        msg = "Your reward recipient Is set to" & vbCrLf
+                        msg &= "Account: " & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
+                        msg &= "Name: " & Mid(result(t), 6)
+                        lblReward.Text = msg
+                        lblReward.Visible = True
+                        Exit Sub
+                    End If
+                Next
+            Else
+                Dim msg As String
+                msg = "Your reward recipient Is set to" & vbCrLf
+                msg &= "Account: " & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
+                lblReward.Text = msg
+                lblReward.Visible = True
+            End If
+
+        Catch ex As Exception
+            '   MsgBox("Unable to get reward recipient status with selected wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No response")
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+
+        End Try
+
 
     End Sub
+
     Private Sub SelectPoolID(sender As Object, e As EventArgs)
 
         For x As Integer = 0 To UBound(QGlobal.Pools)
@@ -64,6 +136,20 @@
         Next
 
     End Sub
+    Private Sub SelectPoolByAccountID(ByVal AccountID As String)
+        For x As Integer = 0 To UBound(QGlobal.Pools)
+            If AccountID = Q.Accounts.ConvertRSToId(QGlobal.Pools(x).BurstAddress) Then
+                txtMiningServer.Text = QGlobal.Pools(x).Address
+                nrMiningPort.Value = Val(QGlobal.Pools(x).Port)
+                txtUpdateServer.Text = QGlobal.Pools(x).Address
+                nrUpdatePort.Value = Val(QGlobal.Pools(x).Port)
+                txtInfoServer.Text = QGlobal.Pools(x).Address
+                nrInfoPort.Value = Val(QGlobal.Pools(x).Port)
+                txtDeadLine.Text = QGlobal.Pools(x).DeadLine
+                Exit For
+            End If
+        Next
+    End Sub
 
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
 
@@ -73,6 +159,17 @@
                 lstPlots.Items.Add(ofd.FileName)
                 Q.settings.Plots &= ofd.FileName & "|"
                 Q.settings.SaveSettings()
+
+
+                If lstPlots.Items.Count = 1 Then
+                    If frmMain.Running And frmMain.FullySynced Then
+                        CheckRewardAssignment(0)
+                    ElseIf Q.settings.UseOnlineWallet Then
+                        CheckRewardAssignment(1)
+                    End If
+                End If
+
+
             End If
         End If
     End Sub

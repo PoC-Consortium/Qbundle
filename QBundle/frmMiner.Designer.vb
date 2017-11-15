@@ -56,6 +56,7 @@ Partial Class frmMiner
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblReward = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
@@ -381,12 +382,24 @@ Partial Class frmMiner
         Me.Label11.Text = "Make sure you have set correct server " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "information or use a predefined pool." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Al" &
     "so, be sure to have set the correct" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Rewardrecipient for your account."
         '
+        'lblReward
+        '
+        Me.lblReward.AutoSize = True
+        Me.lblReward.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReward.Location = New System.Drawing.Point(430, 255)
+        Me.lblReward.Name = "lblReward"
+        Me.lblReward.Size = New System.Drawing.Size(195, 36)
+        Me.lblReward.TabIndex = 37
+        Me.lblReward.Text = "Your reward recipient is set to: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Account. BURST-RBXH-KT5K-NAQA-EEAD8" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name: Cry" &
+    "tpoguru pool" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
         'frmMiner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(652, 393)
+        Me.Controls.Add(Me.lblReward)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
@@ -444,4 +457,5 @@ Partial Class frmMiner
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
+    Friend WithEvents lblReward As Label
 End Class

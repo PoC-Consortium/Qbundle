@@ -156,4 +156,75 @@
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If txtAccount.Text.Length < 10 Then
+            MsgBox("You must fill in your account to be able to check the reward recipient status")
+            Exit Sub
+        End If
+
+        If cmbWallet.SelectedIndex = 0 Then
+            If Not frmMain.Running Then
+                MsgBox("Your local wallet is not running. Please select an online wallet", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Not running")
+                Exit Sub
+            ElseIf Not frmMain.FullySynced Then
+                MsgBox("Your local wallet is running but not fully synced. Please select an online wallet", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Not synced")
+                Exit Sub
+            End If
+        End If
+        Try
+
+
+            Dim http As New clsHttp
+            Dim buffer() As String = Nothing
+            Dim AccountID As String = ""
+            Dim PoolRS As String = ""
+            Dim result() As String = Split(Replace(http.GetUrl(QGlobal.Wallets(cmbWallet.SelectedIndex).Address & "/burst?requestType=getRewardRecipient&account=" & txtAccount.Text), Chr(34), ""), ",")
+            If result(0).StartsWith("{rewardRecipient:") Then
+                AccountID = Mid(result(0), 18)
+            Else
+                MsgBox("Unable to get reward recipient status with selected wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No response")
+                Exit Sub
+            End If
+
+
+            For t As Integer = 0 To UBound(QGlobal.Pools)
+                If QGlobal.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
+                    Dim msg As String
+                    msg = "Your current reward recipient is:" & vbCrLf
+                    msg &= "Burst address: " & QGlobal.Pools(t).BurstAddress & vbCrLf
+                    msg &= "Name: " & QGlobal.Pools(t).Name & vbCrLf
+                    MsgBox(msg, MsgBoxStyle.Information, "Reward recipient")
+                    Exit Sub
+                End If
+            Next
+
+            result = Split(Replace(http.GetUrl(QGlobal.Wallets(cmbWallet.SelectedIndex).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
+            If UBound(result) > 0 Then
+                For t As Integer = 0 To UBound(result)
+                    If result(t).StartsWith("name:") Then
+                        Dim msg As String
+                        msg = "Your current reward recipient is:" & vbCrLf
+                        msg &= "Burst address: BURST-" & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
+                        msg &= "Name: " & Mid(result(t), 6)
+                        MsgBox(msg, MsgBoxStyle.Information, "Reward recipient")
+                        Exit Sub
+                    End If
+                Next
+            Else
+                Dim msg As String
+                msg = "Your current reward recipient is:" & vbCrLf
+                msg &= "Burst address: " & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
+                MsgBox(msg, MsgBoxStyle.Information, "Reward recipient")
+            End If
+
+        Catch ex As Exception
+            MsgBox("Unable to get reward recipient status with selected wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No response")
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+
+        End Try
+
+
+    End Sub
 End Class

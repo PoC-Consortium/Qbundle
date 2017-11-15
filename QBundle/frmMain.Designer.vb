@@ -44,12 +44,13 @@ Partial Class frmMain
         Me.mnuLoginAccount = New System.Windows.Forms.ToolStripMenuItem()
         Me.WalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsStartStop = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WalletModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LauncherModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportDatabaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -85,7 +86,6 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -257,33 +257,14 @@ Partial Class frmMain
         'tsStartStop
         '
         Me.tsStartStop.Name = "tsStartStop"
-        Me.tsStartStop.Size = New System.Drawing.Size(152, 22)
+        Me.tsStartStop.Size = New System.Drawing.Size(134, 22)
         Me.tsStartStop.Text = "Start Wallet"
-        '
-        'ServiceToolStripMenuItem
-        '
-        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
-        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
-        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ServiceToolStripMenuItem.Text = "Service"
-        '
-        'InstallAsAServiceToolStripMenuItem
-        '
-        Me.InstallAsAServiceToolStripMenuItem.Name = "InstallAsAServiceToolStripMenuItem"
-        Me.InstallAsAServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.InstallAsAServiceToolStripMenuItem.Text = "Install as a service"
-        '
-        'UninstallServiceToolStripMenuItem
-        '
-        Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
-        Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
         '
         'ModeToolStripMenuItem
         '
         Me.ModeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WalletModeToolStripMenuItem, Me.LauncherModeToolStripMenuItem})
         Me.ModeToolStripMenuItem.Name = "ModeToolStripMenuItem"
-        Me.ModeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ModeToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.ModeToolStripMenuItem.Text = "Mode"
         '
         'WalletModeToolStripMenuItem
@@ -297,6 +278,30 @@ Partial Class frmMain
         Me.LauncherModeToolStripMenuItem.Name = "LauncherModeToolStripMenuItem"
         Me.LauncherModeToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.LauncherModeToolStripMenuItem.Text = "Launcher Mode"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(131, 6)
+        '
+        'ServiceToolStripMenuItem
+        '
+        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
+        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
+        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.ServiceToolStripMenuItem.Text = "Service"
+        '
+        'InstallAsAServiceToolStripMenuItem
+        '
+        Me.InstallAsAServiceToolStripMenuItem.Name = "InstallAsAServiceToolStripMenuItem"
+        Me.InstallAsAServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.InstallAsAServiceToolStripMenuItem.Text = "Install as a service"
+        '
+        'UninstallServiceToolStripMenuItem
+        '
+        Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
+        Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
         '
         'ToolsToolStripMenuItem
         '
@@ -338,20 +343,20 @@ Partial Class frmMain
         'PlotterToolStripMenuItem
         '
         Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
-        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.PlotterToolStripMenuItem.Text = "Plotter"
         '
         'MinerToolStripMenuItem
         '
         Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
-        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'SetRewardassignmentToolStripMenuItem
         '
         Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
-        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.SetRewardassignmentToolStripMenuItem.Text = "Set Reward Recipient"
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Text = "Reward Recipient"
         '
         'AboutToolStripMenuItem2
         '
@@ -363,13 +368,13 @@ Partial Class frmMain
         'ContributorsToolStripMenuItem
         '
         Me.ContributorsToolStripMenuItem.Name = "ContributorsToolStripMenuItem"
-        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.ContributorsToolStripMenuItem.Text = "Contributors"
         '
         'DeveloperToolStripMenuItem
         '
         Me.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem"
-        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.DeveloperToolStripMenuItem.Text = "Developer"
         '
         'FileToolStripMenuItem
@@ -543,11 +548,6 @@ Partial Class frmMain
         Me.wb1.ScriptErrorsSuppressed = True
         Me.wb1.Size = New System.Drawing.Size(502, 105)
         Me.wb1.TabIndex = 0
-        '
-        'ToolStripMenuItem4
-        '
-        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(149, 6)
         '
         'frmMain
         '
