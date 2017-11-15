@@ -89,12 +89,13 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkDebug = New System.Windows.Forms.CheckBox()
         Me.chkAlwaysAdmin = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkDebug = New System.Windows.Forms.CheckBox()
+        Me.chkOnlineWallets = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -789,6 +790,7 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkOnlineWallets)
         Me.Panel2.Controls.Add(Me.chkDebug)
         Me.Panel2.Controls.Add(Me.chkAlwaysAdmin)
         Me.Panel2.Controls.Add(Me.Label10)
@@ -799,12 +801,22 @@ Partial Class frmSettings
         Me.Panel2.Size = New System.Drawing.Size(699, 133)
         Me.Panel2.TabIndex = 10
         '
+        'chkDebug
+        '
+        Me.chkDebug.AutoSize = True
+        Me.chkDebug.Location = New System.Drawing.Point(12, 111)
+        Me.chkDebug.Name = "chkDebug"
+        Me.chkDebug.Size = New System.Drawing.Size(222, 17)
+        Me.chkDebug.TabIndex = 5
+        Me.chkDebug.Text = "Debug mode. (save Qbundle errors to file)"
+        Me.chkDebug.UseVisualStyleBackColor = True
+        '
         'chkAlwaysAdmin
         '
         Me.chkAlwaysAdmin.AutoSize = True
-        Me.chkAlwaysAdmin.Location = New System.Drawing.Point(12, 70)
+        Me.chkAlwaysAdmin.Location = New System.Drawing.Point(12, 90)
         Me.chkAlwaysAdmin.Name = "chkAlwaysAdmin"
-        Me.chkAlwaysAdmin.Size = New System.Drawing.Size(290, 17)
+        Me.chkAlwaysAdmin.Size = New System.Drawing.Size(289, 17)
         Me.chkAlwaysAdmin.TabIndex = 4
         Me.chkAlwaysAdmin.Text = "Always start Qbundle to run with administrator privileges."
         Me.chkAlwaysAdmin.UseVisualStyleBackColor = True
@@ -852,15 +864,16 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkDebug
+        'chkOnlineWallets
         '
-        Me.chkDebug.AutoSize = True
-        Me.chkDebug.Location = New System.Drawing.Point(12, 95)
-        Me.chkDebug.Name = "chkDebug"
-        Me.chkDebug.Size = New System.Drawing.Size(222, 17)
-        Me.chkDebug.TabIndex = 5
-        Me.chkDebug.Text = "Debug mode. (save Qbundle errors to file)"
-        Me.chkDebug.UseVisualStyleBackColor = True
+        Me.chkOnlineWallets.AutoSize = True
+        Me.chkOnlineWallets.Location = New System.Drawing.Point(12, 69)
+        Me.chkOnlineWallets.Name = "chkOnlineWallets"
+        Me.chkOnlineWallets.Size = New System.Drawing.Size(447, 17)
+        Me.chkOnlineWallets.TabIndex = 6
+        Me.chkOnlineWallets.Text = "Allow Qbundle to connect to remote wallets when local wallet is offline or not sy" &
+    "ncronized."
+        Me.chkOnlineWallets.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -973,4 +986,5 @@ Partial Class frmSettings
     Friend WithEvents chkAlwaysAdmin As CheckBox
     Friend WithEvents chkWalletException As CheckBox
     Friend WithEvents chkDebug As CheckBox
+    Friend WithEvents chkOnlineWallets As CheckBox
 End Class

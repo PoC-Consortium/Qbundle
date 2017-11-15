@@ -80,13 +80,13 @@ Partial Class frmFirstTime
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.pnlWallet = New System.Windows.Forms.Panel()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.pnlLauncher = New System.Windows.Forms.Panel()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.pnlMode = New System.Windows.Forms.Panel()
@@ -176,13 +176,14 @@ Partial Class frmFirstTime
         'chkUpdates
         '
         Me.chkUpdates.AutoSize = True
+        Me.chkUpdates.CheckAlign = System.Drawing.ContentAlignment.TopLeft
         Me.chkUpdates.Checked = True
         Me.chkUpdates.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkUpdates.Location = New System.Drawing.Point(28, 350)
+        Me.chkUpdates.Location = New System.Drawing.Point(26, 344)
         Me.chkUpdates.Name = "chkUpdates"
-        Me.chkUpdates.Size = New System.Drawing.Size(199, 17)
+        Me.chkUpdates.Size = New System.Drawing.Size(221, 30)
         Me.chkUpdates.TabIndex = 11
-        Me.chkUpdates.Text = "Turn on software update notification."
+        Me.chkUpdates.Text = "Allow connection to remote resources for " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "verifications and updates."
         Me.chkUpdates.UseVisualStyleBackColor = True
         '
         'P3
@@ -243,10 +244,10 @@ Partial Class frmFirstTime
         Me.lblPMariaDesc.AutoSize = True
         Me.lblPMariaDesc.Location = New System.Drawing.Point(38, 30)
         Me.lblPMariaDesc.Name = "lblPMariaDesc"
-        Me.lblPMariaDesc.Size = New System.Drawing.Size(292, 26)
+        Me.lblPMariaDesc.Size = New System.Drawing.Size(258, 26)
         Me.lblPMariaDesc.TabIndex = 3
-        Me.lblPMariaDesc.Text = "MariaDB is used for more experienced users." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle will download, setup" &
-    " and control this for you."
+        Me.lblPMariaDesc.Text = "MariaDB is used for more experienced users." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle will download, setup and con" &
+    "trol this for you."
         '
         'lblPMariaHeader
         '
@@ -338,7 +339,7 @@ Partial Class frmFirstTime
         Me.Label7.Font = New System.Drawing.Font("Rockwell", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(18, 276)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(185, 19)
+        Me.Label7.Size = New System.Drawing.Size(78, 19)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "Qbundle"
         '
@@ -697,15 +698,15 @@ Partial Class frmFirstTime
         Me.pnlWallet.Size = New System.Drawing.Size(403, 142)
         Me.pnlWallet.TabIndex = 8
         '
-        'RadioButton1
+        'Label4
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(18, 12)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(14, 13)
-        Me.RadioButton1.TabIndex = 1
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(38, 39)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(353, 39)
+        Me.Label4.TabIndex = 5
+        Me.Label4.Text = "In wallet mode you will access the wallet through the built in webbrowser. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Acco" &
+    "unt manager will assist you with fast logins." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Best experience for new users."
         '
         'Label3
         '
@@ -717,15 +718,15 @@ Partial Class frmFirstTime
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "Wallet Mode"
         '
-        'Label4
+        'RadioButton1
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(38, 39)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(353, 39)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "In wallet mode you will access the wallet through the built in webbrowser. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Acco" &
-    "unt manager will assist you with fast logins." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Best experience for new users."
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(18, 12)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(14, 13)
+        Me.RadioButton1.TabIndex = 1
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'pnlLauncher
         '
@@ -739,15 +740,16 @@ Partial Class frmFirstTime
         Me.pnlLauncher.Size = New System.Drawing.Size(403, 124)
         Me.pnlLauncher.TabIndex = 9
         '
-        'RadioButton3
+        'Label10
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(18, 12)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(14, 13)
-        Me.RadioButton3.TabIndex = 0
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(38, 37)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(280, 39)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "In Launcher mode you will access the wallet through your " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "favourite webbroser.  " &
+    "Account manager will help you with " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "passprases. Good experience for seasoned us" &
+    "ers."
         '
         'Label6
         '
@@ -759,16 +761,15 @@ Partial Class frmFirstTime
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Launcher mode"
         '
-        'Label10
+        'RadioButton3
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(38, 37)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(280, 39)
-        Me.Label10.TabIndex = 6
-        Me.Label10.Text = "In Launcher mode you will access the wallet through your " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "favourite webbroser.  " &
-    "Account manager will help you with " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "passprases. Good experience for seasoned us" &
-    "ers."
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(18, 12)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(14, 13)
+        Me.RadioButton3.TabIndex = 0
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'CheckBox1
         '

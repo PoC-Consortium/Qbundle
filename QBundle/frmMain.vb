@@ -7,6 +7,7 @@
     Private Delegate Sub DNewUpdatesAvilable()
     Public Console(1) As List(Of String)
     Public Running As Boolean
+    Public FullySynced As Boolean
     Public Updateinfo As String
     Public Repositories() As String
     Private LastException As Date
@@ -646,9 +647,11 @@
             If Now.AddHours(-1) > BlockDate Then
                 lblBlockDate.Text = BlockDate.ToString & " (Synchronizing blockchain)"
                 lblBlockDate.ForeColor = Color.DarkRed
+                FullySynced = False
             Else
                 lblBlockDate.Text = BlockDate.ToString & " (Fully Syncronized)"
                 lblBlockDate.ForeColor = Color.DarkGreen
+                FullySynced = True
             End If
 
         Catch ex As Exception

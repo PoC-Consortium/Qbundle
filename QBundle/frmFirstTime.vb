@@ -253,6 +253,9 @@
             Q.settings.JavaType = QGlobal.AppNames.JavaPortable
         End If
         Q.settings.CheckForUpdates = chkUpdates.Checked
+        Q.settings.AutoIp = chkUpdates.Checked
+        Q.settings.UseOnlineWallet = chkUpdates.Checked
+
         Q.settings.DbName = txtDbName.Text
         Q.settings.DbPass = txtDbPass.Text
         Q.settings.DbUser = txtDbUser.Text

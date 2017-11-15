@@ -26,6 +26,7 @@
     Private _Repo As String
     Private _QBMode As Integer
     Private _Debug As Boolean
+    Private _UseOnlineWallet As Boolean
     'Plotting And Mining
     Private _Plots As String
 
@@ -201,7 +202,14 @@
             _Debug = value
         End Set
     End Property
-
+    Public Property UseOnlineWallet() As Boolean
+        Get
+            Return _UseOnlineWallet
+        End Get
+        Set(ByVal value As Boolean)
+            _UseOnlineWallet = value
+        End Set
+    End Property
     'Plotting And Mining
     Public Property Plots() As String
         Get
@@ -214,7 +222,7 @@
 
 
     Friend Sub New()
-        _autoip = True
+        _autoip = False
         _WalletException = True
         _DynPlatform = True
         _useOpenCL = False
@@ -232,12 +240,13 @@
         _JavaType = QGlobal.AppNames.JavaInstalled
 
         _FirstRun = True
-        _CheckForUpdates = True
+        _CheckForUpdates = False
         _Upgradev = 11
         _AlwaysAdmin = False
         _Repo = "http://files.getburst.net;http://files2.getburst.net"
         _QBMode = 1 '0 = AIO 1 = Launcher
         _Debug = False
+        _UseOnlineWallet = False
     End Sub
 
 

@@ -18,8 +18,18 @@
             mnuitm.Text = QGlobal.Pools(t).Name
             AddHandler(mnuitm.Click), AddressOf SelectPoolID
             cmlServers.Items.Add(mnuitm)
-
         Next
+
+        rbSolo.Enabled = True
+        rbSolo.Text = "Solo Mining"
+
+        If Not frmMain.Running Then
+            rbSolo.Enabled = False
+            rbSolo.Text = "Solo Mining (Local wallet is not running)"
+        ElseIf Not frmMain.fullysynced Then
+            rbSolo.Enabled = False
+            rbSolo.Text = "Solo Mining (Local wallet is running but not fully syncronized)"
+        End If
 
     End Sub
     Private Sub SelectPoolID(sender As Object, e As EventArgs)
