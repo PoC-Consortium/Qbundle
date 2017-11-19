@@ -14,6 +14,13 @@
     Private WithEvents APITimer As Timer
     Private WithEvents ShutdownWallet As Timer
     Private WithEvents PasswordTimer As Timer
+
+
+    Private CurHeight As Integer
+    Private LastShowHeight As Integer
+    Private LastMinuteHeight As Integer
+    Private WithEvents BlockMinute As New Timer
+
 #Region " Form Events "
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Q = New clsQ
@@ -97,6 +104,12 @@
                 Me.MaximizeBox = True
                 Me.Width = 1024
                 Me.Height = 980
+                If Me.Height > My.Computer.Screen.WorkingArea.Height - 50 Then
+                    Me.Height = My.Computer.Screen.WorkingArea.Height - 50
+                End If
+                If Me.Width > My.Computer.Screen.WorkingArea.Width - 50 Then
+                    Me.Width = My.Computer.Screen.WorkingArea.Width - 50
+                End If
                 Q.settings.QBMode = 0
                 Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
@@ -585,6 +598,12 @@
 
 #Region " Get Block Info "
     Public Sub StartAPIFetch()
+        LastShowHeight = 0
+        LastMinuteHeight = 0
+        BlockMinute.Interval = 60000
+        BlockMinute.Enabled = True
+        BlockMinute.Start()
+
         APITimer.Interval = "1000"
         APITimer.Enabled = True
         APITimer.Start()
@@ -604,6 +623,13 @@
         trda.Start()
         trda = Nothing
     End Sub
+    Private Sub BlockMinute_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BlockMinute.Tick
+
+        LastShowHeight = CurHeight - LastMinuteHeight
+        LastMinuteHeight = CurHeight
+
+    End Sub
+
 
     Private Sub GetApiData()
         Try
@@ -642,7 +668,8 @@
                 Me.Invoke(d, New Object() {Data, TimeStamp})
                 Return
             End If
-            lblBlockInfo.Text = Data
+            lblBlockInfo.Text = Data '& " - " & CStr(LastShowHeight)
+            CurHeight = Val(Data)
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
                 lblBlockDate.Text = BlockDate.ToString & " (Synchronizing blockchain)"
