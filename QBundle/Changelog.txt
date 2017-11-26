@@ -11,10 +11,14 @@ pipeclient+server implementation in service
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
 Environment check (check enough ram and disk space)
 DaWallet gave an idea of dynamic plotting. Keep track of space and add/remove plots during runtime
+time difference (function added)
 
-Low prio if ever:
+~V1.4
+* Fixed Sizeing in wallet mode for small screens
+* Added NTP time check.
 
-~V1.3
+
+V1.3
 + Full wallet mode.
 + Account Manager with AES 256bit encryption.
 + Added CPU Instructionset detection.
