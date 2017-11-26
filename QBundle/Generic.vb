@@ -1,4 +1,6 @@
 ﻿Imports System.Management
+Imports System.Net
+Imports System.Net.Sockets
 
 Friend Class Generic
     Public Shared DebugMe As Boolean
@@ -295,12 +297,12 @@ Friend Class Generic
             s = Split(Q.settings.ListenIf, ";")
             If s(0) = "0.0.0.0" Then s(0) = "*"
             buffer = Trim(Q.settings.ConnectFrom)
-            If Buffer <> "" Then
-                Buffer = Buffer.Replace(";", ",")
-                Buffer = Buffer.Replace(" ", "")
-                If Buffer.EndsWith(",") Then Buffer = Buffer.Remove(Buffer.Length - 1)
+            If buffer <> "" Then
+                buffer = buffer.Replace(";", ",")
+                buffer = buffer.Replace(" ", "")
+                If buffer.EndsWith(",") Then buffer = buffer.Remove(buffer.Length - 1)
             End If
-            If Not SetFirewall("Burst Api", s(1), s(0), Buffer) Then
+            If Not SetFirewall("Burst Api", s(1), s(0), buffer) Then
                 MsgBox("Failed to apply firewall rules.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Firewall")
                 End
             End If
@@ -514,4 +516,39 @@ Friend Class Generic
         End If
         QGlobal.Wallets(0).Address = url
     End Sub
+
+    Public Shared Function GetTimeDifference(ByVal ntpServer As String) As Integer
+
+        Dim OffSeconds As Integer = 0
+        Try
+
+            Dim ntpData = New Byte(47) {}
+            ntpData(0) = &H1B
+            Dim addresses = Dns.GetHostEntry(ntpServer).AddressList
+            Dim ipEndPoint = New IPEndPoint(addresses(0), 123)
+            Dim socket = New Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+
+            socket.Connect(ipEndPoint)
+            socket.Send(ntpData)
+            socket.Receive(ntpData)
+            socket.Close()
+
+            Dim intPart As ULong = CULng(ntpData(40)) << 24 Or CULng(ntpData(41)) << 16 Or CULng(ntpData(42)) << 8 Or CULng(ntpData(43))
+            Dim fractPart As ULong = CULng(ntpData(44)) << 24 Or CULng(ntpData(45)) << 16 Or CULng(ntpData(46)) << 8 Or CULng(ntpData(47))
+
+            Dim milliseconds = (intPart * 1000) + ((fractPart * 1000) / &H100000000L)
+            Dim networkDateTime = (New DateTime(1900, 1, 1)).AddMilliseconds(CLng(milliseconds))
+
+            networkDateTime = TimeZoneInfo.ConvertTime(networkDateTime, TimeZoneInfo.Utc, TimeZoneInfo.Local)
+            If Now > networkDateTime Then
+                OffSeconds = (Now - networkDateTime).TotalSeconds
+            ElseIf Now < networkDateTime Then
+                OffSeconds = (networkDateTime - Now).TotalSeconds
+            End If
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Return OffSeconds
+
+    End Function
 End Class
