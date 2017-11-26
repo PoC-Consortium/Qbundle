@@ -10,6 +10,7 @@ To Be done:
 pipeclient+server implementation in service
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
 Environment check (check enough ram and disk space)
+DaWallet gave an idea of dynamic plotting. Keep track of space and add/remove plots during runtime
 
 Low prio if ever:
 

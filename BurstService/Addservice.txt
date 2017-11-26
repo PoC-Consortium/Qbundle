@@ -1,0 +1,1 @@
+SC create Burst displayname= "Burst Service" binpath="c:\Users\MoonWolf\Documents\Visual Studio 2017\Projects\BurstService\BurstService\bin\Debug\BurstService.exe"
