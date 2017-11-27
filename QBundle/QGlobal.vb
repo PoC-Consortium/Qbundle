@@ -157,7 +157,7 @@
             p.StartInfo.CreateNoWindow = True
             p.StartInfo.FileName = BaseDir & "readCPUInstructions.exe"
             p.Start()
-            p.WaitForExit()
+            p.WaitForExit(1000)
             result = p.StandardOutput.ReadToEnd
             p.Dispose()
             p.Dispose()

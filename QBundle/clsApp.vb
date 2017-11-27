@@ -140,9 +140,9 @@ Public Class clsApp
             p.StartInfo.UseShellExecute = False
             p.StartInfo.CreateNoWindow = True
             p.StartInfo.FileName = "java"
-            p.StartInfo.Arguments = "-d64 -showversion"
+            p.StartInfo.Arguments = "-d64 -version"
             p.Start()
-            p.WaitForExit()
+            p.WaitForExit(1000)
             result = LCase(p.StandardError.ReadLine())
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug("Java installed version ", result)
             If result <> "" Then

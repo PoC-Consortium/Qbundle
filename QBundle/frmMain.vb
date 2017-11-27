@@ -49,6 +49,7 @@
         If Q.settings.FirstRun Then
             StartImport = frmFirstTime.ShowDialog()
         End If
+
         If Q.settings.FirstRun Then
             End 'we have canceled firstrun screen
         End If
