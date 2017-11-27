@@ -669,7 +669,7 @@
                 Me.Invoke(d, New Object() {Data, TimeStamp})
                 Return
             End If
-            lblBlockInfo.Text = Data '& " - " & CStr(LastShowHeight)
+            lblBlockInfo.Text = Data & " - " & CStr(LastShowHeight)
             CurHeight = Val(Data)
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then

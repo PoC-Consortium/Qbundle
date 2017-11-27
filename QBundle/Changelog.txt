@@ -14,7 +14,7 @@ DaWallet gave an idea of dynamic plotting. Keep track of space and add/remove pl
 time difference (function added)
 
 ~V1.4
-* Fixed Sizeing in wallet mode for small screens
+* Fixed Center screen problems.
 * Added NTP time check.
 
 
