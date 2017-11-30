@@ -89,13 +89,14 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkOnlineWallets = New System.Windows.Forms.CheckBox()
         Me.chkDebug = New System.Windows.Forms.CheckBox()
         Me.chkAlwaysAdmin = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkOnlineWallets = New System.Windows.Forms.CheckBox()
+        Me.chkNTP = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -790,6 +791,7 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkNTP)
         Me.Panel2.Controls.Add(Me.chkOnlineWallets)
         Me.Panel2.Controls.Add(Me.chkDebug)
         Me.Panel2.Controls.Add(Me.chkAlwaysAdmin)
@@ -798,8 +800,19 @@ Partial Class frmSettings
         Me.Panel2.Controls.Add(Me.chkCheckForUpdates)
         Me.Panel2.Location = New System.Drawing.Point(24, 44)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(699, 133)
+        Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
+        '
+        'chkOnlineWallets
+        '
+        Me.chkOnlineWallets.AutoSize = True
+        Me.chkOnlineWallets.Location = New System.Drawing.Point(12, 69)
+        Me.chkOnlineWallets.Name = "chkOnlineWallets"
+        Me.chkOnlineWallets.Size = New System.Drawing.Size(447, 17)
+        Me.chkOnlineWallets.TabIndex = 6
+        Me.chkOnlineWallets.Text = "Allow Qbundle to connect to remote wallets when local wallet is offline or not sy" &
+    "ncronized."
+        Me.chkOnlineWallets.UseVisualStyleBackColor = True
         '
         'chkDebug
         '
@@ -864,16 +877,15 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkOnlineWallets
+        'chkNTP
         '
-        Me.chkOnlineWallets.AutoSize = True
-        Me.chkOnlineWallets.Location = New System.Drawing.Point(12, 69)
-        Me.chkOnlineWallets.Name = "chkOnlineWallets"
-        Me.chkOnlineWallets.Size = New System.Drawing.Size(447, 17)
-        Me.chkOnlineWallets.TabIndex = 6
-        Me.chkOnlineWallets.Text = "Allow Qbundle to connect to remote wallets when local wallet is offline or not sy" &
-    "ncronized."
-        Me.chkOnlineWallets.UseVisualStyleBackColor = True
+        Me.chkNTP.AutoSize = True
+        Me.chkNTP.Location = New System.Drawing.Point(11, 134)
+        Me.chkNTP.Name = "chkNTP"
+        Me.chkNTP.Size = New System.Drawing.Size(223, 17)
+        Me.chkNTP.TabIndex = 7
+        Me.chkNTP.Text = "Check computer time against NTP server."
+        Me.chkNTP.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -987,4 +999,5 @@ Partial Class frmSettings
     Friend WithEvents chkWalletException As CheckBox
     Friend WithEvents chkDebug As CheckBox
     Friend WithEvents chkOnlineWallets As CheckBox
+    Friend WithEvents chkNTP As CheckBox
 End Class

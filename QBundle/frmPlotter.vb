@@ -5,7 +5,9 @@ Public Class frmPlotter
         Dim FD As New FolderBrowserDialog
         If FD.ShowDialog() = DialogResult.OK Then
             txtPath.Text = FD.SelectedPath
-
+            If IO.Path.GetPathRoot(FD.SelectedPath) = FD.SelectedPath Then
+                MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
+            End If
             Dim FreeSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
             Dim nonces As Long = Math.Floor(FreeSpace / 1024 / 256)
             nonces = Math.Floor(nonces / 8) 'make it devidable by 8
@@ -131,7 +133,10 @@ Public Class frmPlotter
 
         'check path
         Dim Path As String = txtPath.Text
-
+        If IO.Path.GetPathRoot(Path) = Path Then
+            MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
+            Exit Sub
+        End If
         Dim nonces As Double = HSSize.Value
         Dim StartNonce As Double = 0
         Try

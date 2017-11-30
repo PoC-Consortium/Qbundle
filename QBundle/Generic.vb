@@ -455,6 +455,31 @@ Friend Class Generic
             Next
         End If
 
+        If Q.settings.NTPCheck Then
+
+            Dim ntpTime As Date = GetNTPTime("time.windows.com")
+            Dim OffSeconds As Integer = 0
+            Dim localTimezoneNTPTime As Date = TimeZoneInfo.ConvertTime(ntpTime, TimeZoneInfo.Utc, TimeZoneInfo.Local)
+            If Now > localTimezoneNTPTime Then
+                OffSeconds = (Now - localTimezoneNTPTime).TotalSeconds
+            ElseIf Now < localTimezoneNTPTime Then
+                OffSeconds = (localTimezoneNTPTime - Now).TotalSeconds
+            End If
+
+            If OffSeconds > 15 Then
+                Msg = "Your computer clock is drifting." & vbCrLf
+                Msg &= "World time (UTC): " & ntpTime.ToString & vbCrLf
+                Msg &= "Your computer time: " & Now.ToString & vbCrLf & vbCrLf
+                Msg &= "Your computer time with current timezone setting " & vbCrLf
+                Msg &= "should be: " & localTimezoneNTPTime.ToString & vbCrLf & vbCrLf
+                Msg &= "Your time is currently off with " & OffSeconds.ToString & " Seconds" & vbCrLf
+                Msg &= "Burstwallet allows max 15 seconds drifting." & vbCrLf
+                MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Change computer time")
+                Ok = False
+            End If
+
+        End If
+
 
         Return Ok
     End Function
@@ -518,7 +543,7 @@ Friend Class Generic
         QGlobal.Wallets(0).Address = url
     End Sub
 
-    Public Shared Function GetTimeDifference(ByVal ntpServer As String) As Integer
+    Public Shared Function GetNTPTime(ByVal ntpServer As String) As Date
 
         Dim OffSeconds As Integer = 0
         Try
@@ -540,16 +565,12 @@ Friend Class Generic
             Dim milliseconds = (intPart * 1000) + ((fractPart * 1000) / &H100000000L)
             Dim networkDateTime = (New DateTime(1900, 1, 1)).AddMilliseconds(CLng(milliseconds))
 
-            networkDateTime = TimeZoneInfo.ConvertTime(networkDateTime, TimeZoneInfo.Utc, TimeZoneInfo.Local)
-            If Now > networkDateTime Then
-                OffSeconds = (Now - networkDateTime).TotalSeconds
-            ElseIf Now < networkDateTime Then
-                OffSeconds = (networkDateTime - Now).TotalSeconds
-            End If
+            Return networkDateTime
+
         Catch ex As Exception
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
-        Return OffSeconds
+        Return Now
 
     End Function
 End Class

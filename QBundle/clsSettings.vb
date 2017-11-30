@@ -27,6 +27,7 @@
     Private _QBMode As Integer
     Private _Debug As Boolean
     Private _UseOnlineWallet As Boolean
+    Private _NTPCheck As Boolean
     'Plotting And Mining
     Private _Plots As String
 
@@ -210,6 +211,14 @@
             _UseOnlineWallet = value
         End Set
     End Property
+    Public Property NTPCheck() As Boolean
+        Get
+            Return _NTPCheck
+        End Get
+        Set(ByVal value As Boolean)
+            _NTPCheck = value
+        End Set
+    End Property
     'Plotting And Mining
     Public Property Plots() As String
         Get
@@ -247,6 +256,7 @@
         _QBMode = 1 '0 = AIO 1 = Launcher
         _Debug = False
         _UseOnlineWallet = False
+        _NTPCheck = True
     End Sub
 
 

@@ -98,6 +98,7 @@ Public Class frmSettings
         Q.settings.AlwaysAdmin = chkAlwaysAdmin.Checked
         Q.settings.WalletException = chkWalletException.Checked
         Q.settings.UseOnlineWallet = chkOnlineWallets.Checked
+        Q.settings.NTPCheck = chkNTP.Checked
         'nrs
 
         Q.settings.AutoIp = chkAutoIP.Checked
@@ -156,6 +157,8 @@ Public Class frmSettings
         chkDebug.Checked = Q.settings.DebugMode
         chkWalletException.Checked = Q.settings.WalletException
         chkOnlineWallets.Checked = Q.settings.UseOnlineWallet
+        chkNTP.Checked = Q.settings.NTPCheck
+
 
         chkAutoIP.Checked = Q.settings.CheckForUpdates
         chkDynPlatform.Checked = Q.settings.DynPlatform
