@@ -31,14 +31,31 @@ Public Class clsProcessHandler
     Private Declare Function SetConsoleCtrlHandler Lib "kernel32" (Handler As ConsoleCtrlDelegate, Add As Boolean) As Boolean
     Private Declare Function FreeConsole Lib "kernel32" () As Boolean
     Private ShouldStop As Boolean
-    Private BaseDir As String
+    Private Shared BaseDir As String
+    Private Shared AppDir As String
+    Private Shared SettingsDir As String
+    Private Shared LogDir As String
 
 #Region " Main Functions "
     Sub New()
         BaseDir = AppDomain.CurrentDomain.BaseDirectory
         If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
+        AppDir = BaseDir
+        Try
+            If IO.File.Exists(BaseDir & "UPD") Then
+                AppDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Qbundle\"
+                If Not IO.Directory.Exists(AppDir) Then
+                    IO.Directory.CreateDirectory(AppDir)
+                End If
+            End If
+        Catch ex As Exception
+            AppDir = BaseDir
+        End Try
+        SettingsDir = AppDir
+        LogDir = AppDir
+
         Settings = New clsSettings
-        Settings.LoadSettings()
+        Settings.LoadSettings(SettingsDir & "BWL.ini")
         LastException = Now
         Isrunning = False
         nrs = New Process
@@ -89,7 +106,7 @@ Public Class clsProcessHandler
     Private Sub StartNrs()
 
 
-        nrs.StartInfo.WorkingDirectory = BaseDir
+        nrs.StartInfo.WorkingDirectory = AppDir
         nrs.StartInfo.Arguments = "-cp burst.jar;conf nxt.Nxt"
         nrs.StartInfo.UseShellExecute = False
 
@@ -98,7 +115,7 @@ Public Class clsProcessHandler
 
         AddHandler nrs.ErrorDataReceived, AddressOf ErroutHandler
         If Settings.JavaType = AppNames.JavaPortable Then
-            nrs.StartInfo.FileName = BaseDir & "Java\bin\java.exe"
+            nrs.StartInfo.FileName = AppDir & "Java\bin\java.exe"
         Else
             nrs.StartInfo.FileName = "java"
         End If
@@ -107,7 +124,7 @@ Public Class clsProcessHandler
             Dim cores As Integer = (2 ^ Settings.Cpulimit) - 1
             If cores <> 0 Then nrs.ProcessorAffinity = CType(cores, IntPtr)
             '  nrs.BeginErrorReadLine()
-            System.IO.File.AppendAllText(BaseDir & "\debugservice.txt", nrs.Id.ToString & vbCrLf)
+            System.IO.File.AppendAllText(LogDir & "\debugservice.txt", nrs.Id.ToString & vbCrLf)
         Catch ex As Exception
 
             Exit Sub

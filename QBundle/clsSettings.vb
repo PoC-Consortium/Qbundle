@@ -263,8 +263,8 @@
 
     Friend Sub LoadSettings()
         Try
-            If IO.File.Exists(QGlobal.BaseDir & "\BWL.ini") Then
-                Dim lines() As String = IO.File.ReadAllLines(QGlobal.BaseDir & "\BWL.ini")
+            If IO.File.Exists(QGlobal.AppDir & "\BWL.ini") Then
+                Dim lines() As String = IO.File.ReadAllLines(QGlobal.AppDir & "\BWL.ini")
                 For Each line As String In lines 'lets populate
                     Try
                         Dim Cell() As String = Split(line, "=")
@@ -289,7 +289,7 @@
             For Each prop In RP
                 Sdata &= prop.Name & "=" & prop.GetValue(Me) & vbCrLf
             Next
-            IO.File.WriteAllText(QGlobal.BaseDir & "\BWL.ini", Sdata)
+            IO.File.WriteAllText(QGlobal.SettingsDir & "\BWL.ini", Sdata)
         Catch ex As Exception
 
         End Try

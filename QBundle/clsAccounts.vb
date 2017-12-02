@@ -157,7 +157,7 @@ Public Class clsAccounts
     End Function
     Public Sub SaveAccounts()
         Dim x As New XmlSerializer(GetType(ArrayList), New Type() {GetType(Account)})
-        Dim writer As TextWriter = New StreamWriter(QGlobal.BaseDir & "Acconts.xml")
+        Dim writer As TextWriter = New StreamWriter(QGlobal.SettingsDir & "Acconts.xml")
         x.Serialize(writer, AccArray)
         writer.Close()
         writer.Dispose()
@@ -167,7 +167,7 @@ Public Class clsAccounts
     Public Sub LoadAccounts()
         Try
             Dim x As New XmlSerializer(GetType(ArrayList), New Type() {GetType(Account)})
-            Dim Reader As TextReader = New StreamReader(QGlobal.BaseDir & "Acconts.xml")
+            Dim Reader As TextReader = New StreamReader(QGlobal.SettingsDir & "Acconts.xml")
             AccArray = DirectCast(x.Deserialize(Reader), ArrayList)
             Reader.Close()
             Reader.Dispose()

@@ -445,10 +445,10 @@
                 pset(0) = New clsProcessHandler.pSettings
                 'mariadb
                 pset(0).AppId = QGlobal.AppNames.MariaPortable
-                pset(0).AppPath = QGlobal.BaseDir & "MariaDb\bin\mysqld.exe"
+                pset(0).AppPath = QGlobal.AppDir & "MariaDb\bin\mysqld.exe"
                 pset(0).Cores = 0
                 pset(0).Params = "--console"
-                pset(0).WorkingDirectory = QGlobal.BaseDir & "MariaDb\bin\"
+                pset(0).WorkingDirectory = QGlobal.AppDir & "MariaDb\bin\"
                 pset(0).StartSignal = "ready for connections"
                 pset(0).StartsignalMaxTime = 60
                 pset(1) = New clsProcessHandler.pSettings
@@ -456,13 +456,13 @@
                 If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
                     pset(1).AppPath = "java"
                 Else
-                    pset(1).AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
+                    pset(1).AppPath = QGlobal.AppDir & "Java\bin\java.exe"
                 End If
                 pset(1).Cores = Q.settings.Cpulimit
                 pset(1).Params = QGlobal.WalletLaunchString.NormalLaunch
                 pset(1).StartSignal = "Started API server at"
                 pset(1).StartsignalMaxTime = 600
-                pset(1).WorkingDirectory = QGlobal.BaseDir
+                pset(1).WorkingDirectory = QGlobal.AppDir
                 Q.ProcHandler.StartProcessSquence(pset)
             Else 'normal start
                 Dim Pset As New clsProcessHandler.pSettings
@@ -470,13 +470,13 @@
                 If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
                     Pset.AppPath = "java"
                 Else
-                    Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
+                    Pset.AppPath = QGlobal.AppDir & "Java\bin\java.exe"
                 End If
                 Pset.Cores = Q.settings.Cpulimit
                 Pset.Params = QGlobal.WalletLaunchString.NormalLaunch
                 Pset.StartSignal = "Started API server at"
                 Pset.StartsignalMaxTime = 600
-                Pset.WorkingDirectory = QGlobal.BaseDir
+                Pset.WorkingDirectory = QGlobal.AppDir
                 Q.ProcHandler.StartProcess(Pset)
             End If
 

@@ -9,13 +9,13 @@ Known problems:
 To Be done:
 pipeclient+server implementation in service
 Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
-Environment check (check enough ram and disk space)
+Environment check (check enough ram and disk space).
 DaWallet gave an idea of dynamic plotting. Keep track of space and add/remove plots during runtime
-time difference (function added)
+
 
 ~V1.4
-* Fixed Center screen problems.
-* Added NTP time check.
+* restricted path for Xplotter.
++ Added NTP time check.
 
 
 V1.3

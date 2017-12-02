@@ -112,11 +112,11 @@ Public Class clsApp
     Private Sub Nrs()
 
         Try
-            If File.Exists(QGlobal.BaseDir & "burst.jar") Then 'check if burst jar is here then we have nrs?
+            If File.Exists(QGlobal.AppDir & "burst.jar") Then 'check if burst jar is here then we have nrs?
                 _Apps(QGlobal.AppNames.BRS).LocalFound = True
                 'try to set version since we have burst.jar
-                If File.Exists(QGlobal.BaseDir & "conf\version") Then
-                    Dim Version As String = File.ReadAllText(QGlobal.BaseDir & "conf\version")
+                If File.Exists(QGlobal.AppDir & "conf\version") Then
+                    Dim Version As String = File.ReadAllText(QGlobal.AppDir & "conf\version")
                     _Apps(QGlobal.AppNames.BRS).LocalVersion = Version
                 Else
                     'asume version 1.3.4cg
@@ -162,11 +162,11 @@ Public Class clsApp
     End Sub
     Private Sub JavaPortable()
         Try
-            If File.Exists(QGlobal.BaseDir & "Java\bin\java.exe") Then
+            If File.Exists(QGlobal.AppDir & "Java\bin\java.exe") Then
                 _Apps(QGlobal.AppNames.JavaPortable).LocalFound = True
                 'try find Javaversion
-                If File.Exists(QGlobal.BaseDir & "Java\release") Then
-                    Dim Lines() As String = File.ReadAllLines(QGlobal.BaseDir & "Java\release")
+                If File.Exists(QGlobal.AppDir & "Java\release") Then
+                    Dim Lines() As String = File.ReadAllLines(QGlobal.AppDir & "Java\release")
                     _Apps(QGlobal.AppNames.JavaPortable).LocalVersion = Lines(0)
                 Else
                     'asume 1.8.0_131
@@ -179,11 +179,11 @@ Public Class clsApp
     End Sub
     Private Sub MariaDB()
         Try
-            If File.Exists(QGlobal.BaseDir & "MariaDb\bin\mysqld.exe") Then
+            If File.Exists(QGlobal.AppDir & "MariaDb\bin\mysqld.exe") Then
                 _Apps(QGlobal.AppNames.MariaPortable).LocalFound = True
                 'try find MariaVersion
-                If File.Exists(QGlobal.BaseDir & "MariaDb\release") Then
-                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "MariaDb\release")
+                If File.Exists(QGlobal.AppDir & "MariaDb\release") Then
+                    Dim version As String = File.ReadAllText(QGlobal.AppDir & "MariaDb\release")
                     _Apps(QGlobal.AppNames.MariaPortable).LocalVersion = version
                 Else
                     'asume 5.5.29
@@ -197,11 +197,11 @@ Public Class clsApp
     End Sub
     Private Sub Xplotter()
         Try
-            If File.Exists(QGlobal.BaseDir & "Xplotter\XPlotter_avx.exe") Then
+            If File.Exists(QGlobal.AppDir & "Xplotter\XPlotter_avx.exe") Then
                 _Apps(QGlobal.AppNames.Xplotter).LocalFound = True
                 'try find MariaVersion
-                If File.Exists(QGlobal.BaseDir & "Xplotter\release") Then
-                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "Xplotter\release")
+                If File.Exists(QGlobal.AppDir & "Xplotter\release") Then
+                    Dim version As String = File.ReadAllText(QGlobal.AppDir & "Xplotter\release")
                     _Apps(QGlobal.AppNames.Xplotter).LocalVersion = version
                 Else
                     'asume 1.0
@@ -215,11 +215,11 @@ Public Class clsApp
     End Sub
     Private Sub BlagoMiner()
         Try
-            If File.Exists(QGlobal.BaseDir & "BlagoMiner\BlagoMiner_AVX2.exe") Then
+            If File.Exists(QGlobal.AppDir & "BlagoMiner\BlagoMiner_AVX2.exe") Then
                 _Apps(QGlobal.AppNames.BlagoMiner).LocalFound = True
                 'try find MariaVersion
-                If File.Exists(QGlobal.BaseDir & "BlagoMiner\version") Then
-                    Dim version As String = File.ReadAllText(QGlobal.BaseDir & "BlagoMiner\version")
+                If File.Exists(QGlobal.AppDir & "BlagoMiner\version") Then
+                    Dim version As String = File.ReadAllText(QGlobal.AppDir & "BlagoMiner\version")
                     _Apps(QGlobal.AppNames.BlagoMiner).LocalVersion = version
                 Else
                     'asume 1.0
@@ -294,7 +294,7 @@ Public Class clsApp
     Private Function Download(ByVal AppId As Integer, Optional ByVal FromRepos As Boolean = True) As Boolean
 
         Dim DLOk As Integer = False
-        Dim filename As String = QGlobal.BaseDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
+        Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
         Dim File As FileStream = Nothing
         For x = 0 To UBound(_Repositories) 'try next repo if fail.
             Try
@@ -349,8 +349,8 @@ Public Class clsApp
     Private Function Extract(ByVal AppId As Integer) As Boolean
         Dim AllOk As Boolean = False
         Try
-            Dim filename As String = QGlobal.BaseDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
-            Dim target As String = QGlobal.BaseDir & _Apps(AppId).ExtractToDir
+            Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
+            Dim target As String = QGlobal.AppDir & _Apps(AppId).ExtractToDir
             Dim Archive As ZipArchive = ZipFile.OpenRead(filename)
             Dim totalfiles As Integer = Archive.Entries.Count
             Dim counter As Integer = 0
@@ -383,7 +383,7 @@ Public Class clsApp
     End Function
     Private Sub DeleteFile(ByVal appid As Integer)
         Try
-            Dim filename As String = QGlobal.BaseDir & Path.GetFileName(_Apps(appid).RemoteUrl)
+            Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(appid).RemoteUrl)
             If File.Exists(filename) Then
                 File.Delete(filename)
             End If

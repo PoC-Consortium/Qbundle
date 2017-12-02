@@ -74,13 +74,13 @@
         If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then
             Pset.AppPath = "java"
         Else
-            Pset.AppPath = QGlobal.BaseDir & "Java\bin\java.exe"
+            Pset.AppPath = QGlobal.AppDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
         Pset.Params = QGlobal.WalletLaunchString.Export & txtFilename.Text
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
-        Pset.WorkingDirectory = QGlobal.BaseDir
+        Pset.WorkingDirectory = QGlobal.AppDir
         Q.ProcHandler.StartProcess(Pset)
 
         Running = True
@@ -234,10 +234,10 @@
             If QB.Generic.SanityCheck Then
                 Dim pr As New clsProcessHandler.pSettings
                 pr.AppId = QGlobal.AppNames.MariaPortable
-                pr.AppPath = QGlobal.BaseDir & "MariaDb\bin\mysqld.exe"
+                pr.AppPath = QGlobal.AppDir & "MariaDb\bin\mysqld.exe"
                 pr.Cores = 0
                 pr.Params = "--console"
-                pr.WorkingDirectory = QGlobal.BaseDir & "MariaDb\bin\"
+                pr.WorkingDirectory = QGlobal.AppDir & "MariaDb\bin\"
                 pr.StartSignal = "ready for connections"
                 pr.StartsignalMaxTime = 60
                 Q.ProcHandler.StartProcess(pr)

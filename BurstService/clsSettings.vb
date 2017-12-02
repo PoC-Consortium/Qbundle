@@ -1,4 +1,6 @@
 ﻿Friend Class clsSettings
+
+
     'NRS
     Private _autoip As Boolean
     Private _WalletException As Boolean
@@ -233,12 +235,11 @@
 
 
 
-    Friend Sub LoadSettings()
+    Friend Sub LoadSettings(ByVal SettingsFile As String)
         Try
-            Dim BaseDir As String = AppDomain.CurrentDomain.BaseDirectory
-            If Not BaseDir.EndsWith("\") Then BaseDir &= "\"
-            If IO.File.Exists(BaseDir & "\BWL.ini") Then
-                Dim lines() As String = IO.File.ReadAllLines(BaseDir & "\BWL.ini")
+
+            If IO.File.Exists(SettingsFile) Then
+                Dim lines() As String = IO.File.ReadAllLines(SettingsFile)
                 For Each line As String In lines 'lets populate
                     Try
                         Dim Cell() As String = Split(line, "=")

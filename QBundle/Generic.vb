@@ -107,8 +107,8 @@ Friend Class Generic
         Select Case Q.settings.DbType
             Case QGlobal.DbType.FireBird
                 Try
-                    If Not IO.Directory.Exists(QGlobal.BaseDir & "burst_db") Then
-                        IO.Directory.CreateDirectory(QGlobal.BaseDir & "burst_db")
+                    If Not IO.Directory.Exists(QGlobal.AppDir & "burst_db") Then
+                        IO.Directory.CreateDirectory(QGlobal.AppDir & "burst_db")
                     End If
                 Catch ex As Exception
                     If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -143,7 +143,7 @@ Friend Class Generic
 
         Try
 
-            IO.File.WriteAllText(QGlobal.BaseDir & "conf\brs.properties", Data)
+            IO.File.WriteAllText(QGlobal.AppDir & "conf\brs.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
@@ -198,8 +198,8 @@ Friend Class Generic
         Select Case Q.settings.DbType
             Case QGlobal.DbType.FireBird
                 Try
-                    If Not IO.Directory.Exists(QGlobal.BaseDir & "burst_db") Then
-                        IO.Directory.CreateDirectory(QGlobal.BaseDir & "burst_db")
+                    If Not IO.Directory.Exists(QGlobal.AppDir & "burst_db") Then
+                        IO.Directory.CreateDirectory(QGlobal.AppDir & "burst_db")
                     End If
                 Catch ex As Exception
                     If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -234,7 +234,7 @@ Friend Class Generic
 
         Try
 
-            IO.File.WriteAllText(QGlobal.BaseDir & "conf\nxt.properties", Data)
+            IO.File.WriteAllText(QGlobal.AppDir & "conf\nxt.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
@@ -494,8 +494,8 @@ Friend Class Generic
     End Function
     Friend Shared Function CheckWritePermission() As Boolean
         Try
-            IO.File.WriteAllText(QGlobal.BaseDir & "testfile", "test")
-            IO.File.Delete(QGlobal.BaseDir & "testfile")
+            IO.File.WriteAllText(QGlobal.AppDir & "testfile", "test")
+            IO.File.Delete(QGlobal.AppDir & "testfile")
             Return True
         Catch ex As Exception
             Return False
@@ -507,7 +507,7 @@ Friend Class Generic
             Dim strErr As String = "------------------------- " & Now.ToString & " --------------------------" & vbCrLf
             strErr &= "Message: " & msg & vbCrLf
             strErr &= "StackTrace:" & strace & vbCrLf
-            IO.File.AppendAllText(QGlobal.BaseDir & "\bwl_debug.txt", strErr)
+            IO.File.AppendAllText(QGlobal.LogDir & "\bwl_debug.txt", strErr)
         Catch ex As Exception
             MsgBox(msg)
         End Try

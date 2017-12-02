@@ -328,20 +328,20 @@
 
         'ok all seems fine. if solo then write password file
         If PassPhrase.Length > 0 Then
-            System.IO.File.WriteAllText(QGlobal.BaseDir & "\BlagoMiner\passphrases.txt", PassPhrase)
+            System.IO.File.WriteAllText(QGlobal.AppDir & "\BlagoMiner\passphrases.txt", PassPhrase)
         End If
         WriteConfig()
         Try
             Dim p As Process = New Process
-            p.StartInfo.WorkingDirectory = QGlobal.BaseDir & "BlagoMiner"
+            p.StartInfo.WorkingDirectory = QGlobal.AppDir & "BlagoMiner"
             p.StartInfo.Arguments = ""
             p.StartInfo.UseShellExecute = True
             If QGlobal.CPUInstructions.AVX2 Then
-                p.StartInfo.FileName = QGlobal.BaseDir & "BlagoMiner\BlagoMiner_avx2.exe"
+                p.StartInfo.FileName = QGlobal.AppDir & "BlagoMiner\BlagoMiner_avx2.exe"
             ElseIf QGlobal.CPUInstructions.AVX Then
-                p.StartInfo.FileName = QGlobal.BaseDir & "BlagoMiner\BlagoMiner_avx.exe"
+                p.StartInfo.FileName = QGlobal.AppDir & "BlagoMiner\BlagoMiner_avx.exe"
             ElseIf QGlobal.CPUInstructions.SSE Then
-                p.StartInfo.FileName = QGlobal.BaseDir & "BlagoMiner\BlagoMiner_sse.exe"
+                p.StartInfo.FileName = QGlobal.AppDir & "BlagoMiner\BlagoMiner_sse.exe"
             End If
             p.StartInfo.Verb = "runas"
             p.Start()
@@ -417,7 +417,7 @@
         cfg &= "   " & Chr(34) & "WinSizeY" & Chr(34) & ": 60" & vbCrLf
         cfg &= "}" & vbCrLf
 
-        System.IO.File.WriteAllText(QGlobal.BaseDir & "BlagoMiner\miner.conf", cfg)
+        System.IO.File.WriteAllText(QGlobal.AppDir & "BlagoMiner\miner.conf", cfg)
 
     End Sub
 
