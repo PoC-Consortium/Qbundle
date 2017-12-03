@@ -673,11 +673,11 @@
             CurHeight = Val(Data)
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
-                lblBlockDate.Text = BlockDate.ToString & " (Synchronizing blockchain)"
+                lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Synchronizing blockchain)"
                 lblBlockDate.ForeColor = Color.DarkRed
                 FullySynced = False
             Else
-                lblBlockDate.Text = BlockDate.ToString & " (Fully Syncronized)"
+                lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Fully Syncronized)"
                 lblBlockDate.ForeColor = Color.DarkGreen
                 FullySynced = True
             End If

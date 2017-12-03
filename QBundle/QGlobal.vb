@@ -85,6 +85,9 @@
         WalletLaunchString.NormalLaunch = "-cp burst.jar;conf nxt.Nxt" '"-cp burst.jar;conf brs.Burst"
         WalletLaunchString.Import = "-cp burst.jar;conf nxt.db.quicksync.LoadBinDump " '"-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
         WalletLaunchString.Export = "-cp burst.jar;conf nxt.db.quicksync.CreateBinDump " '"-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
+        'WalletLaunchString.NormalLaunch = "-cp burst.jar;conf brs.Burst"
+        'WalletLaunchString.Import = "-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
+        'WalletLaunchString.Export = "-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
         InitPools()
         InitOnlineWallets()
         InitCPUInstructions()

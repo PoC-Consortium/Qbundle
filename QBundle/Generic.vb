@@ -153,6 +153,7 @@ Friend Class Generic
     End Sub
     Friend Shared Sub WriteWalletConfig()
         WriteNRSConfig()
+        ' WriteBRSConfig()
     End Sub
     Friend Shared Sub WriteNRSConfig()
         Dim Data As String = ""

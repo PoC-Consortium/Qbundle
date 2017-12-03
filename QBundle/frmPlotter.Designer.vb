@@ -396,19 +396,19 @@ Partial Class frmPlotter
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(399, 201)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(147, 26)
+        Me.Label12.Size = New System.Drawing.Size(145, 26)
         Me.Label12.TabIndex = 20
-        Me.Label12.Text = "Select the silze of the plotfile. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click start plotting"
+        Me.Label12.Text = "Select the size of the plotfile. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click start plotting"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(399, 259)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(229, 39)
+        Me.Label13.Size = New System.Drawing.Size(223, 39)
         Me.Label13.TabIndex = 22
         Me.Label13.Text = "Do not change theese values unless you are " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "absolutley sure of what you are doin" &
-    "g." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle automatically calculate theese values."
+    "g." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle automatically calculate these values."
         '
         'Label14
         '
