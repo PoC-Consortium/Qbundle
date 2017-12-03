@@ -758,6 +758,10 @@
         SetMode(1)
     End Sub
 
+    Private Sub DynamicPlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DynamicPlottingToolStripMenuItem.Click
+        frmDynamicPlotting.Show()
+    End Sub
+
 
 
 

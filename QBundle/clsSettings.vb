@@ -30,6 +30,13 @@
     Private _NTPCheck As Boolean
     'Plotting And Mining
     Private _Plots As String
+    'dynamic plotting
+    Private _DynPlotEnabled As Boolean
+    Private _DynPlotPath As String
+    Private _DynPlotAcc As String
+    Private _DynPlotSize As Integer
+    Private _DynPlotFree As Integer
+    Private _DynPlotHide As Boolean
 
     'NRS
     Public Property AutoIp() As Boolean
@@ -228,6 +235,55 @@
             _Plots = value
         End Set
     End Property
+    'dynamic plotting
+    Public Property DynPlotEnabled() As Boolean
+        Get
+            Return _DynPlotEnabled
+        End Get
+        Set(ByVal value As Boolean)
+            _DynPlotEnabled = value
+        End Set
+    End Property
+    Public Property DynPlotPath() As String
+        Get
+            Return _DynPlotPath
+        End Get
+        Set(ByVal value As String)
+            _DynPlotPath = value
+        End Set
+    End Property
+    Public Property DynPlotAcc() As String
+        Get
+            Return _DynPlotAcc
+        End Get
+        Set(ByVal value As String)
+            _DynPlotAcc = value
+        End Set
+    End Property
+    Public Property DynPlotSize() As Integer
+        Get
+            Return _DynPlotSize
+        End Get
+        Set(ByVal value As Integer)
+            _DynPlotSize = value
+        End Set
+    End Property
+    Public Property DynPlotFree() As Integer
+        Get
+            Return _DynPlotFree
+        End Get
+        Set(ByVal value As Integer)
+            _DynPlotFree = value
+        End Set
+    End Property
+    Public Property DynPlotHide() As Boolean
+        Get
+            Return _DynPlotHide
+        End Get
+        Set(ByVal value As Boolean)
+            _DynPlotHide = value
+        End Set
+    End Property
 
 
     Friend Sub New()
@@ -257,6 +313,15 @@
         _Debug = False
         _UseOnlineWallet = False
         _NTPCheck = True
+
+        _DynPlotEnabled = False
+        _DynPlotPath = ""
+        _DynPlotAcc = ""
+        _DynPlotSize = 10
+        _DynPlotFree = 10
+        _DynPlotHide = True
+
+
     End Sub
 
 

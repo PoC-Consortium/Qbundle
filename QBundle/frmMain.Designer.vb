@@ -86,6 +86,7 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
+        Me.DynamicPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -335,7 +336,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.DynamicPlottingToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
@@ -343,19 +344,19 @@ Partial Class frmMain
         'PlotterToolStripMenuItem
         '
         Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
-        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.PlotterToolStripMenuItem.Text = "Plotter"
         '
         'MinerToolStripMenuItem
         '
         Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
-        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'SetRewardassignmentToolStripMenuItem
         '
         Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
-        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.SetRewardassignmentToolStripMenuItem.Text = "Reward Recipient"
         '
         'AboutToolStripMenuItem2
@@ -549,6 +550,12 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(502, 105)
         Me.wb1.TabIndex = 0
         '
+        'DynamicPlottingToolStripMenuItem
+        '
+        Me.DynamicPlottingToolStripMenuItem.Name = "DynamicPlottingToolStripMenuItem"
+        Me.DynamicPlottingToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.DynamicPlottingToolStripMenuItem.Text = "Dynamic Plotting"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -643,4 +650,5 @@ Partial Class frmMain
     Friend WithEvents WalletModeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LauncherModeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
+    Friend WithEvents DynamicPlottingToolStripMenuItem As ToolStripMenuItem
 End Class

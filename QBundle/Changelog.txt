@@ -11,10 +11,13 @@ Stuck detection. try to restart NRS (if no new block in 60min then try restart N
 Environment check (check enough ram and disk space).
 DaWallet gave an idea of dynamic plotting. Keep track of space and add/remove plots during runtime
 Online Wallet mode. (does not start local wallet)
+blago miner solo delete passphrases after start.
 
 ~V1.4
 * restricted path for Xplotter.
 + Added NTP time check.
+
+
 
 V1.3
 + Full wallet mode.

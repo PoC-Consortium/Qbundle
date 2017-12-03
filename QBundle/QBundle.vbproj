@@ -147,6 +147,12 @@
     <Compile Include="clsQ.vb" />
     <Compile Include="clsServiceHandler.vb" />
     <Compile Include="Curve25519.vb" />
+    <Compile Include="frmDynamicPlotting.Designer.vb">
+      <DependentUpon>frmDynamicPlotting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDynamicPlotting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAccounts.Designer.vb">
       <DependentUpon>frmAccounts.vb</DependentUpon>
     </Compile>
@@ -266,6 +272,9 @@
     <Compile Include="ReedSolomon.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmDynamicPlotting.resx">
+      <DependentUpon>frmDynamicPlotting.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAccounts.resx">
       <DependentUpon>frmAccounts.vb</DependentUpon>
       <SubType>Designer</SubType>

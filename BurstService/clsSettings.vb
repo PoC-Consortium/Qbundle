@@ -31,6 +31,14 @@
     'Plotting And Mining
     Private _Plots As String
 
+    'dynamic plotting
+    Private _DynPlotEnabled As Boolean
+    Private _DynPlotPath As String
+    Private _DynPlotAcc As String
+    Private _DynPlotSize As Integer
+    Private _DynPlotFree As Integer
+    Private _DynPlotHide As Boolean
+
     'NRS
     Public Property AutoIp() As Boolean
         Get
@@ -205,6 +213,8 @@
             _Plots = value
         End Set
     End Property
+
+
 
 
     Friend Sub New()
