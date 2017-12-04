@@ -124,7 +124,7 @@
         Pools(4).Name = "pool poolofd32th"
         Pools(4).Address = "pool.poolofd32th.club"
         Pools(4).Port = "8124"
-        Pools(4).BurstAddress = "BURST-E925-FACX-C2X8-49772"
+        Pools(4).BurstAddress = "BURST-GATX-U4KB-7AWU-H3N8S"
         Pools(4).DeadLine = "2592000"
 
         Pools(5).Name = "xen poolofd32th"
