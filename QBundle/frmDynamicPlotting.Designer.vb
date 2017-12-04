@@ -22,6 +22,7 @@ Partial Class frmDynamicPlotting
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDynamicPlotting))
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.pnlOnOff = New System.Windows.Forms.Panel()
@@ -47,6 +48,7 @@ Partial Class frmDynamicPlotting
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.lstPlots = New System.Windows.Forms.ListBox()
+        Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -299,6 +301,12 @@ Partial Class frmDynamicPlotting
         Me.lstPlots.Size = New System.Drawing.Size(519, 56)
         Me.lstPlots.TabIndex = 0
         '
+        'cmlAccounts
+        '
+        Me.cmlAccounts.Name = "cmlAccounts"
+        Me.cmlAccounts.Size = New System.Drawing.Size(61, 4)
+        Me.cmlAccounts.Text = "Choose Account"
+        '
         'frmDynamicPlotting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -351,4 +359,5 @@ Partial Class frmDynamicPlotting
     Friend WithEvents btnRemove As Button
     Friend WithEvents btnImport As Button
     Friend WithEvents lstPlots As ListBox
+    Friend WithEvents cmlAccounts As ContextMenuStrip
 End Class

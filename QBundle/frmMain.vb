@@ -771,8 +771,6 @@
     End Sub
 
 
-
-
 #End Region
 
     Private Sub OneMinCron_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OneMinCron.Tick
@@ -784,14 +782,41 @@
                 Totalfree = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalFreeSpace   'bytes
                 Totalfree = Math.Floor(Totalfree / 1024 / 1024 / 1024) 'GiB
 
-                If Totalfree > Q.settings.DynPlotFree Then
+                If Totalfree > Q.settings.DynPlotFree + Q.settings.DynPlotSize Then 'we must still have free space efter creation
                     'check if xplotter is running
+                    If Not Generic.IsProcessRunning("xplotter") Then
+                        'ok we can start a new plot
+                        'find StartingNonce.
+                        Dim Sn As String = Generic.GetStartNonce(Q.settings.DynPlotAcc, (Q.settings.DynPlotSize * 4096) - 1).ToString
+                        Dim n As String = (Q.settings.DynPlotSize * 4096).ToString
+                        Dim p As Process = New Process
+                        p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
+                        p.StartInfo.Arguments = "-id " & Q.settings.DynPlotAcc & " -sn " & Sn & " -n " & n & " -path " & Q.settings.DynPlotPath & " -mem 1G"
+                        p.StartInfo.UseShellExecute = False
+                        If Q.settings.DynPlotHide Then
+                            p.StartInfo.CreateNoWindow = True
+                        End If
+                        If QGlobal.CPUInstructions.AVX Then
+                            p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
+                        Else
+                            p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_sse.exe"
+                        End If
+                        p.Start()
 
+                        Dim filePath As String = Q.settings.DynPlotPath
+                        If Not filePath.EndsWith("\") Then filePath &= "\"
+                        filePath &= Q.settings.DynPlotAcc & "_" 'account 
+                        filePath &= Sn & "_" 'startnonce
+                        filePath &= n & "_" 'length
+                        filePath &= n 'stagger
+                        Q.settings.Plots &= filePath & "|"
+                        Q.settings.SaveSettings()
 
+                    End If
                 End If
-
                 'remove from files. we might fail if xplotter is running.
                 If Totalfree < Q.settings.DynPlotFree Then
+                    Generic.KillAllProcessesWithName("xplotter")
                     Dim Files() As String = Split(Q.settings.Plots, "|")
                     For t As Integer = UBound(Files) To 0 Step -1
                         If LCase(Files(t)).StartsWith(LCase(Q.settings.DynPlotPath)) Then 'is it in the dir with dynplotting?
@@ -809,9 +834,7 @@
                             End If
                         End If
                     Next
-
                 End If
-
             Catch ex As Exception
                 If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try

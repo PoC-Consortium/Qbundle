@@ -484,6 +484,34 @@ Friend Class Generic
 
         Return Ok
     End Function
+    Friend Shared Function IsProcessRunning(ByVal Name As String) As Boolean
+        Dim Ok As Boolean = True
+        Dim searcher As ManagementObjectSearcher
+        Dim RetVal As Boolean = False
+        Dim prc As String = ""
+        searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process") ' WHERE Name='" & exeName & "'
+        For Each p As ManagementObject In searcher.[Get]()
+            prc = LCase(p("Name"))
+            If prc.Contains(LCase(Name)) Then RetVal = True
+        Next
+        Return RetVal
+    End Function
+    Friend Shared Sub KillAllProcessesWithName(ByVal Name As String)
+        Dim Ok As Boolean = True
+        Dim searcher As ManagementObjectSearcher
+        Dim prc As String = ""
+        searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process") ' WHERE Name='" & exeName & "'
+        For Each p As ManagementObject In searcher.[Get]()
+            prc = LCase(p("Name"))
+            If prc.Contains(LCase(Name)) Then
+                Dim proc As Process = Process.GetProcessById(Integer.Parse(p("ProcessId").ToString))
+                proc.Kill()
+                Threading.Thread.Sleep(100)
+            End If
+
+
+        Next
+    End Sub
     Friend Shared Function GetMyIp() As String
         Try
             Dim WC As Net.WebClient = New Net.WebClient()
@@ -543,7 +571,35 @@ Friend Class Generic
         End If
         QGlobal.Wallets(0).Address = url
     End Sub
+    Friend Shared Function GetStartNonce(ByVal AccountID As String, ByVal Length As Double) As Double
 
+        Dim Plotfiles() As String
+
+        Dim StartNonce As Double = 0
+        Dim EndNonce As Double = StartNonce + Length
+        Dim HighestEndNonce As Double = 0
+        Dim PEndNonce As Double = 0
+        Try
+            If Q.settings.Plots.Length > 0 Then
+                Plotfiles = Split(Q.settings.Plots, "|")
+                For Each Plot As String In Plotfiles
+                    If Plot.Length > 1 Then
+                        Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
+                        If UBound(N) = 3 Then
+                            If N(0) = Trim(AccountID) Then
+                                PEndNonce = CDbl(N(1)) + CDbl(N(2))
+                                If PEndNonce > HighestEndNonce Then HighestEndNonce = PEndNonce
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return HighestEndNonce
+    End Function
     Public Shared Function GetNTPTime(ByVal ntpServer As String) As Date
 
         Dim OffSeconds As Integer = 0

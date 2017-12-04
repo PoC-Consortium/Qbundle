@@ -202,6 +202,7 @@ Public Class frmPlotter
             filePath &= CStr(HSSize.Value) & "_" 'length
             filePath &= CStr(HSSize.Value) 'stagger
             Q.settings.Plots &= filePath & "|"
+            Q.settings.SaveSettings()
             lstPlots.Items.Add(filePath)
         End If
 
@@ -225,32 +226,8 @@ Public Class frmPlotter
     End Sub
     Private Function GetStartNonce() As Double
 
-        Dim Plotfiles() As String
-        Dim AccountID As String = txtAccount.Text
-        Dim StartNonce As Double = 0
-        Dim EndNonce As Double = StartNonce + HSSize.Value - 1
-        Dim HighestEndNonce As Double = 0
-        Dim PEndNonce As Double = 0
-        Try
-            If Q.settings.Plots.Length > 0 Then
-                Plotfiles = Split(Q.settings.Plots, "|")
-                For Each Plot As String In Plotfiles
-                    If Plot.Length > 1 Then
-                        Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
-                        If UBound(N) = 3 Then
-                            If N(0) = Trim(AccountID) Then
-                                PEndNonce = CDbl(N(1)) + CDbl(N(2))
-                                If PEndNonce > HighestEndNonce Then HighestEndNonce = PEndNonce
-                            End If
-                        End If
-                    End If
-                Next
-            End If
-        Catch ex As Exception
-            Return False
-        End Try
+        Return Generic.GetStartNonce(txtAccount.Text, HSSize.Value - 1)
 
-        Return HighestEndNonce
     End Function
     Private Function checkPlotOverLapp() As Boolean
 
