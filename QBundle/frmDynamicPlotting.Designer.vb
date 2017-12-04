@@ -25,6 +25,8 @@ Partial Class frmDynamicPlotting
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDynamicPlotting))
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.pnlOnOff = New System.Windows.Forms.Panel()
+        Me.lblFreeSpace = New System.Windows.Forms.Label()
+        Me.lblPlotSize = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnAccounts = New System.Windows.Forms.Button()
         Me.txtAccount = New System.Windows.Forms.TextBox()
@@ -41,10 +43,15 @@ Partial Class frmDynamicPlotting
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.lstPlots = New System.Windows.Forms.ListBox()
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox3
@@ -61,6 +68,8 @@ Partial Class frmDynamicPlotting
         '
         'pnlOnOff
         '
+        Me.pnlOnOff.Controls.Add(Me.lblFreeSpace)
+        Me.pnlOnOff.Controls.Add(Me.lblPlotSize)
         Me.pnlOnOff.Controls.Add(Me.Label5)
         Me.pnlOnOff.Controls.Add(Me.btnAccounts)
         Me.pnlOnOff.Controls.Add(Me.txtAccount)
@@ -72,10 +81,29 @@ Partial Class frmDynamicPlotting
         Me.pnlOnOff.Controls.Add(Me.Label3)
         Me.pnlOnOff.Controls.Add(Me.HSSize)
         Me.pnlOnOff.Controls.Add(Me.btnPath)
+        Me.pnlOnOff.Enabled = False
         Me.pnlOnOff.Location = New System.Drawing.Point(10, 66)
         Me.pnlOnOff.Name = "pnlOnOff"
         Me.pnlOnOff.Size = New System.Drawing.Size(338, 248)
         Me.pnlOnOff.TabIndex = 33
+        '
+        'lblFreeSpace
+        '
+        Me.lblFreeSpace.AutoSize = True
+        Me.lblFreeSpace.Location = New System.Drawing.Point(103, 157)
+        Me.lblFreeSpace.Name = "lblFreeSpace"
+        Me.lblFreeSpace.Size = New System.Drawing.Size(10, 13)
+        Me.lblFreeSpace.TabIndex = 32
+        Me.lblFreeSpace.Text = "-"
+        '
+        'lblPlotSize
+        '
+        Me.lblPlotSize.AutoSize = True
+        Me.lblPlotSize.Location = New System.Drawing.Point(154, 94)
+        Me.lblPlotSize.Name = "lblPlotSize"
+        Me.lblPlotSize.Size = New System.Drawing.Size(36, 13)
+        Me.lblPlotSize.TabIndex = 31
+        Me.lblPlotSize.Text = "10GiB"
         '
         'Label5
         '
@@ -106,6 +134,8 @@ Partial Class frmDynamicPlotting
         'chkHide
         '
         Me.chkHide.AutoSize = True
+        Me.chkHide.Checked = True
+        Me.chkHide.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkHide.Location = New System.Drawing.Point(9, 222)
         Me.chkHide.Name = "chkHide"
         Me.chkHide.Size = New System.Drawing.Size(119, 17)
@@ -147,9 +177,9 @@ Partial Class frmDynamicPlotting
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 156)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(118, 13)
+        Me.Label1.Size = New System.Drawing.Size(99, 13)
         Me.Label1.TabIndex = 28
-        Me.Label1.Text = "Choose free space in %"
+        Me.Label1.Text = "Choose free space:"
         '
         'Label3
         '
@@ -163,15 +193,13 @@ Partial Class frmDynamicPlotting
         'HSSize
         '
         Me.HSSize.Location = New System.Drawing.Point(7, 109)
-        Me.HSSize.Maximum = 50000
-        Me.HSSize.Minimum = 8
+        Me.HSSize.Maximum = 100
+        Me.HSSize.Minimum = 1
         Me.HSSize.Name = "HSSize"
         Me.HSSize.Size = New System.Drawing.Size(321, 45)
-        Me.HSSize.SmallChange = 8
         Me.HSSize.TabIndex = 27
-        Me.HSSize.TickFrequency = 8
         Me.HSSize.TickStyle = System.Windows.Forms.TickStyle.Both
-        Me.HSSize.Value = 8
+        Me.HSSize.Value = 10
         '
         'btnPath
         '
@@ -220,25 +248,64 @@ Partial Class frmDynamicPlotting
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(378, 39)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(258, 78)
+        Me.Label6.Size = New System.Drawing.Size(253, 117)
         Me.Label6.TabIndex = 36
         Me.Label6.Text = resources.GetString("Label6.Text")
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(535, 302)
+        Me.btnSave.Location = New System.Drawing.Point(535, 307)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(100, 29)
         Me.btnSave.TabIndex = 37
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnRemove)
+        Me.GroupBox1.Controls.Add(Me.btnImport)
+        Me.GroupBox1.Controls.Add(Me.lstPlots)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 342)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(623, 84)
+        Me.GroupBox1.TabIndex = 38
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "My Plotfiles"
+        '
+        'btnRemove
+        '
+        Me.btnRemove.Location = New System.Drawing.Point(531, 48)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(88, 27)
+        Me.btnRemove.TabIndex = 2
+        Me.btnRemove.Text = "Remove plotfile"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
+        'btnImport
+        '
+        Me.btnImport.Location = New System.Drawing.Point(531, 19)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(88, 27)
+        Me.btnImport.TabIndex = 1
+        Me.btnImport.Text = "Import plotfile"
+        Me.btnImport.UseVisualStyleBackColor = True
+        '
+        'lstPlots
+        '
+        Me.lstPlots.FormattingEnabled = True
+        Me.lstPlots.Location = New System.Drawing.Point(6, 19)
+        Me.lstPlots.Name = "lstPlots"
+        Me.lstPlots.Size = New System.Drawing.Size(519, 56)
+        Me.lstPlots.TabIndex = 0
+        '
         'frmDynamicPlotting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(647, 343)
+        Me.ClientSize = New System.Drawing.Size(647, 438)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
@@ -255,6 +322,7 @@ Partial Class frmDynamicPlotting
         Me.pnlOnOff.PerformLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -277,4 +345,10 @@ Partial Class frmDynamicPlotting
     Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents btnSave As Button
+    Friend WithEvents lblFreeSpace As Label
+    Friend WithEvents lblPlotSize As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents btnRemove As Button
+    Friend WithEvents btnImport As Button
+    Friend WithEvents lstPlots As ListBox
 End Class

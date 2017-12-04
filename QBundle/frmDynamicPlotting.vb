@@ -27,11 +27,6 @@
             End If
         End If
 
-
-
-
-
-
         Q.settings.DynPlotEnabled = True
 
         If rEnable.Checked = True Then
@@ -60,6 +55,60 @@
         trFreeSpace.Value = Q.settings.DynPlotFree
         chkHide.Checked = Q.settings.DynPlotHide
 
+        Dim TotalSpace As Long
+        If Q.settings.DynPlotEnabled Then
+            Try
+                TotalSpace = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalSize  'bytes
+                TotalSpace = Math.Floor(TotalSpace / 1024 / 1024 / 1024) 'GiB
+                trFreeSpace.Minimum = 1
+                trFreeSpace.Maximum = TotalSpace
+            Catch ex As Exception
 
+            End Try
+        End If
+        txtPath.Text = Q.settings.DynPlotPath
+        txtAccount.Text = Q.settings.DynPlotAcc
+        HSSize.Value = Q.settings.DynPlotSize
+        trFreeSpace.Value = Q.settings.DynPlotFree
+        chkHide.Checked = Q.settings.DynPlotHide
+        lblPlotSize.Text = HSSize.Value.ToString & "GiB"
+        lblFreeSpace.Text = CStr(trFreeSpace.Value) & "GiB (" & Math.Floor((trFreeSpace.Value / TotalSpace) * 100).ToString & "%)"
+
+    End Sub
+
+    Private Sub rDisable_CheckedChanged(sender As Object, e As EventArgs) Handles rDisable.Click
+        pnlOnOff.Enabled = False
+
+    End Sub
+    Private Sub rEnable_CheckedChanged(sender As Object, e As EventArgs) Handles rEnable.CheckedChanged
+        pnlOnOff.Enabled = True
+    End Sub
+    Private Sub btnPath_Click(sender As Object, e As EventArgs) Handles btnPath.Click
+        Dim FD As New FolderBrowserDialog
+        If FD.ShowDialog() = DialogResult.OK Then
+            txtPath.Text = FD.SelectedPath
+            If IO.Path.GetPathRoot(FD.SelectedPath) = FD.SelectedPath Then
+                MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
+            End If
+            Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
+            TotalSpace = Math.Floor(TotalSpace / 1024 / 1024 / 1024) 'GiB
+            trFreeSpace.Minimum = 1
+            trFreeSpace.Maximum = TotalSpace
+            trFreeSpace.Value = TotalSpace / 10 'set 10% as start value
+            lblFreeSpace.Text = CStr(TotalSpace / 10) & "GiB (10%)"
+
+        End If
+    End Sub
+    Private Sub HSSize_Scroll(sender As Object, e As EventArgs) Handles HSSize.ValueChanged
+        lblPlotSize.Text = HSSize.Value.ToString & "GiB"
+    End Sub
+    Private Sub trFreeSpace_Scroll(sender As Object, e As EventArgs) Handles trFreeSpace.ValueChanged
+        Try
+            Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
+            TotalSpace = Math.Floor(TotalSpace / 1024 / 1024 / 1024) 'GiB
+            lblFreeSpace.Text = CStr(trFreeSpace.Value) & "GiB (" & Math.Floor((trFreeSpace.Value / TotalSpace) * 100).ToString & "%)"
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

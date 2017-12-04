@@ -119,11 +119,14 @@
   </resheader>
   <data name="Label6.Text" xml:space="preserve">
     <value>Dynamic plotting is a feature that will add and 
-remove plots depending on free space of the drive.
-If your space is less than chosen free space on drive 
-it will start to create plot files. The sizes of the plot 
-files can be set from 1Gb to 100Gb. The detection is 
-done once a minute.
+remove plots depending on free space in the drive.
+If you have more free space than chosen on drive 
+it will start to create plot files in the background. 
+The sizes of the plot files can be set from 1Gb to 
+100Gb. If the space is lower than chosen value the
+last plot files created will be removed until criteria are
+met. The detection is done once a minute and files 
+created will be added to my plotfiles.
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

@@ -14,6 +14,7 @@
     Private WithEvents APITimer As Timer
     Private WithEvents ShutdownWallet As Timer
     Private WithEvents PasswordTimer As Timer
+    Private WithEvents OneMinCron As Timer
 
 
     Private CurHeight As Integer
@@ -76,6 +77,8 @@
         APITimer = New Timer
         ShutdownWallet = New Timer
         PasswordTimer = New Timer
+        OneMinCron = New Timer
+
 
         AddHandler Q.ProcHandler.Started, AddressOf Starting
         AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
@@ -96,6 +99,11 @@
         If StartImport = DialogResult.Yes Then
             frmImport.Show()
         End If
+
+
+        OneMinCron.Interval = 60000
+        OneMinCron.Enabled = True
+        OneMinCron.Start()
 
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
@@ -767,7 +775,51 @@
 
 #End Region
 
+    Private Sub OneMinCron_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OneMinCron.Tick
 
+        If Q.settings.DynPlotEnabled Then
+            'check free space
+            Dim Totalfree As Long
+            Try
+                Totalfree = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalFreeSpace   'bytes
+                Totalfree = Math.Floor(Totalfree / 1024 / 1024 / 1024) 'GiB
+
+                If Totalfree > Q.settings.DynPlotFree Then
+                    'check if xplotter is running
+
+
+                End If
+
+                'remove from files. we might fail if xplotter is running.
+                If Totalfree < Q.settings.DynPlotFree Then
+                    Dim Files() As String = Split(Q.settings.Plots, "|")
+                    For t As Integer = UBound(Files) To 0 Step -1
+                        If LCase(Files(t)).StartsWith(LCase(Q.settings.DynPlotPath)) Then 'is it in the dir with dynplotting?
+                            'we have found a file to remove.
+                            If IO.File.Exists(Files(t)) Then
+                                IO.File.Delete(Files(t))
+                                Q.settings.Plots = Replace(Q.settings.Plots, Files(t) & "|", "")
+                                Q.settings.SaveSettings()
+                                Exit For
+                            Else
+                                'not existing so we just remove it from path
+                                Q.settings.Plots = Replace(Q.settings.Plots, Files(t) & "|", "")
+                                Q.settings.SaveSettings()
+                                'no exit we still need to remove.
+                            End If
+                        End If
+                    Next
+
+                End If
+
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+        End If
+
+
+
+    End Sub
 
 
 
