@@ -130,7 +130,10 @@ Public Class frmPlotter
             End If
         End If
         'ok Xplotter is now installed
-
+        If Q.settings.DynPlotEnabled Then
+            MsgBox("Dynamic plotting is enabled. You need to disable dynamic plotting while plotting like this.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Dynamic plotting")
+            Exit Sub
+        End If
         'check path
         Dim Path As String = txtPath.Text
         If IO.Path.GetPathRoot(Path) = Path Then
