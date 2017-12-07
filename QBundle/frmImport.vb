@@ -114,6 +114,7 @@
     End Sub
     Private Sub ImportFromFile(ByVal FileName As String)
 
+        If FileName.Contains(" ") Then FileName = Chr(34) & FileName & Chr(34)
         Dim Pset As New clsProcessHandler.pSettings
         Pset.AppId = QGlobal.AppNames.Import
         If Q.settings.JavaType = QGlobal.AppNames.JavaInstalled Then

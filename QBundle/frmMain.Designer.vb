@@ -58,6 +58,7 @@ Partial Class frmMain
         Me.ChangeDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlotterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DynamicPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -86,7 +87,8 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.DynamicPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdvancedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RollbackChainpopoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -250,7 +252,7 @@ Partial Class frmMain
         '
         'WalletToolStripMenuItem
         '
-        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsStartStop, Me.ModeToolStripMenuItem, Me.ToolStripMenuItem4, Me.ServiceToolStripMenuItem})
+        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsStartStop, Me.ModeToolStripMenuItem, Me.ToolStripMenuItem4, Me.ServiceToolStripMenuItem, Me.AdvancedToolStripMenuItem})
         Me.WalletToolStripMenuItem.Name = "WalletToolStripMenuItem"
         Me.WalletToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.WalletToolStripMenuItem.Text = "Wallet"
@@ -258,14 +260,14 @@ Partial Class frmMain
         'tsStartStop
         '
         Me.tsStartStop.Name = "tsStartStop"
-        Me.tsStartStop.Size = New System.Drawing.Size(134, 22)
+        Me.tsStartStop.Size = New System.Drawing.Size(152, 22)
         Me.tsStartStop.Text = "Start Wallet"
         '
         'ModeToolStripMenuItem
         '
         Me.ModeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WalletModeToolStripMenuItem, Me.LauncherModeToolStripMenuItem})
         Me.ModeToolStripMenuItem.Name = "ModeToolStripMenuItem"
-        Me.ModeToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.ModeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ModeToolStripMenuItem.Text = "Mode"
         '
         'WalletModeToolStripMenuItem
@@ -283,13 +285,13 @@ Partial Class frmMain
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(131, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(149, 6)
         '
         'ServiceToolStripMenuItem
         '
         Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
         Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
-        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ServiceToolStripMenuItem.Text = "Service"
         '
         'InstallAsAServiceToolStripMenuItem
@@ -346,6 +348,12 @@ Partial Class frmMain
         Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
         Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.PlotterToolStripMenuItem.Text = "Plotter"
+        '
+        'DynamicPlottingToolStripMenuItem
+        '
+        Me.DynamicPlottingToolStripMenuItem.Name = "DynamicPlottingToolStripMenuItem"
+        Me.DynamicPlottingToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.DynamicPlottingToolStripMenuItem.Text = "Dynamic Plotting"
         '
         'MinerToolStripMenuItem
         '
@@ -550,11 +558,18 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(502, 105)
         Me.wb1.TabIndex = 0
         '
-        'DynamicPlottingToolStripMenuItem
+        'AdvancedToolStripMenuItem
         '
-        Me.DynamicPlottingToolStripMenuItem.Name = "DynamicPlottingToolStripMenuItem"
-        Me.DynamicPlottingToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.DynamicPlottingToolStripMenuItem.Text = "Dynamic Plotting"
+        Me.AdvancedToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RollbackChainpopoffToolStripMenuItem})
+        Me.AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem"
+        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AdvancedToolStripMenuItem.Text = "Advanced"
+        '
+        'RollbackChainpopoffToolStripMenuItem
+        '
+        Me.RollbackChainpopoffToolStripMenuItem.Name = "RollbackChainpopoffToolStripMenuItem"
+        Me.RollbackChainpopoffToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.RollbackChainpopoffToolStripMenuItem.Text = "Rollback chain (popoff)"
         '
         'frmMain
         '
@@ -651,4 +666,6 @@ Partial Class frmMain
     Friend WithEvents LauncherModeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
     Friend WithEvents DynamicPlottingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AdvancedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RollbackChainpopoffToolStripMenuItem As ToolStripMenuItem
 End Class

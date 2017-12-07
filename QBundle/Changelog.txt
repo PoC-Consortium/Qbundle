@@ -11,12 +11,15 @@ Stuck detection. try to restart NRS (if no new block in 60min then try restart N
 Environment check (check enough ram and disk space).
 Online Wallet mode. (does not start local wallet)
 blago miner solo delete passphrases after start.
+Fix new first screen. Express setup / Advanced setup
 
 ~V1.4
 * restricted path for Xplotter.
 + Added NTP time check.
 + Dynamic plotting
 * updated built in pool list.
+* fixed a bug when importing bbd files.
++ Rollback chain function
 
 V1.3
 + Full wallet mode.

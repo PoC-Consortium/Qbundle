@@ -63,7 +63,7 @@ Friend Class Generic
         Q.settings.SaveSettings()
 
     End Sub
-    Friend Shared Sub WriteBRSConfig()
+    Friend Shared Sub WriteBRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Data As String = ""
         Dim Buffer() As String = Nothing
         'writing brs.properties
@@ -140,9 +140,18 @@ Friend Class Generic
             Data &= "brs.oclVerify = true" & vbCrLf & vbCrLf
 
         End If
-
+        If WriteDebug Then
+            Data &= "#Debug mode" & vbCrLf
+            Data &= "brs.disablePeerConnectingThread = true" & vbCrLf
+            Data &= "brs.enableTransactionRebroadcasting=false" & vbCrLf
+            Data &= "brs.disableGetMorePeersThread = true " & vbCrLf
+            Data &= "brs.disableProcessTransactionsThread = true" & vbCrLf
+            Data &= "brs.disableRemoveUnconfirmedTransactionsThread = true" & vbCrLf
+            Data &= "brs.disableRebroadcastTransactionsThread = true" & vbCrLf
+            Data &= "brs.apiServerEnforcePOST = false" & vbCrLf
+            Data &= "brs.enableDebugAPI = true" & vbCrLf & vbCrLf
+        End If
         Try
-
             IO.File.WriteAllText(QGlobal.AppDir & "conf\brs.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -151,11 +160,11 @@ Friend Class Generic
 
 
     End Sub
-    Friend Shared Sub WriteWalletConfig()
-        WriteNRSConfig()
-        ' WriteBRSConfig()
+    Friend Shared Sub WriteWalletConfig(Optional ByVal WriteDebug As Boolean = False)
+        ' WriteNRSConfig(WriteDebug)
+        WriteBRSConfig(WriteDebug)
     End Sub
-    Friend Shared Sub WriteNRSConfig()
+    Friend Shared Sub WriteNRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Data As String = ""
         Dim Buffer() As String = Nothing
         'writing brs.properties
@@ -233,8 +242,22 @@ Friend Class Generic
 
         End If
 
-        Try
+        If WriteDebug Then
+            Data &= "#Debug mode" & vbCrLf
+            Data &= "nxt.disablePeerConnectingThread = true" & vbCrLf
+            Data &= "nxt.enableTransactionRebroadcasting=false" & vbCrLf
+            Data &= "nxt.disableGetMorePeersThread = true " & vbCrLf
+            Data &= "nxt.disableProcessTransactionsThread = true" & vbCrLf
+            Data &= "nxt.disableRemoveUnconfirmedTransactionsThread = true" & vbCrLf
+            Data &= "nxt.disableRebroadcastTransactionsThread = true" & vbCrLf
+            Data &= "nxt.apiServerEnforcePOST = false" & vbCrLf
+            Data &= "nxt.enableDebugAPI = true" & vbCrLf & vbCrLf
 
+        End If
+
+
+
+        Try
             IO.File.WriteAllText(QGlobal.AppDir & "conf\nxt.properties", Data)
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)

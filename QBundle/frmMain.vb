@@ -442,9 +442,9 @@
         End If
 
     End Sub
-    Friend Sub StartWallet()
+    Friend Sub StartWallet(Optional ByVal WriteDebug As Boolean = False)
         If Not QB.Generic.SanityCheck() Then Exit Sub
-        QB.Generic.WriteWalletConfig()
+        QB.Generic.WriteWalletConfig(WriteDebug)
         If Q.Service.IsInstalled Then
             Q.Service.StartService()
         Else
@@ -844,6 +844,8 @@
 
     End Sub
 
+    Private Sub RollbackChainpopoffToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RollbackChainpopoffToolStripMenuItem.Click
+        frmPopOff.Show()
 
-
+    End Sub
 End Class
