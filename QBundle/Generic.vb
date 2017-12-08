@@ -161,8 +161,8 @@ Friend Class Generic
 
     End Sub
     Friend Shared Sub WriteWalletConfig(Optional ByVal WriteDebug As Boolean = False)
-        ' WriteNRSConfig(WriteDebug)
-        WriteBRSConfig(WriteDebug)
+        WriteNRSConfig(WriteDebug)
+        ' WriteBRSConfig(WriteDebug)
     End Sub
     Friend Shared Sub WriteNRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Data As String = ""

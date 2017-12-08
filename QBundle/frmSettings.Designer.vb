@@ -89,6 +89,7 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkNTP = New System.Windows.Forms.CheckBox()
         Me.chkOnlineWallets = New System.Windows.Forms.CheckBox()
         Me.chkDebug = New System.Windows.Forms.CheckBox()
         Me.chkAlwaysAdmin = New System.Windows.Forms.CheckBox()
@@ -96,7 +97,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkNTP = New System.Windows.Forms.CheckBox()
+        Me.chkMinToTray = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -791,6 +792,7 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkMinToTray)
         Me.Panel2.Controls.Add(Me.chkNTP)
         Me.Panel2.Controls.Add(Me.chkOnlineWallets)
         Me.Panel2.Controls.Add(Me.chkDebug)
@@ -802,6 +804,16 @@ Partial Class frmSettings
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
+        '
+        'chkNTP
+        '
+        Me.chkNTP.AutoSize = True
+        Me.chkNTP.Location = New System.Drawing.Point(11, 134)
+        Me.chkNTP.Name = "chkNTP"
+        Me.chkNTP.Size = New System.Drawing.Size(223, 17)
+        Me.chkNTP.TabIndex = 7
+        Me.chkNTP.Text = "Check computer time against NTP server."
+        Me.chkNTP.UseVisualStyleBackColor = True
         '
         'chkOnlineWallets
         '
@@ -877,15 +889,15 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkNTP
+        'chkMinToTray
         '
-        Me.chkNTP.AutoSize = True
-        Me.chkNTP.Location = New System.Drawing.Point(11, 134)
-        Me.chkNTP.Name = "chkNTP"
-        Me.chkNTP.Size = New System.Drawing.Size(223, 17)
-        Me.chkNTP.TabIndex = 7
-        Me.chkNTP.Text = "Check computer time against NTP server."
-        Me.chkNTP.UseVisualStyleBackColor = True
+        Me.chkMinToTray.AutoSize = True
+        Me.chkMinToTray.Location = New System.Drawing.Point(11, 155)
+        Me.chkMinToTray.Name = "chkMinToTray"
+        Me.chkMinToTray.Size = New System.Drawing.Size(167, 17)
+        Me.chkMinToTray.TabIndex = 8
+        Me.chkMinToTray.Text = "Minimize Qbundle to tray icon."
+        Me.chkMinToTray.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -1000,4 +1012,5 @@ Partial Class frmSettings
     Friend WithEvents chkDebug As CheckBox
     Friend WithEvents chkOnlineWallets As CheckBox
     Friend WithEvents chkNTP As CheckBox
+    Friend WithEvents chkMinToTray As CheckBox
 End Class

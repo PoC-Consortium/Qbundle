@@ -171,6 +171,20 @@
         End Try
 
     End Sub
+    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            Try
+                If Q.settings.MinToTray Then
+                    TrayIcon.Visible = True
+                    Me.ShowInTaskbar = False
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+
+
     Private Sub ShudownWallet_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShutdownWallet.Tick
         If Running = False Then
             Me.Close()
@@ -847,5 +861,12 @@
     Private Sub RollbackChainpopoffToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RollbackChainpopoffToolStripMenuItem.Click
         frmPopOff.Show()
 
+    End Sub
+
+    Private Sub TrayIcon_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles TrayIcon.MouseClick
+        Me.WindowState = FormWindowState.Normal
+        Me.ShowInTaskbar = True
+        TrayIcon.Visible = False
+        Me.Show()
     End Sub
 End Class

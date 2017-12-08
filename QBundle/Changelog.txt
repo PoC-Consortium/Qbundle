@@ -12,6 +12,9 @@ Environment check (check enough ram and disk space).
 Online Wallet mode. (does not start local wallet)
 blago miner solo delete passphrases after start.
 Fix new first screen. Express setup / Advanced setup
+Batch import existing plots
+minimize to tray
+
 
 ~V1.4
 * restricted path for Xplotter.

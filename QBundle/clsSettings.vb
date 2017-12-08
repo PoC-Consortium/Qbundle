@@ -28,6 +28,7 @@
     Private _Debug As Boolean
     Private _UseOnlineWallet As Boolean
     Private _NTPCheck As Boolean
+    Private _MinToTray As Boolean
     'Plotting And Mining
     Private _Plots As String
     'dynamic plotting
@@ -284,7 +285,14 @@
             _DynPlotHide = value
         End Set
     End Property
-
+    Public Property MinToTray() As Boolean
+        Get
+            Return _MinToTray
+        End Get
+        Set(ByVal value As Boolean)
+            _MinToTray = value
+        End Set
+    End Property
 
     Friend Sub New()
         _autoip = False
@@ -313,6 +321,7 @@
         _Debug = False
         _UseOnlineWallet = False
         _NTPCheck = True
+        _MinToTray = False
 
         _DynPlotEnabled = False
         _DynPlotPath = ""

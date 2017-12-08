@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblGotoWallet = New System.Windows.Forms.LinkLabel()
@@ -51,6 +52,8 @@ Partial Class frmMain
         Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdvancedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RollbackChainpopoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportDatabaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,8 +90,7 @@ Partial Class frmMain
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
         Me.wb1 = New System.Windows.Forms.WebBrowser()
-        Me.AdvancedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RollbackChainpopoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TrayIcon = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -260,14 +262,14 @@ Partial Class frmMain
         'tsStartStop
         '
         Me.tsStartStop.Name = "tsStartStop"
-        Me.tsStartStop.Size = New System.Drawing.Size(152, 22)
+        Me.tsStartStop.Size = New System.Drawing.Size(134, 22)
         Me.tsStartStop.Text = "Start Wallet"
         '
         'ModeToolStripMenuItem
         '
         Me.ModeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WalletModeToolStripMenuItem, Me.LauncherModeToolStripMenuItem})
         Me.ModeToolStripMenuItem.Name = "ModeToolStripMenuItem"
-        Me.ModeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ModeToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.ModeToolStripMenuItem.Text = "Mode"
         '
         'WalletModeToolStripMenuItem
@@ -285,13 +287,13 @@ Partial Class frmMain
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(131, 6)
         '
         'ServiceToolStripMenuItem
         '
         Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
         Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
-        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.ServiceToolStripMenuItem.Text = "Service"
         '
         'InstallAsAServiceToolStripMenuItem
@@ -305,6 +307,19 @@ Partial Class frmMain
         Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
         Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
         Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
+        '
+        'AdvancedToolStripMenuItem
+        '
+        Me.AdvancedToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RollbackChainpopoffToolStripMenuItem})
+        Me.AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem"
+        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.AdvancedToolStripMenuItem.Text = "Advanced"
+        '
+        'RollbackChainpopoffToolStripMenuItem
+        '
+        Me.RollbackChainpopoffToolStripMenuItem.Name = "RollbackChainpopoffToolStripMenuItem"
+        Me.RollbackChainpopoffToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.RollbackChainpopoffToolStripMenuItem.Text = "Rollback chain (popoff)"
         '
         'ToolsToolStripMenuItem
         '
@@ -558,18 +573,12 @@ Partial Class frmMain
         Me.wb1.Size = New System.Drawing.Size(502, 105)
         Me.wb1.TabIndex = 0
         '
-        'AdvancedToolStripMenuItem
+        'TrayIcon
         '
-        Me.AdvancedToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RollbackChainpopoffToolStripMenuItem})
-        Me.AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem"
-        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.AdvancedToolStripMenuItem.Text = "Advanced"
-        '
-        'RollbackChainpopoffToolStripMenuItem
-        '
-        Me.RollbackChainpopoffToolStripMenuItem.Name = "RollbackChainpopoffToolStripMenuItem"
-        Me.RollbackChainpopoffToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
-        Me.RollbackChainpopoffToolStripMenuItem.Text = "Rollback chain (popoff)"
+        Me.TrayIcon.BalloonTipText = "Burstwallet"
+        Me.TrayIcon.BalloonTipTitle = "Burstwallet"
+        Me.TrayIcon.Icon = CType(resources.GetObject("TrayIcon.Icon"), System.Drawing.Icon)
+        Me.TrayIcon.Text = "Burstwallet"
         '
         'frmMain
         '
@@ -668,4 +677,5 @@ Partial Class frmMain
     Friend WithEvents DynamicPlottingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AdvancedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RollbackChainpopoffToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TrayIcon As NotifyIcon
 End Class
