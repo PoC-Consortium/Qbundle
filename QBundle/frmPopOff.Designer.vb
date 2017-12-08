@@ -60,10 +60,10 @@ Partial Class frmPopOff
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(104, 56)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(284, 26)
+        Me.Label3.Size = New System.Drawing.Size(311, 26)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Rolling back the chain should only be done if you problems" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "with your wallet. Max" &
-    " rollback allowed are 1440 blocks."
+        Me.Label3.Text = "Rolling back the chain should only be done if you have" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "problems with your wallet" &
+    ". Max rollback allowed are 1440 blocks."
         '
         'Label4
         '
@@ -116,7 +116,7 @@ Partial Class frmPopOff
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(417, 161)
+        Me.ClientSize = New System.Drawing.Size(429, 161)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.btnStart)

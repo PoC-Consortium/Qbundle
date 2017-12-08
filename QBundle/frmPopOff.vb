@@ -29,10 +29,6 @@
         End If
     End Sub
 
-    Private Sub frmPopOff_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
 
     Private Sub WaitTimer_tick() Handles WaitTimer.Tick
 
@@ -88,5 +84,16 @@
 
     End Sub
 
+
+
+
+
+    Private Sub PopOffSome()
+
+
+
+
+
+    End Sub
 
 End Class

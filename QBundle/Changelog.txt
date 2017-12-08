@@ -7,13 +7,13 @@ Known problems:
 
 To Be done:
 pipeclient+server implementation in service
-Stuck detection. try to restart NRS (if no new block in 60min then try restart NRS)
+
 Environment check (check enough ram and disk space).
 Online Wallet mode. (does not start local wallet)
 blago miner solo delete passphrases after start.
 Fix new first screen. Express setup / Advanced setup
+Make More data Updatabable. Like online wallets and pool lists. 
 Batch import existing plots
-minimize to tray
 
 
 ~V1.4
@@ -22,7 +22,8 @@ minimize to tray
 + Dynamic plotting
 * updated built in pool list.
 * fixed a bug when importing bbd files.
-+ Rollback chain function
++ Rollback chain function (popoff blocks)
++ Minimize to tray function
 
 V1.3
 + Full wallet mode.

@@ -141,7 +141,7 @@ Partial Class frmFirstTime
         Me.lblFireBirdDesc.Name = "lblFireBirdDesc"
         Me.lblFireBirdDesc.Size = New System.Drawing.Size(230, 13)
         Me.lblFireBirdDesc.TabIndex = 5
-        Me.lblFireBirdDesc.Text = "The Firebird database is suitable for most users."
+        Me.lblFireBirdDesc.Text = "The Firebird database is suitable for most users." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'lblFireBirdHeader
         '
@@ -213,9 +213,9 @@ Partial Class frmFirstTime
         Me.lblOwnHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblOwnHeader.Location = New System.Drawing.Point(38, 12)
         Me.lblOwnHeader.Name = "lblOwnHeader"
-        Me.lblOwnHeader.Size = New System.Drawing.Size(238, 13)
+        Me.lblOwnHeader.Size = New System.Drawing.Size(190, 13)
         Me.lblOwnHeader.TabIndex = 3
-        Me.lblOwnHeader.Text = "Use installed MariaDB / MySql Database"
+        Me.lblOwnHeader.Text = "Use installed MariaDB Database"
         '
         'r3
         '
@@ -289,9 +289,10 @@ Partial Class frmFirstTime
         Me.lblH2Desc.ForeColor = System.Drawing.Color.Black
         Me.lblH2Desc.Location = New System.Drawing.Point(38, 27)
         Me.lblH2Desc.Name = "lblH2Desc"
-        Me.lblH2Desc.Size = New System.Drawing.Size(202, 13)
+        Me.lblH2Desc.Size = New System.Drawing.Size(281, 26)
         Me.lblH2Desc.TabIndex = 5
-        Me.lblH2Desc.Text = "Compatible with older and non cg wallets."
+        Me.lblH2Desc.Text = "Compatible with older and non cg wallets. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use this alternative if you are uncer" &
+    "tain of what to choose." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'lblH2Header
         '
