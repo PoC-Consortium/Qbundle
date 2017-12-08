@@ -145,15 +145,8 @@
     End Sub
 
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
+        Me.cmImport.Show(Me.btnImport, Me.btnImport.PointToClient(Cursor.Position))
 
-        Dim ofd As New OpenFileDialog
-        If ofd.ShowDialog = DialogResult.OK Then
-            If IO.File.Exists(ofd.FileName) Then
-                lstPlots.Items.Add(ofd.FileName)
-                Q.settings.Plots &= ofd.FileName & "|"
-                Q.settings.SaveSettings()
-            End If
-        End If
 
     End Sub
 
@@ -171,6 +164,32 @@
             Next
             Q.settings.SaveSettings()
 
+        End If
+    End Sub
+
+    Private Sub ImportFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFileToolStripMenuItem.Click
+        Dim ofd As New OpenFileDialog
+        If ofd.ShowDialog = DialogResult.OK Then
+            If IO.File.Exists(ofd.FileName) Then
+                lstPlots.Items.Add(ofd.FileName)
+                Q.settings.Plots &= ofd.FileName & "|"
+                Q.settings.SaveSettings()
+            End If
+        End If
+    End Sub
+
+    Private Sub ImportFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFolderToolStripMenuItem.Click
+        Dim ofd As New FolderBrowserDialog
+        If ofd.ShowDialog = DialogResult.OK Then
+            If IO.Directory.Exists(ofd.SelectedPath) Then
+                Dim fileEntries As String() = IO.Directory.GetFiles(ofd.SelectedPath)
+                For Each file As String In fileEntries
+                    lstPlots.Items.Add(file)
+                    Q.settings.Plots &= file & "|"
+                Next
+
+                Q.settings.SaveSettings()
+            End If
         End If
     End Sub
 End Class

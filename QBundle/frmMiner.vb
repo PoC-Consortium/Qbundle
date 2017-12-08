@@ -152,22 +152,10 @@
     End Sub
 
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
+        Me.cmImport.Show(Me.btnImport, Me.btnImport.PointToClient(Cursor.Position))
 
-        Dim ofd As New OpenFileDialog
-        If ofd.ShowDialog = DialogResult.OK Then
-            If IO.File.Exists(ofd.FileName) Then
-                lstPlots.Items.Add(ofd.FileName)
-                Q.settings.Plots &= ofd.FileName & "|"
-                Q.settings.SaveSettings()
-                If lstPlots.Items.Count = 1 Then
-                    If frmMain.Running And frmMain.FullySynced Then
-                        CheckRewardAssignment(0)
-                    ElseIf Q.settings.UseOnlineWallet Then
-                        CheckRewardAssignment(1)
-                    End If
-                End If
-            End If
-        End If
+
+
     End Sub
 
     Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
@@ -446,5 +434,37 @@
 
     Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
 
+    End Sub
+
+    Private Sub ImportFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFileToolStripMenuItem.Click
+        Dim ofd As New OpenFileDialog
+        If ofd.ShowDialog = DialogResult.OK Then
+            If IO.File.Exists(ofd.FileName) Then
+                lstPlots.Items.Add(ofd.FileName)
+                Q.settings.Plots &= ofd.FileName & "|"
+                Q.settings.SaveSettings()
+                If lstPlots.Items.Count = 1 Then
+                    If frmMain.Running And frmMain.FullySynced Then
+                        CheckRewardAssignment(0)
+                    ElseIf Q.settings.UseOnlineWallet Then
+                        CheckRewardAssignment(1)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ImportFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFolderToolStripMenuItem.Click
+        Dim ofd As New FolderBrowserDialog
+        If ofd.ShowDialog = DialogResult.OK Then
+            If IO.Directory.Exists(ofd.SelectedPath) Then
+                Dim fileEntries As String() = IO.Directory.GetFiles(ofd.SelectedPath)
+                For Each file As String In fileEntries
+                    lstPlots.Items.Add(file)
+                    Q.settings.Plots &= file & "|"
+                Next
+                Q.settings.SaveSettings()
+            End If
+        End If
     End Sub
 End Class

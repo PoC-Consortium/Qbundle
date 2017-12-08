@@ -49,11 +49,15 @@ Partial Class frmDynamicPlotting
         Me.btnImport = New System.Windows.Forms.Button()
         Me.lstPlots = New System.Windows.Forms.ListBox()
         Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.cmImport.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox3
@@ -307,6 +311,24 @@ Partial Class frmDynamicPlotting
         Me.cmlAccounts.Size = New System.Drawing.Size(61, 4)
         Me.cmlAccounts.Text = "Choose Account"
         '
+        'cmImport
+        '
+        Me.cmImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFileToolStripMenuItem, Me.ImportFolderToolStripMenuItem})
+        Me.cmImport.Name = "cmImport"
+        Me.cmImport.Size = New System.Drawing.Size(153, 70)
+        '
+        'ImportFileToolStripMenuItem
+        '
+        Me.ImportFileToolStripMenuItem.Name = "ImportFileToolStripMenuItem"
+        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFileToolStripMenuItem.Text = "Import file"
+        '
+        'ImportFolderToolStripMenuItem
+        '
+        Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
+        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
+        '
         'frmDynamicPlotting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -331,6 +353,7 @@ Partial Class frmDynamicPlotting
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
+        Me.cmImport.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -360,4 +383,7 @@ Partial Class frmDynamicPlotting
     Friend WithEvents btnImport As Button
     Friend WithEvents lstPlots As ListBox
     Friend WithEvents cmlAccounts As ContextMenuStrip
+    Friend WithEvents cmImport As ContextMenuStrip
+    Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
 End Class

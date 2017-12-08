@@ -4,6 +4,7 @@
     Private Delegate Sub DStoped(ByVal [AppId] As Integer)
     Private Delegate Sub DAborted(ByVal [AppId] As Integer, ByVal [data] As String)
     Private Delegate Sub DAPIResult(ByVal [Height] As String, ByVal [TimeStamp] As String)
+    Private Delegate Sub DHttpResult(ByVal [Data] As String)
     Private Delegate Sub DNewUpdatesAvilable()
     Public Console(1) As List(Of String)
     Public Running As Boolean
@@ -88,6 +89,9 @@
         AddHandler Q.Service.Stopped, AddressOf Stopped
         AddHandler Q.Service.Update, AddressOf ProcEvents
 
+
+
+
         SetLoginMenu()
 
         Running = Q.Service.IsServiceRunning
@@ -105,6 +109,11 @@
         OneMinCron.Enabled = True
         OneMinCron.Start()
 
+        Dim trda As Threading.Thread
+        trda = New Threading.Thread(AddressOf FetchCoinMarket)
+        trda.IsBackground = True
+        trda.Start()
+        trda = Nothing
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
@@ -123,29 +132,41 @@
                 Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
                 Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
+                MenuBar.Visible = True
                 pnlAIO.Visible = True
+                pnlAIO.Top = MenuBar.Top + MenuBar.Height
+                pnlAIO.Left = 0
+                pnlAIO.Height = StatusStrip1.Top - 50
+                pnlAIO.Width = Me.Width - 17
+                pnlAIO.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Top Or AnchorStyles.Right
                 pnlLauncher.Visible = False
                 lblWalletIS.Visible = True
                 lblSplitterWallet.Visible = True
                 lblWalletStatus.Visible = True
-                WalletModeToolStripMenuItem.Checked = True
-                LauncherModeToolStripMenuItem.Checked = False
+                WalletModeToolStripMenuItem1.Checked = True
+                LauncherModeToolStripMenuItem1.Checked = False
+                lblSelectWallet.Visible = True
+                cmbSelectWallet.Visible = True
             Case 1 ' Launcher Mode
                 Me.FormBorderStyle = FormBorderStyle.FixedDialog
                 Me.MaximizeBox = False
                 Me.Width = 513 ' 580 '464
-                Me.Height = 181
+                Me.Height = 218
                 Q.settings.QBMode = 1
                 Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
                 Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
                 pnlAIO.Visible = False
                 pnlLauncher.Visible = True
+                pnlLauncher.BringToFront()
                 lblWalletIS.Visible = False
                 lblSplitterWallet.Visible = False
                 lblWalletStatus.Visible = False
-                WalletModeToolStripMenuItem.Checked = False
-                LauncherModeToolStripMenuItem.Checked = True
+                '   MenuBar.Visible = False
+                WalletModeToolStripMenuItem1.Checked = False
+                LauncherModeToolStripMenuItem1.Checked = True
+                lblSelectWallet.Visible = False
+                cmbSelectWallet.Visible = False
         End Select
 
 
@@ -772,14 +793,6 @@
         frmConsole.Show()
     End Sub
 
-    Private Sub WalletModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WalletModeToolStripMenuItem.Click
-        SetMode(0)
-    End Sub
-
-    Private Sub LauncherModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LauncherModeToolStripMenuItem.Click
-        SetMode(1)
-    End Sub
-
     Private Sub DynamicPlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DynamicPlottingToolStripMenuItem.Click
         frmDynamicPlotting.Show()
     End Sub
@@ -855,6 +868,57 @@
         End If
 
 
+        'coinmarket info
+        Dim trda As Threading.Thread
+        trda = New Threading.Thread(AddressOf FetchCoinMarket)
+        trda.IsBackground = True
+        trda.Start()
+        trda = Nothing
+
+    End Sub
+
+    Private Sub FetchCoinMarket()
+        Try
+            Dim http As New clsHttp
+            Dim result As String = http.GetUrl("https://api.coinmarketcap.com/v1/ticker/burst/")
+            HttpResult(result)
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub HttpResult(ByVal Data As String)
+        If Me.InvokeRequired Then
+            Dim d As New DHttpResult(AddressOf HttpResult)
+            Me.Invoke(d, New Object() {Data})
+            Return
+        End If
+        Try
+            Dim PriceBtc As Decimal = 0
+            Dim PriceUSD As Decimal = 0
+            Dim buffer As String = ""
+            Data = Replace(Data, Chr(34), "")
+            Data = Replace(Data, vbLf, "")
+            Data = Replace(Data, " ", "")
+            Dim Entries() As String = Split(Data, ",")
+            For t As Integer = 0 To UBound(Entries)
+                If Entries(t).StartsWith("price_usd") Then
+
+                    PriceUSD = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
+                End If
+                If Entries(t).StartsWith("price_btc") Then
+
+                    PriceBtc = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
+                End If
+            Next
+            lblCoinMarket.Text = " Burst price: " & PriceBtc.ToString & " btc | " & PriceUSD.ToString & " $"
+        Catch ex As Exception
+            lblCoinMarket.Text = " Burst price: N/A"
+        End Try
+
+
+
 
     End Sub
 
@@ -868,5 +932,13 @@
         Me.ShowInTaskbar = True
         TrayIcon.Visible = False
         Me.Show()
+    End Sub
+
+    Private Sub WalletModeToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles WalletModeToolStripMenuItem1.Click
+        SetMode(0)
+    End Sub
+
+    Private Sub LauncherModeToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LauncherModeToolStripMenuItem1.Click
+        SetMode(1)
     End Sub
 End Class

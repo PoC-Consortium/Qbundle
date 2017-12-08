@@ -63,6 +63,9 @@ Partial Class frmPlotter
         Me.cmlAccounts = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
+        Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -70,6 +73,7 @@ Partial Class frmPlotter
         CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmImport.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnStartPotting
@@ -456,6 +460,24 @@ Partial Class frmPlotter
         Me.Label19.TabIndex = 24
         Me.Label19.Text = "Step 1."
         '
+        'cmImport
+        '
+        Me.cmImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFileToolStripMenuItem, Me.ImportFolderToolStripMenuItem})
+        Me.cmImport.Name = "cmImport"
+        Me.cmImport.Size = New System.Drawing.Size(153, 70)
+        '
+        'ImportFileToolStripMenuItem
+        '
+        Me.ImportFileToolStripMenuItem.Name = "ImportFileToolStripMenuItem"
+        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFileToolStripMenuItem.Text = "Import file"
+        '
+        'ImportFolderToolStripMenuItem
+        '
+        Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
+        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
+        '
         'frmPlotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -491,6 +513,7 @@ Partial Class frmPlotter
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmImport.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -535,4 +558,7 @@ Partial Class frmPlotter
     Friend WithEvents Label18 As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents HSSize As TrackBar
+    Friend WithEvents cmImport As ContextMenuStrip
+    Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
 End Class

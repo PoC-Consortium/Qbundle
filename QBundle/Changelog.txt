@@ -10,20 +10,25 @@ pipeclient+server implementation in service
 
 Environment check (check enough ram and disk space).
 Online Wallet mode. (does not start local wallet)
+|- might need a toolbar.
 blago miner solo delete passphrases after start.
-Fix new first screen. Express setup / Advanced setup
 Make More data Updatabable. Like online wallets and pool lists. 
-Batch import existing plots
 
 
 ~V1.4
-* restricted path for Xplotter.
-+ Added NTP time check.
-+ Dynamic plotting
-* updated built in pool list.
-* fixed a bug when importing bbd files.
+Added:
++ Ability to import a folder with plotfiles to My Plotfiles
++ Added NTP time check before starting wallet.
++ Dynamic plotting (Add/Remove Plotfiles depending on free space)
 + Rollback chain function (popoff blocks)
 + Minimize to tray function
++ Shows Burst price info from Coinmarket
+
+Changes:
+* Restricted pathselection for Xplotter.
+* Updated built in pool list.
+* fixed a bug when importing bbd files.
+
 
 V1.3
 + Full wallet mode.

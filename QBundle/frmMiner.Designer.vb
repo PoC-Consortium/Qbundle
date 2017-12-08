@@ -57,12 +57,16 @@ Partial Class frmMiner
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblReward = New System.Windows.Forms.Label()
+        Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
         CType(Me.nrInfoPort, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nrUpdatePort, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nrMiningPort, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmImport.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -393,6 +397,24 @@ Partial Class frmMiner
         Me.lblReward.Text = "Your reward recipient is set to: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Account. BURST-RBXH-KT5K-NAQA-EEAD8" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name: Cry" &
     "tpoguru pool" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
+        'cmImport
+        '
+        Me.cmImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFileToolStripMenuItem, Me.ImportFolderToolStripMenuItem})
+        Me.cmImport.Name = "cmImport"
+        Me.cmImport.Size = New System.Drawing.Size(153, 70)
+        '
+        'ImportFileToolStripMenuItem
+        '
+        Me.ImportFileToolStripMenuItem.Name = "ImportFileToolStripMenuItem"
+        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFileToolStripMenuItem.Text = "Import file"
+        '
+        'ImportFolderToolStripMenuItem
+        '
+        Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
+        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
+        '
         'frmMiner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -420,6 +442,7 @@ Partial Class frmMiner
         CType(Me.nrInfoPort, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nrUpdatePort, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nrMiningPort, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmImport.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -458,4 +481,7 @@ Partial Class frmMiner
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents lblReward As Label
+    Friend WithEvents cmImport As ContextMenuStrip
+    Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
 End Class

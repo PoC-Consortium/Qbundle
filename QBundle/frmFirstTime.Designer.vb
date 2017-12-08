@@ -156,12 +156,10 @@ Partial Class frmFirstTime
         'r1
         '
         Me.r1.AutoSize = True
-        Me.r1.Checked = True
         Me.r1.Location = New System.Drawing.Point(18, 11)
         Me.r1.Name = "r1"
         Me.r1.Size = New System.Drawing.Size(14, 13)
         Me.r1.TabIndex = 3
-        Me.r1.TabStop = True
         Me.r1.UseVisualStyleBackColor = True
         '
         'btnNext
@@ -307,6 +305,7 @@ Partial Class frmFirstTime
         'r0
         '
         Me.r0.AutoSize = True
+        Me.r0.Checked = True
         Me.r0.Location = New System.Drawing.Point(18, 12)
         Me.r0.Name = "r0"
         Me.r0.Size = New System.Drawing.Size(14, 13)
