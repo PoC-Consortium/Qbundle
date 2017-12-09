@@ -7,8 +7,9 @@ Known problems:
 
 To Be done:
 pipeclient+server implementation in service
+Make More data Updatabable. Like online wallets and pool lists.
 blago miner solo delete passphrases after start.
-Make More data Updatabable. Like online wallets and pool lists. 
+
 
 ~V1.4
 + Ability to import a folder with plotfiles to My Plotfiles

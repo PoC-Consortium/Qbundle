@@ -336,7 +336,9 @@
         Catch ex As Exception
             MsgBox("Failed to start Blago miner")
         End Try
-
+        If PassPhrase.Length > 0 Then
+            tmrRemovePass.Enabled = True
+        End If
 
     End Sub
     Private Function GetAccountIdFromPlot(ByVal Plotfile As String) As String
@@ -466,5 +468,13 @@
                 Q.settings.SaveSettings()
             End If
         End If
+    End Sub
+
+    Private Sub tmrRemovePass_Tick(sender As Object, e As EventArgs) Handles tmrRemovePass.Tick
+        Try
+            tmrRemovePass.Enabled = False
+            System.IO.File.Delete(QGlobal.AppDir & "\BlagoMiner\passphrases.txt")
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

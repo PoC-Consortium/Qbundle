@@ -60,6 +60,7 @@ Partial Class frmMiner
         Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tmrRemovePass = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
@@ -401,19 +402,23 @@ Partial Class frmMiner
         '
         Me.cmImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFileToolStripMenuItem, Me.ImportFolderToolStripMenuItem})
         Me.cmImport.Name = "cmImport"
-        Me.cmImport.Size = New System.Drawing.Size(153, 70)
+        Me.cmImport.Size = New System.Drawing.Size(147, 48)
         '
         'ImportFileToolStripMenuItem
         '
         Me.ImportFileToolStripMenuItem.Name = "ImportFileToolStripMenuItem"
-        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFileToolStripMenuItem.Text = "Import file"
         '
         'ImportFolderToolStripMenuItem
         '
         Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
-        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
+        '
+        'tmrRemovePass
+        '
+        Me.tmrRemovePass.Interval = 3000
         '
         'frmMiner
         '
@@ -484,4 +489,5 @@ Partial Class frmMiner
     Friend WithEvents cmImport As ContextMenuStrip
     Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tmrRemovePass As Timer
 End Class
