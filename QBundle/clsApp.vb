@@ -21,6 +21,8 @@ Public Class clsApp
     Private _Repositories() As String
     Private _UpdateNotifyState As Integer
     Public ErrMSg As String
+    Public UpdateInfo As String
+
     Public Sub New()
 
         'our appstore
@@ -35,7 +37,7 @@ Public Class clsApp
             _Apps(i).ExtractToDir = ""
             _Apps(i).Updated = False
         Next
-
+        UpdateInfo = "QInfo"
         'repositories to download from
         ReDim _Repositories(1)
         _Repositories(0) = "http://files.getburst.net/"

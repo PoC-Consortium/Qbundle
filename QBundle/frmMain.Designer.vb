@@ -186,7 +186,7 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem, Me.AccountMangerToolStripMenuItem, Me.WalletToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.AboutToolStripMenuItem2})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(824, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(529, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -462,7 +462,7 @@ Partial Class frmMain
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4, Me.lblBlockDate, Me.lblSplitterWallet, Me.lblWalletIS, Me.lblWalletStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 371)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(824, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(529, 22)
         Me.StatusStrip1.TabIndex = 5
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -562,7 +562,7 @@ Partial Class frmMain
         '
         Me.pnlAIO.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlAIO.Controls.Add(Me.wb1)
-        Me.pnlAIO.Location = New System.Drawing.Point(261, 151)
+        Me.pnlAIO.Location = New System.Drawing.Point(-136, 154)
         Me.pnlAIO.Name = "pnlAIO"
         Me.pnlAIO.Size = New System.Drawing.Size(379, 163)
         Me.pnlAIO.TabIndex = 10
@@ -593,7 +593,7 @@ Partial Class frmMain
         Me.MenuBar.Location = New System.Drawing.Point(0, 24)
         Me.MenuBar.Name = "MenuBar"
         Me.MenuBar.Padding = New System.Windows.Forms.Padding(0)
-        Me.MenuBar.Size = New System.Drawing.Size(824, 25)
+        Me.MenuBar.Size = New System.Drawing.Size(529, 25)
         Me.MenuBar.TabIndex = 11
         '
         'ToolStripLabel1
@@ -624,7 +624,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(824, 393)
+        Me.ClientSize = New System.Drawing.Size(529, 393)
         Me.Controls.Add(Me.MenuBar)
         Me.Controls.Add(Me.pnlLauncher)
         Me.Controls.Add(Me.StatusStrip1)

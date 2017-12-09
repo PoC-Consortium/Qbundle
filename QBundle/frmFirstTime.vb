@@ -257,6 +257,7 @@
         Q.settings.AutoIp = chkUpdates.Checked
         Q.settings.UseOnlineWallet = chkUpdates.Checked
         Q.settings.GetCoinMarket = chkUpdates.Checked
+        Q.settings.NTPCheck = chkUpdates.Checked
 
         Q.settings.DbName = txtDbName.Text
         Q.settings.DbPass = txtDbPass.Text

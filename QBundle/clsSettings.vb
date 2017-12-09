@@ -329,7 +329,7 @@
         _QBMode = 1 '0 = AIO 1 = Launcher
         _Debug = False
         _UseOnlineWallet = False
-        _NTPCheck = True
+        _NTPCheck = False
         _MinToTray = False
         _CoinMarket = False
 
@@ -342,8 +342,6 @@
 
 
     End Sub
-
-
 
     Friend Sub LoadSettings()
         Try

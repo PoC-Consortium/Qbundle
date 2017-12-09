@@ -810,7 +810,7 @@ Partial Class frmSettings
         'chkMinToTray
         '
         Me.chkMinToTray.AutoSize = True
-        Me.chkMinToTray.Location = New System.Drawing.Point(11, 155)
+        Me.chkMinToTray.Location = New System.Drawing.Point(12, 155)
         Me.chkMinToTray.Name = "chkMinToTray"
         Me.chkMinToTray.Size = New System.Drawing.Size(167, 17)
         Me.chkMinToTray.TabIndex = 8
@@ -820,7 +820,7 @@ Partial Class frmSettings
         'chkNTP
         '
         Me.chkNTP.AutoSize = True
-        Me.chkNTP.Location = New System.Drawing.Point(11, 134)
+        Me.chkNTP.Location = New System.Drawing.Point(12, 133)
         Me.chkNTP.Name = "chkNTP"
         Me.chkNTP.Size = New System.Drawing.Size(223, 17)
         Me.chkNTP.TabIndex = 7
@@ -904,7 +904,7 @@ Partial Class frmSettings
         'chkCoinmarket
         '
         Me.chkCoinmarket.AutoSize = True
-        Me.chkCoinmarket.Location = New System.Drawing.Point(11, 178)
+        Me.chkCoinmarket.Location = New System.Drawing.Point(12, 178)
         Me.chkCoinmarket.Name = "chkCoinmarket"
         Me.chkCoinmarket.Size = New System.Drawing.Size(186, 17)
         Me.chkCoinmarket.TabIndex = 9

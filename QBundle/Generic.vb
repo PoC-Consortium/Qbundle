@@ -54,7 +54,7 @@ Friend Class Generic
                     Q.settings.UseOnlineWallet = Q.settings.CheckForUpdates
                 Case 13 ' from 13-14
                     Q.settings.GetCoinMarket = Q.settings.CheckForUpdates
-
+                    Q.settings.NTPCheck = Q.settings.CheckForUpdates
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do
@@ -420,8 +420,9 @@ Friend Class Generic
                     End
                 Case "Debug"
                     QB.Generic.DebugMe = True
+                Case "BetaUpdate"
+                    Q.App.UpdateInfo = "BetaUpdate"
             End Select
-
         End If
     End Sub
     Friend Shared Function SanityCheck() As Boolean
