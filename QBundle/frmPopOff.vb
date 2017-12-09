@@ -20,6 +20,8 @@
             Else
                 wStep = 1
             End If
+            nrBlocks.Enabled = False
+            btnStart.Enabled = False
 
             frmMain.StopWallet()
             WaitTimer = New Timer
@@ -61,6 +63,9 @@
                     RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
                     WaitTimer.Stop()
                     WaitTimer.Enabled = False
+                    nrBlocks.Enabled = True
+                    btnStart.Enabled = True
+
                 End If
         End Select
     End Sub
