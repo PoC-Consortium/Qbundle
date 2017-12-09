@@ -89,6 +89,7 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkMinToTray = New System.Windows.Forms.CheckBox()
         Me.chkNTP = New System.Windows.Forms.CheckBox()
         Me.chkOnlineWallets = New System.Windows.Forms.CheckBox()
         Me.chkDebug = New System.Windows.Forms.CheckBox()
@@ -97,7 +98,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkMinToTray = New System.Windows.Forms.CheckBox()
+        Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -792,6 +793,7 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkCoinmarket)
         Me.Panel2.Controls.Add(Me.chkMinToTray)
         Me.Panel2.Controls.Add(Me.chkNTP)
         Me.Panel2.Controls.Add(Me.chkOnlineWallets)
@@ -804,6 +806,16 @@ Partial Class frmSettings
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
+        '
+        'chkMinToTray
+        '
+        Me.chkMinToTray.AutoSize = True
+        Me.chkMinToTray.Location = New System.Drawing.Point(11, 155)
+        Me.chkMinToTray.Name = "chkMinToTray"
+        Me.chkMinToTray.Size = New System.Drawing.Size(167, 17)
+        Me.chkMinToTray.TabIndex = 8
+        Me.chkMinToTray.Text = "Minimize Qbundle to tray icon."
+        Me.chkMinToTray.UseVisualStyleBackColor = True
         '
         'chkNTP
         '
@@ -889,15 +901,15 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkMinToTray
+        'chkCoinmarket
         '
-        Me.chkMinToTray.AutoSize = True
-        Me.chkMinToTray.Location = New System.Drawing.Point(11, 155)
-        Me.chkMinToTray.Name = "chkMinToTray"
-        Me.chkMinToTray.Size = New System.Drawing.Size(167, 17)
-        Me.chkMinToTray.TabIndex = 8
-        Me.chkMinToTray.Text = "Minimize Qbundle to tray icon."
-        Me.chkMinToTray.UseVisualStyleBackColor = True
+        Me.chkCoinmarket.AutoSize = True
+        Me.chkCoinmarket.Location = New System.Drawing.Point(11, 178)
+        Me.chkCoinmarket.Name = "chkCoinmarket"
+        Me.chkCoinmarket.Size = New System.Drawing.Size(186, 17)
+        Me.chkCoinmarket.TabIndex = 9
+        Me.chkCoinmarket.Text = "Get price info from Coinmarketcap"
+        Me.chkCoinmarket.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -1013,4 +1025,5 @@ Partial Class frmSettings
     Friend WithEvents chkOnlineWallets As CheckBox
     Friend WithEvents chkNTP As CheckBox
     Friend WithEvents chkMinToTray As CheckBox
+    Friend WithEvents chkCoinmarket As CheckBox
 End Class

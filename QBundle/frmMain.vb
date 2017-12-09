@@ -114,11 +114,13 @@
         OneMinCron.Enabled = True
         OneMinCron.Start()
 
-        Dim trda As Threading.Thread
-        trda = New Threading.Thread(AddressOf FetchCoinMarket)
-        trda.IsBackground = True
-        trda.Start()
-        trda = Nothing
+        If Q.settings.GetCoinMarket Then
+            Dim trda As Threading.Thread
+            trda = New Threading.Thread(AddressOf FetchCoinMarket)
+            trda.IsBackground = True
+            trda.Start()
+            trda = Nothing
+        End If
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
@@ -872,14 +874,14 @@
             End Try
         End If
 
-
-        'coinmarket info
-        Dim trda As Threading.Thread
-        trda = New Threading.Thread(AddressOf FetchCoinMarket)
-        trda.IsBackground = True
-        trda.Start()
-        trda = Nothing
-
+        If Q.settings.GetCoinMarket Then
+            'coinmarket info
+            Dim trda As Threading.Thread
+            trda = New Threading.Thread(AddressOf FetchCoinMarket)
+            trda.IsBackground = True
+            trda.Start()
+            trda = Nothing
+        End If
     End Sub
 
     Private Sub FetchCoinMarket()
@@ -913,13 +915,11 @@
                     PriceUSD = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
                 End If
                 If Entries(t).StartsWith("price_btc") Then
-
                     PriceBtc = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
                 End If
                 If Entries(t).StartsWith("market_cap_usd") Then
                     MktCap = Convert.ToDecimal(Mid(Entries(t), 16), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
                 End If
-
             Next
             lblCoinMarket.Text = "Burst price: " & PriceBtc.ToString & " btc | $" & Math.Round(PriceUSD, 3).ToString & " | Market cap : $" & Math.Round(MktCap / 1000000, 2).ToString & "M"
         Catch ex As Exception

@@ -92,10 +92,10 @@ Partial Class frmMain
         Me.wb1 = New System.Windows.Forms.WebBrowser()
         Me.TrayIcon = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.MenuBar = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.lblSelectWallet = New System.Windows.Forms.ToolStripLabel()
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -596,6 +596,12 @@ Partial Class frmMain
         Me.MenuBar.Size = New System.Drawing.Size(824, 25)
         Me.MenuBar.TabIndex = 11
         '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(13, 22)
+        Me.ToolStripLabel1.Text = "  "
+        '
         'lblSelectWallet
         '
         Me.lblSelectWallet.Name = "lblSelectWallet"
@@ -610,14 +616,8 @@ Partial Class frmMain
         'lblCoinMarket
         '
         Me.lblCoinMarket.Name = "lblCoinMarket"
-        Me.lblCoinMarket.Size = New System.Drawing.Size(100, 22)
-        Me.lblCoinMarket.Text = " | Burst price: N/A"
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(13, 22)
-        Me.ToolStripLabel1.Text = "  "
+        Me.lblCoinMarket.Size = New System.Drawing.Size(91, 22)
+        Me.lblCoinMarket.Text = "Burst price: N/A"
         '
         'frmMain
         '

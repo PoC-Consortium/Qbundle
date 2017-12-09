@@ -53,6 +53,7 @@ Friend Class Generic
                 Case 12 'from 12-13
                     Q.settings.UseOnlineWallet = Q.settings.CheckForUpdates
                 Case 13 ' from 13-14
+                    Q.settings.GetCoinMarket = Q.settings.CheckForUpdates
 
             End Select
             OldVer += 1

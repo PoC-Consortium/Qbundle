@@ -8,6 +8,7 @@
     Private _ListenIf As String
     Private _ListenPeer As String
     Private _ConnectFrom As String
+    Private _CoinMarket As Boolean
     'DB
     Private _DbType As Integer
     Private _DbServer As String
@@ -293,6 +294,14 @@
             _MinToTray = value
         End Set
     End Property
+    Public Property GetCoinMarket() As Boolean
+        Get
+            Return _CoinMarket
+        End Get
+        Set(ByVal value As Boolean)
+            _CoinMarket = value
+        End Set
+    End Property
 
     Friend Sub New()
         _autoip = False
@@ -322,6 +331,7 @@
         _UseOnlineWallet = False
         _NTPCheck = True
         _MinToTray = False
+        _CoinMarket = False
 
         _DynPlotEnabled = False
         _DynPlotPath = ""

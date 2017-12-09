@@ -11,14 +11,14 @@ blago miner solo delete passphrases after start.
 Make More data Updatabable. Like online wallets and pool lists. 
 
 ~V1.4
-Added:
 + Ability to import a folder with plotfiles to My Plotfiles
 + Added NTP time check before starting wallet.
 + Dynamic plotting (Add/Remove Plotfiles depending on free space)
 + Rollback chain function (popoff blocks)
 + Minimize to tray function
-+ Shows Burst price info from Coinmarket
++ Can show Burst price info from Coinmarketcap
 + Online wallets can now be used in wallet mode.
+
 * Restricted path selection for Xplotter.
 * Updated built in pool list.
 * fixed a bug when importing bbd files.

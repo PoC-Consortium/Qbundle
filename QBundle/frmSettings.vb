@@ -100,6 +100,7 @@ Public Class frmSettings
         Q.settings.UseOnlineWallet = chkOnlineWallets.Checked
         Q.settings.NTPCheck = chkNTP.Checked
         Q.settings.MinToTray = chkMinToTray.Checked
+        Q.settings.GetCoinMarket = chkCoinmarket.Checked
         'nrs
 
         Q.settings.AutoIp = chkAutoIP.Checked
@@ -160,6 +161,7 @@ Public Class frmSettings
         chkOnlineWallets.Checked = Q.settings.UseOnlineWallet
         chkNTP.Checked = Q.settings.NTPCheck
         chkMinToTray.Checked = Q.settings.MinToTray
+        chkCoinmarket.Checked = Q.settings.GetCoinMarket
 
         chkAutoIP.Checked = Q.settings.CheckForUpdates
         chkDynPlatform.Checked = Q.settings.DynPlatform
