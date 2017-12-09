@@ -78,7 +78,6 @@ Partial Class frmMain
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBlockInfo = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBlockDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblSplitterWallet = New System.Windows.Forms.ToolStripStatusLabel()
@@ -111,7 +110,7 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.LblDbStatus)
         Me.GroupBox1.Controls.Add(Me.lblDbName)
-        Me.GroupBox1.Location = New System.Drawing.Point(280, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(321, 4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(159, 90)
         Me.GroupBox1.TabIndex = 0
@@ -186,7 +185,7 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem, Me.AccountMangerToolStripMenuItem, Me.WalletToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.AboutToolStripMenuItem2})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(506, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(567, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -459,10 +458,10 @@ Partial Class frmMain
         'StatusStrip1
         '
         Me.StatusStrip1.BackColor = System.Drawing.Color.White
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4, Me.lblBlockDate, Me.lblSplitterWallet, Me.lblWalletIS, Me.lblWalletStatus})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblBlockInfo, Me.ToolStripStatusLabel4, Me.lblBlockDate, Me.lblSplitterWallet, Me.lblWalletIS, Me.lblWalletStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 335)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(506, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(567, 22)
         Me.StatusStrip1.TabIndex = 5
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -479,12 +478,6 @@ Partial Class frmMain
         Me.lblBlockInfo.Name = "lblBlockInfo"
         Me.lblBlockInfo.Size = New System.Drawing.Size(11, 17)
         Me.lblBlockInfo.Text = "-"
-        '
-        'ToolStripStatusLabel3
-        '
-        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 17)
-        Me.ToolStripStatusLabel3.Text = "|"
         '
         'ToolStripStatusLabel4
         '
@@ -555,7 +548,7 @@ Partial Class frmMain
         Me.pnlLauncher.Controls.Add(Me.btnStartStop)
         Me.pnlLauncher.Location = New System.Drawing.Point(1, 50)
         Me.pnlLauncher.Name = "pnlLauncher"
-        Me.pnlLauncher.Size = New System.Drawing.Size(485, 98)
+        Me.pnlLauncher.Size = New System.Drawing.Size(555, 98)
         Me.pnlLauncher.TabIndex = 9
         '
         'pnlAIO
@@ -592,7 +585,7 @@ Partial Class frmMain
         Me.MenuBar.Location = New System.Drawing.Point(0, 24)
         Me.MenuBar.Name = "MenuBar"
         Me.MenuBar.Padding = New System.Windows.Forms.Padding(0)
-        Me.MenuBar.Size = New System.Drawing.Size(506, 25)
+        Me.MenuBar.Size = New System.Drawing.Size(567, 25)
         Me.MenuBar.TabIndex = 11
         '
         'ToolStripLabel1
@@ -623,7 +616,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(506, 357)
+        Me.ClientSize = New System.Drawing.Size(567, 357)
         Me.Controls.Add(Me.MenuBar)
         Me.Controls.Add(Me.pnlLauncher)
         Me.Controls.Add(Me.StatusStrip1)
@@ -699,7 +692,6 @@ Partial Class frmMain
     Friend WithEvents PlotterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MinerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetRewardassignmentToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripStatusLabel3 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel4 As ToolStripStatusLabel
     Friend WithEvents lblBlockDate As ToolStripStatusLabel
     Friend WithEvents lblSplitterWallet As ToolStripStatusLabel

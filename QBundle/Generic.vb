@@ -188,7 +188,6 @@ Friend Class Generic
             Data &= "nxt.allowedBotHosts = " & Q.settings.ConnectFrom & vbCrLf & vbCrLf
         End If
 
-
         'autoip
         If Q.settings.AutoIp Then
             Dim ip As String = GetMyIp()
@@ -256,9 +255,6 @@ Friend Class Generic
             Data &= "nxt.enableDebugAPI = true" & vbCrLf & vbCrLf
 
         End If
-
-
-
         Try
             IO.File.WriteAllText(QGlobal.AppDir & "conf\nxt.properties", Data)
         Catch ex As Exception

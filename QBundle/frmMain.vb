@@ -159,7 +159,7 @@
             Case 1 ' Launcher Mode
                 Me.FormBorderStyle = FormBorderStyle.FixedDialog
                 Me.MaximizeBox = False
-                Me.Width = 513 ' 580 '464
+                Me.Width = 580 '464
                 Me.Height = 218
                 Q.settings.QBMode = 1
                 Q.settings.SaveSettings()
@@ -665,8 +665,9 @@
     Public Sub StopAPIFetch()
         APITimer.Enabled = False
         APITimer.Stop()
-
-        lblBlockDate.Text = Replace(lblBlockDate.Text, " (Synchronizing blockchain)", "")
+        If lblBlockDate.Text.Contains("Downloading") Then
+            lblBlockDate.Text = Mid(lblBlockDate.Text, 1, InStr(lblBlockDate.Text, "(") - 1)
+        End If
         lblBlockDate.Text = Replace(lblBlockDate.Text, " (Fully Syncronized)", "")
     End Sub
     Private Sub APITimer_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles APITimer.Tick
@@ -725,7 +726,7 @@
             CurHeight = Val(Data)
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
-                lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Synchronizing blockchain)"
+                lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Downloading blockchain at " & CStr(LastShowHeight) & " blocks/min)"
                 lblBlockDate.ForeColor = Color.DarkRed
                 FullySynced = False
             Else
