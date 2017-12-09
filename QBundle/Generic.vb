@@ -138,6 +138,7 @@ Friend Class Generic
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
             Data &= "brs.oclAuto = true" & vbCrLf
+            Data &= "brs.oclHashesPerEnqueue=100" & vbCrLf
             Data &= "brs.oclVerify = true" & vbCrLf & vbCrLf
 
         End If
@@ -239,8 +240,8 @@ Friend Class Generic
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
             Data &= "burst.oclAuto = true" & vbCrLf
+            Data &= "burst.oclHashesPerEnqueue=100" & vbCrLf
             Data &= "burst.oclVerify = true" & vbCrLf & vbCrLf
-
         End If
 
         If WriteDebug Then

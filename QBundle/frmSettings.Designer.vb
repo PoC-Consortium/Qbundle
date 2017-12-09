@@ -99,6 +99,7 @@ Partial Class frmSettings
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
+        Me.chkAutoStart = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -159,6 +160,7 @@ Partial Class frmSettings
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.chkAutoStart)
         Me.Panel4.Controls.Add(Me.chkWalletException)
         Me.Panel4.Controls.Add(Me.Label34)
         Me.Panel4.Controls.Add(Me.Label26)
@@ -204,9 +206,9 @@ Partial Class frmSettings
         Me.chkWalletException.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkWalletException.Location = New System.Drawing.Point(12, 72)
         Me.chkWalletException.Name = "chkWalletException"
-        Me.chkWalletException.Size = New System.Drawing.Size(295, 17)
+        Me.chkWalletException.Size = New System.Drawing.Size(292, 17)
         Me.chkWalletException.TabIndex = 45
-        Me.chkWalletException.Text = "Restart wallet if exception occur (max once every 60min)."
+        Me.chkWalletException.Text = "Restart wallet if exception occur (max once every 60min)"
         Me.chkWalletException.UseVisualStyleBackColor = True
         '
         'Label34
@@ -358,7 +360,7 @@ Partial Class frmSettings
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(9, 108)
+        Me.Label28.Location = New System.Drawing.Point(9, 113)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(140, 16)
         Me.Label28.TabIndex = 27
@@ -429,16 +431,16 @@ Partial Class frmSettings
         Me.Label20.Size = New System.Drawing.Size(277, 39)
         Me.Label20.TabIndex = 15
         Me.Label20.Text = "The use of graphic card will offload cpu during sync times" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and most probably imp" &
-    "rove the speed of sync." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Using gpu requires opencl to be installed."
+    "rove the speed of sync." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Using gpu requires OpenCL to be installed."
         '
         'chkOpenCL
         '
         Me.chkOpenCL.AutoSize = True
         Me.chkOpenCL.Location = New System.Drawing.Point(13, 175)
         Me.chkOpenCL.Name = "chkOpenCL"
-        Me.chkOpenCL.Size = New System.Drawing.Size(310, 17)
+        Me.chkOpenCL.Size = New System.Drawing.Size(210, 17)
         Me.chkOpenCL.TabIndex = 14
-        Me.chkOpenCL.Text = "Try to use graphic card to to offload cpu during sync events."
+        Me.chkOpenCL.Text = "Try to use OpenCL during sync events."
         Me.chkOpenCL.UseVisualStyleBackColor = True
         '
         'lblMaxCores
@@ -512,9 +514,9 @@ Partial Class frmSettings
         Me.Label23.Font = New System.Drawing.Font("Rockwell", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.Location = New System.Drawing.Point(19, 16)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(164, 25)
+        Me.Label23.Size = New System.Drawing.Size(222, 25)
         Me.Label23.TabIndex = 11
-        Me.Label23.Text = "Wallet settings"
+        Me.Label23.Text = "Local wallet settings"
         '
         'TabPage2
         '
@@ -911,6 +913,18 @@ Partial Class frmSettings
         Me.chkCoinmarket.Text = "Get price info from Coinmarketcap"
         Me.chkCoinmarket.UseVisualStyleBackColor = True
         '
+        'chkAutoStart
+        '
+        Me.chkAutoStart.AutoSize = True
+        Me.chkAutoStart.Checked = True
+        Me.chkAutoStart.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAutoStart.Location = New System.Drawing.Point(12, 92)
+        Me.chkAutoStart.Name = "chkAutoStart"
+        Me.chkAutoStart.Size = New System.Drawing.Size(123, 17)
+        Me.chkAutoStart.TabIndex = 46
+        Me.chkAutoStart.Text = "Autostart local wallet"
+        Me.chkAutoStart.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1026,4 +1040,5 @@ Partial Class frmSettings
     Friend WithEvents chkNTP As CheckBox
     Friend WithEvents chkMinToTray As CheckBox
     Friend WithEvents chkCoinmarket As CheckBox
+    Friend WithEvents chkAutoStart As CheckBox
 End Class

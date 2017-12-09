@@ -97,7 +97,9 @@
         Running = Q.Service.IsServiceRunning
         If Running Then ProcEvents(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
         If Q.settings.QBMode = 0 And StartImport = DialogResult.No Then
-            If Running = False Then StartWallet()
+            If Running = False And Q.settings.AutoStart Then
+                StartWallet()
+            End If
         End If
         SetMode(Q.settings.QBMode)
         If StartImport = DialogResult.Yes Then

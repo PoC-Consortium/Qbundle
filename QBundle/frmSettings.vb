@@ -102,7 +102,7 @@ Public Class frmSettings
         Q.settings.MinToTray = chkMinToTray.Checked
         Q.settings.GetCoinMarket = chkCoinmarket.Checked
         'nrs
-
+        Q.settings.AutoStart = chkAutoStart.Checked
         Q.settings.AutoIp = chkAutoIP.Checked
         Q.settings.DynPlatform = chkDynPlatform.Checked
         'nrs advanced
@@ -162,6 +162,7 @@ Public Class frmSettings
         chkNTP.Checked = Q.settings.NTPCheck
         chkMinToTray.Checked = Q.settings.MinToTray
         chkCoinmarket.Checked = Q.settings.GetCoinMarket
+        chkAutoStart.Checked = Q.settings.AutoStart
 
         chkAutoIP.Checked = Q.settings.CheckForUpdates
         chkDynPlatform.Checked = Q.settings.DynPlatform

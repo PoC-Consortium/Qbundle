@@ -561,7 +561,7 @@ Partial Class frmMain
         'pnlAIO
         '
         Me.pnlAIO.Controls.Add(Me.wb1)
-        Me.pnlAIO.Location = New System.Drawing.Point(12, 154)
+        Me.pnlAIO.Location = New System.Drawing.Point(12, 160)
         Me.pnlAIO.Name = "pnlAIO"
         Me.pnlAIO.Size = New System.Drawing.Size(379, 163)
         Me.pnlAIO.TabIndex = 10

@@ -393,10 +393,9 @@ Partial Class frmMiner
         Me.lblReward.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblReward.Location = New System.Drawing.Point(430, 255)
         Me.lblReward.Name = "lblReward"
-        Me.lblReward.Size = New System.Drawing.Size(195, 36)
+        Me.lblReward.Size = New System.Drawing.Size(130, 36)
         Me.lblReward.TabIndex = 37
-        Me.lblReward.Text = "Your reward recipient is set to: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Account. BURST-RBXH-KT5K-NAQA-EEAD8" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name: Cry" &
-    "tpoguru pool" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.lblReward.Text = "Your reward recipient is set to: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Account.-" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name: -" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'cmImport
         '

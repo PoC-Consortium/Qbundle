@@ -8,7 +8,7 @@
     Private _ListenIf As String
     Private _ListenPeer As String
     Private _ConnectFrom As String
-    Private _CoinMarket As Boolean
+    Private _AutoStart As Boolean
     'DB
     Private _DbType As Integer
     Private _DbServer As String
@@ -30,6 +30,7 @@
     Private _UseOnlineWallet As Boolean
     Private _NTPCheck As Boolean
     Private _MinToTray As Boolean
+    Private _CoinMarket As Boolean
     'Plotting And Mining
     Private _Plots As String
     'dynamic plotting
@@ -103,6 +104,14 @@
         End Get
         Set(ByVal value As String)
             _ConnectFrom = value
+        End Set
+    End Property
+    Public Property AutoStart() As String
+        Get
+            Return _AutoStart
+        End Get
+        Set(ByVal value As String)
+            _AutoStart = value
         End Set
     End Property
     'DB
@@ -332,6 +341,7 @@
         _NTPCheck = False
         _MinToTray = False
         _CoinMarket = False
+        _AutoStart = True
 
         _DynPlotEnabled = False
         _DynPlotPath = ""
