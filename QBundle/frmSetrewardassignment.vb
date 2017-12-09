@@ -80,7 +80,6 @@
                             If tmp.Length > 0 Then
                                 Passphrase = tmp
                             Else
-
                                 MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
                                 Exit Sub
                             End If
@@ -130,9 +129,6 @@
 
 
             Dim http As New clsHttp
-
-
-
 
 
             Dim postData As String = "recipient=" & http.URLEncode(AccID)

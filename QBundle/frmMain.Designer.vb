@@ -95,6 +95,7 @@ Partial Class frmMain
         Me.lblSelectWallet = New System.Windows.Forms.ToolStripLabel()
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -397,13 +398,13 @@ Partial Class frmMain
         'ContributorsToolStripMenuItem
         '
         Me.ContributorsToolStripMenuItem.Name = "ContributorsToolStripMenuItem"
-        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ContributorsToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.ContributorsToolStripMenuItem.Text = "Contributors"
         '
         'DeveloperToolStripMenuItem
         '
         Me.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem"
-        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.DeveloperToolStripMenuItem.Text = "Developer"
         '
         'FileToolStripMenuItem
@@ -586,28 +587,37 @@ Partial Class frmMain
         '
         'MenuBar
         '
-        Me.MenuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblSelectWallet, Me.cmbSelectWallet, Me.lblCoinMarket})
+        Me.MenuBar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.MenuBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.MenuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.lblSelectWallet, Me.cmbSelectWallet, Me.lblCoinMarket})
         Me.MenuBar.Location = New System.Drawing.Point(0, 24)
         Me.MenuBar.Name = "MenuBar"
+        Me.MenuBar.Padding = New System.Windows.Forms.Padding(0)
         Me.MenuBar.Size = New System.Drawing.Size(824, 25)
         Me.MenuBar.TabIndex = 11
         '
         'lblSelectWallet
         '
         Me.lblSelectWallet.Name = "lblSelectWallet"
-        Me.lblSelectWallet.Size = New System.Drawing.Size(85, 22)
-        Me.lblSelectWallet.Text = "Selected wallet"
+        Me.lblSelectWallet.Size = New System.Drawing.Size(71, 22)
+        Me.lblSelectWallet.Text = "Using wallet"
         '
         'cmbSelectWallet
         '
         Me.cmbSelectWallet.Name = "cmbSelectWallet"
-        Me.cmbSelectWallet.Size = New System.Drawing.Size(121, 25)
+        Me.cmbSelectWallet.Size = New System.Drawing.Size(160, 25)
         '
         'lblCoinMarket
         '
         Me.lblCoinMarket.Name = "lblCoinMarket"
         Me.lblCoinMarket.Size = New System.Drawing.Size(100, 22)
         Me.lblCoinMarket.Text = " | Burst price: N/A"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(13, 22)
+        Me.ToolStripLabel1.Text = "  "
         '
         'frmMain
         '
@@ -714,4 +724,5 @@ Partial Class frmMain
     Friend WithEvents lblSelectWallet As ToolStripLabel
     Friend WithEvents cmbSelectWallet As ToolStripComboBox
     Friend WithEvents lblCoinMarket As ToolStripLabel
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
 End Class

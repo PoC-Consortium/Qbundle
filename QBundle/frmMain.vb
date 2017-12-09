@@ -104,6 +104,11 @@
             frmImport.Show()
         End If
 
+        Generic.UpdateLocalWallet()
+        For t As Integer = 0 To UBound(QGlobal.Wallets)
+            cmbSelectWallet.Items.Add(QGlobal.Wallets(t).Name)
+        Next
+        cmbSelectWallet.SelectedIndex = 0
 
         OneMinCron.Interval = 60000
         OneMinCron.Enabled = True
@@ -712,7 +717,7 @@
                 Me.Invoke(d, New Object() {Data, TimeStamp})
                 Return
             End If
-            lblBlockInfo.Text = Data & " - " & CStr(LastShowHeight)
+            lblBlockInfo.Text = Data '& " - " & CStr(LastShowHeight)
             CurHeight = Val(Data)
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
@@ -897,6 +902,7 @@
         Try
             Dim PriceBtc As Decimal = 0
             Dim PriceUSD As Decimal = 0
+            Dim MktCap As Decimal = 0
             Dim buffer As String = ""
             Data = Replace(Data, Chr(34), "")
             Data = Replace(Data, vbLf, "")
@@ -904,17 +910,20 @@
             Dim Entries() As String = Split(Data, ",")
             For t As Integer = 0 To UBound(Entries)
                 If Entries(t).StartsWith("price_usd") Then
-
                     PriceUSD = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
                 End If
                 If Entries(t).StartsWith("price_btc") Then
 
                     PriceBtc = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
                 End If
+                If Entries(t).StartsWith("market_cap_usd") Then
+                    MktCap = Convert.ToDecimal(Mid(Entries(t), 16), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
+                End If
+
             Next
-            lblCoinMarket.Text = " Burst price: " & PriceBtc.ToString & " btc | " & PriceUSD.ToString & " $"
+            lblCoinMarket.Text = "Burst price: " & PriceBtc.ToString & " btc | $" & Math.Round(PriceUSD, 3).ToString & " | Market cap : $" & Math.Round(MktCap / 1000000, 2).ToString & "M"
         Catch ex As Exception
-            lblCoinMarket.Text = " Burst price: N/A"
+            lblCoinMarket.Text = "Burst price: N/A"
         End Try
 
 
@@ -941,4 +950,24 @@
     Private Sub LauncherModeToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LauncherModeToolStripMenuItem1.Click
         SetMode(1)
     End Sub
+
+    Private Sub cmbSelectWallet_Click(sender As Object, e As EventArgs) Handles cmbSelectWallet.SelectedIndexChanged
+        Try
+            If OneMinCron.Enabled = True Then
+                If cmbSelectWallet.SelectedIndex > 0 Then
+                    wb1.Navigate(QGlobal.Wallets(cmbSelectWallet.SelectedIndex).Address)
+                Else
+                    If Running Then
+                        wb1.Navigate(QGlobal.Wallets(cmbSelectWallet.SelectedIndex).Address)
+                    Else
+                        MsgBox("Your local wallet is not running.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Local wallet")
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
 End Class

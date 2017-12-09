@@ -101,14 +101,6 @@
             Me.Text = Me.Text & " (DebugMode)"
         End If
         ' Me.DialogResult = DialogResult.No
-        If Me.Height > My.Computer.Screen.WorkingArea.Height - 50 Then
-            Me.Height = My.Computer.Screen.WorkingArea.Height - 50
-        End If
-        If Me.Width > My.Computer.Screen.WorkingArea.Width - 50 Then
-            Me.Width = My.Computer.Screen.WorkingArea.Width - 50
-        End If
-        Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
-        Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
 
     End Sub
 
