@@ -11,7 +11,7 @@ pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 
 ~V1.4
-
+Added: 
 + Ability to import a folder with plotfiles to My Plotfiles
 + Added NTP time check before starting wallet.
 + Dynamic plotting (Add/Remove Plotfiles depending on free space)
@@ -19,12 +19,20 @@ Make More data Updatabable. Like online wallets and pool lists.
 + Minimize to tray function
 + Can show Burst price info from Coinmarketcap
 + Online wallets can now be used in wallet mode.
++ New bar with price and wallet selection added
++ Shows blocks/minute when syncing chain.
 
-* When solomining passphrase is only saved to disk for 3 seconds.
+Changed:
+* Some minor GUI changes.
+* HashesPerEnqueue is now set to 100 when using OpenCL
+
+Fixes:
+* when solomining passphrase is now only saved to disk for 3 seconds.
 * Restricted path selection for Xplotter.
 * Updated built in pool list.
 * fixed a bug when importing bbd files.
-* Some GUI changes.
+* Setupwizard resizing problem.
+
 
 V1.3
 + Full wallet mode.
