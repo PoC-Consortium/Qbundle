@@ -828,7 +828,9 @@
                         Dim n As String = (Q.settings.DynPlotSize * 4096).ToString
                         Dim p As Process = New Process
                         p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
-                        p.StartInfo.Arguments = "-id " & Q.settings.DynPlotAcc & " -sn " & Sn & " -n " & n & " -path " & Q.settings.DynPlotPath & " -mem 1G"
+                        Dim thepath As String = Q.settings.DynPlotPath
+                        If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
+                        p.StartInfo.Arguments = "-id " & Q.settings.DynPlotAcc & " -sn " & Sn & " -n " & n & " -path " & thepath & " -mem 1G"
                         p.StartInfo.UseShellExecute = False
                         If Q.settings.DynPlotHide Then
                             p.StartInfo.CreateNoWindow = True

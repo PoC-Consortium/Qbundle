@@ -212,7 +212,9 @@ Public Class frmPlotter
         Try
             Dim p As Process = New Process
             p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
-            p.StartInfo.Arguments = "-id " & txtAccount.Text & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & txtPath.Text & " -mem " & nrRam.Value.ToString & "G"
+            Dim thepath As String = txtPath.Text
+            If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
+            p.StartInfo.Arguments = "-id " & txtAccount.Text & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & thepath & " -mem " & nrRam.Value.ToString & "G"
             p.StartInfo.UseShellExecute = True
             If QGlobal.CPUInstructions.AVX Then
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
