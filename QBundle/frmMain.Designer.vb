@@ -261,8 +261,8 @@ Partial Class frmMain
         '
         Me.AccountMangerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAccountToolStripMenuItem, Me.mnuLoginAccount})
         Me.AccountMangerToolStripMenuItem.Name = "AccountMangerToolStripMenuItem"
-        Me.AccountMangerToolStripMenuItem.Size = New System.Drawing.Size(108, 20)
-        Me.AccountMangerToolStripMenuItem.Text = "Account Manger"
+        Me.AccountMangerToolStripMenuItem.Size = New System.Drawing.Size(114, 20)
+        Me.AccountMangerToolStripMenuItem.Text = "Account Manager"
         '
         'AddAccountToolStripMenuItem
         '
