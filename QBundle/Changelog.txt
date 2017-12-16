@@ -10,7 +10,17 @@ To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 
-~V1.4
+Hide parrent window while downloading data to not lock userspace
+Fix better information about installed java
+Remove DB choise option at start.
+Ability to download MAriaDB controlled when switching database.
+Upgrade MariaDB to 10.1.28
+
+
+~1.5
+
+
+V1.4
 Added: 
 + Ability to import a folder with plotfiles to My Plotfiles
 + Added NTP time check before starting wallet.

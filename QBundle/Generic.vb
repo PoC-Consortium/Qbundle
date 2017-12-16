@@ -55,6 +55,8 @@ Friend Class Generic
                 Case 13 ' from 13-14
                     Q.settings.GetCoinMarket = Q.settings.CheckForUpdates
                     Q.settings.NTPCheck = Q.settings.CheckForUpdates
+                Case 14 ' from 14-15
+
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do
