@@ -135,10 +135,14 @@
         Dim S As frmDownloadExtract
         S = New frmDownloadExtract
         S.Url = Url
+        Me.Hide()
+
         If S.ShowDialog = DialogResult.OK Then
+            Me.Show()
             ImportFromFile(QGlobal.AppDir & IO.Path.GetFileName(Url))
             Exit Sub
         End If
+        Me.Show()
         'we have aborted return to download again
         IsAborted = True
         If QGlobal.DbType.pMariaDB Then StopMaria()

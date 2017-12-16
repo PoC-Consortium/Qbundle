@@ -114,10 +114,14 @@ Public Class frmPlotter
     Private Sub btnStartPotting_Click(sender As Object, e As EventArgs) Handles btnStartPotting.Click
         If Not Q.App.isInstalled(QGlobal.AppNames.Xplotter) Then
             If MsgBox("Xplotter is not installed yet. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Xplotter") = MsgBoxResult.Yes Then
+
+
                 Dim s As frmDownloadExtract = New frmDownloadExtract
                 s.Appid = QGlobal.AppNames.Xplotter
                 Dim res As DialogResult
+                Me.Hide()
                 res = s.ShowDialog
+                Me.Show()
                 If res = DialogResult.Cancel Then
                     Exit Sub
                 ElseIf res = DialogResult.Abort Then

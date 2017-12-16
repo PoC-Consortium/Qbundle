@@ -11,9 +11,9 @@ pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 
 Hide parrent window while downloading data to not lock userspace
-Fix better information about installed java
-Remove DB choise option at start.
-Ability to download MAriaDB controlled when switching database.
+Fix better information about installed java.
+Remove DB choice option at start.
+Ability to download MariaDB controlled when switching database.
 Upgrade MariaDB to 10.1.28
 
 

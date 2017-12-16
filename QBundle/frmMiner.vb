@@ -296,7 +296,9 @@
                 Dim s As frmDownloadExtract = New frmDownloadExtract
                 s.Appid = QGlobal.AppNames.BlagoMiner
                 Dim res As DialogResult
+                Me.Hide()
                 res = s.ShowDialog
+                Me.Show()
                 If res = DialogResult.Cancel Then
                     Exit Sub
                 ElseIf res = DialogResult.Abort Then

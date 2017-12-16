@@ -176,7 +176,7 @@
     End Sub
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-
+        Me.Hide()
         Dim S As frmDownloadExtract
         Dim res As DialogResult
         btnBack.Enabled = False
@@ -193,7 +193,7 @@
                 btnDownload.Enabled = True
                 btnBack.Enabled = True
                 S = Nothing
-
+                Me.Show()
                 Exit Sub
             End If
             If res = DialogResult.Cancel Then
@@ -202,7 +202,7 @@
                 btnDownload.Enabled = True
                 btnBack.Enabled = True
                 S = Nothing
-
+                Me.Show()
                 Exit Sub
             End If
             S = Nothing
@@ -222,7 +222,7 @@
                 btnDownload.Enabled = True
                 btnBack.Enabled = True
                 S = Nothing
-
+                Me.Show()
                 Exit Sub
             End If
             If res = DialogResult.Cancel Then
@@ -231,7 +231,7 @@
                 btnDownload.Enabled = True
                 btnBack.Enabled = True
                 S = Nothing
-
+                Me.Show()
                 Exit Sub
             End If
             S = Nothing
@@ -244,7 +244,7 @@
         ElseIf SelectedDBType <> QGlobal.DbType.MariaDB Then
             btnDone.Enabled = True
         End If
-
+        Me.Show()
     End Sub
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
         Q.settings.DbType = SelectedDBType
