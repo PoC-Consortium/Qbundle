@@ -102,9 +102,12 @@
         End If
         ' Me.DialogResult = DialogResult.No
 
-    End Sub
 
-    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        FirstNext()
+
+
+    End Sub
+    Private Sub FirstNext()
         Chosen = True
         Dim Ok As Boolean = True
 
@@ -166,6 +169,9 @@
         PnlWiz2.Left = pnlWiz1.Left
         PnlWiz2.Visible = True
 
+    End Sub
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        FirstNext()
 
     End Sub
 
@@ -275,12 +281,13 @@
         '  BWL.settings.SaveSettings()
         '  BWL.Generic.WriteNRSConfig()
         '  Me.Close()
+        finalSteps()
 
         'Temp unavail untill repo in place
-        PnlWiz2.Visible = False
-        PnlWiz3.Top = pnlWiz1.Top
-        PnlWiz3.Left = pnlWiz1.Left
-        PnlWiz3.Visible = True
+        '   PnlWiz2.Visible = False
+        '   PnlWiz3.Top = pnlWiz1.Top
+        '   PnlWiz3.Left = pnlWiz1.Left
+        '   PnlWiz3.Visible = True
 
     End Sub
 
@@ -330,18 +337,25 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        finalSteps()
+
+    End Sub
+
+    Private Sub finalSteps()
         Q.settings.QBMode = 0
         If Q.App.CheckOpenCL() Then Q.settings.useOpenCL = True
         Q.settings.SaveSettings()
         'writing brs.properties since we need it for tools.
-
         QB.Generic.WriteWalletConfig()
-        If rYes.Checked Then
-            Me.DialogResult = DialogResult.Yes
-        Else
-            Me.DialogResult = DialogResult.No
-            'frmImport.Show()
-        End If
-        '  Me.Close()
+
+        Me.DialogResult = DialogResult.No
+        '        If rYes.Checked Then
+        '        Me.DialogResult = DialogResult.Yes
+        '        Else
+        '        Me.DialogResult = DialogResult.No
+
+        '        End If
+
+
     End Sub
 End Class

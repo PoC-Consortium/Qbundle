@@ -44,8 +44,8 @@
                 pnlMariaSettings.Enabled = True
         End Select
         If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
-            rDB3.Enabled = False
-            rDB3.Text = rDB3.Text & " (Not installed)"
+            '    rDB3.Enabled = False
+            '    rDB3.Text = rDB3.Text & " (Not installed)"
         End If
         lblCurDB.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
         If Not Q.settings.DbType = QGlobal.DbType.H2 Then
@@ -96,6 +96,34 @@
         setdb(QGlobal.DbType.MariaDB)
     End Sub
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+
+        'download and install mariadb if that is checked and not installed
+        If SelDB = QGlobal.DbType.pMariaDB Then
+            If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
+                If Not MsgBox("MariaDB Portable is not installed. Would you like to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Maria DB?") = MsgBoxResult.Yes Then
+                    Exit Sub
+                End If
+                Me.Hide()
+                Dim S As frmDownloadExtract = New frmDownloadExtract
+                S.Appid = QGlobal.AppNames.MariaPortable
+                S.DialogResult = Nothing
+                Dim Res As DialogResult = S.ShowDialog()
+                If Res = DialogResult.Abort Then
+                    S = Nothing
+                    Me.Show()
+                    Exit Sub
+                End If
+                If Res = DialogResult.Cancel Then
+                    S = Nothing
+                    Me.Show()
+                    Exit Sub
+                End If
+                S = Nothing
+                Q.App.SetLocalInfo()
+            End If
+        End If
+        Me.Show()
+
         pnlWiz1.Hide()
         pnlWiz2.Show()
         pnlWiz2.Top = pnlWiz1.Top

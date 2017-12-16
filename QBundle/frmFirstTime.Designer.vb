@@ -87,7 +87,6 @@ Partial Class frmFirstTime
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.pnlMode = New System.Windows.Forms.Panel()
         Me.pnlWiz1.SuspendLayout()
@@ -349,9 +348,10 @@ Partial Class frmFirstTime
         Me.Label8.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Label8.Location = New System.Drawing.Point(19, 298)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(193, 39)
+        Me.Label8.Size = New System.Drawing.Size(201, 39)
         Me.Label8.TabIndex = 9
-        Me.Label8.Text = "Please choose your initial settings." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default settings will get you started." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The settings can be changed later."
+        Me.Label8.Text = "We have now checked the environment." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If anything is missing please use" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "download" &
+    " missing components."
         '
         'Label9
         '
@@ -521,6 +521,7 @@ Partial Class frmFirstTime
         Me.btnBack.TabIndex = 17
         Me.btnBack.Text = "<< Back"
         Me.btnBack.UseVisualStyleBackColor = True
+        Me.btnBack.Visible = False
         '
         'btnDownload
         '
@@ -771,18 +772,6 @@ Partial Class frmFirstTime
         Me.RadioButton3.TabStop = True
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(28, 350)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(199, 17)
-        Me.CheckBox1.TabIndex = 11
-        Me.CheckBox1.Text = "Turn on software update notification."
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
         'Button3
         '
         Me.Button3.Location = New System.Drawing.Point(308, 343)
@@ -795,7 +784,6 @@ Partial Class frmFirstTime
         'pnlMode
         '
         Me.pnlMode.Controls.Add(Me.Button3)
-        Me.pnlMode.Controls.Add(Me.CheckBox1)
         Me.pnlMode.Controls.Add(Me.pnlLauncher)
         Me.pnlMode.Controls.Add(Me.pnlWallet)
         Me.pnlMode.Controls.Add(Me.Label20)
@@ -809,7 +797,7 @@ Partial Class frmFirstTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1096, 692)
+        Me.ClientSize = New System.Drawing.Size(1096, 754)
         Me.Controls.Add(Me.pnlMode)
         Me.Controls.Add(Me.PnlWiz3)
         Me.Controls.Add(Me.PictureBox2)
@@ -924,7 +912,6 @@ Partial Class frmFirstTime
     Friend WithEvents Label10 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Button3 As Button
     Friend WithEvents pnlMode As Panel
 End Class
