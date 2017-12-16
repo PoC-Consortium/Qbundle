@@ -124,7 +124,7 @@
             lblJavaStatus.Text = "Java was found in a portable version."
         Else
             pnlJava.BackColor = Color.LightCoral
-            lblJavaStatus.Text = "Java is not found." & vbCrLf & "Use download components to download a portable version."
+            lblJavaStatus.Text = Q.App.getAppMessage(QGlobal.AppNames.JavaInstalled) & vbCrLf & "Use download components to download a portable version."
             'offer the download
             btnDone.Enabled = False
             btnDownload.Enabled = True

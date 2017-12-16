@@ -15,6 +15,7 @@ Public Class clsApp
         Dim LocalVersion As String
         Dim ExtractToDir As String
         Dim Updated As Boolean
+        Dim Message As String
     End Structure
     Private _Apps() As StrucApps
     Private _Aborted As Boolean
@@ -36,6 +37,7 @@ Public Class clsApp
             _Apps(i).RemoteUrl = ""
             _Apps(i).ExtractToDir = ""
             _Apps(i).Updated = False
+            _Apps(i).Message = ""
         Next
         UpdateInfo = "QInfo"
         'repositories to download from
@@ -153,7 +155,17 @@ Public Class clsApp
                     result = result.Replace(" ", "")
                     result = Trim(result.Replace(Chr(34), ""))
                     JavaFound = CheckVersion("1.8", result, False)
+                    If JavaFound Then
+                        _Apps(QGlobal.AppNames.JavaInstalled).Message = "Java is found installed on your system."
+                    Else
+                        _Apps(QGlobal.AppNames.JavaInstalled).Message = "Installed java version is outdated."
+                    End If
                 End If
+                If LCase(result).Contains("does not support") Then
+                    _Apps(QGlobal.AppNames.JavaInstalled).Message = "32bit java was found but 64bit is required."
+                End If
+            Else
+                _Apps(QGlobal.AppNames.JavaInstalled).Message = "Java is not found installed on your system."
             End If
             p.Dispose()
             p.Dispose()
@@ -567,6 +579,9 @@ Public Class clsApp
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
         Return False
+    End Function
+    Public Function getAppMessage(ByVal appid As Integer) As String
+        Return _Apps(appid).Message
     End Function
 #End Region
 
