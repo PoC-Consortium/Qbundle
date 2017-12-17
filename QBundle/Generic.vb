@@ -56,6 +56,7 @@ Friend Class Generic
                     Q.settings.GetCoinMarket = Q.settings.CheckForUpdates
                     Q.settings.NTPCheck = Q.settings.CheckForUpdates
                 Case 14 ' from 14-15
+                Case 15 ' from 15-16
 
             End Select
             OldVer += 1
