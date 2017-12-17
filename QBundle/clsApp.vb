@@ -70,7 +70,7 @@ Public Class clsApp
         Dim AllOk As Boolean = False
         For i = 0 To UBound(_Repositories)
             Dim Http As New clsHttp
-            data = Http.GetUrl(_Repositories(i) & "QInfo")
+            data = Http.GetUrl(_Repositories(i) & UpdateInfo)
             If Http.Errmsg <> "" Then ErrMSg = Http.Errmsg
             Http = Nothing
             If data.Length <> 0 Then Exit For
