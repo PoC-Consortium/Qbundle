@@ -34,7 +34,7 @@
                 rDB1.Text = rDB1.Text & " (Currently used)"
             Case QGlobal.DbType.FireBird
                 rDB2.Enabled = False
-                rDB2.Text = rDB2.Text & " (Currently used)"
+            '   rDB2.Text = rDB2.Text & " (Currently used)"
             Case QGlobal.DbType.pMariaDB
                 rDB3.Enabled = False
                 rDB3.Text = rDB3.Text & " (Currently used)"
@@ -43,18 +43,21 @@
                 rDB4.Text = rDB4.Text & " (Currently used)"
                 pnlMariaSettings.Enabled = True
         End Select
-        If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
-            '    rDB3.Enabled = False
-            '    rDB3.Text = rDB3.Text & " (Not installed)"
-        End If
+        '   If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
+        '    rDB3.Enabled = False
+        '   '    rDB3.Text = rDB3.Text & " (Not installed)"
+        '  End If
         lblCurDB.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
         If Not Q.settings.DbType = QGlobal.DbType.H2 Then
             setdb(QGlobal.DbType.H2)
         Else
-            setdb(QGlobal.DbType.FireBird)
+            setdb(QGlobal.DbType.pMariaDB)
         End If
 
         OP = 0
+        '/disable firebird
+        rDB2.Enabled = False
+        rDB2.Text = rDB2.Text & " (Currently Disabled)"
 
         Me.Width = 501
         Me.Height = 436
