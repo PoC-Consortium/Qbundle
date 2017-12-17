@@ -11,7 +11,7 @@ pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 Upgrade MariaDB to 10.1.28
 
-
+ 
 ~1.5
 * Plotting to pathes with spaces in them is now working.
 * Parrent window is now hidden during download to prevent locked windows. (Issue #2 on github)
