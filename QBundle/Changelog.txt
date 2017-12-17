@@ -11,6 +11,10 @@ pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 Upgrade MariaDB to 10.1.28
 
+BUGS:
+Plotter should accept BURST- address for accountID
+1. if a RJ45 network-cable is not plugged, the qbundle will crash
+2. if windows screen-scale-settings are over 100%, the qbundle installwindow is to small (the buttons are hided and there is no scrollbar)
  
 ~1.5
 * Plotting to pathes with spaces in them is now working.
