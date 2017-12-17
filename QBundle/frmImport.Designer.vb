@@ -32,6 +32,7 @@ Partial Class frmImport
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkStartWallet = New System.Windows.Forms.CheckBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.txtFile = New System.Windows.Forms.TextBox()
         Me.txtUrl = New System.Windows.Forms.TextBox()
@@ -44,7 +45,6 @@ Partial Class frmImport
         Me.pb1 = New System.Windows.Forms.ProgressBar()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnStart = New System.Windows.Forms.Button()
-        Me.chkStartWallet = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -147,6 +147,18 @@ Partial Class frmImport
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(472, 220)
         Me.Panel2.TabIndex = 12
+        '
+        'chkStartWallet
+        '
+        Me.chkStartWallet.AutoSize = True
+        Me.chkStartWallet.Checked = True
+        Me.chkStartWallet.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStartWallet.Location = New System.Drawing.Point(32, 191)
+        Me.chkStartWallet.Name = "chkStartWallet"
+        Me.chkStartWallet.Size = New System.Drawing.Size(178, 17)
+        Me.chkStartWallet.TabIndex = 14
+        Me.chkStartWallet.Text = "Start wallet when import is done."
+        Me.chkStartWallet.UseVisualStyleBackColor = True
         '
         'btnBrowse
         '
@@ -255,18 +267,6 @@ Partial Class frmImport
         Me.btnStart.Text = "Start Import"
         Me.btnStart.UseVisualStyleBackColor = True
         '
-        'chkStartWallet
-        '
-        Me.chkStartWallet.AutoSize = True
-        Me.chkStartWallet.Checked = True
-        Me.chkStartWallet.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkStartWallet.Location = New System.Drawing.Point(32, 191)
-        Me.chkStartWallet.Name = "chkStartWallet"
-        Me.chkStartWallet.Size = New System.Drawing.Size(178, 17)
-        Me.chkStartWallet.TabIndex = 14
-        Me.chkStartWallet.Text = "Start wallet when import is done."
-        Me.chkStartWallet.UseVisualStyleBackColor = True
-        '
         'frmImport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -279,7 +279,7 @@ Partial Class frmImport
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmImport"

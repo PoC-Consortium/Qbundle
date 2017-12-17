@@ -234,6 +234,16 @@
         End If
     End Sub
     Private Sub Complete()
+        Try
+
+            RemoveHandler Q.ProcHandler.Aborting, AddressOf Aborted
+            RemoveHandler Q.ProcHandler.Started, AddressOf Starting
+            RemoveHandler Q.ProcHandler.Stopped, AddressOf Stopped
+            RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+
         If IsAborted = False Then
             Dim ElapsedTime As TimeSpan = Now.Subtract(StartTime)
             lblStatus.Text = "Done! Import completed in " & ElapsedTime.Hours & ":" & ElapsedTime.Minutes & ":" & ElapsedTime.Seconds
@@ -243,21 +253,18 @@
             pb1.Value = 100
             Running = False
             If chkStartWallet.Checked = True Then
-                frmMain.StartWallet()
+                Try
+                    frmMain.StartWallet()
+                Catch ex As Exception
+                    If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                End Try
             End If
         Else
             SetSelect(SelectedType)
-            '            btnStart.Text = "Close"
             btnStart.Enabled = True
             pb1.Value = 100
             Running = False
         End If
-
-
-        RemoveHandler Q.ProcHandler.Aborting, AddressOf Aborted
-        RemoveHandler Q.ProcHandler.Started, AddressOf Starting
-        RemoveHandler Q.ProcHandler.Stopped, AddressOf Stopped
-        RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
     End Sub
     Private Sub ProcEvents(ByVal AppId As Integer, ByVal Operation As Integer, ByVal data As String)
         If Me.InvokeRequired Then
