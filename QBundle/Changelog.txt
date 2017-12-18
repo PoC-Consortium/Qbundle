@@ -13,10 +13,15 @@ Upgrade MariaDB to 10.1.28
 
 BUGS:
 Plotter should accept BURST- address for accountID
-1. if a RJ45 network-cable is not plugged, the qbundle will crash
-2. if windows screen-scale-settings are over 100%, the qbundle installwindow is to small (the buttons are hided and there is no scrollbar)
+FILE_SUPPORTS_SPARSE_FILES: no <-- if found change drive format i suppose
+1. if a RJ45 network-cable is not plugged, the qbundle will crash (no network)
+
+~1.6
+Windows scale factor should no longer render forms with controlls outside of it.
+
+
  
-~1.5
+1.5
 * Plotting to pathes with spaces in them is now working.
 * Parrent window is now hidden during download to prevent locked windows. (Issue #2 on github)
 * More information regarding java is now presented on setupscreen (Issue #1 on github)

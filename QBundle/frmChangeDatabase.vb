@@ -59,8 +59,13 @@
         rDB2.Enabled = False
         rDB2.Text = rDB2.Text & " (Currently Disabled)"
 
-        Me.Width = 501
-        Me.Height = 436
+        'Me.Width = 501
+        'Me.Height = 436
+        ' MsgBox(pnlWiz1.Top + pnlWiz1.Height + 40)
+        Me.Width = pnlWiz1.Left + pnlWiz1.Width + 13
+        Me.Height = pnlWiz1.Top + pnlWiz1.Height + 40
+
+
 
     End Sub
     Private Sub setdb(ByVal id As Integer)

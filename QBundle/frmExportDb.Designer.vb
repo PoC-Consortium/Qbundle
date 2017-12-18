@@ -168,7 +168,7 @@ Partial Class frmExportDb
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(489, 322)
+        Me.ClientSize = New System.Drawing.Size(496, 281)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pb1)
         Me.Controls.Add(Me.Label3)

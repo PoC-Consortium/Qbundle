@@ -127,6 +127,26 @@
         If Q.settings.DbType = QGlobal.DbType.FireBird Then
             MsgBox("You are currently set up to use Firebird as database. Due to recent discovery’s firebird is no longer recommended in 1.3.6cg core wallet. It is suggested that you change database backend.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Firebird")
         End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
@@ -163,8 +183,23 @@
             Case 1 ' Launcher Mode
                 Me.FormBorderStyle = FormBorderStyle.FixedDialog
                 Me.MaximizeBox = False
-                Me.Width = 580 '464
-                Me.Height = 218
+
+                Dim g As Graphics = Me.CreateGraphics()
+                Dim dpiX As Decimal = CDec(g.DpiX) / 100
+                Dim dpiY As Decimal = CDec(g.DpiY) / 100
+                If dpiY > 1 Then
+                    dpiX = 1 - (dpiX - 1)
+                    dpiY = 1 - (dpiY - 1)
+                    Dim res As New SizeF(dpiX, dpiY)
+                    Me.Scale(res)
+                End If
+
+                '    Me.Width = 580  '464
+                '    Me.Height = 218
+                '    MsgBox(pnlLauncher.Top + pnlLauncher.Height + 70)
+                Me.Width = pnlLauncher.Left + pnlLauncher.Width + 24
+                Me.Height = pnlLauncher.Top + pnlLauncher.Height + 70
+
                 Q.settings.QBMode = 1
                 Q.settings.SaveSettings()
                 Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)

@@ -227,7 +227,9 @@
     End Sub
 
     Private Sub frmExportDb_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Height = 316
+
+
+
     End Sub
     Private Sub StartMaria()
         Try

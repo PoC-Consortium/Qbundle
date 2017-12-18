@@ -95,8 +95,33 @@
 #End Region
 
     Private Sub frmFirstTime_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Width = 674
-        Me.Height = 418 ' 405
+
+        Me.AutoScaleMode = AutoScaleMode.None
+
+        Me.Width = pnlWiz1.Left + pnlWiz1.Width + 25
+        Me.Height = pnlWiz1.Top + pnlWiz1.Height + 39
+
+        '  Me.Width = 674 ' * dpiX
+        '  Me.Height = 418 ' * dpiY ' 405
+
+        Me.AutoScaleMode = AutoScaleMode.Font
+
+
+        '        Dim g As Graphics = Me.CreateGraphics()
+        '        Dim dpiX As Decimal = CDec(g.DpiX) / 100
+        '        Dim dpiY As Decimal = CDec(g.DpiY) / 100
+        '        If dpiY > 1 Then
+        '        dpiX = 1 - (dpiX - 1)
+        '        dpiY = 1 - (dpiY - 1)
+        '        Dim res As New SizeF(dpiX, dpiY)
+        '        Me.Scale(res)
+        '        For Each s As Control In Me.Controls
+        '        s.Font = New Font(s.Font.FontFamily, s.Font.Size * dpiX)
+        '        Next
+        '        End If
+
+
+
         If QB.Generic.DebugMe Then
             Me.Text = Me.Text & " (DebugMode)"
         End If

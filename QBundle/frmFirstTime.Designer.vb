@@ -366,6 +366,7 @@ Partial Class frmFirstTime
         '
         'PnlWiz2
         '
+        Me.PnlWiz2.AutoScroll = True
         Me.PnlWiz2.Controls.Add(Me.pnlDb)
         Me.PnlWiz2.Controls.Add(Me.lblStatusInfo)
         Me.PnlWiz2.Controls.Add(Me.btnBack)
@@ -797,7 +798,7 @@ Partial Class frmFirstTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1096, 754)
+        Me.ClientSize = New System.Drawing.Size(794, 470)
         Me.Controls.Add(Me.pnlMode)
         Me.Controls.Add(Me.PnlWiz3)
         Me.Controls.Add(Me.PictureBox2)
@@ -807,7 +808,7 @@ Partial Class frmFirstTime
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.PictureBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmFirstTime"
