@@ -6,7 +6,8 @@
 
         If Not Q.App.SetRemoteInfo() Then
             MsgBox("There was an error getting update info. Check internet connection and try again.")
-            Me.Close()
+            btnUpdate.Enabled = False
+            Exit Sub
         End If
         If CheckAndUpdateLW() Then
             btnUpdate.Enabled = True
