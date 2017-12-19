@@ -66,6 +66,8 @@ Partial Class frmPlotter
         Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.lblcputype = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -407,7 +409,7 @@ Partial Class frmPlotter
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(399, 259)
+        Me.Label13.Location = New System.Drawing.Point(399, 249)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(223, 39)
         Me.Label13.TabIndex = 22
@@ -418,7 +420,7 @@ Partial Class frmPlotter
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(399, 243)
+        Me.Label14.Location = New System.Drawing.Point(399, 233)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(114, 13)
         Me.Label14.TabIndex = 21
@@ -464,19 +466,39 @@ Partial Class frmPlotter
         '
         Me.cmImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFileToolStripMenuItem, Me.ImportFolderToolStripMenuItem})
         Me.cmImport.Name = "cmImport"
-        Me.cmImport.Size = New System.Drawing.Size(153, 70)
+        Me.cmImport.Size = New System.Drawing.Size(147, 48)
         '
         'ImportFileToolStripMenuItem
         '
         Me.ImportFileToolStripMenuItem.Name = "ImportFileToolStripMenuItem"
-        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFileToolStripMenuItem.Text = "Import file"
         '
         'ImportFolderToolStripMenuItem
         '
         Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
-        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(527, 347)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(69, 12)
+        Me.Label20.TabIndex = 26
+        Me.Label20.Text = "CPU capability:"
+        '
+        'lblcputype
+        '
+        Me.lblcputype.AutoSize = True
+        Me.lblcputype.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblcputype.Location = New System.Drawing.Point(594, 347)
+        Me.lblcputype.Name = "lblcputype"
+        Me.lblcputype.Size = New System.Drawing.Size(30, 12)
+        Me.lblcputype.TabIndex = 27
+        Me.lblcputype.Text = "AVX2"
         '
         'frmPlotter
         '
@@ -484,6 +506,8 @@ Partial Class frmPlotter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(645, 461)
+        Me.Controls.Add(Me.lblcputype)
+        Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.Label15)
@@ -561,4 +585,6 @@ Partial Class frmPlotter
     Friend WithEvents cmImport As ContextMenuStrip
     Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label20 As Label
+    Friend WithEvents lblcputype As Label
 End Class

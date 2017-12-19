@@ -61,6 +61,8 @@ Partial Class frmMiner
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrRemovePass = New System.Windows.Forms.Timer(Me.components)
+        Me.lblcputype = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
@@ -120,6 +122,8 @@ Partial Class frmMiner
         '
         'grpMiner
         '
+        Me.grpMiner.Controls.Add(Me.lblcputype)
+        Me.grpMiner.Controls.Add(Me.Label20)
         Me.grpMiner.Controls.Add(Me.pnlPool)
         Me.grpMiner.Controls.Add(Me.btnStartMine)
         Me.grpMiner.Controls.Add(Me.txtDeadLine)
@@ -263,7 +267,7 @@ Partial Class frmMiner
         '
         'btnStartMine
         '
-        Me.btnStartMine.Location = New System.Drawing.Point(266, 237)
+        Me.btnStartMine.Location = New System.Drawing.Point(266, 233)
         Me.btnStartMine.Name = "btnStartMine"
         Me.btnStartMine.Size = New System.Drawing.Size(114, 29)
         Me.btnStartMine.TabIndex = 51
@@ -419,6 +423,26 @@ Partial Class frmMiner
         '
         Me.tmrRemovePass.Interval = 3000
         '
+        'lblcputype
+        '
+        Me.lblcputype.AutoSize = True
+        Me.lblcputype.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblcputype.Location = New System.Drawing.Point(340, 263)
+        Me.lblcputype.Name = "lblcputype"
+        Me.lblcputype.Size = New System.Drawing.Size(30, 12)
+        Me.lblcputype.TabIndex = 54
+        Me.lblcputype.Text = "AVX2"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(273, 263)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(69, 12)
+        Me.Label20.TabIndex = 53
+        Me.Label20.Text = "CPU capability:"
+        '
         'frmMiner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -489,4 +513,6 @@ Partial Class frmMiner
     Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tmrRemovePass As Timer
+    Friend WithEvents lblcputype As Label
+    Friend WithEvents Label20 As Label
 End Class

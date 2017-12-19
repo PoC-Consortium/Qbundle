@@ -128,25 +128,6 @@
             MsgBox("You are currently set up to use Firebird as database. Due to recent discovery’s firebird is no longer recommended in 1.3.6cg core wallet. It is suggested that you change database backend.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Firebird")
         End If
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
@@ -194,9 +175,6 @@
                     Me.Scale(res)
                 End If
 
-                '    Me.Width = 580  '464
-                '    Me.Height = 218
-                '    MsgBox(pnlLauncher.Top + pnlLauncher.Height + 70)
                 Me.Width = pnlLauncher.Left + pnlLauncher.Width + 24
                 Me.Height = pnlLauncher.Top + pnlLauncher.Height + 70
 

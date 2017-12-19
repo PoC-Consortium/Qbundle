@@ -367,12 +367,16 @@
     End Sub
 
     Private Sub finalSteps()
-        Q.settings.QBMode = 0
-        If Q.App.CheckOpenCL() Then Q.settings.useOpenCL = True
-        Q.settings.SaveSettings()
-        'writing brs.properties since we need it for tools.
-        QB.Generic.WriteWalletConfig()
+        Try
+            Q.settings.QBMode = 0
+            If Q.App.CheckOpenCL() Then Q.settings.useOpenCL = True
+            Q.settings.SaveSettings()
+            'writing brs.properties since we need it for tools.
 
+        Catch ex As Exception
+
+        End Try
+        QB.Generic.WriteWalletConfig()
         Me.DialogResult = DialogResult.No
         '        If rYes.Checked Then
         '        Me.DialogResult = DialogResult.Yes
