@@ -14,11 +14,10 @@ Upgrade MariaDB to 10.1.28
 BUGS:
 Plotter should accept BURST- address for accountID
 FILE_SUPPORTS_SPARSE_FILES: no <-- if found change drive format i suppose
-1. if a RJ45 network-cable is not plugged, the qbundle will crash (no network)
 
 ~1.6
-Windows scale factor should no longer render forms with controlls outside of it.
-
+Windows scale factors is now compatible with Qbundle
+No internet connection should no longer cause crashes.
 
  
 1.5
