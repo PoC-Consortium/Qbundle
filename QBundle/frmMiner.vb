@@ -39,6 +39,10 @@
                 CheckRewardAssignment(1)
             End If
         End If
+
+        If QGlobal.CPUInstructions.SSE Then lblcputype.Text = "SSE"
+        If QGlobal.CPUInstructions.AVX Then lblcputype.Text = "AVX"
+        If QGlobal.CPUInstructions.AVX2 Then lblcputype.Text = "AVX2"
     End Sub
 
     Private Sub CheckRewardAssignment(ByVal WalletId As Integer)

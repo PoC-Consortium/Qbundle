@@ -366,13 +366,9 @@
                 Next
             End If
         Catch ex As Exception
-
-        End Try
-        Try
             If _Debug = True Then Generic.DebugMe = True
-        Catch ex As Exception
-
         End Try
+
     End Sub
     Friend Sub SaveSettings()
         Try
@@ -383,7 +379,7 @@
             Next
             IO.File.WriteAllText(QGlobal.SettingsDir & "\BWL.ini", Sdata)
         Catch ex As Exception
-
+            If _Debug = True Then Generic.DebugMe = True
         End Try
     End Sub
 End Class

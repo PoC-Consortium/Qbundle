@@ -12,6 +12,11 @@ Public Class frmPlotter
             Dim nonces As Long = Math.Floor(FreeSpace / 1024 / 256)
             nonces = Math.Floor(nonces / 8) 'make it devidable by 8
             nonces = nonces * 8
+            If nonces < 8 Then
+                MsgBox("Free space on drive is to low for plotfiles", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "No free space.")
+                nonces = 8
+            End If
+
             HSSize.Maximum = nonces
 
             HSSize.Minimum = 8
@@ -102,6 +107,11 @@ Public Class frmPlotter
         Catch ex As Exception
 
         End Try
+
+        If QGlobal.CPUInstructions.SSE Then lblcputype.Text = "SSE"
+        If QGlobal.CPUInstructions.AVX Then lblcputype.Text = "AVX"
+        If QGlobal.CPUInstructions.AVX2 Then lblcputype.Text = "AVX2"
+
 
 
 
