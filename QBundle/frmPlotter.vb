@@ -196,7 +196,7 @@ Public Class frmPlotter
 
         'check nonce overlap.
         If checkPlotOverLapp() = False Then
-            MsgBox("You are trying to write a plot that overlap with an existing one. Please change your Startnonce.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Free space changed.")
+            MsgBox("You are trying to write a plot that overlap with an existing one. Please change your Startnonce.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Plot overlap")
             Exit Sub
         End If
 
