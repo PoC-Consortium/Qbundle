@@ -1,6 +1,7 @@
 ﻿Imports System.Management
 Imports System.Net
 Imports System.Net.Sockets
+Imports Microsoft.Win32
 
 Friend Class Generic
     Public Shared DebugMe As Boolean
@@ -670,4 +671,19 @@ Friend Class Generic
         Return False
 
     End Function
+
+    Friend Shared Function CheckDotNet() As Boolean
+        Const subkey As String = "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"
+        Using ndpKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey)
+            If ndpKey IsNot Nothing AndAlso ndpKey.GetValue("Release") IsNot Nothing Then
+                If ((CInt(ndpKey.GetValue("Release")) >= 379893)) Then 'ver 4.5.2
+                    Return True
+                End If
+            End If
+        End Using
+        Return False
+    End Function
+
+
+
 End Class

@@ -15,10 +15,23 @@
     Private Sub frmImport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Running = False
         cmbRepo.Items.Clear()
-        ReDim RepoDBUrls(0)
-        RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
-        cmbRepo.Items.Add("Cryptoguru repository")
-        cmbRepo.SelectedIndex = 0
+
+        Select Case Q.settings.DbType
+            Case QGlobal.DbType.H2
+                ReDim RepoDBUrls(1)
+                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
+                RepoDBUrls(1) = "https://burstneon-bc.ddns.net/neonDb.zip"
+                cmbRepo.Items.Add("Cryptoguru repository")
+                cmbRepo.Items.Add("Burstneon Block Catcher")
+                cmbRepo.SelectedIndex = 1
+            Case Else
+                ReDim RepoDBUrls(0)
+                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
+                cmbRepo.Items.Add("Cryptoguru repository")
+                cmbRepo.SelectedIndex = 0
+        End Select
+
+
 
     End Sub
     Private Sub frmImport_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -104,7 +117,8 @@
         IsAborted = False
         Select Case SelectedType
             Case 1
-                ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+                If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+                If cmbRepo.SelectedIndex = 1 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
             Case 2
                 ImportFromUrl(txtUrl.Text)
             Case 3
@@ -128,6 +142,57 @@
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.AppDir
         Q.ProcHandler.StartProcess(Pset)
+
+
+    End Sub
+    Private Sub DownloadUnzip(ByVal Url As String)
+        Dim S As frmDownloadExtract
+        S = New frmDownloadExtract
+        S.Url = Url
+        S.Unzip = True
+        Me.Hide()
+        If S.ShowDialog = DialogResult.OK Then
+            Me.Show()
+            Try
+                If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then
+                    IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url))
+                End If
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+            Try
+                If IO.File.Exists(QGlobal.BaseDir & "\burst_db\burst.mv.db") Then
+                    IO.File.Delete(QGlobal.BaseDir & "\burst_db\burst.mv.db")
+                End If
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+            Try
+                IO.File.Move(QGlobal.BaseDir & "\burst.mv.db", QGlobal.BaseDir & "\burst_db\burst.mv.db")
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+
+            Complete()
+
+            Exit Sub
+        End If
+        Me.Show()
+        'we have aborted return to download again
+        IsAborted = True
+        If QGlobal.DbType.pMariaDB Then StopMaria()
+
+        Running = False
+        r1.Enabled = True
+        r2.Enabled = True
+        r3.Enabled = True
+        cmbRepo.Enabled = True
+        txtUrl.Enabled = True
+        txtFile.Enabled = True
+        btnBrowse.Enabled = True
+        btnStart.Enabled = True
+        SetSelect(SelectedType)
+        lblStatus.Text = "Aborted"
 
 
     End Sub

@@ -10,20 +10,16 @@ To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 Upgrade MariaDB to 10.1.28
-Check that .net 4.5.2 is installed.(?)
-
-
-BUGS:
 
 ~1.6
-+ Added ability to resume plotfile.
+Added ability to resume plotfile.
+Burstneon block catcher added to Repository for direct H2 Import.
 Updated Pool list
 Windows scale factor is now compatible with Qbundle
 No internet connection should no longer cause crashes.
-Adressed an issue in Plotter saying there is an overlap.
+Addressed an issue in Plotter saying there is an overlap when there is not.
 Plotter now supports RS address for account id.
-
-
+Checks that correct .net version is installed.
  
 1.5
 * Plotting to pathes with spaces in them is now working.

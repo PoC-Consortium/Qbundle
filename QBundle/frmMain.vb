@@ -25,12 +25,17 @@
 
 #Region " Form Events "
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If QB.Generic.CheckDotNet() = False Then
+            MsgBox("You need to install .net 4.5.2. Check the Readme.txt file for more information.")
+        End If
+
         Q = New clsQ
         QB.Generic.CheckCommandArgs()
         If Q.settings.AlwaysAdmin And Not QB.Generic.IsAdmin Then
             QB.Generic.RestartAsAdmin()
             End
         End If
+
 
         If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
         LastException = Now 'for brs exception monitoring

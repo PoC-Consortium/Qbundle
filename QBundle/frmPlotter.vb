@@ -278,33 +278,37 @@ Public Class frmPlotter
         '      PStartnonce  <------------------>  PEndNonce
 
         Try
-            If Q.settings.Plots.Length > 6 Then
-                Plotfiles = Split(Q.settings.Plots, "|")
-                For Each Plot As String In Plotfiles
-                    If Plot.Length > 6 Then
-                        If IO.File.Exists(Plot) Then
-                            Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
-                            If UBound(N) = 3 Then
-                                If N(0) = Trim(AccountID) Then
-                                    PStartNonce = CDbl(N(1))
-                                    PEndNonce = PStartNonce + CDbl(N(2)) - 1
-                                    If StartNonce >= PStartNonce And StartNonce <= PEndNonce Then
-                                        'startnonce within a plotrange
-                                        Return False
-                                    End If
-                                    If EndNonce >= PStartNonce And EndNonce <= PEndNonce Then
-                                        'Endnonce within a plotrange
-                                        Return False
-                                    End If
-                                    If PStartNonce > StartNonce And PEndNonce < EndNonce Then
-                                        'We overlap totaly
-                                        Return False
+            If Not IsNothing(Q.settings.Plots) Then
+                If Q.settings.Plots.Length > 6 Then
+                    Plotfiles = Split(Q.settings.Plots, "|")
+                    If Not IsNothing(Plotfiles) Then
+                        For Each Plot As String In Plotfiles
+                            If Plot.Length > 6 Then
+                                If IO.File.Exists(Plot) Then
+                                    Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
+                                    If UBound(N) = 3 Then
+                                        If N(0) = Trim(AccountID) Then
+                                            PStartNonce = CDbl(N(1))
+                                            PEndNonce = PStartNonce + CDbl(N(2)) - 1
+                                            If StartNonce >= PStartNonce And StartNonce <= PEndNonce Then
+                                                'startnonce within a plotrange
+                                                Return False
+                                            End If
+                                            If EndNonce >= PStartNonce And EndNonce <= PEndNonce Then
+                                                'Endnonce within a plotrange
+                                                Return False
+                                            End If
+                                            If PStartNonce > StartNonce And PEndNonce < EndNonce Then
+                                                'We overlap totaly
+                                                Return False
+                                            End If
+                                        End If
                                     End If
                                 End If
                             End If
-                        End If
+                        Next
                     End If
-                Next
+                End If
             End If
         Catch ex As Exception
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -472,4 +476,6 @@ Public Class frmPlotter
 
 
     End Sub
+
+
 End Class

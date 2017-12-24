@@ -343,6 +343,8 @@
         _CoinMarket = False
         _AutoStart = True
 
+        _Plots = ""
+
         _DynPlotEnabled = False
         _DynPlotPath = ""
         _DynPlotAcc = ""

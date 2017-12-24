@@ -3,6 +3,7 @@
     Friend OverideFilename As String
     Friend Appid As Integer
     Friend Url As String
+    Friend Unzip As Boolean = False
     Private Delegate Sub DProgress(ByVal [Job] As Integer, ByVal [AppId] As Integer, ByVal [percent] As Integer, ByVal [Speed] As Integer, ByVal [lRead] As Long, ByVal [lLength] As Long)
     Private Delegate Sub DDone(ByVal [AppId] As Integer)
     Private Delegate Sub DAborting(ByVal [AppId] As Integer)
@@ -18,13 +19,14 @@
         lblSpeed.Text = "0 KB/sec"
         lblRead.Text = "0 / 0 bytes"
         lblProgress.Text = "0%"
-
-
         TimeElapsed.Start()
-
         Pb1.Value = 0
         If Url <> "" Then
-            Q.App.DownloadFile(Url)
+            If Unzip Then
+                Q.App.DownloadUnzip(Url)
+            Else
+                Q.App.DownloadFile(Url)
+            End If
             DownloadName = IO.Path.GetFileName(Url) 'just download
         Else
             Q.App.DownloadApp(Appid) 'download and extract

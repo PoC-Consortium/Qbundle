@@ -269,6 +269,15 @@ Public Class clsApp
         trda.Start(QGlobal.AppNames.DownloadFile)
         trda = Nothing
     End Sub
+    Public Sub DownloadUnzip(ByVal Url As String)
+        _Aborted = False
+        Dim trda As Thread
+        _Apps(QGlobal.AppNames.DownloadFile).RemoteUrl = Url
+        trda = New Thread(AddressOf DownloadUnpack)
+        trda.IsBackground = True
+        trda.Start(QGlobal.AppNames.DownloadFile)
+        trda = Nothing
+    End Sub
     Private Sub DownloadOnly(ByVal obj As Object)
 
         Dim appid As Integer = CType(obj, Integer)
@@ -283,18 +292,20 @@ Public Class clsApp
         Dim appid As Integer = CType(obj, Integer)
         'we are now in threaded environment
         'if we do not have remoteinfo lets get it.
-        If _Apps(QGlobal.AppNames.BRS).RemoteUrl = "" Then
+        If _Apps(appid).RemoteUrl = "" Then
             If Not SetRemoteInfo() Then
                 RaiseEvent Aborted(appid)
                 Exit Sub
             End If
         End If
-
-        If Not Download(appid) Then 'ok lets start download
+        Dim fromRepo As Boolean = True
+        If _Apps(appid).RemoteUrl.StartsWith("http") Then fromRepo = False
+        If Not Download(appid, fromRepo) Then 'ok lets start download
             RaiseEvent Aborted(appid)
             Exit Sub
         End If
         If _Aborted Then Exit Sub
+        RaiseEvent Progress(1, appid, 0, 0, 0, 0)
         If Not Extract(appid) Then 'ok lets start download
             RaiseEvent Aborted(appid)
             Exit Sub
