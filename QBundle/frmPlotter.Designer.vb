@@ -68,6 +68,12 @@ Partial Class frmPlotter
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.lblcputype = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResumePlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -76,11 +82,12 @@ Partial Class frmPlotter
         Me.GroupBox3.SuspendLayout()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmImport.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnStartPotting
         '
-        Me.btnStartPotting.Location = New System.Drawing.Point(402, 328)
+        Me.btnStartPotting.Location = New System.Drawing.Point(402, 351)
         Me.btnStartPotting.Name = "btnStartPotting"
         Me.btnStartPotting.Size = New System.Drawing.Size(119, 34)
         Me.btnStartPotting.TabIndex = 0
@@ -134,7 +141,7 @@ Partial Class frmPlotter
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 366)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 389)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(615, 84)
         Me.GroupBox1.TabIndex = 13
@@ -171,7 +178,7 @@ Partial Class frmPlotter
         '
         Me.GroupBox2.Controls.Add(Me.GroupBox4)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 14)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 37)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(380, 348)
         Me.GroupBox2.TabIndex = 14
@@ -352,7 +359,7 @@ Partial Class frmPlotter
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(399, 90)
+        Me.Label6.Location = New System.Drawing.Point(399, 113)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(48, 13)
         Me.Label6.TabIndex = 15
@@ -361,7 +368,7 @@ Partial Class frmPlotter
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(399, 106)
+        Me.Label8.Location = New System.Drawing.Point(399, 129)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(188, 26)
         Me.Label8.TabIndex = 16
@@ -371,7 +378,7 @@ Partial Class frmPlotter
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(399, 138)
+        Me.Label9.Location = New System.Drawing.Point(399, 161)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(48, 13)
         Me.Label9.TabIndex = 17
@@ -380,7 +387,7 @@ Partial Class frmPlotter
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(399, 153)
+        Me.Label10.Location = New System.Drawing.Point(399, 176)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(222, 26)
         Me.Label10.TabIndex = 18
@@ -391,7 +398,7 @@ Partial Class frmPlotter
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(399, 185)
+        Me.Label11.Location = New System.Drawing.Point(399, 208)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(48, 13)
         Me.Label11.TabIndex = 19
@@ -400,7 +407,7 @@ Partial Class frmPlotter
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(399, 201)
+        Me.Label12.Location = New System.Drawing.Point(399, 224)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(145, 26)
         Me.Label12.TabIndex = 20
@@ -409,7 +416,7 @@ Partial Class frmPlotter
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(399, 249)
+        Me.Label13.Location = New System.Drawing.Point(399, 272)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(223, 39)
         Me.Label13.TabIndex = 22
@@ -420,7 +427,7 @@ Partial Class frmPlotter
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(399, 233)
+        Me.Label14.Location = New System.Drawing.Point(399, 256)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(114, 13)
         Me.Label14.TabIndex = 21
@@ -430,7 +437,7 @@ Partial Class frmPlotter
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(396, 18)
+        Me.Label15.Location = New System.Drawing.Point(396, 41)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(57, 20)
         Me.Label15.TabIndex = 23
@@ -445,7 +452,7 @@ Partial Class frmPlotter
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(398, 59)
+        Me.Label18.Location = New System.Drawing.Point(398, 82)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(214, 26)
         Me.Label18.TabIndex = 25
@@ -456,7 +463,7 @@ Partial Class frmPlotter
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(398, 43)
+        Me.Label19.Location = New System.Drawing.Point(398, 66)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(48, 13)
         Me.Label19.TabIndex = 24
@@ -484,7 +491,7 @@ Partial Class frmPlotter
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(527, 347)
+        Me.Label20.Location = New System.Drawing.Point(527, 370)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(69, 12)
         Me.Label20.TabIndex = 26
@@ -494,18 +501,60 @@ Partial Class frmPlotter
         '
         Me.lblcputype.AutoSize = True
         Me.lblcputype.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblcputype.Location = New System.Drawing.Point(594, 347)
+        Me.lblcputype.Location = New System.Drawing.Point(594, 370)
         Me.lblcputype.Name = "lblcputype"
         Me.lblcputype.Size = New System.Drawing.Size(30, 12)
         Me.lblcputype.TabIndex = 27
         Me.lblcputype.Text = "AVX2"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ActionToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(645, 24)
+        Me.MenuStrip1.TabIndex = 28
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'CloseToolStripMenuItem
+        '
+        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CloseToolStripMenuItem.Text = "Close"
+        '
+        'ActionToolStripMenuItem
+        '
+        Me.ActionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartPlottingToolStripMenuItem, Me.ResumePlottingToolStripMenuItem})
+        Me.ActionToolStripMenuItem.Name = "ActionToolStripMenuItem"
+        Me.ActionToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
+        Me.ActionToolStripMenuItem.Text = "Action"
+        '
+        'StartPlottingToolStripMenuItem
+        '
+        Me.StartPlottingToolStripMenuItem.Name = "StartPlottingToolStripMenuItem"
+        Me.StartPlottingToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.StartPlottingToolStripMenuItem.Text = "Start Plotting"
+        '
+        'ResumePlottingToolStripMenuItem
+        '
+        Me.ResumePlottingToolStripMenuItem.Name = "ResumePlottingToolStripMenuItem"
+        Me.ResumePlottingToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.ResumePlottingToolStripMenuItem.Text = "Resume plotting"
         '
         'frmPlotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(645, 461)
+        Me.ClientSize = New System.Drawing.Size(645, 482)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.lblcputype)
         Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.Label18)
@@ -524,6 +573,7 @@ Partial Class frmPlotter
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "frmPlotter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -538,6 +588,8 @@ Partial Class frmPlotter
         Me.GroupBox3.PerformLayout()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmImport.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -587,4 +639,10 @@ Partial Class frmPlotter
     Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label20 As Label
     Friend WithEvents lblcputype As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CloseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ActionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StartPlottingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ResumePlottingToolStripMenuItem As ToolStripMenuItem
 End Class

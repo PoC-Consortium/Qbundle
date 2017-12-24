@@ -10,14 +10,19 @@ To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 Upgrade MariaDB to 10.1.28
+Check that .net 4.5.2 is installed.(?)
+
 
 BUGS:
-Plotter should accept BURST- address for accountID
-FILE_SUPPORTS_SPARSE_FILES: no <-- if found change drive format i suppose
 
 ~1.6
-Windows scale factors is now compatible with Qbundle
++ Added ability to resume plotfile.
+Updated Pool list
+Windows scale factor is now compatible with Qbundle
 No internet connection should no longer cause crashes.
+Adressed an issue in Plotter saying there is an overlap.
+Plotter now supports RS address for account id.
+
 
  
 1.5

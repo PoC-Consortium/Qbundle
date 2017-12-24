@@ -8,6 +8,9 @@ Public Class frmPlotter
             If IO.Path.GetPathRoot(FD.SelectedPath) = FD.SelectedPath Then
                 MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             End If
+            If Not Generic.PlotDriveTypeOk(FD.SelectedPath) Then
+                MsgBox("The drive format is not NTFS. Please use another drive or reformat it to NTFS.")
+            End If
             Dim FreeSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
             Dim nonces As Long = Math.Floor(FreeSpace / 1024 / 256)
             nonces = Math.Floor(nonces / 8) 'make it devidable by 8
@@ -103,6 +106,7 @@ Public Class frmPlotter
             nrRam.Maximum = Math.Round((My.Computer.Info.TotalPhysicalMemory / 1024 / 1024 / 1024))
             Dim freeram As Integer = Math.Floor(My.Computer.Info.AvailablePhysicalMemory / 1024 / 1024 / 1024) - 1
             If freeram < 1 Then freeram = 1
+            If freeram > 2 Then freeram = 2
             nrRam.Value = freeram
         Catch ex As Exception
 
@@ -122,10 +126,12 @@ Public Class frmPlotter
 
     End Sub
     Private Sub btnStartPotting_Click(sender As Object, e As EventArgs) Handles btnStartPotting.Click
+        StartPlotting()
+    End Sub
+
+    Private Sub StartPlotting()
         If Not Q.App.isInstalled(QGlobal.AppNames.Xplotter) Then
             If MsgBox("Xplotter is not installed yet. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Xplotter") = MsgBoxResult.Yes Then
-
-
                 Dim s As frmDownloadExtract = New frmDownloadExtract
                 s.Appid = QGlobal.AppNames.Xplotter
                 Dim res As DialogResult
@@ -150,6 +156,10 @@ Public Class frmPlotter
         End If
         'check path
         Dim Path As String = txtPath.Text
+        If Not IO.Directory.Exists(txtPath.Text) Then
+            MsgBox("Please select a valid path to store the plotfile to.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
+            Exit Sub
+        End If
         If IO.Path.GetPathRoot(Path) = Path Then
             MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             Exit Sub
@@ -182,11 +192,12 @@ Public Class frmPlotter
         Catch ex As Exception
 
             Exit Sub
-            End Try
+        End Try
 
-
+        Dim account As String = txtAccount.Text
+        If UCase(account).StartsWith("BURST-") Then account = Q.Accounts.ConvertRSToId(account)
         Try
-            If txtAccount.Text.Length < 1 Or Val(txtAccount.Text) = 0 Then
+            If account.Length < 1 Or Val(account) = 0 Then
                 MsgBox("You need to enter a valid accountID", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Account ID.")
                 Exit Sub
             End If
@@ -214,7 +225,7 @@ Public Class frmPlotter
         If chkAddtoPlottfiles.Checked = True Then
             Dim filePath As String = txtPath.Text
             If Not filePath.EndsWith("\") Then filePath &= "\"
-            filePath &= txtAccount.Text & "_" 'account 
+            filePath &= account & "_" 'account 
             filePath &= txtStartNonce.Text & "_" 'startnonce
             filePath &= CStr(HSSize.Value) & "_" 'length
             filePath &= CStr(HSSize.Value) 'stagger
@@ -228,7 +239,7 @@ Public Class frmPlotter
             p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
             Dim thepath As String = txtPath.Text
             If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
-            p.StartInfo.Arguments = "-id " & txtAccount.Text & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & thepath & " -mem " & nrRam.Value.ToString & "G"
+            p.StartInfo.Arguments = "-id " & account & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & thepath & " -mem " & nrRam.Value.ToString & "G"
             p.StartInfo.UseShellExecute = True
             If QGlobal.CPUInstructions.AVX Then
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
@@ -241,8 +252,8 @@ Public Class frmPlotter
             MsgBox("Failed to start Xplotter.")
         End Try
 
-
     End Sub
+
     Private Function GetStartNonce() As Double
 
         Return Generic.GetStartNonce(txtAccount.Text, HSSize.Value - 1)
@@ -267,26 +278,28 @@ Public Class frmPlotter
         '      PStartnonce  <------------------>  PEndNonce
 
         Try
-            If Q.settings.Plots.Length > 0 Then
+            If Q.settings.Plots.Length > 6 Then
                 Plotfiles = Split(Q.settings.Plots, "|")
                 For Each Plot As String In Plotfiles
-                    If Plot.Length > 1 Then
-                        Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
-                        If UBound(N) = 3 Then
-                            If N(0) = Trim(AccountID) Then
-                                PStartNonce = CDbl(N(1))
-                                PEndNonce = PStartNonce + CDbl(N(2)) - 1
-                                If StartNonce >= PStartNonce And StartNonce <= PEndNonce Then
-                                    'startnonce within a plotrange
-                                    Return False
-                                End If
-                                If EndNonce >= PStartNonce And EndNonce <= PEndNonce Then
-                                    'Endnonce within a plotrange
-                                    Return False
-                                End If
-                                If PStartNonce > StartNonce And PEndNonce < EndNonce Then
-                                    'We overlap totaly
-                                    Return False
+                    If Plot.Length > 6 Then
+                        If IO.File.Exists(Plot) Then
+                            Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
+                            If UBound(N) = 3 Then
+                                If N(0) = Trim(AccountID) Then
+                                    PStartNonce = CDbl(N(1))
+                                    PEndNonce = PStartNonce + CDbl(N(2)) - 1
+                                    If StartNonce >= PStartNonce And StartNonce <= PEndNonce Then
+                                        'startnonce within a plotrange
+                                        Return False
+                                    End If
+                                    If EndNonce >= PStartNonce And EndNonce <= PEndNonce Then
+                                        'Endnonce within a plotrange
+                                        Return False
+                                    End If
+                                    If PStartNonce > StartNonce And PEndNonce < EndNonce Then
+                                        'We overlap totaly
+                                        Return False
+                                    End If
                                 End If
                             End If
                         End If
@@ -294,6 +307,7 @@ Public Class frmPlotter
                 Next
             End If
         Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             Return False
         End Try
 
@@ -389,5 +403,73 @@ Public Class frmPlotter
                 Q.settings.SaveSettings()
             End If
         End If
+    End Sub
+
+    Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
+        Me.Close()
+
+    End Sub
+
+    Private Sub ResumePlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResumePlottingToolStripMenuItem.Click
+        If Not Q.App.isInstalled(QGlobal.AppNames.Xplotter) Then
+            If MsgBox("Xplotter is not installed yet. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Xplotter") = MsgBoxResult.Yes Then
+                Dim s As frmDownloadExtract = New frmDownloadExtract
+                s.Appid = QGlobal.AppNames.Xplotter
+                Dim res As DialogResult
+                Me.Hide()
+                res = s.ShowDialog
+                Me.Show()
+                If res = DialogResult.Cancel Then
+                    Exit Sub
+                ElseIf res = DialogResult.Abort Then
+                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
+                    Exit Sub
+                End If
+                Q.App.SetLocalInfo() 'update so it is installed
+            Else
+                Exit Sub
+            End If
+        End If
+
+        Dim FileParts() As String = Nothing
+        Dim FilePath As String = ""
+        Try
+
+            Dim ofd As New OpenFileDialog
+            If ofd.ShowDialog = DialogResult.OK Then
+                If IO.File.Exists(ofd.FileName) Then
+                    'now check the plotfile
+                    FileParts = Split(IO.Path.GetFileName(ofd.FileName), "_")
+                    FilePath = IO.Path.GetDirectoryName(ofd.FileName)
+
+                End If
+            End If
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            MsgBox("Error parsing current plotfile.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Error")
+            Exit Sub
+        End Try
+
+        Dim Arg As String = "-id " & FileParts(0) & " -sn " & FileParts(1) & " -n " & FileParts(2) & " -t " & nrThreads.Value.ToString & " -path " & FilePath & " -mem " & nrRam.Value.ToString & "G"
+
+        Try
+            Dim p As Process = New Process
+            p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
+
+            p.StartInfo.Arguments = Arg
+            p.StartInfo.UseShellExecute = True
+            If QGlobal.CPUInstructions.AVX Then
+                p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
+            Else
+                p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_sse.exe"
+            End If
+            p.StartInfo.Verb = "runas"
+            p.Start()
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            MsgBox("Failed to start Xplotter.")
+        End Try
+
+
     End Sub
 End Class

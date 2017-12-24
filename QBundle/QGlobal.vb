@@ -95,7 +95,7 @@
     End Sub
     Private Shared Sub InitPools()
 
-        ReDim Pools(9)
+        ReDim Pools(10)
 
         Pools(0).Name = "CryptoGuru Pool"
         Pools(0).Address = "burst.cryptoguru.org"
@@ -157,8 +157,11 @@
         Pools(9).BurstAddress = "BURST-E4ZX-KCBL-5F8A-CPU6G"
         Pools(9).DeadLine = "2592000"
 
-
-
+        Pools(10).Name = "burstneon.ddns.net"
+        Pools(10).Address = "burstneon.ddns.net"
+        Pools(10).Port = "8124"
+        Pools(10).BurstAddress = "BURST-YXZW-JH7M-QKR9-9PKBN"
+        Pools(10).DeadLine = "6048000"
 
     End Sub
     Private Shared Sub InitCPUInstructions()

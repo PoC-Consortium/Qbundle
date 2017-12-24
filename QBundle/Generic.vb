@@ -657,4 +657,17 @@ Friend Class Generic
         Return Now
 
     End Function
+
+    Friend Shared Function PlotDriveTypeOk(ByVal path As String) As Boolean
+
+        Dim TheDrive As System.IO.DriveInfo = New System.IO.DriveInfo(path)
+
+        If TheDrive.DriveFormat = "NTFS" Then
+            Return True
+        End If
+
+
+        Return False
+
+    End Function
 End Class
