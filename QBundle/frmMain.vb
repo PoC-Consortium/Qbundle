@@ -981,13 +981,14 @@
     Private Sub cmbSelectWallet_Click(sender As Object, e As EventArgs) Handles cmbSelectWallet.SelectedIndexChanged
         Try
             If OneMinCron.Enabled = True Then
+                Dim address = QGlobal.Wallets(cmbSelectWallet.SelectedIndex).Address
                 If cmbSelectWallet.SelectedIndex > 0 Then
-                    wb1.Navigate(QGlobal.Wallets(cmbSelectWallet.SelectedIndex).Address)
+                    wb1.Navigate(address)
                 Else
                     If Running Then
-                        wb1.Navigate(QGlobal.Wallets(cmbSelectWallet.SelectedIndex).Address)
+                        wb1.Navigate(address)
                     Else
-                        MsgBox("Your local wallet is not running.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Local wallet")
+                        MsgBox("Your local wallet is not running. Checked address: " + address, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Local wallet")
                     End If
                 End If
             End If
