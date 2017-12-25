@@ -1,7 +1,7 @@
 **/bin/**
 **/obj/**
 **/Debug/**
-/.vs/**
+**/.vs/**
 .vs/QBundle/v14/.suo
 QBundle/frmFirstTime.vb
 QBundle/frmFirstTime.vb

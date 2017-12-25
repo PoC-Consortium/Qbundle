@@ -9,7 +9,7 @@ Known problems:
 To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
-Upgrade MariaDB to 10.1.28
+
 
 ~1.6
 Added ability to resume plotfile.
