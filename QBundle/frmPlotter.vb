@@ -5,6 +5,7 @@ Public Class frmPlotter
         Dim FD As New FolderBrowserDialog
         If FD.ShowDialog() = DialogResult.OK Then
             txtPath.Text = FD.SelectedPath
+            HSSize.Enabled = True
             If IO.Path.GetPathRoot(FD.SelectedPath) = FD.SelectedPath Then
                 MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             End If
@@ -476,6 +477,11 @@ Public Class frmPlotter
 
 
     End Sub
+
+    Private Sub txtPath_TextChanged(sender As Object, e As EventArgs) Handles txtPath.TextChanged
+        ' Only enable the size selector if there is text in the path box'
+        HSSize.Enabled = txtPath.Text.Length > 0 
+    End Sub 
 
 
 End Class
