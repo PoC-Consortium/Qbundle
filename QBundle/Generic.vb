@@ -58,6 +58,16 @@ Friend Class Generic
                     Q.settings.NTPCheck = Q.settings.CheckForUpdates
                 Case 14 ' from 14-15
                 Case 15 ' from 15-16
+                Case 16 ' from 16-17
+                    Try
+                        If IO.File.Exists(QGlobal.BaseDir & "\Acconts.xml") Then
+                            IO.File.Move(QGlobal.BaseDir & "\Acconts.xml", QGlobal.BaseDir & "\Accounts.xml")
+                            Q.Accounts.LoadAccounts()
+                        End If
+                    Catch ex As Exception
+                        If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                    End Try
+
 
             End Select
             OldVer += 1

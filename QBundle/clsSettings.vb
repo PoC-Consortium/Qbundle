@@ -332,7 +332,7 @@
 
         _FirstRun = True
         _CheckForUpdates = False
-        _Upgradev = 16
+        _Upgradev = 17
         _AlwaysAdmin = False
         _Repo = "http://files.getburst.net;http://files2.getburst.net"
         _QBMode = 1 '0 = AIO 1 = Launcher

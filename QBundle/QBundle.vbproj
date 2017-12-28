@@ -256,6 +256,12 @@
     <Compile Include="frmUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmVanity.Designer.vb">
+      <DependentUpon>frmVanity.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmVanity.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Generic.vb" />
     <Compile Include="main.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -345,6 +351,9 @@
     <EmbeddedResource Include="frmUpdate.resx">
       <DependentUpon>frmUpdate.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVanity.resx">
+      <DependentUpon>frmVanity.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

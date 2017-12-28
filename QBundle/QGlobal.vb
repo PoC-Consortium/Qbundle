@@ -129,7 +129,7 @@
 
         Pools(5).Name = "xen poolofd32th"
         Pools(5).Address = "xen.poolofd32th.club"
-        Pools(5).Port = "8124"
+        Pools(5).Port = "8122"
         Pools(5).BurstAddress = "BURST-LBQ2-XLPT-S2S8-64ZG5"
         Pools(5).DeadLine = "2592000"
 

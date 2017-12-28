@@ -4,14 +4,19 @@
 ~dev edition
 
 Known problems:
--
 
 To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
+Implement the rest of vanity address generator
 
 
-~1.6
+~1.7
+Corrected errors in predefined pool list
+Accounts.xml is now correctly spelled.
+
+
+1.6
 Added ability to resume plotfile.
 Burstneon block catcher added to Repository for direct H2 Import.
 Updated Pool list
