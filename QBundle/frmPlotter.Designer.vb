@@ -314,6 +314,7 @@ Partial Class frmPlotter
         Me.HSSize.TickFrequency = 8
         Me.HSSize.TickStyle = System.Windows.Forms.TickStyle.Both
         Me.HSSize.Value = 8
+        Me.HSSize.Enabled = False
         '
         'Label2
         '
