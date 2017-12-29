@@ -640,14 +640,16 @@ Friend Class Generic
     End Function
     Public Shared Function GetNTPTime(ByVal ntpServer As String) As Date
 
-
+        Dim socket = New Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
         Try
 
             Dim ntpData = New Byte(47) {}
             ntpData(0) = &H1B
             Dim addresses = Dns.GetHostEntry(ntpServer).AddressList
             Dim ipEndPoint = New IPEndPoint(addresses(0), 123)
-            Dim socket = New Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+
+            Socket.SendTimeout = 5000
+            socket.ReceiveTimeout = 5000
 
             socket.Connect(ipEndPoint)
             socket.Send(ntpData)
@@ -664,6 +666,8 @@ Friend Class Generic
 
         Catch ex As Exception
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        Finally
+            socket.Dispose()
         End Try
         Return Now
 
