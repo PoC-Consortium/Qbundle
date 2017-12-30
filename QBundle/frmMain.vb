@@ -624,7 +624,7 @@
                             Me.wb1.Document.InvokeScript("eval", codeString)
                             Pass = ""
                         Catch ex As Exception
-
+                            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
                         End Try
                     Else 'coppy to clipboard
                         MsgBox("Your passphrase is copied to clipoard. And will be erased after 30 seconds.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Clipboard")

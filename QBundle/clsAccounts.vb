@@ -157,7 +157,7 @@ Public Class clsAccounts
     End Function
     Public Sub SaveAccounts()
         Dim x As New XmlSerializer(GetType(ArrayList), New Type() {GetType(Account)})
-        Dim writer As TextWriter = New StreamWriter(QGlobal.SettingsDir & "Acconts.xml")
+        Dim writer As TextWriter = New StreamWriter(QGlobal.SettingsDir & "Accounts.xml")
         x.Serialize(writer, AccArray)
         writer.Close()
         writer.Dispose()
@@ -228,7 +228,7 @@ Public Class clsAccounts
         csEncrypt.FlushFinalBlock()
         encrypted = msDecrypt.ToArray()
         'check to see if it is a burst pass
-        Dim RetVal As String = Trim(Replace(System.Text.Encoding.UTF8.GetString(encrypted), vbNullChar, Nothing))
+        Dim RetVal As String = Replace(System.Text.Encoding.UTF8.GetString(encrypted), vbNullChar, Nothing)
         If RetVal.Substring(0, 5) = "BURST" Then
             RetVal = RetVal.Substring(5)
         Else
