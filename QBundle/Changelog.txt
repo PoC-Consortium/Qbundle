@@ -9,11 +9,20 @@ To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 Implement the rest of vanity address generator
+Make a better Account manager
+Make plott remove to suppose multiple removals
+pin pinput box with * and a show box
+Iconify(?)
+Block not accepted - Autopopoff to relese stuck wallets.
+
 
 
 ~1.7
 Corrected errors in predefined pool list
 Accounts.xml is now correctly spelled.
+NTP checks should no longer cause hangs
+Qbundle Installer will from now on be provided.
+Login accounts now shows asterix instead of pin in cleartext
 
 
 1.6

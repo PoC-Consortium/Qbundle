@@ -606,33 +606,39 @@
     End Sub
     Private Sub LoadWallet(sender As Object, e As EventArgs)
 
-        Dim pin As String = InputBox("Enter the pin for the account " & sender.text, "Enter Pin", "")
-        If pin.Length > 5 Then
-            Dim Pass As String = Q.Accounts.GetPassword(sender.name, pin)
-            If Pass.Length > 0 Then
-                If Q.settings.QBMode = 0 Then
-                    Try
-                        Dim element As HtmlElement = wb1.Document.GetElementById("remember_password")
-                        If Not Convert.ToBoolean(element.GetAttribute("checked")) Then
-                            element.InvokeMember("click")
-                        End If
-                        Dim codeString As String() = {[String].Format(" {0}('{1}') ", "NRS.login", Pass)}
-                        Me.wb1.Document.InvokeScript("eval", codeString)
-                        Pass = ""
-                    Catch ex As Exception
+        Dim pwdf As New frmInput
+        pwdf.Text = "Enter your pin"
+        pwdf.lblInfo.Text = "Enter the pin for the account " & sender.text
+        If pwdf.ShowDialog() = DialogResult.OK Then
+            Dim pin As String = pwdf.txtPwd.Text
+            If pin.Length > 5 Then
+                Dim Pass As String = Q.Accounts.GetPassword(sender.name, pin)
+                If Pass.Length > 0 Then
+                    If Q.settings.QBMode = 0 Then
+                        Try
+                            Dim element As HtmlElement = wb1.Document.GetElementById("remember_password")
+                            If Not Convert.ToBoolean(element.GetAttribute("checked")) Then
+                                element.InvokeMember("click")
+                            End If
+                            Dim codeString As String() = {[String].Format(" {0}('{1}') ", "NRS.login", Pass)}
+                            Me.wb1.Document.InvokeScript("eval", codeString)
+                            Pass = ""
+                        Catch ex As Exception
 
-                    End Try
-                Else 'coppy to clipboard
-                    MsgBox("Your passphrase is copied to clipoard. And will be erased after 30 seconds.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Clipboard")
-                    My.Computer.Clipboard.SetText(Pass)
-                    PasswordTimer.Interval = 30000
-                    PasswordTimer.Enabled = True
+                        End Try
+                    Else 'coppy to clipboard
+                        MsgBox("Your passphrase is copied to clipoard. And will be erased after 30 seconds.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Clipboard")
+                        My.Computer.Clipboard.SetText(Pass)
+                        PasswordTimer.Interval = 30000
+                        PasswordTimer.Enabled = True
+                    End If
+                Else
+                    MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
                 End If
             Else
                 MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
             End If
         End If
-
     End Sub
     Public Sub SetDbInfo()
 
