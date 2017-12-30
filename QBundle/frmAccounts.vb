@@ -18,6 +18,8 @@
 
     Private Sub frmAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReloadAccountList()
+        txtPassprase.PasswordChar = "*"
+        txtPrivateKey.PasswordChar = "*"
     End Sub
     Private Sub ReloadAccountList()
 
@@ -27,62 +29,72 @@
         Next
 
     End Sub
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-        For Each account As QB.clsAccounts.Account In Q.Accounts.AccArray
-            If account.AccountName = txtName.Text Then
-                MsgBox("You already have an account with that name.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Duplicate account name")
-                Exit Sub
-            End If
-        Next
-        If txtName.Text.Length < 1 Then
-            MsgBox("You need to enter a name for the account.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "No name")
-            Exit Sub
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim newAcc As New frmNewAccount
+        If newAcc.ShowDialog = DialogResult.OK Then
+            Q.Accounts.AddAccount(newAcc.txtName.Text, newAcc.txtPass.Text, newAcc.txtPin.Text)
+            lstAccounts.Items.Add(newAcc.txtName.Text)
+            Q.Accounts.SaveAccounts()
+            frmMain.SetLoginMenu()
         End If
-        If txtPass.Text.Length < 1 Then
-            MsgBox("You need to enter a Burst passphrase for the account.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "No Passphrase")
-            Exit Sub
-        End If
-        If txtPass.Text.Length < 35 Then
-            If MsgBox("Your Burst passphrase is considered as a weak passphrase. You should concider another one. " & vbCrLf & "Do you still want to save it?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Weak account") = MsgBoxResult.No Then
-                Exit Sub
-            End If
-        End If
-        If txtPin.Text.Length < 6 Then
-            MsgBox("You need to enter a valid Pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "No valid pin.")
-            Exit Sub
-        End If
-        'compute BURST-RS and Accountnr
-
-
-        Q.Accounts.AddAccount(txtName.Text, txtPass.Text, txtPin.Text)
-        lstAccounts.Items.Add(txtName.Text)
-        Q.Accounts.SaveAccounts()
-        frmMain.SetLoginMenu()
     End Sub
 
-    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
-        Dim KeySeed As String = ""
-        Dim curwords As String = ""
+    Private Sub revealPwd_Click(sender As Object, e As EventArgs) Handles revealPwd.Click
+        If lstAccounts.SelectedIndex = -1 Then Exit Sub
+        Dim AccName As String = lstAccounts.Items.Item(lstAccounts.SelectedIndex).ToString
+        Dim pwdf As New frmInput
+        pwdf.Text = "Enter your pin"
+        pwdf.lblInfo.Text = "Enter the pin for the account " & AccName
+        If pwdf.ShowDialog() = DialogResult.OK Then
+            Dim pin As String = pwdf.txtPwd.Text
+            If pin.Length > 5 Then
+                Dim Pass As String = Q.Accounts.GetPassword(AccName, pin)
+                If Pass.Length > 0 Then
 
-        Randomize()
-        Dim value As Integer = 0
-        KeySeed = QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd())))
+                    txtPassprase.PasswordChar = ""
+                    txtPassprase.Text = Pass
 
-        txtPass.Text = KeySeed
+                Else
+                    MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
+                End If
+            Else
+                MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
+            End If
+        End If
+    End Sub
 
+    Private Sub revealPk_Click(sender As Object, e As EventArgs) Handles revealPk.Click
+        If lstAccounts.SelectedIndex = -1 Then Exit Sub
+        Dim AccName As String = lstAccounts.Items.Item(lstAccounts.SelectedIndex).ToString
+        Dim pwdf As New frmInput
+        pwdf.Text = "Enter your pin"
+        pwdf.lblInfo.Text = "Enter the pin for the account " & AccName
+        If pwdf.ShowDialog() = DialogResult.OK Then
+            Dim pin As String = pwdf.txtPwd.Text
+            If pin.Length > 5 Then
+                Dim PK As String = Q.Accounts.GetPrivateKey(AccName, pin)
+                If PK.Length > 0 Then
+                    txtPrivateKey.PasswordChar = ""
+                    txtPrivateKey.Text = PK
+                Else
+                    MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
+                End If
+            Else
+                MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")
+            End If
+        End If
 
+    End Sub
 
+    Private Sub lstAccounts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAccounts.SelectedIndexChanged
+        If lstAccounts.SelectedIndex = -1 Then Exit Sub
+        Dim AccName As String = lstAccounts.Items.Item(lstAccounts.SelectedIndex).ToString
+        lblName.Text = AccName
+        txtRs.Text = Q.Accounts.GetAccountRS(AccName)
+        txtNr.Text = Q.Accounts.GetAccountID(AccName)
+        txtPublicKey.Text = Q.Accounts.GetPublicKey(AccName)
+        txtPassprase.Text = "***********"
+        txtPrivateKey.Text = "***********"
     End Sub
 End Class

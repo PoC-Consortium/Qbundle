@@ -73,6 +73,25 @@ Public Class clsAccounts
         Next
         Return ""
     End Function
+    Public Function GetPrivateKey(ByVal Name As String, ByVal Pin As String) As String
+        For Each acc As Account In AccArray
+            If acc.AccountName = Name Then
+                Dim KeySeed As String
+                Dim PrivateKey As Byte()
+                KeySeed = Dec(acc.BurstPassword, Pin)
+                Dim cSHA256 As SHA256 = SHA256Managed.Create()
+                'create private key
+                PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
+                If PrivateKey.Length > 0 Then
+                    Return BytesToHexString(PrivateKey)
+                End If
+                Exit For
+            End If
+        Next
+        Return ""
+    End Function
+
+
     Private Function BytesToHexString(ByVal bArray As Byte()) As String
         Dim HexString As String = ""
         Dim buffer As String = ""

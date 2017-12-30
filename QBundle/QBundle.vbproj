@@ -226,6 +226,12 @@
     <Compile Include="frmMiner.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewAccount.Designer.vb">
+      <DependentUpon>frmNewAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPlotter.Designer.vb">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </Compile>
@@ -332,6 +338,9 @@
     <EmbeddedResource Include="frmMiner.resx">
       <DependentUpon>frmMiner.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewAccount.resx">
+      <DependentUpon>frmNewAccount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
