@@ -12,7 +12,8 @@ Make More data Updatabable. Like online wallets and pool lists.
 Implement the rest of vanity address generator
 Make plott remove to support multiple removals
 Iconify(?)
-Block not accepted - Autopopoff to relese stuck wallets.
+Block not accepted - Autopopoff to relese stuck wallets. (should not be used.)
+minimize to tray on exit ?
 
 ~1.7
 Corrected errors in predefined pool list
@@ -24,14 +25,14 @@ Account manager now shows more info about accounts.
 
 
 1.6
-Added ability to resume plotfile.
-Burstneon block catcher added to Repository for direct H2 Import.
-Updated Pool list
-Windows scale factor is now compatible with Qbundle
-No internet connection should no longer cause crashes.
-Addressed an issue in Plotter saying there is an overlap when there is not.
-Plotter now supports RS address for account id.
-Checks that correct .net version is installed.
+* Added ability to resume plotfile.
+* Burstneon block catcher added to Repository for direct H2 Import.
+* Updated Pool list
+* Windows scale factor is now compatible with Qbundle
+* No internet connection should no longer cause crashes.
+* Addressed an issue in Plotter saying there is an overlap when there is not.
+* Plotter now supports RS address for account id.
+* Checks that correct .net version is installed.
  
 1.5
 * Plotting to pathes with spaces in them is now working.

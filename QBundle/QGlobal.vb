@@ -217,7 +217,7 @@
     End Sub
     Private Shared Sub InitOnlineWallets()
 
-        ReDim Wallets(7)
+        ReDim Wallets(6)
         Wallets(0).Name = "Local wallet"
 
         Wallets(1).Name = "Cryptoguru online wallet"

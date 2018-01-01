@@ -95,6 +95,7 @@ Partial Class frmMain
         Me.lblSelectWallet = New System.Windows.Forms.ToolStripLabel()
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
+        Me.VanityAddressGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -358,7 +359,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.DynamicPlottingToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.DynamicPlottingToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem, Me.VanityAddressGeneratorToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
@@ -366,25 +367,25 @@ Partial Class frmMain
         'PlotterToolStripMenuItem
         '
         Me.PlotterToolStripMenuItem.Name = "PlotterToolStripMenuItem"
-        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.PlotterToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.PlotterToolStripMenuItem.Text = "Plotter"
         '
         'DynamicPlottingToolStripMenuItem
         '
         Me.DynamicPlottingToolStripMenuItem.Name = "DynamicPlottingToolStripMenuItem"
-        Me.DynamicPlottingToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.DynamicPlottingToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.DynamicPlottingToolStripMenuItem.Text = "Dynamic Plotting"
         '
         'MinerToolStripMenuItem
         '
         Me.MinerToolStripMenuItem.Name = "MinerToolStripMenuItem"
-        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.MinerToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.MinerToolStripMenuItem.Text = "Miner"
         '
         'SetRewardassignmentToolStripMenuItem
         '
         Me.SetRewardassignmentToolStripMenuItem.Name = "SetRewardassignmentToolStripMenuItem"
-        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.SetRewardassignmentToolStripMenuItem.Text = "Reward Recipient"
         '
         'AboutToolStripMenuItem2
@@ -611,6 +612,12 @@ Partial Class frmMain
         Me.lblCoinMarket.Size = New System.Drawing.Size(91, 22)
         Me.lblCoinMarket.Text = "Burst price: N/A"
         '
+        'VanityAddressGeneratorToolStripMenuItem
+        '
+        Me.VanityAddressGeneratorToolStripMenuItem.Name = "VanityAddressGeneratorToolStripMenuItem"
+        Me.VanityAddressGeneratorToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.VanityAddressGeneratorToolStripMenuItem.Text = "Vanity Address generator"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -716,4 +723,5 @@ Partial Class frmMain
     Friend WithEvents cmbSelectWallet As ToolStripComboBox
     Friend WithEvents lblCoinMarket As ToolStripLabel
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents VanityAddressGeneratorToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -1004,4 +1004,8 @@
 
     End Sub
 
+    Private Sub VanityAddressGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VanityAddressGeneratorToolStripMenuItem.Click
+        frmVanity.Show()
+
+    End Sub
 End Class
