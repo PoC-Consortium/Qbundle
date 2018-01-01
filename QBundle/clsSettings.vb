@@ -31,6 +31,7 @@
     Private _NTPCheck As Boolean
     Private _MinToTray As Boolean
     Private _CoinMarket As Boolean
+    Private _NoDirectLogin As Boolean
     'Plotting And Mining
     Private _Plots As String
     'dynamic plotting
@@ -311,6 +312,14 @@
             _CoinMarket = value
         End Set
     End Property
+    Public Property NoDirectLogin() As Boolean
+        Get
+            Return _NoDirectLogin
+        End Get
+        Set(ByVal value As Boolean)
+            _NoDirectLogin = value
+        End Set
+    End Property
 
     Friend Sub New()
         _autoip = False
@@ -342,7 +351,7 @@
         _MinToTray = False
         _CoinMarket = False
         _AutoStart = True
-
+        _NoDirectLogin = False
         _Plots = ""
 
         _DynPlotEnabled = False

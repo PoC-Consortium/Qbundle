@@ -9,11 +9,10 @@ To Be done:
 pipeclient+server implementation in service
 
 Make More data Updatabable. Like online wallets and pool lists.
-Implement the rest of vanity address generator
 Make plott remove to support multiple removals
-Iconify(?)
-Block not accepted - Autopopoff to relese stuck wallets. (should not be used.)
 minimize to tray on exit ?
+Find out why login does not work on some
+Iconify(?)
 
 ~1.7
 Corrected errors in predefined pool list
@@ -22,6 +21,7 @@ NTP checks should no longer cause hangs
 Qbundle Installer will from now on be provided.
 Login account now shows * instad of cleartext pin
 Account manager now shows more info about accounts.
+Vanity address generator added.
 
 
 1.6

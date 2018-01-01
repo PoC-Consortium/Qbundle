@@ -605,7 +605,6 @@
         Next
     End Sub
     Private Sub LoadWallet(sender As Object, e As EventArgs)
-
         Dim pwdf As New frmInput
         pwdf.Text = "Enter your pin"
         pwdf.lblInfo.Text = "Enter the pin for the account " & sender.text
@@ -614,7 +613,7 @@
             If pin.Length > 5 Then
                 Dim Pass As String = Q.Accounts.GetPassword(sender.name, pin)
                 If Pass.Length > 0 Then
-                    If Q.settings.QBMode = 0 Then
+                    If Q.settings.QBMode = 0 And Q.settings.NoDirectLogin = False Then
                         Try
                             Dim element As HtmlElement = wb1.Document.GetElementById("remember_password")
                             If Not Convert.ToBoolean(element.GetAttribute("checked")) Then

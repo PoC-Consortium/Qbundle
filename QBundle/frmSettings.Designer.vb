@@ -27,6 +27,7 @@ Partial Class frmSettings
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.chkAutoStart = New System.Windows.Forms.CheckBox()
         Me.chkWalletException = New System.Windows.Forms.CheckBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -89,6 +90,7 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
         Me.chkMinToTray = New System.Windows.Forms.CheckBox()
         Me.chkNTP = New System.Windows.Forms.CheckBox()
         Me.chkOnlineWallets = New System.Windows.Forms.CheckBox()
@@ -98,8 +100,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
-        Me.chkAutoStart = New System.Windows.Forms.CheckBox()
+        Me.chkNoDirectLogin = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -198,6 +199,18 @@ Partial Class frmSettings
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(699, 286)
         Me.Panel4.TabIndex = 12
+        '
+        'chkAutoStart
+        '
+        Me.chkAutoStart.AutoSize = True
+        Me.chkAutoStart.Checked = True
+        Me.chkAutoStart.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAutoStart.Location = New System.Drawing.Point(12, 92)
+        Me.chkAutoStart.Name = "chkAutoStart"
+        Me.chkAutoStart.Size = New System.Drawing.Size(123, 17)
+        Me.chkAutoStart.TabIndex = 46
+        Me.chkAutoStart.Text = "Autostart local wallet"
+        Me.chkAutoStart.UseVisualStyleBackColor = True
         '
         'chkWalletException
         '
@@ -795,6 +808,7 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkNoDirectLogin)
         Me.Panel2.Controls.Add(Me.chkCoinmarket)
         Me.Panel2.Controls.Add(Me.chkMinToTray)
         Me.Panel2.Controls.Add(Me.chkNTP)
@@ -808,6 +822,16 @@ Partial Class frmSettings
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
+        '
+        'chkCoinmarket
+        '
+        Me.chkCoinmarket.AutoSize = True
+        Me.chkCoinmarket.Location = New System.Drawing.Point(12, 178)
+        Me.chkCoinmarket.Name = "chkCoinmarket"
+        Me.chkCoinmarket.Size = New System.Drawing.Size(186, 17)
+        Me.chkCoinmarket.TabIndex = 9
+        Me.chkCoinmarket.Text = "Get price info from Coinmarketcap"
+        Me.chkCoinmarket.UseVisualStyleBackColor = True
         '
         'chkMinToTray
         '
@@ -903,27 +927,15 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkCoinmarket
+        'chkNoDirectLogin
         '
-        Me.chkCoinmarket.AutoSize = True
-        Me.chkCoinmarket.Location = New System.Drawing.Point(12, 178)
-        Me.chkCoinmarket.Name = "chkCoinmarket"
-        Me.chkCoinmarket.Size = New System.Drawing.Size(186, 17)
-        Me.chkCoinmarket.TabIndex = 9
-        Me.chkCoinmarket.Text = "Get price info from Coinmarketcap"
-        Me.chkCoinmarket.UseVisualStyleBackColor = True
-        '
-        'chkAutoStart
-        '
-        Me.chkAutoStart.AutoSize = True
-        Me.chkAutoStart.Checked = True
-        Me.chkAutoStart.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkAutoStart.Location = New System.Drawing.Point(12, 92)
-        Me.chkAutoStart.Name = "chkAutoStart"
-        Me.chkAutoStart.Size = New System.Drawing.Size(123, 17)
-        Me.chkAutoStart.TabIndex = 46
-        Me.chkAutoStart.Text = "Autostart local wallet"
-        Me.chkAutoStart.UseVisualStyleBackColor = True
+        Me.chkNoDirectLogin.AutoSize = True
+        Me.chkNoDirectLogin.Location = New System.Drawing.Point(11, 199)
+        Me.chkNoDirectLogin.Name = "chkNoDirectLogin"
+        Me.chkNoDirectLogin.Size = New System.Drawing.Size(230, 17)
+        Me.chkNoDirectLogin.TabIndex = 10
+        Me.chkNoDirectLogin.Text = "Disable account direct login in wallet mode."
+        Me.chkNoDirectLogin.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -1041,4 +1053,5 @@ Partial Class frmSettings
     Friend WithEvents chkMinToTray As CheckBox
     Friend WithEvents chkCoinmarket As CheckBox
     Friend WithEvents chkAutoStart As CheckBox
+    Friend WithEvents chkNoDirectLogin As CheckBox
 End Class
