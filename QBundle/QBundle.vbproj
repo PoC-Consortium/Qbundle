@@ -83,7 +83,7 @@
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
     <WarningsAsErrors>
     </WarningsAsErrors>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>

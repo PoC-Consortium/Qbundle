@@ -26,6 +26,7 @@ Account manager now shows more info about accounts.
 Vanity address generator added.
 Setting to disable direct login from Account manager accounts.
 
+
 1.6
 * Added ability to resume plotfile.
 * Burstneon block catcher added to Repository for direct H2 Import.
