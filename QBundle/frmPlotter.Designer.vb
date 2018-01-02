@@ -101,7 +101,7 @@ Partial Class frmPlotter
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(100, 13)
         Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Numeric account nr"
+        Me.Label3.Text = "Numeric account number"
         '
         'txtPath
         '
