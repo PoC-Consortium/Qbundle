@@ -13,15 +13,15 @@ Public Class frmPlotter
                 MsgBox("The drive format is not NTFS. Please use another drive or reformat it to NTFS.")
             End If
             Dim FreeSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
-            Dim nonces As Long = Math.Floor(FreeSpace / 1024 / 256)
-            nonces = Math.Floor(nonces / 8) 'make it devidable by 8
+            Dim nonces As Long = CLng(Math.Floor(FreeSpace / 1024 / 256))
+            nonces = CLng(Math.Floor(nonces / 8)) 'make it devidable by 8
             nonces = nonces * 8
             If nonces < 8 Then
                 MsgBox("Free space on drive is to low for plotfiles", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "No free space.")
                 nonces = 8
             End If
 
-            HSSize.Maximum = nonces
+            HSSize.Maximum = CInt(nonces)
 
             HSSize.Minimum = 8
             HSSize.Value = CInt(nonces)
@@ -101,11 +101,11 @@ Public Class frmPlotter
             AddHandler(mnuitm.Click), AddressOf SelectAccountID
             cmlAccounts.Items.Add(mnuitm)
         Next
-        txtStartNonce.Text = GetStartNonce()
+        txtStartNonce.Text = CStr(GetStartNonce())
 
         Try
-            nrRam.Maximum = Math.Round((My.Computer.Info.TotalPhysicalMemory / 1024 / 1024 / 1024))
-            Dim freeram As Integer = Math.Floor(My.Computer.Info.AvailablePhysicalMemory / 1024 / 1024 / 1024) - 1
+            nrRam.Maximum = CDec(Math.Round((My.Computer.Info.TotalPhysicalMemory / 1024 / 1024 / 1024)))
+            Dim freeram As Integer = CInt(Math.Floor(My.Computer.Info.AvailablePhysicalMemory / 1024 / 1024 / 1024) - 1)
             If freeram < 1 Then freeram = 1
             If freeram > 2 Then freeram = 2
             nrRam.Value = freeram
@@ -123,7 +123,14 @@ Public Class frmPlotter
     End Sub
     Private Sub SelectAccountID(sender As Object, e As EventArgs)
 
-        txtAccount.Text = Q.Accounts.GetAccountID(sender.text)
+        Dim mnuitm As ToolStripMenuItem = Nothing
+        Try
+            mnuitm = DirectCast(sender, ToolStripMenuItem)
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+        End Try
+        txtAccount.Text = Q.Accounts.GetAccountID(mnuitm.Text)
 
     End Sub
     Private Sub btnStartPotting_Click(sender As Object, e As EventArgs) Handles btnStartPotting.Click
@@ -213,7 +220,7 @@ Public Class frmPlotter
         End If
 
         Try
-            Dim freeram As Integer = Math.Floor(My.Computer.Info.AvailablePhysicalMemory / 1024 / 1024 / 1024)
+            Dim freeram As Integer = CInt(Math.Floor(My.Computer.Info.AvailablePhysicalMemory / 1024 / 1024 / 1024))
             If freeram < nrRam.Value Then
                 MsgBox("You are trying to use more ram than what is currently free in your computer. Please free up ram or lower your settings.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Free Ram")
                 Exit Sub
@@ -350,17 +357,17 @@ Public Class frmPlotter
             lstPlots.Items.RemoveAt(lstPlots.SelectedIndex)
             Q.settings.Plots = ""
             For t As Integer = 0 To lstPlots.Items.Count - 1
-                Q.settings.Plots &= lstPlots.Items.Item(t) & "|"
+                Q.settings.Plots &= lstPlots.Items.Item(t).ToString & "|"
             Next
             Q.settings.SaveSettings()
 
         End If
 
-        txtStartNonce.Text = GetStartNonce()
+        txtStartNonce.Text = CStr(GetStartNonce())
     End Sub
 
     Private Sub txtAccount_TextChanged(sender As Object, e As EventArgs) Handles txtAccount.TextChanged
-        txtStartNonce.Text = GetStartNonce()
+        txtStartNonce.Text = CStr(GetStartNonce())
     End Sub
 
     Private Sub HSSize_Scroll(sender As Object, e As EventArgs) Handles HSSize.Scroll
@@ -387,7 +394,7 @@ Public Class frmPlotter
             If IO.File.Exists(ofd.FileName) Then
                 lstPlots.Items.Add(ofd.FileName)
                 Q.settings.Plots &= ofd.FileName & "|"
-                txtStartNonce.Text = GetStartNonce()
+                txtStartNonce.Text = CStr(GetStartNonce())
                 Q.settings.SaveSettings()
             End If
         End If
@@ -404,7 +411,7 @@ Public Class frmPlotter
                     lstPlots.Items.Add(file)
                     Q.settings.Plots &= file & "|"
                 Next
-                txtStartNonce.Text = GetStartNonce()
+                txtStartNonce.Text = CStr(GetStartNonce())
                 Q.settings.SaveSettings()
             End If
         End If

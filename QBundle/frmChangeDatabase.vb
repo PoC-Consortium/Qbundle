@@ -160,7 +160,7 @@
 
             OldDB = Q.settings.DbType
             If frmMain.Running Then
-                If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") Then
+                If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
                     lblStatus.Text = "Waiting for wallet to stop."
                     frmMain.StopWallet()
                     WaitTimer = New Timer
@@ -314,7 +314,7 @@
                         If UBound(darray) = 8 Then
                             If darray(3) = "CreateBinDump" And darray(7) = "/" Then
                                 If Not darray(6) = "0" And Not darray(8) = "0" Then
-                                    percent = Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0)
+                                    percent = CInt(Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0))
                                 Else
                                     percent = 100
                                 End If
@@ -337,7 +337,7 @@
                         If UBound(darray) = 8 Then
                             If darray(3) = "LoadBinDump" And darray(7) = "/" Then
                                 If Not darray(6) = "0" And Not darray(8) = "0" Then
-                                    percent = Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0)
+                                    percent = CInt(Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0))
                                 Else
                                     percent = 100
                                 End If

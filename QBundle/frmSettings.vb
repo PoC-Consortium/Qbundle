@@ -106,21 +106,21 @@ Public Class frmSettings
         Q.settings.AutoIp = chkAutoIP.Checked
         Q.settings.DynPlatform = chkDynPlatform.Checked
         'nrs advanced
-        Q.settings.Cpulimit = nrCores.Value
+        Q.settings.Cpulimit = CInt(nrCores.Value)
         Q.settings.useOpenCL = chkOpenCL.Checked
         'nrs net
         If cmbListen.SelectedIndex = 0 Then
             Q.settings.ListenIf = "0.0.0.0" & ";" & CStr(nrListenPort.Value)
         Else
-            Q.settings.ListenIf = cmbListen.Items.Item(cmbListen.SelectedIndex) & ";" & CStr(nrListenPort.Value)
+            Q.settings.ListenIf = cmbListen.Items.Item(cmbListen.SelectedIndex).ToString & ";" & CStr(nrListenPort.Value)
         End If
         If cmbPeerIP.SelectedIndex = 0 Then
             Q.settings.ListenPeer = "0.0.0.0" & ";" & CStr(nrPeerPort.Value)
         Else
-            Q.settings.ListenPeer = cmbPeerIP.Items.Item(cmbPeerIP.SelectedIndex) & ";" & CStr(nrPeerPort.Value)
+            Q.settings.ListenPeer = cmbPeerIP.Items.Item(cmbPeerIP.SelectedIndex).ToString & ";" & CStr(nrPeerPort.Value)
         End If
         For x As Integer = 0 To lstConnectFrom.Items.Count - 1
-            buffer &= lstConnectFrom.Items.Item(x) & ";"
+            buffer &= lstConnectFrom.Items.Item(x).ToString & ";"
         Next
 
         Q.settings.ConnectFrom = buffer
@@ -250,12 +250,12 @@ Public Class frmSettings
         Dim S() As String = Nothing
         Try
             S = Split(Q.settings.ListenPeer, ";")
-            nrPeerPort.Value = Val(S(1))
+            nrPeerPort.Value = CDec(Val(S(1)))
             If S(0) = "0.0.0.0" Then
                 cmbPeerIP.SelectedIndex = 0
             Else
                 For t As Integer = 0 To cmbListen.Items.Count - 1
-                    If cmbPeerIP.Items.Item(t) = S(0) Then cmbListen.SelectedIndex = t
+                    If cmbPeerIP.Items.Item(t).ToString = S(0) Then cmbListen.SelectedIndex = t
                 Next
             End If
         Catch ex As Exception
@@ -265,12 +265,12 @@ Public Class frmSettings
 
         Try
             S = Split(Q.settings.ListenIf, ";")
-            nrListenPort.Value = Val(S(1))
+            nrListenPort.Value = CDec(Val(S(1)))
             If S(0) = "0.0.0.0" Then
                 cmbListen.SelectedIndex = 0
             Else
                 For t As Integer = 0 To cmbListen.Items.Count - 1
-                    If cmbListen.Items.Item(t) = S(0) Then cmbListen.SelectedIndex = t
+                    If cmbListen.Items.Item(t).ToString = S(0) Then cmbListen.SelectedIndex = t
                 Next
             End If
         Catch ex As Exception

@@ -20,7 +20,7 @@ Public Class clsProcessHandler
         P(Pcls.AppId).Arguments = Pcls.Params
         P(Pcls.AppId).WorkingDirectory = Pcls.WorkingDirectory
         P(Pcls.AppId).StartSignal = Pcls.StartSignal
-        P(Pcls.AppId).Cores = (2 ^ Pcls.Cores) - 1 'processaffinity is set bitwise 
+        P(Pcls.AppId).Cores = CInt(2 ^ Pcls.Cores) - 1 'processaffinity is set bitwise 
         P(Pcls.AppId).SSMTEnd = Pcls.StartsignalMaxTime
         AddHandler P(Pcls.AppId).UpdateConsole, AddressOf ProcUpdate
 
@@ -40,17 +40,17 @@ Public Class clsProcessHandler
         trda = Nothing
     End Sub
     Private Sub RestartWorker(ByVal AppId As Object)
-        If Not IsNothing(P(AppId)) Then
-            If P(AppId).IsRunning Then
-                P(AppId).StopProc()
+        If Not IsNothing(P(CInt(AppId))) Then
+            If P(CInt(AppId)).IsRunning Then
+                P(CInt(AppId)).StopProc()
                 Do
-                    If P(AppId).State = QGlobal.ProcOp.Stopped Then Exit Do
+                    If P(CInt(AppId)).State = QGlobal.ProcOp.Stopped Then Exit Do
                     Thread.Sleep(500)
                 Loop
             End If
             'we have stopped
             Dim trda As Thread
-            trda = New Thread(AddressOf P(AppId).Work)
+            trda = New Thread(AddressOf P(CInt(AppId)).Work)
             trda.IsBackground = True
             trda.Start()
             trda = Nothing
@@ -77,7 +77,7 @@ Public Class clsProcessHandler
             P(Proc.AppId).Arguments = Proc.Params
             P(Proc.AppId).WorkingDirectory = Proc.WorkingDirectory
             P(Proc.AppId).StartSignal = Proc.StartSignal
-            P(Proc.AppId).Cores = (2 ^ Proc.Cores) - 1 'processaffinity is set bitwise 
+            P(Proc.AppId).Cores = CInt(2 ^ Proc.Cores) - 1 'processaffinity is set bitwise 
             P(Proc.AppId).SSMTEnd = Proc.StartsignalMaxTime
             AddHandler P(Proc.AppId).UpdateConsole, AddressOf ProcUpdate
             Dim trda As Thread
@@ -187,9 +187,9 @@ Public Class clsProcessHandler
 
         Private Sub ShutDown(ByVal SigIntSleep As Integer, ByVal SigKillSleep As Integer)
             Try
-                AttachConsole(p.Id)
+                AttachConsole(CUInt(p.Id))
                 SetConsoleCtrlHandler(New ConsoleCtrlDelegate(AddressOf OnExit), True)
-                GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0)
+                GenerateConsoleCtrlEvent(CShort(CtrlTypes.CTRL_C_EVENT), 0)
                 p.WaitForExit(SigIntSleep) 'wait for exit before we release. if not we might get ourself terminated.
                 If Not p.HasExited Then
                     p.Kill()
@@ -205,7 +205,7 @@ Public Class clsProcessHandler
 
             End Try
         End Sub
-        Private Function OnExit(CtrlType As CtrlTypes)
+        Private Function OnExit(CtrlType As CtrlTypes) As Boolean
             Return True
         End Function
 
@@ -274,7 +274,7 @@ Public Class clsProcessHandler
             Return False
 
         End Function
-        Public Function State()
+        Public Function State() As Integer
             Return _state
         End Function
         Public Sub StopProc()

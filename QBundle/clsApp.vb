@@ -85,7 +85,7 @@ Public Class clsApp
                 If Trim(Line) <> "" Then
                     Try
                         Dim Cell() As String = Split(Line, "|")
-                        AppId = [Enum].Parse(GetType(QGlobal.AppNames), Cell(0)) 'converting name to appid 'if not exist it will move on
+                        AppId = CInt([Enum].Parse(GetType(QGlobal.AppNames), Cell(0))) 'converting name to appid 'if not exist it will move on
                         _Apps(AppId).RemoteVersion = Cell(1)
                         _Apps(AppId).ExtractToDir = Cell(2)
                         _Apps(AppId).RemoteUrl = Cell(3)
@@ -318,7 +318,7 @@ Public Class clsApp
 
     Private Function Download(ByVal AppId As Integer, Optional ByVal FromRepos As Boolean = True) As Boolean
 
-        Dim DLOk As Integer = False
+        Dim DLOk As Boolean = False
         Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
         Dim File As FileStream = Nothing
         For x = 0 To UBound(_Repositories) 'try next repo if fail.
@@ -334,8 +334,8 @@ Public Class clsApp
                 Else
                     url = _Apps(AppId).RemoteUrl
                 End If
-                Dim http As HttpWebRequest = WebRequest.Create(url)
-                Dim WebResponse As HttpWebResponse = http.GetResponse
+                Dim http As WebRequest = WebRequest.Create(url)
+                Dim WebResponse As WebResponse = http.GetResponse
                 ContentLength = WebResponse.ContentLength
                 Dim sChunks As Stream = WebResponse.GetResponseStream
                 File = New FileStream(filename, FileMode.Create, FileAccess.Write)
@@ -352,7 +352,7 @@ Public Class clsApp
                     TotalRead += iBytesRead
                     File.Write(bBuffer, 0, iBytesRead)
                     If SW.ElapsedMilliseconds > 0 Then speed = CInt(TotalRead / SW.ElapsedMilliseconds)
-                    percent = Math.Round((TotalRead / ContentLength) * 100, 0)
+                    percent = CInt(Math.Round((TotalRead / ContentLength) * 100, 0))
                     RaiseEvent Progress(0, AppId, percent, speed, TotalRead, ContentLength)
                 Loop
                 File.Flush()
@@ -393,7 +393,7 @@ Public Class clsApp
                     entry.ExtractToFile(Path.Combine(target, entry.FullName), True)
                 End If
                 counter += 1
-                percent = Math.Round((counter / totalfiles) * 100, 0)
+                percent = CInt(Math.Round((counter / totalfiles) * 100, 0))
                 RaiseEvent Progress(1, AppId, percent, 0, 0, 0)
             Next
             AllOk = True
@@ -581,7 +581,7 @@ Public Class clsApp
     Public Function GetRemoteUrl(ByVal AppId As Integer) As String
         Return _Apps(AppId).RemoteUrl
     End Function
-    Public Function CheckOpenCL()
+    Public Function CheckOpenCL() As Boolean
         Try
             If IO.File.Exists(Environment.SystemDirectory & "\OpenCL.dll") Then
                 Return True

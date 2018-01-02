@@ -24,10 +24,10 @@ Public Class frmVanity
             lastval = 0
             AddressToFind = txtFind1.Text & "-" & txtFind2.Text & "-" & txtFind3.Text & "-" & txtFind4.Text
             AddressToFind = Replace(AddressToFind, "@", ".")
-            NrofChars = nrPass.Value
+            NrofChars = CInt(nrPass.Value)
             Dim trda As Thread
             running = True
-            For x As Integer = 1 To nrThreads.Value
+            For x As Integer = 1 To CInt(nrThreads.Value)
                 trda = New Thread(AddressOf VanityGeneration)
                 trda.Priority = ThreadPriority.BelowNormal
                 ' trda.IsBackground = True
@@ -85,7 +85,7 @@ Public Class frmVanity
             KeySeed = ""
             For x = 1 To NrofChars
                 Randomize()
-                KeySeed &= chars(Int(Rnd() * TotalChars))
+                KeySeed &= chars(Int(CInt(Rnd()) * TotalChars))
             Next
             cSHA256 = SHA256Managed.Create()
             PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
@@ -94,7 +94,7 @@ Public Class frmVanity
             PublicKeyHash = cSHA256.ComputeHash(PublicKey)
             b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
             If (b(b.Length - 1) And &H80) <> 0 Then Array.Resize(Of Byte)(b, b.Length + 1)
-            AccountAddress = ReedSolomon.encode(New BigInteger(b))
+            AccountAddress = ReedSolomon.encode(CULng(New BigInteger(b)))
             '    SyncLock LockObj
             Tested += 1
             '    End SyncLock
@@ -135,11 +135,11 @@ Public Class frmVanity
 
     Private Sub tmr_Tick(sender As Object, e As EventArgs) Handles tmr.Tick
         SyncLock LockObj
-            lblTested.Text = Tested
+            lblTested.Text = CStr(Tested)
             counter += 1
             If counter = 10 Then
                 lblTesting.Text = CStr(Tested - lastval) & " keys/sec"
-                lastval = Tested
+                lastval = CInt(Tested)
                 counter = 0
             End If
         End SyncLock
@@ -160,7 +160,7 @@ Public Class frmVanity
         result = ""
         For t As Integer = 0 To 3
             If Not chars.Contains(txt(t)) Then
-                txt(t) = "@"
+                txt(t) = CChar("@")
 
             End If
             result &= txt(t)
@@ -185,7 +185,7 @@ Public Class frmVanity
         result = ""
         For t As Integer = 0 To 3
             If Not chars.Contains(txt(t)) Then
-                txt(t) = "@"
+                txt(t) = CChar("@")
             End If
             result &= txt(t)
         Next
@@ -216,7 +216,7 @@ Public Class frmVanity
         result = ""
         For t As Integer = 0 To 3
             If Not chars.Contains(txt(t)) Then
-                txt(t) = "@"
+                txt(t) = CChar("@")
 
             End If
             result &= txt(t)
@@ -248,7 +248,7 @@ Public Class frmVanity
         result = ""
         For t As Integer = 0 To 4
             If Not chars.Contains(txt(t)) Then
-                txt(t) = "@"
+                txt(t) = CChar("@")
 
             End If
             result &= txt(t)
@@ -307,7 +307,7 @@ Public Class frmVanity
         lastval = 0
         AddressToFind = txtFind1.Text & "-" & txtFind2.Text & "-" & txtFind3.Text & "-" & txtFind4.Text
         AddressToFind = Replace(AddressToFind, "@", ".")
-        NrofChars = nrPass.Value
+        NrofChars = CInt(nrPass.Value)
         Dim trda As Thread
         trda = New Thread(AddressOf TestParalel)
         trda.Priority = ThreadPriority.BelowNormal
@@ -352,7 +352,7 @@ Public Class frmVanity
                                               KeySeed = ""
                                               For x = 1 To NrofChars
                                                   Randomize()
-                                                  KeySeed &= chars(Int(Rnd() * TotalChars))
+                                                  KeySeed &= chars(Int(CInt(Rnd()) * TotalChars))
                                               Next
                                               cSHA256 = SHA256Managed.Create()
                                               PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
@@ -361,7 +361,7 @@ Public Class frmVanity
                                               PublicKeyHash = cSHA256.ComputeHash(PublicKey)
                                               b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
                                               If (b(b.Length - 1) And &H80) <> 0 Then Array.Resize(Of Byte)(b, b.Length + 1)
-                                              AccountAddress = ReedSolomon.encode(New BigInteger(b))
+                                              AccountAddress = ReedSolomon.encode(CULng(New BigInteger(b)))
                                               '    SyncLock LockObj
                                               Tested += 1
                                               '    End SyncLock

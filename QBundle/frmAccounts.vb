@@ -10,7 +10,7 @@
         If lstAccounts.SelectedIndex = -1 Then Exit Sub
 
         If MsgBox("Are you sure you want to delete account " & lstAccounts.Items.Item(lstAccounts.SelectedIndex).ToString & "?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Delete account") = MsgBoxResult.Yes Then
-            Q.Accounts.DeleteAccount(lstAccounts.Items.Item(lstAccounts.SelectedIndex))
+            Q.Accounts.DeleteAccount(lstAccounts.Items.Item(lstAccounts.SelectedIndex).ToString)
             ReloadAccountList()
             frmMain.SetLoginMenu()
         End If
@@ -18,8 +18,8 @@
 
     Private Sub frmAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReloadAccountList()
-        txtPassprase.PasswordChar = "*"
-        txtPrivateKey.PasswordChar = "*"
+        txtPassprase.PasswordChar = CChar("*")
+        txtPrivateKey.PasswordChar = CChar("*")
     End Sub
     Private Sub ReloadAccountList()
 
@@ -52,7 +52,7 @@
                 Dim Pass As String = Q.Accounts.GetPassword(AccName, pin)
                 If Pass.Length > 0 Then
 
-                    txtPassprase.PasswordChar = ""
+                    txtPassprase.PasswordChar = CChar("")
                     txtPassprase.Text = Pass
 
                 Else
@@ -75,7 +75,7 @@
             If pin.Length > 5 Then
                 Dim PK As String = Q.Accounts.GetPrivateKey(AccName, pin)
                 If PK.Length > 0 Then
-                    txtPrivateKey.PasswordChar = ""
+                    txtPrivateKey.PasswordChar = CChar("")
                     txtPrivateKey.Text = PK
                 Else
                     MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong pin")

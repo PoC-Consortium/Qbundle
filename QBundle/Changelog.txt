@@ -12,6 +12,8 @@ Make More data Updatabable. Like online wallets and pool lists.
 Make plott remove to support multiple removals
 minimize to tray on exit ?
 Iconify(?)
+Be able to do db settings for H2.
+
 
 ~1.7
 Corrected errors in predefined pool list

@@ -107,11 +107,11 @@
             _ConnectFrom = value
         End Set
     End Property
-    Public Property AutoStart() As String
+    Public Property AutoStart() As Boolean
         Get
             Return _AutoStart
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Boolean)
             _AutoStart = value
         End Set
     End Property
@@ -386,7 +386,7 @@
             Dim Sdata As String = ""
             Dim RP() As Reflection.PropertyInfo = Me.GetType().GetProperties()
             For Each prop In RP
-                Sdata &= prop.Name & "=" & prop.GetValue(Me) & vbCrLf
+                Sdata &= prop.Name & "=" & CStr(prop.GetValue(Me)) & vbCrLf
             Next
             IO.File.WriteAllText(QGlobal.SettingsDir & "\BWL.ini", Sdata)
         Catch ex As Exception

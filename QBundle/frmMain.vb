@@ -606,12 +606,19 @@
     End Sub
     Private Sub LoadWallet(sender As Object, e As EventArgs)
         Dim pwdf As New frmInput
+        Dim mnuitm As ToolStripMenuItem = Nothing
+        Try
+            mnuitm = DirectCast(sender, ToolStripMenuItem)
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+        End Try
         pwdf.Text = "Enter your pin"
-        pwdf.lblInfo.Text = "Enter the pin for the account " & sender.text
+        pwdf.lblInfo.Text = "Enter the pin for the account " & mnuitm.Text
         If pwdf.ShowDialog() = DialogResult.OK Then
             Dim pin As String = pwdf.txtPwd.Text
             If pin.Length > 5 Then
-                Dim Pass As String = Q.Accounts.GetPassword(sender.name, pin)
+                Dim Pass As String = Q.Accounts.GetPassword(mnuitm.Name, pin)
                 If Pass.Length > 0 Then
                     If Q.settings.QBMode = 0 And Q.settings.NoDirectLogin = False Then
                         Try
@@ -684,7 +691,7 @@
         BlockMinute.Enabled = True
         BlockMinute.Start()
 
-        APITimer.Interval = "1000"
+        APITimer.Interval = 1000
         APITimer.Enabled = True
         APITimer.Start()
 
@@ -750,7 +757,7 @@
                 Return
             End If
             lblBlockInfo.Text = Data '& " - " & CStr(LastShowHeight)
-            CurHeight = Val(Data)
+            CurHeight = CInt(Val(Data))
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
                 lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Downloading blockchain at " & CStr(LastShowHeight) & " blocks/min)"
@@ -844,7 +851,7 @@
             Dim Totalfree As Long
             Try
                 Totalfree = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalFreeSpace   'bytes
-                Totalfree = Math.Floor(Totalfree / 1024 / 1024 / 1024) 'GiB
+                Totalfree = CLng(Math.Floor(Totalfree / 1024 / 1024 / 1024)) 'GiB
 
                 If Totalfree > Q.settings.DynPlotFree + Q.settings.DynPlotSize Then 'we must still have free space efter creation
                     'check if xplotter is running
@@ -944,13 +951,13 @@
             Dim Entries() As String = Split(Data, ",")
             For t As Integer = 0 To UBound(Entries)
                 If Entries(t).StartsWith("price_usd") Then
-                    PriceUSD = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
+                    PriceUSD = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US"))
                 End If
                 If Entries(t).StartsWith("price_btc") Then
-                    PriceBtc = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
+                    PriceBtc = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US"))
                 End If
                 If Entries(t).StartsWith("market_cap_usd") Then
-                    MktCap = Convert.ToDecimal(Mid(Entries(t), 16), System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString
+                    MktCap = Convert.ToDecimal(Mid(Entries(t), 16), System.Globalization.CultureInfo.GetCultureInfo("en-US"))
                 End If
             Next
             lblCoinMarket.Text = "Burst price: " & PriceBtc.ToString & " btc | $" & Math.Round(PriceUSD, 3).ToString & " | Market cap : $" & Math.Round(MktCap / 1000000, 2).ToString & "M"

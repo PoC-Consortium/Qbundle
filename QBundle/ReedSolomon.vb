@@ -8,10 +8,10 @@
 Imports System.Numerics
 Public Class ReedSolomon
 
-    Private Shared ReadOnly initial_codeword = New Integer() {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-    Private Shared ReadOnly gexp = New Integer() {1, 2, 4, 8, 16, 5, 10, 20, 13, 26, 17, 7, 14, 28, 29, 31, 27, 19, 3, 6, 12, 24, 21, 15, 30, 25, 23, 11, 22, 9, 18, 1}
-    Private Shared ReadOnly glog = New Integer() {0, 0, 1, 18, 2, 5, 19, 11, 3, 29, 6, 27, 20, 8, 12, 23, 4, 10, 30, 17, 7, 22, 28, 26, 21, 25, 9, 16, 13, 14, 24, 15}
-    Private Shared ReadOnly codeword_map = New Integer() {3, 2, 1, 0, 7, 6, 5, 4, 13, 14, 15, 16, 12, 8, 9, 10, 11}
+    Private Shared ReadOnly initial_codeword() As Integer = New Integer() {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    Private Shared ReadOnly gexp() As Integer = New Integer() {1, 2, 4, 8, 16, 5, 10, 20, 13, 26, 17, 7, 14, 28, 29, 31, 27, 19, 3, 6, 12, 24, 21, 15, 30, 25, 23, 11, 22, 9, 18, 1}
+    Private Shared ReadOnly glog() As Integer = New Integer() {0, 0, 1, 18, 2, 5, 19, 11, 3, 29, 6, 27, 20, 8, 12, 23, 4, 10, 30, 17, 7, 22, 28, 26, 21, 25, 9, 16, 13, 14, 24, 15}
+    Private Shared ReadOnly codeword_map() As Integer = New Integer() {3, 2, 1, 0, 7, 6, 5, 4, 13, 14, 15, 16, 12, 8, 9, 10, 11}
     Private Shared ReadOnly alphabet As String = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
 
     Private Shared ReadOnly base_32_length As Integer = 13
@@ -140,7 +140,7 @@ Public Class ReedSolomon
 
         Dim bigInt As New BigInteger
         bigInt = BigInteger.Parse(plain_string_builder)
-        Dim retval As ULong = bigInt
+        Dim retval As ULong = CULng(bigInt)
 
         Return retval
     End Function

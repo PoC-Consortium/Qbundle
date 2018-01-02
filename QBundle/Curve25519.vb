@@ -28,20 +28,20 @@ Public Class Curve25519
         Public Shared Sub ClampPrivateKeyInline(key As Byte())
             If key Is Nothing Then Throw New ArgumentNullException("key")
             If key.Length <> 32 Then Throw New ArgumentException([String].Format("key must be 32 bytes long (but was {0} bytes long)", key.Length))
-            key(31) = key(31) And &H7F
-            key(31) = key(31) Or &H40
-            key(0) = key(0) And &HF8
-        End Sub
+        key(31) = key(31) And CByte(&H7F)
+        key(31) = key(31) Or CByte(&H40)
+        key(0) = key(0) And CByte(&HF8)
+    End Sub
 
         Public Shared Function ClampPrivateKey(rawKey As Byte()) As Byte()
             If rawKey Is Nothing Then Throw New ArgumentNullException("rawKey")
             If rawKey.Length <> 32 Then Throw New ArgumentException([String].Format("rawKey must be 32 bytes long (but was {0} bytes long)", rawKey.Length), "rawKey")
             Dim res = New Byte(31) {}
             Array.Copy(rawKey, res, 32)
-            res(31) = res(31) And &H7F
-            res(31) = res(31) Or &H40
-            res(0) = res(0) And &HF8
-            Return res
+        res(31) = res(31) And CByte(&H7F)
+        res(31) = res(31) Or CByte(&H40)
+        res(0) = res(0) And CByte(&HF8)
+        Return res
         End Function
 
         Public Shared Function CreateRandomPrivateKey() As Byte()

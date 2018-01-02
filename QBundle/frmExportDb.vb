@@ -42,7 +42,7 @@
         StartTime = Now
         'if wallet is running shut it down
         If frmMain.Running Then
-            If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") Then
+            If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
                 lblStatus.Text = "Waiting for wallet to stop."
                 frmMain.StopWallet()
                 WaitTimer = New Timer
@@ -85,7 +85,7 @@
 
         Running = True
     End Sub
-    Private Sub frmExportDb_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.Closing
+    Private Sub frmExportDb_Closing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         Try
             If Running Then
                 MsgBox("You must wait until the export is finished.", MsgBoxStyle.OkOnly, "Close")
@@ -189,7 +189,7 @@
                                 'we can now asume we have something to parse
                                 'lets create percent
                                 If Not darray(6) = "0" And Not darray(8) = "0" Then
-                                    percent = Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0)
+                                    percent = CInt(Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0))
                                 Else
                                     percent = 100
                                 End If
