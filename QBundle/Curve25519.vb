@@ -151,8 +151,8 @@ Public Class Curve25519
             If t > 1 Then
                 dt = dt Or (d(t - 2) And &HFF)
             End If
-            While System.Math.Max(System.Threading.Interlocked.Decrement(n), n + 1) >= t
-                Dim z As Integer = (rn << 16) Or ((r(n) And &HFF) << 8)
+        While System.Math.Max(System.Threading.Interlocked.Decrement(n), n + 1) >= t
+            Dim z As Integer = (rn << 16) Or ((r(n) And &HFF) << 8)
                 If n > 0 Then
                     z = z Or (r(n - 1) And &HFF)
                 End If

@@ -11,7 +11,6 @@ pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 Make plott remove to support multiple removals
 minimize to tray on exit ?
-Find out why login does not work on some
 Iconify(?)
 
 ~1.7
@@ -22,7 +21,7 @@ Qbundle Installer will from now on be provided.
 Login account now shows * instad of cleartext pin
 Account manager now shows more info about accounts.
 Vanity address generator added.
-
+Setting to disable direct login from Account manager accounts.
 
 1.6
 * Added ability to resume plotfile.

@@ -53,6 +53,7 @@ Partial Class frmVanity
         Me.cmSave = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SaveAsTextfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToAccountManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nrPass, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -80,7 +81,7 @@ Partial Class frmVanity
         'nrThreads
         '
         Me.nrThreads.Location = New System.Drawing.Point(64, 68)
-        Me.nrThreads.Maximum = New Decimal(New Integer() {32, 0, 0, 0})
+        Me.nrThreads.Maximum = New Decimal(New Integer() {96, 0, 0, 0})
         Me.nrThreads.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nrThreads.Name = "nrThreads"
         Me.nrThreads.Size = New System.Drawing.Size(57, 20)
@@ -325,12 +326,22 @@ Partial Class frmVanity
         Me.SaveToAccountManagerToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.SaveToAccountManagerToolStripMenuItem.Text = "Add to account manager"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(563, 83)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(56, 15)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmVanity
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(647, 288)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label3)
@@ -381,4 +392,5 @@ Partial Class frmVanity
     Friend WithEvents cmSave As ContextMenuStrip
     Friend WithEvents SaveAsTextfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveToAccountManagerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button1 As Button
 End Class

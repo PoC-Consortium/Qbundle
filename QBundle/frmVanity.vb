@@ -29,7 +29,8 @@ Public Class frmVanity
             running = True
             For x As Integer = 1 To nrThreads.Value
                 trda = New Thread(AddressOf VanityGeneration)
-                trda.IsBackground = True
+                trda.Priority = ThreadPriority.BelowNormal
+                ' trda.IsBackground = True
                 trda.Start()
             Next
             trda = Nothing
@@ -50,7 +51,7 @@ Public Class frmVanity
     Private Sub frmVanity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         running = False
         LockObj = New Object
-
+        Exit Sub
         nrThreads.Maximum = Environment.ProcessorCount
 
         Select Case Environment.ProcessorCount
@@ -73,6 +74,7 @@ Public Class frmVanity
         Dim cSHA256 As SHA256
         Dim b As Byte()
         Dim x As Integer
+        ' Dim Crv As New Curve
 
         Dim chars() As String = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
          "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "X",
@@ -87,14 +89,15 @@ Public Class frmVanity
             Next
             cSHA256 = SHA256Managed.Create()
             PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
-            PublicKey = Curve25519.GetPublicKey(PrivateKey)
+            PublicKey = Curve.GetPublicKey(PrivateKey)
+
             PublicKeyHash = cSHA256.ComputeHash(PublicKey)
             b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
             If (b(b.Length - 1) And &H80) <> 0 Then Array.Resize(Of Byte)(b, b.Length + 1)
             AccountAddress = ReedSolomon.encode(New BigInteger(b))
-            SyncLock LockObj
-                Tested += 1
-            End SyncLock
+            '    SyncLock LockObj
+            Tested += 1
+            '    End SyncLock
             If Regex.IsMatch(AccountAddress, AddressToFind) Then
                 If ValidateAddress(AccountAddress) Then
                     Found(AccountAddress, KeySeed)
@@ -294,5 +297,83 @@ Public Class frmVanity
             Q.Accounts.SaveAccounts()
             frmMain.SetLoginMenu()
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        Tested = 0
+        counter = 0
+        lastval = 0
+        AddressToFind = txtFind1.Text & "-" & txtFind2.Text & "-" & txtFind3.Text & "-" & txtFind4.Text
+        AddressToFind = Replace(AddressToFind, "@", ".")
+        NrofChars = nrPass.Value
+        Dim trda As Thread
+        trda = New Thread(AddressOf TestParalel)
+        trda.Priority = ThreadPriority.BelowNormal
+        trda.IsBackground = True
+
+        trda.Start()
+        running = True
+
+        btnStart.Text = "Stop"
+        tmr.Enabled = True
+
+
+
+
+    End Sub
+
+    Private Sub TestParalel()
+
+        Parallel.For(0, Integer.MaxValue, Sub(i, loopState)
+
+                                              Dim AccountAddress As String
+                                              Dim KeySeed As String = ""
+                                              Dim PrivateKey As Byte()
+                                              Dim PublicKey As Byte()
+                                              Dim PublicKeyHash As Byte()
+                                              Dim cSHA256 As SHA256
+                                              Dim b As Byte()
+                                              Dim x As Integer
+
+
+                                              Dim chars() As String = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "X",
+         "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+                                              Dim TotalChars As Integer = UBound(chars)
+
+                                              If running = False Then
+
+                                                  loopState.[Stop]()
+                                                  Exit Sub
+
+                                              End If
+                                              KeySeed = ""
+                                              For x = 1 To NrofChars
+                                                  Randomize()
+                                                  KeySeed &= chars(Int(Rnd() * TotalChars))
+                                              Next
+                                              cSHA256 = SHA256Managed.Create()
+                                              PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
+                                              PublicKey = Curve.GetPublicKey(PrivateKey)
+
+                                              PublicKeyHash = cSHA256.ComputeHash(PublicKey)
+                                              b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
+                                              If (b(b.Length - 1) And &H80) <> 0 Then Array.Resize(Of Byte)(b, b.Length + 1)
+                                              AccountAddress = ReedSolomon.encode(New BigInteger(b))
+                                              '    SyncLock LockObj
+                                              Tested += 1
+                                              '    End SyncLock
+                                              If Regex.IsMatch(AccountAddress, AddressToFind) Then
+                                                  If ValidateAddress(AccountAddress) Then
+                                                      Found(AccountAddress, KeySeed)
+                                                      Exit Sub
+                                                  End If
+                                              End If
+
+
+                                          End Sub)
+
     End Sub
 End Class
