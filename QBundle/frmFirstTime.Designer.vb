@@ -268,7 +268,7 @@ Partial Class frmFirstTime
         '
         'P0
         '
-        Me.P0.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.P0.BackColor = System.Drawing.Color.LightSteelBlue
         Me.P0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.P0.Controls.Add(Me.lblH2Desc)
         Me.P0.Controls.Add(Me.lblH2Header)

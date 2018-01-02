@@ -128,7 +128,6 @@ Partial Class frmUpdate
         Me.Name = "frmUpdate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Check for updates"
-        Me.TopMost = True
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)

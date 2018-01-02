@@ -74,7 +74,7 @@ Partial Class frmChangeDatabase
         '
         'pnlttl
         '
-        Me.pnlttl.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.pnlttl.BackColor = System.Drawing.Color.LightSteelBlue
         Me.pnlttl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlttl.Controls.Add(Me.Label12)
         Me.pnlttl.Controls.Add(Me.lblCurDB)
@@ -133,7 +133,7 @@ Partial Class frmChangeDatabase
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel2.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.pnlMariaSettings)
         Me.Panel2.Controls.Add(Me.btnNext)
@@ -295,7 +295,7 @@ Partial Class frmChangeDatabase
         '
         'Panel5
         '
-        Me.Panel5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel5.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel5.Controls.Add(Me.btnBack)
         Me.Panel5.Controls.Add(Me.Label8)
@@ -420,7 +420,7 @@ Partial Class frmChangeDatabase
         '
         'Panel3
         '
-        Me.Panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel3.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.lblFromTo)
         Me.Panel3.Controls.Add(Me.Label7)

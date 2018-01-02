@@ -51,7 +51,7 @@ Partial Class frmImport
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel1.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -132,7 +132,7 @@ Partial Class frmImport
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel2.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.chkStartWallet)
         Me.Panel2.Controls.Add(Me.btnBrowse)

@@ -42,7 +42,7 @@ Partial Class frmExportDb
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel1.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Label14)
@@ -83,7 +83,7 @@ Partial Class frmExportDb
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel2.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.btnBrowse)
         Me.Panel2.Controls.Add(Me.txtFilename)

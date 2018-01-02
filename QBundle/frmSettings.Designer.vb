@@ -90,6 +90,7 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkNoDirectLogin = New System.Windows.Forms.CheckBox()
         Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
         Me.chkMinToTray = New System.Windows.Forms.CheckBox()
         Me.chkNTP = New System.Windows.Forms.CheckBox()
@@ -100,7 +101,6 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkNoDirectLogin = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -159,7 +159,7 @@ Partial Class frmSettings
         '
         'Panel4
         '
-        Me.Panel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel4.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.chkAutoStart)
         Me.Panel4.Controls.Add(Me.chkWalletException)
@@ -585,7 +585,7 @@ Partial Class frmSettings
         '
         'pnlMaria
         '
-        Me.pnlMaria.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.pnlMaria.BackColor = System.Drawing.Color.LightSteelBlue
         Me.pnlMaria.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMaria.Controls.Add(Me.pnlDbSettings)
         Me.pnlMaria.Controls.Add(Me.Label4)
@@ -730,7 +730,7 @@ Partial Class frmSettings
         '
         'Panel3
         '
-        Me.Panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel3.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.Label12)
         Me.Panel3.Controls.Add(Me.rJava1)
@@ -806,7 +806,7 @@ Partial Class frmSettings
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel2.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.chkNoDirectLogin)
         Me.Panel2.Controls.Add(Me.chkCoinmarket)
@@ -822,6 +822,16 @@ Partial Class frmSettings
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
+        '
+        'chkNoDirectLogin
+        '
+        Me.chkNoDirectLogin.AutoSize = True
+        Me.chkNoDirectLogin.Location = New System.Drawing.Point(11, 199)
+        Me.chkNoDirectLogin.Name = "chkNoDirectLogin"
+        Me.chkNoDirectLogin.Size = New System.Drawing.Size(230, 17)
+        Me.chkNoDirectLogin.TabIndex = 10
+        Me.chkNoDirectLogin.Text = "Disable account direct login in wallet mode."
+        Me.chkNoDirectLogin.UseVisualStyleBackColor = True
         '
         'chkCoinmarket
         '
@@ -927,16 +937,6 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkNoDirectLogin
-        '
-        Me.chkNoDirectLogin.AutoSize = True
-        Me.chkNoDirectLogin.Location = New System.Drawing.Point(11, 199)
-        Me.chkNoDirectLogin.Name = "chkNoDirectLogin"
-        Me.chkNoDirectLogin.Size = New System.Drawing.Size(230, 17)
-        Me.chkNoDirectLogin.TabIndex = 10
-        Me.chkNoDirectLogin.Text = "Disable account direct login in wallet mode."
-        Me.chkNoDirectLogin.UseVisualStyleBackColor = True
-        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -949,7 +949,6 @@ Partial Class frmSettings
         Me.Name = "frmSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
-        Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
