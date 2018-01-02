@@ -446,7 +446,7 @@ Friend Class Generic
         'Check if Java is running another burst.jar
         searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='java.exe'")
         For Each p As ManagementObject In searcher.[Get]()
-            cmdline = p("CommandLine")
+            cmdline = p("CommandLine").ToString
             If cmdline.ToLower.Contains("burst.jar") Then
                 Msg = "Qbundle has detected that another burst wallet is running." & vbCrLf
                 Msg &= "If the other wallet use the same setting as this one. it will not work." & vbCrLf
@@ -498,9 +498,9 @@ Friend Class Generic
                 Dim OffSeconds As Integer = 0
                 Dim localTimezoneNTPTime As Date = TimeZoneInfo.ConvertTime(ntpTime, TimeZoneInfo.Utc, TimeZoneInfo.Local)
                 If Now > localTimezoneNTPTime Then
-                    OffSeconds = (Now - localTimezoneNTPTime).TotalSeconds
+                    OffSeconds = CInt((Now - localTimezoneNTPTime).TotalSeconds)
                 ElseIf Now < localTimezoneNTPTime Then
-                    OffSeconds = (localTimezoneNTPTime - Now).TotalSeconds
+                    OffSeconds = CInt((localTimezoneNTPTime - Now).TotalSeconds)
                 End If
 
                 If OffSeconds > 15 Then
@@ -529,7 +529,7 @@ Friend Class Generic
         Dim prc As String = ""
         searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process") ' WHERE Name='" & exeName & "'
         For Each p As ManagementObject In searcher.[Get]()
-            prc = LCase(p("Name"))
+            prc = LCase(p("Name").ToString)
             If prc.Contains(LCase(Name)) Then RetVal = True
         Next
         Return RetVal
@@ -540,7 +540,7 @@ Friend Class Generic
         Dim prc As String = ""
         searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process") ' WHERE Name='" & exeName & "'
         For Each p As ManagementObject In searcher.[Get]()
-            prc = LCase(p("Name"))
+            prc = LCase(p("Name").ToString)
             If prc.Contains(LCase(Name)) Then
                 Dim proc As Process = Process.GetProcessById(Integer.Parse(p("ProcessId").ToString))
                 proc.Kill()
@@ -633,7 +633,7 @@ Friend Class Generic
                 Next
             End If
         Catch ex As Exception
-            Return False
+            Return 0
         End Try
 
         Return HighestEndNonce

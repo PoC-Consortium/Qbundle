@@ -11,7 +11,7 @@
     Private OP As Integer '0=copy 1=Fresh
 #Region " Setup and form Events "
 
-    Private Sub frmChangeDatabase_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.Closing
+    Private Sub frmChangeDatabase_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Try
             If Running Then
                 MsgBox("You must wait until the convertion is compleated.", MsgBoxStyle.OkOnly, "Close")

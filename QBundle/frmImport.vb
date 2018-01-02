@@ -91,7 +91,7 @@
         Running = True
         'if wallet is running shut it down
         If frmMain.Running Then
-            If MsgBox("The wallet must be stopped to import the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") Then
+            If MsgBox("The wallet must be stopped to import the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
                 lblStatus.Text = "Waiting for wallet to stop."
                 frmMain.StopWallet()
                 WaitTimer = New Timer
@@ -180,7 +180,7 @@
         Me.Show()
         'we have aborted return to download again
         IsAborted = True
-        If QGlobal.DbType.pMariaDB Then StopMaria()
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then StopMaria()
 
         Running = False
         r1.Enabled = True
@@ -210,7 +210,7 @@
         Me.Show()
         'we have aborted return to download again
         IsAborted = True
-        If QGlobal.DbType.pMariaDB Then StopMaria()
+        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then StopMaria()
 
         Running = False
         r1.Enabled = True
@@ -359,7 +359,7 @@
                                 'we can now asume we have something to parse
                                 'lets create percent
                                 If Not darray(6) = "0" And Not darray(8) = "0" Then
-                                    percent = Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0)
+                                    percent = CInt(Math.Round(Val(darray(6)) / Val(darray(8)) * 100, 0))
                                 Else
                                     percent = 100
                                 End If
@@ -369,7 +369,7 @@
                             If darray(5) = "Dump" And darray(6) = "loaded" Then
                                 'we are done
 
-                                Dim ts As New TimeSpan(0, 0, Val(darray(8).Replace("seconds", "")))
+                                Dim ts As New TimeSpan(0, 0, CInt(Val(darray(8).Replace("seconds", ""))))
 
                                 lblStatus.Text = "Done! Export completed in " & ts.Hours & ":" & ts.Minutes & ":" & ts.Seconds
                             End If

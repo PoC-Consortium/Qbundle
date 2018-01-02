@@ -113,7 +113,7 @@
             If n > 0 Then
                 z = z Or (r(n - 1) And &HFF)
             End If
-            z /= dt
+            z = CInt(z / dt)
             rn += MultiplyArraySmall(r, r, n - t + 1, d, t, -z)
             q(n - t + 1) = CByte((z + rn) And &HFF)
 
@@ -136,7 +136,13 @@
         Dim bn As Integer = 32
         Dim i As Integer
         For i = 0 To 31
-            x(i) = y(i) = 0
+            '
+            '    CHECK THIS! ! ! ! ! ! 
+            '
+            '
+            '
+
+            x(i) = CByte(y(i) = 0)
         Next
         x(0) = 1
         Dim an As Integer = GetNumSize(a, 32)

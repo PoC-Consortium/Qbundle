@@ -59,9 +59,9 @@
         If Q.settings.DynPlotEnabled Then
             Try
                 TotalSpace = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalSize  'bytes
-                TotalSpace = Math.Floor(TotalSpace / 1024 / 1024 / 1024) 'GiB
+                TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
                 trFreeSpace.Minimum = 1
-                trFreeSpace.Maximum = TotalSpace
+                trFreeSpace.Maximum = CInt(TotalSpace)
             Catch ex As Exception
 
             End Try
@@ -95,8 +95,14 @@
 
     End Sub
     Private Sub SelectAccountID(sender As Object, e As EventArgs)
-
-        txtAccount.Text = Q.Accounts.GetAccountID(sender.text)
+        Dim mnuitm As ToolStripMenuItem = Nothing
+        Try
+            mnuitm = DirectCast(sender, ToolStripMenuItem)
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+        End Try
+        txtAccount.Text = Q.Accounts.GetAccountID(mnuitm.Text)
 
     End Sub
     Private Sub rDisable_CheckedChanged(sender As Object, e As EventArgs) Handles rDisable.Click
@@ -114,10 +120,10 @@
                 MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             End If
             Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
-            TotalSpace = Math.Floor(TotalSpace / 1024 / 1024 / 1024) 'GiB
+            TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
             trFreeSpace.Minimum = 1
-            trFreeSpace.Maximum = TotalSpace
-            trFreeSpace.Value = TotalSpace / 10 'set 10% as start value
+            trFreeSpace.Maximum = CInt(TotalSpace)
+            trFreeSpace.Value = CInt(TotalSpace / 10) 'set 10% as start value
             lblFreeSpace.Text = CStr(TotalSpace / 10) & "GiB (10%)"
 
         End If
@@ -128,7 +134,7 @@
     Private Sub trFreeSpace_Scroll(sender As Object, e As EventArgs) Handles trFreeSpace.ValueChanged
         Try
             Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
-            TotalSpace = Math.Floor(TotalSpace / 1024 / 1024 / 1024) 'GiB
+            TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
             lblFreeSpace.Text = CStr(trFreeSpace.Value) & "GiB (" & Math.Floor((trFreeSpace.Value / TotalSpace) * 100).ToString & "%)"
         Catch ex As Exception
 
@@ -160,7 +166,7 @@
             lstPlots.Items.RemoveAt(lstPlots.SelectedIndex)
             Q.settings.Plots = ""
             For t As Integer = 0 To lstPlots.Items.Count - 1
-                Q.settings.Plots &= lstPlots.Items.Item(t) & "|"
+                Q.settings.Plots &= lstPlots.Items.Item(t).ToString & "|"
             Next
             Q.settings.SaveSettings()
 

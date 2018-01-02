@@ -1,9 +1,9 @@
 ﻿Public Class frmInput
     Private Sub revealPwd_Mdown(sender As Object, e As EventArgs) Handles revealPwd.MouseDown
-        txtPwd.PasswordChar = ""
+        txtPwd.PasswordChar = CChar("")
     End Sub
     Private Sub revealPwd_Mup(sender As Object, e As EventArgs) Handles revealPwd.MouseUp
-        txtPwd.PasswordChar = "*"
+        txtPwd.PasswordChar = CChar("*")
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click

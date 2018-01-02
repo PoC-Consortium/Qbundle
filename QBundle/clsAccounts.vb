@@ -44,7 +44,7 @@ Public Class clsAccounts
         'Account ID
         AccountID = Bint.ToString
         'Create RS-Address
-        AccountAddress = ReedSolomon.encode(Bint.ToString)
+        AccountAddress = ReedSolomon.encode(CULng(Bint))
 
 
         Dim Acc As New Account
@@ -150,7 +150,7 @@ Public Class clsAccounts
         End If
         Dim Bint As New BigInteger(b)
         AccountID = Bint.ToString
-        AccountAddress = ReedSolomon.encode(Bint.ToString)
+        AccountAddress = ReedSolomon.encode(CULng(Bint))
 
         Return AccountAddress
     End Function
@@ -196,13 +196,13 @@ Public Class clsAccounts
         End Try
     End Sub
     Public Function ConvertIdToRS(ByVal id As String) As String
-        Return ReedSolomon.encode(id)
+        Return ReedSolomon.encode(CULng(id))
     End Function
     Public Function ConvertRSToId(ByVal Address As String) As String
         If UCase(Address).StartsWith("BURST-") Then
             Address = Address.Substring(6) 'Remove BURST- before sending it for convertion.
         End If
-        Return ReedSolomon.decode(Address)
+        Return CStr(ReedSolomon.decode(Address))
     End Function
     Public Function Enc(ByVal input As String, ByVal Keyval As String) As String
         Dim PreKeySeed As String = "9Q&Eag8Lq=+d*Jb6?+E?CNqRY82pFYGJ"

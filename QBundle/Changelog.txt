@@ -13,6 +13,7 @@ Make plott remove to support multiple removals
 minimize to tray on exit ?
 Iconify(?)
 Be able to do db settings for H2.
+Logfile for plotter and miners. Catch console (?) or add logging 
 
 
 ~1.7

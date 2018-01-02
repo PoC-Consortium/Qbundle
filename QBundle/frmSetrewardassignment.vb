@@ -43,14 +43,28 @@
 
     End Sub
     Private Sub SelectAccountID(sender As Object, e As EventArgs)
-        txtAccount.Text = Q.Accounts.GetAccountRS(sender.text)
+        Dim mnuitm As ToolStripMenuItem = Nothing
+        Try
+            mnuitm = DirectCast(sender, ToolStripMenuItem)
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+        End Try
+        txtAccount.Text = Q.Accounts.GetAccountRS(mnuitm.Text)
     End Sub
     Private Sub SelectPoolID(sender As Object, e As EventArgs)
-        If sender.text = "Solo mining" Then
+        Dim mnuitm As ToolStripMenuItem = Nothing
+        Try
+            mnuitm = DirectCast(sender, ToolStripMenuItem)
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+        End Try
+        If mnuitm.Text = "Solo mining" Then
             txtPool.Text = txtAccount.Text
         Else
             For x As Integer = 0 To UBound(QGlobal.Pools)
-                If sender.text = QGlobal.Pools(x).Name Then
+                If mnuitm.Text = QGlobal.Pools(x).Name Then
                     txtPool.Text = QGlobal.Pools(x).BurstAddress
                     Exit For
                 End If

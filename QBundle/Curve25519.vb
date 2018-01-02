@@ -156,8 +156,8 @@ Public Class Curve25519
                 If n > 0 Then
                     z = z Or (r(n - 1) And &HFF)
                 End If
-                z /= dt
-                rn += MultiplyArraySmall(r, r, n - t + 1, d, t, -z)
+            z = CInt(z / dt)
+            rn += MultiplyArraySmall(r, r, n - t + 1, d, t, -z)
                 q(n - t + 1) = CByte((z + rn) And &HFF)
                 ' rn is 0 or -1 (underflow) 
                 MultiplyArraySmall(r, r, n - t + 1, d, t, -rn)
@@ -183,7 +183,7 @@ Public Class Curve25519
         Dim bn As Integer = 32
         Dim i As Integer
         For i = 0 To 31
-            x(i) = y(i) = 0
+            x(i) = CByte(y(i) = 0)
         Next
         x(0) = 1
         Dim an As Integer = GetNumSize(a, 32)

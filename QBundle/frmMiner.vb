@@ -50,7 +50,7 @@
         'get accountid from plotfile
 
         Try
-            Dim PlotAccount As String = GetAccountIdFromPlot(lstPlots.Items.Item(0))
+            Dim PlotAccount As String = GetAccountIdFromPlot(lstPlots.Items.Item(0).ToString)
 
             Dim http As New clsHttp
             Dim buffer() As String = Nothing
@@ -125,15 +125,21 @@
     End Sub
 
     Private Sub SelectPoolID(sender As Object, e As EventArgs)
-
+        Dim mnuitm As ToolStripMenuItem = Nothing
+        Try
+            mnuitm = DirectCast(sender, ToolStripMenuItem)
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Exit Sub
+        End Try
         For x As Integer = 0 To UBound(QGlobal.Pools)
-            If sender.text = QGlobal.Pools(x).Name Then
+            If mnuitm.Text = QGlobal.Pools(x).Name Then
                 txtMiningServer.Text = QGlobal.Pools(x).Address
-                nrMiningPort.Value = Val(QGlobal.Pools(x).Port)
+                nrMiningPort.Value = CDec(Val(QGlobal.Pools(x).Port))
                 txtUpdateServer.Text = QGlobal.Pools(x).Address
-                nrUpdatePort.Value = Val(QGlobal.Pools(x).Port)
+                nrUpdatePort.Value = CDec(Val(QGlobal.Pools(x).Port))
                 txtInfoServer.Text = QGlobal.Pools(x).Address
-                nrInfoPort.Value = Val(QGlobal.Pools(x).Port)
+                nrInfoPort.Value = CDec(Val(QGlobal.Pools(x).Port))
                 txtDeadLine.Text = QGlobal.Pools(x).DeadLine
                 Exit For
             End If
@@ -144,11 +150,11 @@
         For x As Integer = 0 To UBound(QGlobal.Pools)
             If AccountID = Q.Accounts.ConvertRSToId(QGlobal.Pools(x).BurstAddress) Then
                 txtMiningServer.Text = QGlobal.Pools(x).Address
-                nrMiningPort.Value = Val(QGlobal.Pools(x).Port)
+                nrMiningPort.Value = CDec(Val(QGlobal.Pools(x).Port))
                 txtUpdateServer.Text = QGlobal.Pools(x).Address
-                nrUpdatePort.Value = Val(QGlobal.Pools(x).Port)
+                nrUpdatePort.Value = CDec(Val(QGlobal.Pools(x).Port))
                 txtInfoServer.Text = QGlobal.Pools(x).Address
-                nrInfoPort.Value = Val(QGlobal.Pools(x).Port)
+                nrInfoPort.Value = CDec(Val(QGlobal.Pools(x).Port))
                 txtDeadLine.Text = QGlobal.Pools(x).DeadLine
                 Exit For
             End If
@@ -171,7 +177,7 @@
             lstPlots.Items.RemoveAt(lstPlots.SelectedIndex)
             Q.settings.Plots = ""
             For t As Integer = 0 To lstPlots.Items.Count - 1
-                Q.settings.Plots &= lstPlots.Items.Item(t) & "|"
+                Q.settings.Plots &= lstPlots.Items.Item(t).ToString & "|"
             Next
             Q.settings.SaveSettings()
 
@@ -208,10 +214,10 @@
                 Exit Sub
             End If
 
-            Dim AccountId As String = GetAccountIdFromPlot(lstPlots.Items.Item(0))
+            Dim AccountId As String = GetAccountIdFromPlot(lstPlots.Items.Item(0).ToString)
             If lstPlots.Items.Count > 1 Then
                 For t As Integer = 1 To lstPlots.Items.Count - 1
-                    If Not AccountId = GetAccountIdFromPlot(lstPlots.Items(t)) Then
+                    If Not AccountId = GetAccountIdFromPlot(lstPlots.Items(t).ToString) Then
                         MsgBox("When mining solo you cannot mine with different accounts at the same time. Please remove the plotfiles with account id that does not match the account you want to mine with.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Multiple accounts.")
                         Exit Sub
                     End If
@@ -356,10 +362,10 @@
         Dim plots As String = ""
         Dim Buffer(lstPlots.Items.Count - 1) As String
         For t As Integer = 0 To lstPlots.Items.Count - 1
-            If Buffer.Contains(IO.Path.GetDirectoryName(lstPlots.Items.Item(t))) Then
+            If Buffer.Contains(IO.Path.GetDirectoryName(lstPlots.Items.Item(t).ToString)) Then
             Else
-                Buffer(t) = IO.Path.GetDirectoryName(lstPlots.Items.Item(t))
-                plots &= Chr(34) & IO.Path.GetDirectoryName(lstPlots.Items.Item(t)) & Chr(34) & ","
+                Buffer(t) = IO.Path.GetDirectoryName(lstPlots.Items.Item(t).ToString)
+                plots &= Chr(34) & IO.Path.GetDirectoryName(lstPlots.Items.Item(t).ToString) & Chr(34) & ","
             End If
         Next
         plots = Replace(plots, "\", "\\")
@@ -429,9 +435,9 @@
         Generic.UpdateLocalWallet()
 
         Dim buffer() As String = Split(Replace(QGlobal.Wallets(0).Address, "http://", ""), ":")
-        nrMiningPort.Value = Val(buffer(1))
-        nrUpdatePort.Value = Val(buffer(1))
-        nrInfoPort.Value = Val(buffer(1))
+        nrMiningPort.Value = CDec(Val(buffer(1)))
+        nrUpdatePort.Value = CDec(Val(buffer(1)))
+        nrInfoPort.Value = CDec(Val(buffer(1)))
         txtMiningServer.Text = buffer(0)
         txtUpdateServer.Text = buffer(0)
         txtInfoServer.Text = buffer(0)
