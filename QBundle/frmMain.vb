@@ -237,8 +237,6 @@
         End If
     End Sub
 
-
-
     Private Sub ShudownWallet_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShutdownWallet.Tick
         If Running = False Then
             Me.Close()
@@ -677,8 +675,8 @@
             Return
         End If
         Try
-
             lblUpdates.Visible = True
+            lblUpdateAvail2.Visible = True
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try

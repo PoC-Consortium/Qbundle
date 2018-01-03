@@ -81,6 +81,7 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnSend.Click
+        Dim pwdf As New frmInput
         Try
 
             Dim Passphrase As String = ""
@@ -88,35 +89,44 @@
             If txtAccount.Text.Length > 0 And UCase(txtAccount.Text).StartsWith("BURST-") Then
                 For Each account As QB.clsAccounts.Account In Q.Accounts.AccArray
                     If account.RSAddress = txtAccount.Text Then
-                        Dim pin As String = InputBox("Enter pin for account " & account.AccountName & " (" & account.RSAddress & ")", "Enter Pin", "")
-                        If pin.Length > 0 Then
-                            Dim tmp As String = Q.Accounts.GetPassword(account.AccountName, pin)
-                            If tmp.Length > 0 Then
-                                Passphrase = tmp
+
+                        pwdf.Text = "Enter your pin"
+                        pwdf.lblInfo.Text = "Enter pin for account " & account.AccountName & " (" & account.RSAddress & ")"
+                        If pwdf.ShowDialog() = DialogResult.OK Then
+                            Dim pin As String = pwdf.txtPwd.Text
+                            If pin.Length > 0 Then
+                                Dim tmp As String = Q.Accounts.GetPassword(account.AccountName, pin)
+                                If tmp.Length > 0 Then
+                                    Passphrase = tmp
+                                Else
+                                    MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
+                                    Exit Sub
+                                End If
                             Else
                                 MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
                                 Exit Sub
                             End If
-                        Else
-                            MsgBox("You entered the wrong pin.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong Pin")
-                            Exit Sub
+                            Exit For
                         End If
-                        Exit For
                     End If
                 Next
                 'If no account then ask for passphrase
                 If Passphrase.Length = 0 Then
-                    Dim tmp As String = InputBox("Enter Passphrase for account (" & txtAccount.Text & ")", "Enter Passphrase", "")
-                    If tmp.Length > 0 Then
-                        If UCase(txtAccount.Text) = UCase("BURST-" & Q.Accounts.GetRSFromPassPhrase(tmp)) Then
-                            Passphrase = tmp
+                    pwdf.Text = "Enter your pin"
+                    pwdf.lblInfo.Text = "Enter Passphrase for account (" & txtAccount.Text & ")"
+                    If pwdf.ShowDialog() = DialogResult.OK Then
+                        Dim tmp As String = pwdf.txtPwd.Text
+                        If tmp.Length > 0 Then
+                            If UCase(txtAccount.Text) = UCase("BURST-" & Q.Accounts.GetRSFromPassPhrase(tmp)) Then
+                                Passphrase = tmp
+                            Else
+                                MsgBox("You entered the wrong passphrase.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong passphrase")
+                                Exit Sub
+                            End If
                         Else
                             MsgBox("You entered the wrong passphrase.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong passphrase")
                             Exit Sub
                         End If
-                    Else
-                        MsgBox("You entered the wrong passphrase.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong passphrase")
-                        Exit Sub
                     End If
                 End If
             Else
@@ -160,7 +170,7 @@
                     MsgBox("Rewardassignment has been set.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "All done.")
                 End If
             Else
-                    MsgBox("Wallet seem to be offline. Try another wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No connection")
+                MsgBox("Wallet seem to be offline. Try another wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No connection")
             End If
         Catch ex As Exception
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)

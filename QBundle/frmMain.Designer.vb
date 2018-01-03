@@ -64,6 +64,7 @@ Partial Class frmMain
         Me.DynamicPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VanityAddressGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContributorsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeveloperToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,7 +96,7 @@ Partial Class frmMain
         Me.lblSelectWallet = New System.Windows.Forms.ToolStripLabel()
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
-        Me.VanityAddressGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblUpdateAvail2 = New System.Windows.Forms.ToolStripLabel()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -388,6 +389,12 @@ Partial Class frmMain
         Me.SetRewardassignmentToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.SetRewardassignmentToolStripMenuItem.Text = "Reward Recipient"
         '
+        'VanityAddressGeneratorToolStripMenuItem
+        '
+        Me.VanityAddressGeneratorToolStripMenuItem.Name = "VanityAddressGeneratorToolStripMenuItem"
+        Me.VanityAddressGeneratorToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.VanityAddressGeneratorToolStripMenuItem.Text = "Vanity Address generator"
+        '
         'AboutToolStripMenuItem2
         '
         Me.AboutToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContributorsToolStripMenuItem, Me.DeveloperToolStripMenuItem})
@@ -582,7 +589,7 @@ Partial Class frmMain
         '
         Me.MenuBar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.MenuBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.MenuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.lblSelectWallet, Me.cmbSelectWallet, Me.lblCoinMarket})
+        Me.MenuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.lblSelectWallet, Me.cmbSelectWallet, Me.lblCoinMarket, Me.lblUpdateAvail2})
         Me.MenuBar.Location = New System.Drawing.Point(0, 24)
         Me.MenuBar.Name = "MenuBar"
         Me.MenuBar.Padding = New System.Windows.Forms.Padding(0)
@@ -612,11 +619,13 @@ Partial Class frmMain
         Me.lblCoinMarket.Size = New System.Drawing.Size(91, 22)
         Me.lblCoinMarket.Text = "Burst price: N/A"
         '
-        'VanityAddressGeneratorToolStripMenuItem
+        'lblUpdateAvail2
         '
-        Me.VanityAddressGeneratorToolStripMenuItem.Name = "VanityAddressGeneratorToolStripMenuItem"
-        Me.VanityAddressGeneratorToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.VanityAddressGeneratorToolStripMenuItem.Text = "Vanity Address generator"
+        Me.lblUpdateAvail2.ForeColor = System.Drawing.Color.Red
+        Me.lblUpdateAvail2.Name = "lblUpdateAvail2"
+        Me.lblUpdateAvail2.Size = New System.Drawing.Size(128, 22)
+        Me.lblUpdateAvail2.Text = "(New update available)"
+        Me.lblUpdateAvail2.Visible = False
         '
         'frmMain
         '
@@ -724,4 +733,5 @@ Partial Class frmMain
     Friend WithEvents lblCoinMarket As ToolStripLabel
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents VanityAddressGeneratorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblUpdateAvail2 As ToolStripLabel
 End Class

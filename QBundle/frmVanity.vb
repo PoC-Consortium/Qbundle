@@ -29,8 +29,8 @@ Public Class frmVanity
             running = True
             For x As Integer = 1 To CInt(nrThreads.Value)
                 trda = New Thread(AddressOf VanityGeneration)
-                trda.Priority = ThreadPriority.BelowNormal
-                ' trda.IsBackground = True
+                'trda.Priority = ThreadPriority.BelowNormal
+                trda.IsBackground = True
                 trda.Start()
             Next
             trda = Nothing
@@ -85,19 +85,18 @@ Public Class frmVanity
             KeySeed = ""
             For x = 1 To NrofChars
                 Randomize()
-                KeySeed &= chars(Int(CInt(Rnd()) * TotalChars))
+                KeySeed &= chars(Int(Rnd() * TotalChars))
             Next
             cSHA256 = SHA256Managed.Create()
             PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
-            PublicKey = Curve.GetPublicKey(PrivateKey)
-
+            PublicKey = Curve25519.GetPublicKey(PrivateKey)
             PublicKeyHash = cSHA256.ComputeHash(PublicKey)
             b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
             If (b(b.Length - 1) And &H80) <> 0 Then Array.Resize(Of Byte)(b, b.Length + 1)
             AccountAddress = ReedSolomon.encode(CULng(New BigInteger(b)))
-            '    SyncLock LockObj
-            Tested += 1
-            '    End SyncLock
+            SyncLock LockObj
+                Tested += 1
+            End SyncLock
             If Regex.IsMatch(AccountAddress, AddressToFind) Then
                 If ValidateAddress(AccountAddress) Then
                     Found(AccountAddress, KeySeed)
@@ -111,7 +110,7 @@ Public Class frmVanity
 
         'if account returns it has a public key. we do not want to give password to existing address
         Dim http As New clsHttp
-        Dim result As String = http.GetUrl("https://wallet.burst.cryptoguru.org:8125/burst?requestType=getAccount&account=BURST-" & Addr)
+        Dim result As String = http.GetUrl(QGlobal.Wallets(1).Address & "/burst?requestType=getAccount&account=BURST-" & Addr)
         If result.Contains("errorDescription") Then Return True
 
         Return False

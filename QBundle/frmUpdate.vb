@@ -32,9 +32,7 @@
         btnUpdate.Enabled = False
         If frmMain.Running Then
             lblStatus.Text = "Waiting for wallet to stop"
-            If Q.settings.DbType = QGlobal.DbType.pMariaDB Then 'send startsequence
-                frmMain.StopWallet()
-            End If
+            frmMain.StopWallet()
             tmr.Interval = 500
             tmr.Start()
             tmr.Enabled = True

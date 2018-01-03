@@ -19,4 +19,8 @@
         Me.Close()
 
     End Sub
+
+    Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel4.LinkClicked
+        Process.Start("https://www.advancedinstaller.com/")
+    End Sub
 End Class

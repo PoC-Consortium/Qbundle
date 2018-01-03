@@ -39,12 +39,17 @@ Partial Class frmContributors
         Me.Label4 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.P1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'P1
@@ -218,19 +223,66 @@ Partial Class frmContributors
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(479, 291)
+        Me.Button1.Location = New System.Drawing.Point(479, 384)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(124, 30)
         Me.Button1.TabIndex = 12
         Me.Button1.Text = "Close"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.LinkLabel4)
+        Me.Panel3.Controls.Add(Me.Label7)
+        Me.Panel3.Controls.Add(Me.Label8)
+        Me.Panel3.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Panel3.Location = New System.Drawing.Point(12, 291)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(591, 87)
+        Me.Panel3.TabIndex = 13
+        '
+        'LinkLabel4
+        '
+        Me.LinkLabel4.AutoSize = True
+        Me.LinkLabel4.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LinkLabel4.Location = New System.Drawing.Point(403, 69)
+        Me.LinkLabel4.Name = "LinkLabel4"
+        Me.LinkLabel4.Size = New System.Drawing.Size(181, 13)
+        Me.LinkLabel4.TabIndex = 6
+        Me.LinkLabel4.TabStop = True
+        Me.LinkLabel4.Text = "https://www.advancedinstaller.com/"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(89, 27)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(416, 32)
+        Me.Label7.TabIndex = 5
+        Me.Label7.Text = "Advanced Installer is a Windows installer authoring tool for installing, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "updati" &
+    "ng, and configuring your products safely, securely, and reliably."
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Rockwell", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(88, 3)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(189, 23)
+        Me.Label8.TabIndex = 4
+        Me.Label8.Text = "Advanced Installer"
+        '
         'frmContributors
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(616, 331)
+        Me.ClientSize = New System.Drawing.Size(616, 423)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -250,6 +302,8 @@ Partial Class frmContributors
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -270,4 +324,8 @@ Partial Class frmContributors
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents LinkLabel2 As LinkLabel
     Friend WithEvents LinkLabel3 As LinkLabel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents LinkLabel4 As LinkLabel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
 End Class

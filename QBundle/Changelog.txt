@@ -3,6 +3,9 @@
 - Removed
 ~dev edition
 
+Hash in powershell
+Get-FileHash <filename> -Algorithm SHA256 | Format-List
+
 Known problems:
 
 To Be done:
@@ -26,6 +29,7 @@ Iconify(?)
 * Ability to change connectionstring for databases.
 * multiple minor internal changes.
 * Burstneon repo is no longer in zip format
+* Small change in update handling and visibility
 
 1.6
 * Added ability to resume plotfile.

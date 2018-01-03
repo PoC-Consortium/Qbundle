@@ -74,8 +74,8 @@ Partial Class frmUpdate
         'lblStatus
         '
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(153, 17)
-        Me.lblStatus.Text = "Getting version information"
+        Me.lblStatus.Size = New System.Drawing.Size(12, 17)
+        Me.lblStatus.Text = "-"
         '
         'GroupBox2
         '
