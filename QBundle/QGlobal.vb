@@ -29,6 +29,14 @@
         Friend Export As String
         Friend Import As String
     End Structure
+    Friend Structure strucDBInfo
+        Friend Name As String
+        Friend DbId As Integer
+        Friend ConnString As String
+        Friend Username As String
+        Friend Pass As String
+    End Structure
+    Friend Shared Dbinfo() As strucDBInfo
     Friend Shared WalletLaunchString As strucWalletLaunch
 
     Public Enum DbType As Integer
@@ -91,7 +99,7 @@
         InitPools()
         InitOnlineWallets()
         InitCPUInstructions()
-
+        SetDefaultDbinfo()
     End Sub
     Private Shared Sub InitPools()
 
@@ -237,6 +245,38 @@
 
         Wallets(6).Name = "Burst-team Wallet 5"
         Wallets(6).Address = "https://wallet5.burst-team.us:2083"
+
+    End Sub
+
+
+    Private Shared Sub SetDefaultDbinfo()
+
+        ReDim Dbinfo(3)
+
+        Dbinfo(0).Name = "H2"
+        Dbinfo(0).DbId = DbType.H2
+        Dbinfo(0).ConnString = "jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False"
+        Dbinfo(0).Username = "sa"
+        Dbinfo(0).Pass = "sa"
+
+        Dbinfo(1).Name = "FireBird"
+        Dbinfo(1).DbId = DbType.FireBird
+        Dbinfo(1).ConnString = "jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db"
+        Dbinfo(1).Username = "sa"
+        Dbinfo(1).Pass = "sa"
+
+        Dbinfo(2).Name = "MariaDb"
+        Dbinfo(2).DbId = DbType.pMariaDB
+        Dbinfo(2).ConnString = "jdbc:mariadb://localhost:3306/burstwallet"
+        Dbinfo(2).Username = "burstwallet"
+        Dbinfo(2).Pass = "burstwallet"
+
+        Dbinfo(3).Name = "MariaDb"
+        Dbinfo(3).DbId = DbType.MariaDB
+        Dbinfo(3).ConnString = "jdbc:mariadb://localhost:3306/burstwallet"
+        Dbinfo(3).Username = "burstwallet"
+        Dbinfo(3).Pass = "burstwallet"
+
 
     End Sub
 End Class

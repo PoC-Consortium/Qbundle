@@ -69,13 +69,10 @@ Partial Class frmSettings
         Me.Button3 = New System.Windows.Forms.Button()
         Me.pnlMaria = New System.Windows.Forms.Panel()
         Me.pnlDbSettings = New System.Windows.Forms.Panel()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.txtDbPass = New System.Windows.Forms.TextBox()
         Me.txtDbUser = New System.Windows.Forms.TextBox()
-        Me.txtDbName = New System.Windows.Forms.TextBox()
         Me.txtDbServer = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -597,35 +594,22 @@ Partial Class frmSettings
         '
         'pnlDbSettings
         '
-        Me.pnlDbSettings.Controls.Add(Me.Label19)
         Me.pnlDbSettings.Controls.Add(Me.Label8)
         Me.pnlDbSettings.Controls.Add(Me.Label7)
-        Me.pnlDbSettings.Controls.Add(Me.Label6)
         Me.pnlDbSettings.Controls.Add(Me.txtDbPass)
         Me.pnlDbSettings.Controls.Add(Me.txtDbUser)
-        Me.pnlDbSettings.Controls.Add(Me.txtDbName)
         Me.pnlDbSettings.Controls.Add(Me.txtDbServer)
         Me.pnlDbSettings.Controls.Add(Me.Label5)
         Me.pnlDbSettings.Enabled = False
         Me.pnlDbSettings.Location = New System.Drawing.Point(3, 29)
         Me.pnlDbSettings.Name = "pnlDbSettings"
-        Me.pnlDbSettings.Size = New System.Drawing.Size(411, 126)
+        Me.pnlDbSettings.Size = New System.Drawing.Size(574, 126)
         Me.pnlDbSettings.TabIndex = 10
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(87, 92)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(132, 13)
-        Me.Label19.TabIndex = 9
-        Me.Label19.Text = "note: Database must exist."
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(5, 72)
+        Me.Label8.Location = New System.Drawing.Point(5, 51)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(56, 13)
         Me.Label8.TabIndex = 7
@@ -634,45 +618,29 @@ Partial Class frmSettings
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(5, 51)
+        Me.Label7.Location = New System.Drawing.Point(5, 30)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(58, 13)
         Me.Label7.TabIndex = 6
         Me.Label7.Text = "Username:"
         '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(5, 30)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(56, 13)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Database:"
-        '
         'txtDbPass
         '
-        Me.txtDbPass.Location = New System.Drawing.Point(90, 69)
+        Me.txtDbPass.Location = New System.Drawing.Point(100, 48)
         Me.txtDbPass.Name = "txtDbPass"
         Me.txtDbPass.Size = New System.Drawing.Size(303, 20)
         Me.txtDbPass.TabIndex = 4
         '
         'txtDbUser
         '
-        Me.txtDbUser.Location = New System.Drawing.Point(90, 48)
+        Me.txtDbUser.Location = New System.Drawing.Point(100, 27)
         Me.txtDbUser.Name = "txtDbUser"
         Me.txtDbUser.Size = New System.Drawing.Size(303, 20)
         Me.txtDbUser.TabIndex = 3
         '
-        'txtDbName
-        '
-        Me.txtDbName.Location = New System.Drawing.Point(90, 27)
-        Me.txtDbName.Name = "txtDbName"
-        Me.txtDbName.Size = New System.Drawing.Size(303, 20)
-        Me.txtDbName.TabIndex = 2
-        '
         'txtDbServer
         '
-        Me.txtDbServer.Location = New System.Drawing.Point(90, 6)
+        Me.txtDbServer.Location = New System.Drawing.Point(100, 6)
         Me.txtDbServer.Name = "txtDbServer"
         Me.txtDbServer.Size = New System.Drawing.Size(303, 20)
         Me.txtDbServer.TabIndex = 1
@@ -682,9 +650,9 @@ Partial Class frmSettings
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(5, 9)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(79, 13)
+        Me.Label5.Size = New System.Drawing.Size(92, 13)
         Me.Label5.TabIndex = 0
-        Me.Label5.Text = "ServerAddress:"
+        Me.Label5.Text = "Connection string:"
         '
         'Label4
         '
@@ -692,9 +660,9 @@ Partial Class frmSettings
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(8, 10)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(217, 16)
+        Me.Label4.Size = New System.Drawing.Size(143, 16)
         Me.Label4.TabIndex = 1
-        Me.Label4.Text = "Own MariaDB / MySql Settings"
+        Me.Label4.Text = "Connection settings"
         '
         'Label2
         '
@@ -986,10 +954,8 @@ Partial Class frmSettings
     Friend WithEvents pnlDbSettings As Panel
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents txtDbPass As TextBox
     Friend WithEvents txtDbUser As TextBox
-    Friend WithEvents txtDbName As TextBox
     Friend WithEvents txtDbServer As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Button3 As Button
@@ -1004,7 +970,6 @@ Partial Class frmSettings
     Friend WithEvents lblDb As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents lblRecommendedCPU As Label
-    Friend WithEvents Label19 As Label
     Friend WithEvents General As TabPage
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label10 As Label

@@ -125,7 +125,7 @@ Public Class frmSettings
 
         Q.settings.ConnectFrom = buffer
         Q.settings.DbServer = txtDbServer.Text
-        Q.settings.DbName = txtDbName.Text
+
         Q.settings.DbUser = txtDbUser.Text
         Q.settings.DbPass = txtDbPass.Text
 
@@ -145,13 +145,9 @@ Public Class frmSettings
     Private Sub LoadSettings()
         If Not Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then rJava0.Enabled = False
         If Not Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then rJava1.Enabled = False
-        If Q.settings.DbType = QGlobal.DbType.MariaDB Then
-            pnlMaria.Enabled = True
-            pnlDbSettings.Enabled = True
-        Else
-            pnlMaria.Enabled = True
-            pnlDbSettings.Enabled = False
-        End If
+
+        pnlMaria.Enabled = True
+        pnlDbSettings.Enabled = True
         lblDb.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
 
         chkCheckForUpdates.Checked = Q.settings.CheckForUpdates
@@ -163,11 +159,9 @@ Public Class frmSettings
         chkMinToTray.Checked = Q.settings.MinToTray
         chkCoinmarket.Checked = Q.settings.GetCoinMarket
         chkAutoStart.Checked = Q.settings.AutoStart
-
         chkAutoIP.Checked = Q.settings.CheckForUpdates
         chkDynPlatform.Checked = Q.settings.DynPlatform
         txtDbServer.Text = Q.settings.DbServer
-        txtDbName.Text = Q.settings.DbName
         txtDbUser.Text = Q.settings.DbUser
         txtDbPass.Text = Q.settings.DbPass
         ChangeJavaType(Q.settings.JavaType)

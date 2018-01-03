@@ -68,6 +68,23 @@ Friend Class Generic
                         If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
                     End Try
 
+                    Select Case Q.settings.DbType
+                        Case QGlobal.DbType.FireBird
+                            Q.settings.DbServer = "jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db"
+                            Q.settings.DbUser = "sa"
+                            Q.settings.DbPass = "sa"
+                        Case QGlobal.DbType.pMariaDB
+                            Q.settings.DbServer = "jdbc:mariadb://localhost:3306/burstwallet"
+                            Q.settings.DbUser = "burstwallet"
+                            Q.settings.DbPass = "burstwallet"
+                        Case QGlobal.DbType.MariaDB
+                            Q.settings.DbServer = "jdbc:mariadb://" & Q.settings.DbServer & "/" & Q.settings.DbName
+                        Case QGlobal.DbType.H2
+                            Q.settings.DbServer = "jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False"
+                            Q.settings.DbUser = "sa"
+                            Q.settings.DbPass = "sa"
+                    End Select
+                    Q.settings.SaveSettings()
 
             End Select
             OldVer += 1
@@ -148,6 +165,12 @@ Friend Class Generic
                 Data &= "brs.dbUsername = sa" & vbCrLf
                 Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
         End Select
+
+        Data &= "brs.dbUrl = " & Q.settings.DbServer & vbCrLf
+        Data &= "brs.dbUsername = " & Q.settings.DbUser & vbCrLf
+        Data &= "brs.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
+
+
 
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
@@ -230,25 +253,20 @@ Friend Class Generic
                     If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
-                Data &= "nxt.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
-                Data &= "nxt.dbUsername = sa" & vbCrLf
-                Data &= "nxt.dbPassword = sa" & vbCrLf & vbCrLf
+
             Case QGlobal.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
-                Data &= "nxt.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
-                Data &= "nxt.dbUsername = burstwallet" & vbCrLf
-                Data &= "nxt.dbPassword = burstwallet" & vbCrLf & vbCrLf
             Case QGlobal.DbType.MariaDB
                 Data &= "#Using installed MariaDb" & vbCrLf
-                Data &= "nxt.dbUrl=jdbc:mariadb://" & Q.settings.DbServer & "/" & Q.settings.DbName & vbCrLf
-                Data &= "nxt.dbUsername = " & Q.settings.DbUser & vbCrLf
-                Data &= "nxt.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
             Case QGlobal.DbType.H2
                 Data &= "#Using H2" & vbCrLf
-                Data &= "nxt.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
-                Data &= "nxt.dbUsername = sa" & vbCrLf
-                Data &= "nxt.dbPassword = sa" & vbCrLf & vbCrLf
         End Select
+
+        Data &= "nxt.dbUrl = " & Q.settings.DbServer & vbCrLf
+        Data &= "nxt.dbUsername = " & Q.settings.DbUser & vbCrLf
+        Data &= "nxt.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
+
+
 
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf

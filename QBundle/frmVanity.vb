@@ -51,7 +51,7 @@ Public Class frmVanity
     Private Sub frmVanity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         running = False
         LockObj = New Object
-        Exit Sub
+
         nrThreads.Maximum = Environment.ProcessorCount
 
         Select Case Environment.ProcessorCount
@@ -299,30 +299,7 @@ Public Class frmVanity
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-
-        Tested = 0
-        counter = 0
-        lastval = 0
-        AddressToFind = txtFind1.Text & "-" & txtFind2.Text & "-" & txtFind3.Text & "-" & txtFind4.Text
-        AddressToFind = Replace(AddressToFind, "@", ".")
-        NrofChars = CInt(nrPass.Value)
-        Dim trda As Thread
-        trda = New Thread(AddressOf TestParalel)
-        trda.Priority = ThreadPriority.BelowNormal
-        trda.IsBackground = True
-
-        trda.Start()
-        running = True
-
-        btnStart.Text = "Stop"
-        tmr.Enabled = True
-
-
-
-
-    End Sub
 
     Private Sub TestParalel()
 

@@ -290,10 +290,10 @@
         Q.settings.GetCoinMarket = chkUpdates.Checked
         Q.settings.NTPCheck = chkUpdates.Checked
 
-        Q.settings.DbName = txtDbName.Text
-        Q.settings.DbPass = txtDbPass.Text
-        Q.settings.DbUser = txtDbUser.Text
-        Q.settings.DbServer = txtDbAddress.Text
+        Q.settings.DbName = QGlobal.Dbinfo(0).Name
+        Q.settings.DbPass = QGlobal.Dbinfo(0).Pass
+        Q.settings.DbUser = QGlobal.Dbinfo(0).Username
+        Q.settings.DbServer = QGlobal.Dbinfo(0).ConnString
         Q.settings.FirstRun = False
 
 

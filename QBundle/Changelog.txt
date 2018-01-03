@@ -7,13 +7,10 @@ Known problems:
 
 To Be done:
 pipeclient+server implementation in service
-
 Make More data Updatabable. Like online wallets and pool lists.
 Make plott remove to support multiple removals
 minimize to tray on exit ?
 Iconify(?)
-Be able to do db settings for H2.
-Logfile for plotter and miners. Catch console (?) or add logging 
 
 
 ~1.7
@@ -22,10 +19,10 @@ Accounts.xml is now correctly spelled.
 NTP checks should no longer cause hangs
 Qbundle Installer will from now on be provided.
 Login account now shows * instad of cleartext pin
-Account manager now shows more info about accounts.
+Account manager can now show more info about accounts.
 Vanity address generator added.
 Setting to disable direct login from Account manager accounts.
-
+Ability to change connectionstring for databases.
 
 1.6
 * Added ability to resume plotfile.

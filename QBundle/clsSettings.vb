@@ -11,7 +11,7 @@
     Private _AutoStart As Boolean
     'DB
     Private _DbType As Integer
-    Private _DbServer As String
+    Private _DbServer As String 'connectionstring from now on
     Private _DbUser As String
     Private _DbName As String
     Private _DbPass As String
