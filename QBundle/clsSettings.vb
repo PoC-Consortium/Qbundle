@@ -365,13 +365,26 @@
     End Sub
 
     Friend Sub LoadSettings()
+
         Try
+            Dim param As String = ""
+            Dim Cell() As String = Nothing
             If IO.File.Exists(QGlobal.AppDir & "\BWL.ini") Then
                 Dim lines() As String = IO.File.ReadAllLines(QGlobal.AppDir & "\BWL.ini")
                 For Each line As String In lines 'lets populate
                     Try
-                        Dim Cell() As String = Split(line, "=")
-                        CallByName(Me, Cell(0), CallType.Set, Cell(1))
+                        If line.Contains("=") Then
+                            Cell = Split(line, "=")
+                            If UBound(Cell) > 0 Then
+                                param = Cell(1)
+                                If UBound(Cell) > 1 Then
+                                    For t As Integer = 2 To UBound(Cell)
+                                        param &= "=" & Cell(t)
+                                    Next
+                                End If
+                                CallByName(Me, Cell(0), CallType.Set, param)
+                            End If
+                        End If
                     Catch ex As Exception
                     End Try
                 Next

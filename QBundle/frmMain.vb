@@ -214,7 +214,9 @@
                 ShutdownWallet.Interval = 100
                 ShutdownWallet.Enabled = True
                 ShutdownWallet.Start()
+
                 StopWallet()
+                frmShutdown.Show()
                 Me.Hide()
                 Exit Sub
             End If

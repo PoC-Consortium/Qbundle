@@ -13,16 +13,19 @@ minimize to tray on exit ?
 Iconify(?)
 
 
+
 ~1.7
-Corrected errors in predefined pool list
-Accounts.xml is now correctly spelled.
-NTP checks should no longer cause hangs
-Qbundle Installer will from now on be provided.
-Login account now shows * instad of cleartext pin
-Account manager can now show more info about accounts.
-Vanity address generator added.
-Setting to disable direct login from Account manager accounts.
-Ability to change connectionstring for databases.
+* Corrected errors in predefined pool list
+* Accounts.xml is now correctly spelled.
+* NTP checks should no longer cause hangs
++ Qbundle Installer will from now on be provided.
+* Login account now shows * instad of cleartext pin
+* Account manager can now show more info about accounts.
++ Vanity address generator added.
++ Setting to disable direct login from Account manager accounts.
+* Ability to change connectionstring for databases.
+* multiple minor internal changes.
+* Burstneon repo is no longer in zip format
 
 1.6
 * Added ability to resume plotfile.

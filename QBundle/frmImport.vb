@@ -20,7 +20,7 @@
             Case QGlobal.DbType.H2
                 ReDim RepoDBUrls(1)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
-                RepoDBUrls(1) = "https://burstneon-bc.ddns.net/neonDb.zip"
+                RepoDBUrls(1) = "https://burstneon-bc.ddns.net/burst.mv.db"
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.Items.Add("Burstneon Block Catcher")
                 cmbRepo.SelectedIndex = 1
@@ -149,26 +149,26 @@
         Dim S As frmDownloadExtract
         S = New frmDownloadExtract
         S.Url = Url
-        S.Unzip = True
+        S.Unzip = False
         Me.Hide()
         If S.ShowDialog = DialogResult.OK Then
             Me.Show()
             Try
                 If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then
-                    IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url))
+                    '     IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
                 End If
             Catch ex As Exception
                 If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try
             Try
-                If IO.File.Exists(QGlobal.BaseDir & "\burst_db\burst.mv.db") Then
-                    IO.File.Delete(QGlobal.BaseDir & "\burst_db\burst.mv.db")
+                If IO.File.Exists(QGlobal.BaseDir & "burst_db\burst.mv.db") Then
+                    IO.File.Delete(QGlobal.BaseDir & "burst_db\burst.mv.db")
                 End If
             Catch ex As Exception
                 If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try
             Try
-                IO.File.Move(QGlobal.BaseDir & "\burst.mv.db", QGlobal.BaseDir & "\burst_db\burst.mv.db")
+                IO.File.Move(QGlobal.BaseDir & "burst.mv.db", QGlobal.BaseDir & "burst_db\burst.mv.db")
             Catch ex As Exception
                 If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try
