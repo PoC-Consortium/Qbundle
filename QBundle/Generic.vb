@@ -85,7 +85,23 @@ Friend Class Generic
                             Q.settings.DbPass = "sa"
                     End Select
                     Q.settings.SaveSettings()
-
+                Case 17 '  from 17-18
+                    'must check settings
+                    Select Case Q.settings.DbType
+                        Case QGlobal.DbType.FireBird
+                            Q.settings.DbServer = "jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db"
+                            Q.settings.DbUser = "sa"
+                            Q.settings.DbPass = "sa"
+                        Case QGlobal.DbType.pMariaDB
+                            Q.settings.DbServer = "jdbc:mariadb://localhost:3306/burstwallet"
+                            Q.settings.DbUser = "burstwallet"
+                            Q.settings.DbPass = "burstwallet"
+                        Case QGlobal.DbType.H2
+                            Q.settings.DbServer = "jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False"
+                            Q.settings.DbUser = "sa"
+                            Q.settings.DbPass = "sa"
+                    End Select
+                    Q.settings.SaveSettings()
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do

@@ -16,7 +16,8 @@ minimize to tray on exit ?
 Iconify(?)
 
 ~1.8
-
+* Fixed Connectionstring for change database
+* minor information changes.
 
 
 ~1.7

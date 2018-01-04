@@ -152,8 +152,6 @@
 
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
         Me.cmImport.Show(Me.btnImport, Me.btnImport.PointToClient(Cursor.Position))
-
-
     End Sub
 
     Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click

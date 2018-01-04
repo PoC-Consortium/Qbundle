@@ -644,7 +644,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Qbundle v1.7 | Burstcoin Wallet v1.3.6cg "
+        Me.Text = "Qbundle v1.8 | Burstcoin Wallet v1.3.6cg "
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)

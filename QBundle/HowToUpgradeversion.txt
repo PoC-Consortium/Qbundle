@@ -1,4 +1,4 @@
 ﻿1. change assembly version.
-2. change var _upgradrev in settings to same version without dots.
+2. change var _upgradrev in settings to same version without dots. in settings
 3. add a case in Generic->CheckUpgrade with same version as _upgraderev -1
 4. Change frmMain title
