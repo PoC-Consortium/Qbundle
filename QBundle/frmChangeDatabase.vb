@@ -156,8 +156,8 @@
             Me.Close()
             Exit Sub
         End If
-        If OP = 0 Then
 
+        If OP = 0 Then
             OldDB = Q.settings.DbType
             If frmMain.Running Then
                 If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
@@ -183,10 +183,18 @@
             End If
         Else
             Q.settings.DbType = SelDB
-            Q.settings.DbName = txtDbName.Text
-            Q.settings.DbPass = txtDbPass.Text
-            Q.settings.DbUser = txtDbUser.Text
-            Q.settings.DbServer = txtDbAddress.Text
+            If SelDB = QGlobal.DbType.MariaDB Then
+                Q.settings.DbName = QGlobal.Dbinfo(SelDB).Name
+                Q.settings.DbPass = txtDbPass.Text
+                Q.settings.DbUser = txtDbUser.Text
+                Q.settings.DbServer = txtDbConnection.Text
+            Else
+                Q.settings.DbName = QGlobal.Dbinfo(SelDB).Name
+                Q.settings.DbPass = QGlobal.Dbinfo(SelDB).Pass
+                Q.settings.DbUser = QGlobal.Dbinfo(SelDB).Username
+                Q.settings.DbServer = QGlobal.Dbinfo(SelDB).ConnString
+            End If
+
             Q.settings.SaveSettings()
             QB.Generic.WriteWalletConfig()
             frmMain.SetDbInfo()
@@ -220,9 +228,6 @@
         Q.ProcHandler.StartProcess(Pset)
 
         Running = True
-
-
-
 
     End Sub
     Private Sub WaitTimer_tick() Handles WaitTimer.Tick
@@ -265,10 +270,17 @@
         End If
         If AppId = QGlobal.AppNames.Export Then
             Q.settings.DbType = SelDB
-            Q.settings.DbName = txtDbName.Text
-            Q.settings.DbPass = txtDbPass.Text
-            Q.settings.DbUser = txtDbUser.Text
-            Q.settings.DbServer = txtDbAddress.Text
+            If SelDB = QGlobal.DbType.MariaDB Then
+                Q.settings.DbName = QGlobal.Dbinfo(SelDB).Name
+                Q.settings.DbPass = txtDbPass.Text
+                Q.settings.DbUser = txtDbUser.Text
+                Q.settings.DbServer = txtDbConnection.Text
+            Else
+                Q.settings.DbName = QGlobal.Dbinfo(SelDB).Name
+                Q.settings.DbPass = QGlobal.Dbinfo(SelDB).Pass
+                Q.settings.DbUser = QGlobal.Dbinfo(SelDB).Username
+                Q.settings.DbServer = QGlobal.Dbinfo(SelDB).ConnString
+            End If
             Q.settings.SaveSettings()
             QB.Generic.WriteWalletConfig()
             StartImport()

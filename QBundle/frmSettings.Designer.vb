@@ -98,6 +98,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -594,6 +595,7 @@ Partial Class frmSettings
         '
         'pnlDbSettings
         '
+        Me.pnlDbSettings.Controls.Add(Me.Button7)
         Me.pnlDbSettings.Controls.Add(Me.Label8)
         Me.pnlDbSettings.Controls.Add(Me.Label7)
         Me.pnlDbSettings.Controls.Add(Me.txtDbPass)
@@ -905,6 +907,15 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(327, 74)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(76, 24)
+        Me.Button7.TabIndex = 8
+        Me.Button7.Text = "Set default"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1018,4 +1029,5 @@ Partial Class frmSettings
     Friend WithEvents chkCoinmarket As CheckBox
     Friend WithEvents chkAutoStart As CheckBox
     Friend WithEvents chkNoDirectLogin As CheckBox
+    Friend WithEvents Button7 As Button
 End Class

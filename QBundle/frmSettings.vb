@@ -285,6 +285,11 @@ Public Class frmSettings
 
     End Sub
 
-
-
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        If MsgBox("Are you sure you want to reset to default values?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Set default values") = MsgBoxResult.Yes Then
+            txtDbServer.Text = QGlobal.Dbinfo(Q.settings.DbType).ConnString
+            txtDbUser.Text = QGlobal.Dbinfo(Q.settings.DbType).Username
+            txtDbPass.Text = QGlobal.Dbinfo(Q.settings.DbType).Pass
+        End If
+    End Sub
 End Class

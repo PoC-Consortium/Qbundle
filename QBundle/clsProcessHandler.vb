@@ -62,7 +62,7 @@ Public Class clsProcessHandler
         'this is needed if working with mariadb portable. maybe for otherthings later aswell.
         Dim trda As Thread
         '  trda = New Thread(AddressOf StartPS)
-        trda = New Thread(DirectCast(Sub() StartPS(Pcls), ThreadStart))
+        trda = New Thread(AddressOf StartPS)
         trda.IsBackground = True
         trda.Start(Pcls)
         trda = Nothing
@@ -108,7 +108,7 @@ Public Class clsProcessHandler
     Public Sub StopProcessSquence(ByVal Appid() As Object)
         Dim trda As Thread
         '   trda = New Thread(New ParameterizedThreadStart(AddressOf StopPS))
-        trda = New Thread(DirectCast(Sub() StopPS(Appid), ThreadStart))
+        trda = New Thread(AddressOf StopPS)
         trda.IsBackground = True
         trda.Start(Appid)
         trda = Nothing

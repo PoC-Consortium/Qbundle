@@ -35,10 +35,8 @@ Partial Class frmChangeDatabase
         Me.txtDbPass = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtDbUser = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtDbName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtDbAddress = New System.Windows.Forms.TextBox()
+        Me.txtDbConnection = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.rDB4 = New System.Windows.Forms.RadioButton()
         Me.rDB3 = New System.Windows.Forms.RadioButton()
@@ -154,22 +152,20 @@ Partial Class frmChangeDatabase
         Me.pnlMariaSettings.Controls.Add(Me.txtDbPass)
         Me.pnlMariaSettings.Controls.Add(Me.Label17)
         Me.pnlMariaSettings.Controls.Add(Me.txtDbUser)
-        Me.pnlMariaSettings.Controls.Add(Me.Label16)
-        Me.pnlMariaSettings.Controls.Add(Me.txtDbName)
         Me.pnlMariaSettings.Controls.Add(Me.Label1)
-        Me.pnlMariaSettings.Controls.Add(Me.txtDbAddress)
+        Me.pnlMariaSettings.Controls.Add(Me.txtDbConnection)
         Me.pnlMariaSettings.Controls.Add(Me.Label13)
         Me.pnlMariaSettings.Enabled = False
         Me.pnlMariaSettings.Location = New System.Drawing.Point(32, 133)
         Me.pnlMariaSettings.Name = "pnlMariaSettings"
-        Me.pnlMariaSettings.Size = New System.Drawing.Size(387, 126)
+        Me.pnlMariaSettings.Size = New System.Drawing.Size(387, 100)
         Me.pnlMariaSettings.TabIndex = 15
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(99, 90)
+        Me.Label5.Location = New System.Drawing.Point(110, 69)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(132, 13)
         Me.Label5.TabIndex = 8
@@ -177,15 +173,16 @@ Partial Class frmChangeDatabase
         '
         'txtDbPass
         '
-        Me.txtDbPass.Location = New System.Drawing.Point(102, 67)
+        Me.txtDbPass.Location = New System.Drawing.Point(113, 46)
         Me.txtDbPass.Name = "txtDbPass"
-        Me.txtDbPass.Size = New System.Drawing.Size(270, 20)
+        Me.txtDbPass.Size = New System.Drawing.Size(259, 20)
         Me.txtDbPass.TabIndex = 7
+        Me.txtDbPass.Text = "burstwallet"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(15, 70)
+        Me.Label17.Location = New System.Drawing.Point(15, 49)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(56, 13)
         Me.Label17.TabIndex = 6
@@ -193,53 +190,37 @@ Partial Class frmChangeDatabase
         '
         'txtDbUser
         '
-        Me.txtDbUser.Location = New System.Drawing.Point(102, 46)
+        Me.txtDbUser.Location = New System.Drawing.Point(113, 25)
         Me.txtDbUser.Name = "txtDbUser"
-        Me.txtDbUser.Size = New System.Drawing.Size(270, 20)
+        Me.txtDbUser.Size = New System.Drawing.Size(259, 20)
         Me.txtDbUser.TabIndex = 5
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(15, 28)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(56, 13)
-        Me.Label16.TabIndex = 4
-        Me.Label16.Text = "Database:"
-        '
-        'txtDbName
-        '
-        Me.txtDbName.Location = New System.Drawing.Point(102, 25)
-        Me.txtDbName.Name = "txtDbName"
-        Me.txtDbName.Size = New System.Drawing.Size(270, 20)
-        Me.txtDbName.TabIndex = 3
-        Me.txtDbName.Text = "burstwallet"
+        Me.txtDbUser.Text = "burstwallet"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(15, 49)
+        Me.Label1.Location = New System.Drawing.Point(15, 28)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Username:"
         '
-        'txtDbAddress
+        'txtDbConnection
         '
-        Me.txtDbAddress.Location = New System.Drawing.Point(102, 4)
-        Me.txtDbAddress.Name = "txtDbAddress"
-        Me.txtDbAddress.Size = New System.Drawing.Size(270, 20)
-        Me.txtDbAddress.TabIndex = 1
-        Me.txtDbAddress.Text = "127.0.0.1:3306"
+        Me.txtDbConnection.Location = New System.Drawing.Point(113, 4)
+        Me.txtDbConnection.Name = "txtDbConnection"
+        Me.txtDbConnection.Size = New System.Drawing.Size(259, 20)
+        Me.txtDbConnection.TabIndex = 1
+        Me.txtDbConnection.Text = "jdbc:mariadb://localhost:3306/burstwallet"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(15, 7)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(81, 13)
+        Me.Label13.Size = New System.Drawing.Size(92, 13)
         Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Server address:"
+        Me.Label13.Text = "Connection string:"
         '
         'rDB4
         '
@@ -519,10 +500,8 @@ Partial Class frmChangeDatabase
     Friend WithEvents txtDbPass As TextBox
     Friend WithEvents Label17 As Label
     Friend WithEvents txtDbUser As TextBox
-    Friend WithEvents Label16 As Label
-    Friend WithEvents txtDbName As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtDbAddress As TextBox
+    Friend WithEvents txtDbConnection As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label4 As Label
