@@ -806,7 +806,7 @@
             Exit Sub
         End If
         If Running Then
-            MsgBox("You must stop the wallet before you can install it as a service.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Wrong DB version")
+            MsgBox("You must stop the wallet before you can install it as a service.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Stop wallet.")
             Exit Sub
         End If
         If Q.Service.InstallService() Then
@@ -1013,5 +1013,9 @@
     Private Sub VanityAddressGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VanityAddressGeneratorToolStripMenuItem.Click
         frmVanity.Show()
 
+    End Sub
+
+    Private Sub lblUpdateAvail2_Click(sender As Object, e As EventArgs) Handles lblUpdateAvail2.Click
+        frmUpdate.Show()
     End Sub
 End Class
