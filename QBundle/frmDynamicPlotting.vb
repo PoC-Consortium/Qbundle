@@ -160,14 +160,15 @@
             Exit Sub
         End If
 
-        If MsgBox("Are you sure you want to remove selected plot?" & vbCrLf & "It will not be deleted from disk.", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Remove plotfile") = MsgBoxResult.Yes Then
-            lstPlots.Items.RemoveAt(lstPlots.SelectedIndex)
+        If MsgBox("Are you sure you want to remove selected plot(s)?" & vbCrLf & "It will not be deleted from disk.", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Remove plotfile") = MsgBoxResult.Yes Then
             Q.settings.Plots = ""
-            For t As Integer = 0 To lstPlots.Items.Count - 1
-                Q.settings.Plots &= lstPlots.Items.Item(t).ToString & "|"
+            For i As Integer = 0 To lstPlots.Items.Count - 1
+                If Not lstPlots.GetSelected(i) = True Then
+                    Q.settings.Plots &= lstPlots.Items.Item(i).ToString & "|"
+                End If
             Next
             Q.settings.SaveSettings()
-
+            UpdatePlotList()
         End If
     End Sub
 
@@ -194,6 +195,30 @@
 
                 Q.settings.SaveSettings()
             End If
+        End If
+    End Sub
+    Private Sub lblSelectAll_Click(sender As Object, e As EventArgs) Handles lblSelectAll.Click
+        If lstPlots.Items.Count <= 0 Then Exit Sub
+        For i As Integer = 0 To lstPlots.Items.Count - 1
+            Me.lstPlots.SetSelected(i, True)
+        Next
+    End Sub
+
+    Private Sub lblDeselectAll_Click(sender As Object, e As EventArgs) Handles lblDeselectAll.Click
+        If lstPlots.Items.Count <= 0 Then Exit Sub
+        For i As Integer = 0 To lstPlots.Items.Count - 1
+            Me.lstPlots.SetSelected(i, False)
+        Next
+    End Sub
+    Private Sub UpdatePlotList()
+        lstPlots.Items.Clear()
+        If Q.settings.Plots <> "" Then
+            Dim buffer() As String = Split(Q.settings.Plots, "|")
+            For Each plot As String In buffer
+                If plot.Length > 1 Then
+                    lstPlots.Items.Add(plot)
+                End If
+            Next
         End If
     End Sub
 End Class

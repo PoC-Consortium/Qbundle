@@ -25,11 +25,15 @@ Partial Class frmMiner
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMiner))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblDeselectAll = New System.Windows.Forms.Label()
+        Me.lblSelectAll = New System.Windows.Forms.Label()
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.lstPlots = New System.Windows.Forms.ListBox()
         Me.btnPool = New System.Windows.Forms.Button()
         Me.grpMiner = New System.Windows.Forms.GroupBox()
+        Me.lblcputype = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.pnlPool = New System.Windows.Forms.Panel()
         Me.nrInfoPort = New System.Windows.Forms.NumericUpDown()
         Me.nrUpdatePort = New System.Windows.Forms.NumericUpDown()
@@ -61,8 +65,7 @@ Partial Class frmMiner
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrRemovePass = New System.Windows.Forms.Timer(Me.components)
-        Me.lblcputype = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
@@ -74,15 +77,40 @@ Partial Class frmMiner
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.lblDeselectAll)
+        Me.GroupBox1.Controls.Add(Me.lblSelectAll)
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
         Me.GroupBox1.Location = New System.Drawing.Point(18, 297)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(615, 84)
+        Me.GroupBox1.Size = New System.Drawing.Size(615, 96)
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
+        '
+        'lblDeselectAll
+        '
+        Me.lblDeselectAll.AutoSize = True
+        Me.lblDeselectAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDeselectAll.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblDeselectAll.Location = New System.Drawing.Point(63, 78)
+        Me.lblDeselectAll.Name = "lblDeselectAll"
+        Me.lblDeselectAll.Size = New System.Drawing.Size(62, 13)
+        Me.lblDeselectAll.TabIndex = 6
+        Me.lblDeselectAll.Text = "Deselect all"
+        '
+        'lblSelectAll
+        '
+        Me.lblSelectAll.AutoSize = True
+        Me.lblSelectAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblSelectAll.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblSelectAll.Location = New System.Drawing.Point(6, 78)
+        Me.lblSelectAll.Name = "lblSelectAll"
+        Me.lblSelectAll.Size = New System.Drawing.Size(50, 13)
+        Me.lblSelectAll.TabIndex = 5
+        Me.lblSelectAll.Text = "Select all"
         '
         'btnRemove
         '
@@ -107,6 +135,7 @@ Partial Class frmMiner
         Me.lstPlots.FormattingEnabled = True
         Me.lstPlots.Location = New System.Drawing.Point(6, 19)
         Me.lstPlots.Name = "lstPlots"
+        Me.lstPlots.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstPlots.Size = New System.Drawing.Size(499, 56)
         Me.lstPlots.TabIndex = 0
         '
@@ -139,6 +168,26 @@ Partial Class frmMiner
         Me.grpMiner.TabIndex = 32
         Me.grpMiner.TabStop = False
         Me.grpMiner.Text = "Miner settings"
+        '
+        'lblcputype
+        '
+        Me.lblcputype.AutoSize = True
+        Me.lblcputype.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblcputype.Location = New System.Drawing.Point(340, 263)
+        Me.lblcputype.Name = "lblcputype"
+        Me.lblcputype.Size = New System.Drawing.Size(30, 12)
+        Me.lblcputype.TabIndex = 54
+        Me.lblcputype.Text = "AVX2"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(273, 263)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(69, 12)
+        Me.Label20.TabIndex = 53
+        Me.Label20.Text = "CPU capability:"
         '
         'pnlPool
         '
@@ -423,32 +472,21 @@ Partial Class frmMiner
         '
         Me.tmrRemovePass.Interval = 3000
         '
-        'lblcputype
+        'Label12
         '
-        Me.lblcputype.AutoSize = True
-        Me.lblcputype.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblcputype.Location = New System.Drawing.Point(340, 263)
-        Me.lblcputype.Name = "lblcputype"
-        Me.lblcputype.Size = New System.Drawing.Size(30, 12)
-        Me.lblcputype.TabIndex = 54
-        Me.lblcputype.Text = "AVX2"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(273, 263)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(69, 12)
-        Me.Label20.TabIndex = 53
-        Me.Label20.Text = "CPU capability:"
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(266, 78)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(237, 13)
+        Me.Label12.TabIndex = 7
+        Me.Label12.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'frmMiner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(652, 393)
+        Me.ClientSize = New System.Drawing.Size(652, 409)
         Me.Controls.Add(Me.lblReward)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
@@ -463,6 +501,7 @@ Partial Class frmMiner
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Miner (Blago CPU Miner)"
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.grpMiner.ResumeLayout(False)
         Me.grpMiner.PerformLayout()
         Me.pnlPool.ResumeLayout(False)
@@ -515,4 +554,7 @@ Partial Class frmMiner
     Friend WithEvents tmrRemovePass As Timer
     Friend WithEvents lblcputype As Label
     Friend WithEvents Label20 As Label
+    Friend WithEvents lblDeselectAll As Label
+    Friend WithEvents lblSelectAll As Label
+    Friend WithEvents Label12 As Label
 End Class

@@ -11,14 +11,13 @@ Known problems:
 To Be done:
 pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
-Make plott remove to support multiple removals
 minimize to tray on exit ?
 Iconify(?)
 
 ~1.8
 * Fixed Connectionstring for change database
 * minor information changes.
-
+* Select / Deselect multiple plotfiles. Issue #4
 
 ~1.7
 * Corrected errors in predefined pool list

@@ -31,6 +31,8 @@ Partial Class frmPlotter
         Me.btnPath = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblDeselectAll = New System.Windows.Forms.Label()
+        Me.lblSelectAll = New System.Windows.Forms.Label()
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.lstPlots = New System.Windows.Forms.ListBox()
@@ -74,6 +76,7 @@ Partial Class frmPlotter
         Me.ActionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumePlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -99,7 +102,7 @@ Partial Class frmPlotter
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(16, 64)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(100, 13)
+        Me.Label3.Size = New System.Drawing.Size(126, 13)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Numeric account number"
         '
@@ -138,15 +141,40 @@ Partial Class frmPlotter
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label21)
+        Me.GroupBox1.Controls.Add(Me.lblDeselectAll)
+        Me.GroupBox1.Controls.Add(Me.lblSelectAll)
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 389)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(615, 84)
+        Me.GroupBox1.Size = New System.Drawing.Size(615, 100)
         Me.GroupBox1.TabIndex = 13
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
+        '
+        'lblDeselectAll
+        '
+        Me.lblDeselectAll.AutoSize = True
+        Me.lblDeselectAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDeselectAll.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblDeselectAll.Location = New System.Drawing.Point(60, 78)
+        Me.lblDeselectAll.Name = "lblDeselectAll"
+        Me.lblDeselectAll.Size = New System.Drawing.Size(62, 13)
+        Me.lblDeselectAll.TabIndex = 4
+        Me.lblDeselectAll.Text = "Deselect all"
+        '
+        'lblSelectAll
+        '
+        Me.lblSelectAll.AutoSize = True
+        Me.lblSelectAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblSelectAll.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblSelectAll.Location = New System.Drawing.Point(3, 78)
+        Me.lblSelectAll.Name = "lblSelectAll"
+        Me.lblSelectAll.Size = New System.Drawing.Size(50, 13)
+        Me.lblSelectAll.TabIndex = 3
+        Me.lblSelectAll.Text = "Select all"
         '
         'btnRemove
         '
@@ -171,6 +199,7 @@ Partial Class frmPlotter
         Me.lstPlots.FormattingEnabled = True
         Me.lstPlots.Location = New System.Drawing.Point(6, 19)
         Me.lstPlots.Name = "lstPlots"
+        Me.lstPlots.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstPlots.Size = New System.Drawing.Size(495, 56)
         Me.lstPlots.TabIndex = 0
         '
@@ -304,6 +333,7 @@ Partial Class frmPlotter
         '
         'HSSize
         '
+        Me.HSSize.Enabled = False
         Me.HSSize.Location = New System.Drawing.Point(17, 127)
         Me.HSSize.Maximum = 50000
         Me.HSSize.Minimum = 8
@@ -314,7 +344,6 @@ Partial Class frmPlotter
         Me.HSSize.TickFrequency = 8
         Me.HSSize.TickStyle = System.Windows.Forms.TickStyle.Both
         Me.HSSize.Value = 8
-        Me.HSSize.Enabled = False
         '
         'Label2
         '
@@ -527,7 +556,7 @@ Partial Class frmPlotter
         'CloseToolStripMenuItem
         '
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.CloseToolStripMenuItem.Text = "Close"
         '
         'ActionToolStripMenuItem
@@ -549,12 +578,21 @@ Partial Class frmPlotter
         Me.ResumePlottingToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.ResumePlottingToolStripMenuItem.Text = "Resume plotting"
         '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(264, 78)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(237, 13)
+        Me.Label21.TabIndex = 8
+        Me.Label21.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
+        '
         'frmPlotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(645, 482)
+        Me.ClientSize = New System.Drawing.Size(645, 494)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.lblcputype)
         Me.Controls.Add(Me.Label20)
@@ -580,6 +618,7 @@ Partial Class frmPlotter
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Plotter (Xplotter by Blago)"
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -646,4 +685,7 @@ Partial Class frmPlotter
     Friend WithEvents ActionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StartPlottingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ResumePlottingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblDeselectAll As Label
+    Friend WithEvents lblSelectAll As Label
+    Friend WithEvents Label21 As Label
 End Class

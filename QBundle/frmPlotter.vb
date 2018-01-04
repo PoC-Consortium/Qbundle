@@ -82,15 +82,8 @@ Public Class frmPlotter
                 nrThreads.Value = Environment.ProcessorCount - 1
         End Select
 
-        lstPlots.Items.Clear()
-        If Q.settings.Plots <> "" Then
-            Dim buffer() As String = Split(Q.settings.Plots, "|")
-            For Each plot As String In buffer
-                If plot.Length > 1 Then
-                    lstPlots.Items.Add(plot)
-                End If
-            Next
-        End If
+        UpdatePlotList()
+
 
         cmlAccounts.Items.Clear()
         Dim mnuitm As ToolStripMenuItem
@@ -121,6 +114,7 @@ Public Class frmPlotter
 
 
     End Sub
+
     Private Sub SelectAccountID(sender As Object, e As EventArgs)
 
         Dim mnuitm As ToolStripMenuItem = Nothing
@@ -353,14 +347,15 @@ Public Class frmPlotter
             Exit Sub
         End If
 
-        If MsgBox("Are you sure you want to remove selected plot?" & vbCrLf & "It will not be deleted from disk.", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Remove plotfile") = MsgBoxResult.Yes Then
-            lstPlots.Items.RemoveAt(lstPlots.SelectedIndex)
+        If MsgBox("Are you sure you want to remove selected plot(s)?" & vbCrLf & "It will not be deleted from disk.", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Remove plotfile") = MsgBoxResult.Yes Then
             Q.settings.Plots = ""
-            For t As Integer = 0 To lstPlots.Items.Count - 1
-                Q.settings.Plots &= lstPlots.Items.Item(t).ToString & "|"
+            For i As Integer = 0 To lstPlots.Items.Count - 1
+                If Not lstPlots.GetSelected(i) = True Then
+                    Q.settings.Plots &= lstPlots.Items.Item(i).ToString & "|"
+                End If
             Next
             Q.settings.SaveSettings()
-
+            UpdatePlotList()
         End If
 
         txtStartNonce.Text = CStr(GetStartNonce())
@@ -487,8 +482,31 @@ Public Class frmPlotter
 
     Private Sub txtPath_TextChanged(sender As Object, e As EventArgs) Handles txtPath.TextChanged
         ' Only enable the size selector if there is text in the path box'
-        HSSize.Enabled = txtPath.Text.Length > 0 
-    End Sub 
+        HSSize.Enabled = txtPath.Text.Length > 0
+    End Sub
 
+    Private Sub lblSelectAll_Click(sender As Object, e As EventArgs) Handles lblSelectAll.Click
+        If lstPlots.Items.Count <= 0 Then Exit Sub
+        For i As Integer = 0 To lstPlots.Items.Count - 1
+            Me.lstPlots.SetSelected(i, True)
+        Next
+    End Sub
 
+    Private Sub lblDeselectAll_Click(sender As Object, e As EventArgs) Handles lblDeselectAll.Click
+        If lstPlots.Items.Count <= 0 Then Exit Sub
+        For i As Integer = 0 To lstPlots.Items.Count - 1
+            Me.lstPlots.SetSelected(i, False)
+        Next
+    End Sub
+    Private Sub UpdatePlotList()
+        lstPlots.Items.Clear()
+        If Q.settings.Plots <> "" Then
+            Dim buffer() As String = Split(Q.settings.Plots, "|")
+            For Each plot As String In buffer
+                If plot.Length > 1 Then
+                    lstPlots.Items.Add(plot)
+                End If
+            Next
+        End If
+    End Sub
 End Class

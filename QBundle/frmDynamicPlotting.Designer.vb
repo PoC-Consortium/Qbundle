@@ -45,6 +45,8 @@ Partial Class frmDynamicPlotting
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblDeselectAll = New System.Windows.Forms.Label()
+        Me.lblSelectAll = New System.Windows.Forms.Label()
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.lstPlots = New System.Windows.Forms.ListBox()
@@ -52,6 +54,7 @@ Partial Class frmDynamicPlotting
         Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -192,7 +195,7 @@ Partial Class frmDynamicPlotting
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(6, 50)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(100, 13)
+        Me.Label3.Size = New System.Drawing.Size(126, 13)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Numeric account number"
         '
@@ -269,15 +272,40 @@ Partial Class frmDynamicPlotting
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.lblDeselectAll)
+        Me.GroupBox1.Controls.Add(Me.lblSelectAll)
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 342)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(623, 84)
+        Me.GroupBox1.Size = New System.Drawing.Size(623, 98)
         Me.GroupBox1.TabIndex = 38
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
+        '
+        'lblDeselectAll
+        '
+        Me.lblDeselectAll.AutoSize = True
+        Me.lblDeselectAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDeselectAll.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblDeselectAll.Location = New System.Drawing.Point(60, 78)
+        Me.lblDeselectAll.Name = "lblDeselectAll"
+        Me.lblDeselectAll.Size = New System.Drawing.Size(62, 13)
+        Me.lblDeselectAll.TabIndex = 6
+        Me.lblDeselectAll.Text = "Deselect all"
+        '
+        'lblSelectAll
+        '
+        Me.lblSelectAll.AutoSize = True
+        Me.lblSelectAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblSelectAll.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblSelectAll.Location = New System.Drawing.Point(3, 78)
+        Me.lblSelectAll.Name = "lblSelectAll"
+        Me.lblSelectAll.Size = New System.Drawing.Size(50, 13)
+        Me.lblSelectAll.TabIndex = 5
+        Me.lblSelectAll.Text = "Select all"
         '
         'btnRemove
         '
@@ -302,6 +330,7 @@ Partial Class frmDynamicPlotting
         Me.lstPlots.FormattingEnabled = True
         Me.lstPlots.Location = New System.Drawing.Point(6, 19)
         Me.lstPlots.Name = "lstPlots"
+        Me.lstPlots.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstPlots.Size = New System.Drawing.Size(519, 56)
         Me.lstPlots.TabIndex = 0
         '
@@ -315,26 +344,35 @@ Partial Class frmDynamicPlotting
         '
         Me.cmImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFileToolStripMenuItem, Me.ImportFolderToolStripMenuItem})
         Me.cmImport.Name = "cmImport"
-        Me.cmImport.Size = New System.Drawing.Size(153, 70)
+        Me.cmImport.Size = New System.Drawing.Size(147, 48)
         '
         'ImportFileToolStripMenuItem
         '
         Me.ImportFileToolStripMenuItem.Name = "ImportFileToolStripMenuItem"
-        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFileToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFileToolStripMenuItem.Text = "Import file"
         '
         'ImportFolderToolStripMenuItem
         '
         Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
-        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(288, 78)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(237, 13)
+        Me.Label12.TabIndex = 8
+        Me.Label12.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'frmDynamicPlotting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(647, 438)
+        Me.ClientSize = New System.Drawing.Size(647, 454)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label6)
@@ -353,6 +391,7 @@ Partial Class frmDynamicPlotting
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.cmImport.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -386,4 +425,7 @@ Partial Class frmDynamicPlotting
     Friend WithEvents cmImport As ContextMenuStrip
     Friend WithEvents ImportFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblDeselectAll As Label
+    Friend WithEvents lblSelectAll As Label
+    Friend WithEvents Label12 As Label
 End Class
