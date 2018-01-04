@@ -135,18 +135,6 @@
         Pools(4).BurstAddress = "BURST-LBQ2-XLPT-S2S8-64ZG5"
         Pools(4).DeadLine = "2592000"
 
-        Pools(5).Name = "pool.burstcoin.space"
-        Pools(5).Address = "pool.burstcoin.space"
-        Pools(5).Port = "8124"
-        Pools(5).BurstAddress = "BURST-SPAC-EWWF-CRX2-78Z6Z"
-        Pools(5).DeadLine = "2592000"
-
-        Pools(6).Name = "pool.burstcoin.ro"
-        Pools(6).Address = "pool.burstcoin.ro"
-        Pools(6).Port = "8080"
-        Pools(6).BurstAddress = "BURST-GG4B-34Y9-ZXGV-FNTNJ"
-        Pools(6).DeadLine = "7889231"
-
         Pools(7).Name = "falconburstpool.xyz"
         Pools(7).Address = "falconburstpool.xyz"
         Pools(7).Port = "8080"
@@ -164,6 +152,18 @@
         Pools(9).Port = "8124"
         Pools(9).BurstAddress = "BURST-YXZW-JH7M-QKR9-9PKBN"
         Pools(9).DeadLine = "6048000"
+        'might go away with dymaxion 
+        Pools(6).Name = "pool.burstcoin.ro"
+        Pools(6).Address = "pool.burstcoin.ro"
+        Pools(6).Port = "8080"
+        Pools(6).BurstAddress = "BURST-GG4B-34Y9-ZXGV-FNTNJ"
+        Pools(6).DeadLine = "7889231"
+
+        Pools(5).Name = "pool.burstcoin.space"
+        Pools(5).Address = "pool.burstcoin.space"
+        Pools(5).Port = "8124"
+        Pools(5).BurstAddress = "BURST-SPAC-EWWF-CRX2-78Z6Z"
+        Pools(5).DeadLine = "2592000"
 
         Pools(10).Name = "Burst Minig club"
         Pools(10).Address = "pool.burstmining.club"

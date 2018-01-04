@@ -473,59 +473,68 @@ Friend Class Generic
     Friend Shared Function SanityCheck() As Boolean
 
         Dim Ok As Boolean = True
-        Dim searcher As ManagementObjectSearcher
+
         Dim cmdline As String = ""
         Dim Msg As String = ""
         Dim res As MsgBoxResult = Nothing
         'Check if Java is running another burst.jar
-        searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='java.exe'")
-        For Each p As ManagementObject In searcher.[Get]()
-            cmdline = p("CommandLine").ToString
-            If cmdline.ToLower.Contains("burst.jar") Then
-                Msg = "Qbundle has detected that another burst wallet is running." & vbCrLf
-                Msg &= "If the other wallet use the same setting as this one. it will not work." & vbCrLf
-                Msg &= "Would you like to stop the other wallet?" & vbCrLf & vbCrLf
-                Msg &= "Yes = Stop the other wallet and start this one." & vbCrLf
-                Msg &= "No = Start this wallet despite the other wallet." & vbCrLf
-                Msg &= "Cancel = Do not start this one." & vbCrLf
-                res = MsgBox(Msg, MsgBoxStyle.Information Or MsgBoxStyle.YesNoCancel, "Another wallet is running")
-                If res = MsgBoxResult.Yes Then
-                    Dim proc As Process = Process.GetProcessById(Integer.Parse(p("ProcessId").ToString))
-                    proc.Kill()
-                    Threading.Thread.Sleep(1000)
-                ElseIf res = MsgBoxResult.No Then
-                    'do nothing 
-                Else
-                    Ok = False
-                End If
-            End If
-        Next
-
-        If Q.settings.DbType = QGlobal.DbType.pMariaDB And Ok = True Then
-            cmdline = ""
-            Msg = ""
-            searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='mysqld.exe'")
+        Try
+            Dim searcher As ManagementObjectSearcher
+            searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='java.exe'")
             For Each p As ManagementObject In searcher.[Get]()
-                ' cmdline = p("CommandLine")
-                Msg = "Qbundle has detected that another Mysql/MariaDB is running." & vbCrLf
-                Msg &= "If the other database use the same setting as this one. it will not work." & vbCrLf
-                Msg &= "Would you like to stop the other database?" & vbCrLf & vbCrLf
-                Msg &= "Yes = Stop the other database and start this one." & vbCrLf
-                Msg &= "No = Start this database despite the other database." & vbCrLf
-                Msg &= "Cancel = Do not start this one." & vbCrLf
-                res = MsgBox(Msg, MsgBoxStyle.Information Or MsgBoxStyle.YesNoCancel, "Another database is running")
-                If res = MsgBoxResult.Yes Then
-                    Dim proc As Process = Process.GetProcessById(Integer.Parse(p("ProcessId").ToString))
-                    proc.Kill()
-                    Threading.Thread.Sleep(1000)
-                ElseIf res = MsgBoxResult.No Then
-                    'do nothing 
-                Else
-                    Ok = False
+                cmdline = p("CommandLine").ToString
+                If cmdline.ToLower.Contains("burst.jar") Then
+                    Msg = "Qbundle has detected that another burst wallet is running." & vbCrLf
+                    Msg &= "If the other wallet use the same setting as this one. it will not work." & vbCrLf
+                    Msg &= "Would you like to stop the other wallet?" & vbCrLf & vbCrLf
+                    Msg &= "Yes = Stop the other wallet and start this one." & vbCrLf
+                    Msg &= "No = Start this wallet despite the other wallet." & vbCrLf
+                    Msg &= "Cancel = Do not start this one." & vbCrLf
+                    res = MsgBox(Msg, MsgBoxStyle.Information Or MsgBoxStyle.YesNoCancel, "Another wallet is running")
+                    If res = MsgBoxResult.Yes Then
+                        Dim proc As Process = Process.GetProcessById(Integer.Parse(p("ProcessId").ToString))
+                        proc.Kill()
+                        Threading.Thread.Sleep(1000)
+                    ElseIf res = MsgBoxResult.No Then
+                        'do nothing 
+                    Else
+                        Ok = False
+                    End If
                 End If
             Next
-        End If
 
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Try
+            If Q.settings.DbType = QGlobal.DbType.pMariaDB And Ok = True Then
+                cmdline = ""
+                Msg = ""
+                Dim searcher As ManagementObjectSearcher
+                searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='mysqld.exe'")
+                For Each p As ManagementObject In searcher.[Get]()
+                    ' cmdline = p("CommandLine")
+                    Msg = "Qbundle has detected that another Mysql/MariaDB is running." & vbCrLf
+                    Msg &= "If the other database use the same setting as this one. it will not work." & vbCrLf
+                    Msg &= "Would you like to stop the other database?" & vbCrLf & vbCrLf
+                    Msg &= "Yes = Stop the other database and start this one." & vbCrLf
+                    Msg &= "No = Start this database despite the other database." & vbCrLf
+                    Msg &= "Cancel = Do not start this one." & vbCrLf
+                    res = MsgBox(Msg, MsgBoxStyle.Information Or MsgBoxStyle.YesNoCancel, "Another database is running")
+                    If res = MsgBoxResult.Yes Then
+                        Dim proc As Process = Process.GetProcessById(Integer.Parse(p("ProcessId").ToString))
+                        proc.Kill()
+                        Threading.Thread.Sleep(1000)
+                    ElseIf res = MsgBoxResult.No Then
+                        'do nothing 
+                    Else
+                        Ok = False
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
         If Q.settings.NTPCheck Then
             Try
                 Dim ntpTime As Date = GetNTPTime("time.windows.com")
@@ -549,11 +558,9 @@ Friend Class Generic
                     Ok = False
                 End If
             Catch ex As Exception
-
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try
         End If
-
-
         Return Ok
     End Function
     Friend Shared Function IsProcessRunning(ByVal Name As String) As Boolean
