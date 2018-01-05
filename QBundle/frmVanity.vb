@@ -77,7 +77,7 @@ Public Class frmVanity
         ' Dim Crv As New Curve
 
         Dim chars() As String = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "X",
+         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
          "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
         Dim TotalChars As Integer = UBound(chars)
         Do
@@ -155,7 +155,7 @@ Public Class frmVanity
             Loop
         End If
         Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYX23456789@"
+        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
         result = ""
         For t As Integer = 0 To 3
             If Not chars.Contains(txt(t)) Then
@@ -180,7 +180,7 @@ Public Class frmVanity
             Loop
         End If
         Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYX23456789@"
+        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
         result = ""
         For t As Integer = 0 To 3
             If Not chars.Contains(txt(t)) Then
@@ -211,7 +211,7 @@ Public Class frmVanity
             Loop
         End If
         Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYX23456789@"
+        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
         result = ""
         For t As Integer = 0 To 3
             If Not chars.Contains(txt(t)) Then
@@ -243,7 +243,7 @@ Public Class frmVanity
             Loop
         End If
         Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYX23456789@"
+        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
         result = ""
         For t As Integer = 0 To 4
             If Not chars.Contains(txt(t)) Then
@@ -315,7 +315,7 @@ Public Class frmVanity
 
 
                                               Dim chars() As String = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "X",
+         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
          "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
                                               Dim TotalChars As Integer = UBound(chars)
 
