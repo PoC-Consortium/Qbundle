@@ -150,8 +150,10 @@ Public Class frmVanity
         Dim result As String = txtFind1.Text
         txtFind1.Text = sanitizeTxt(result, 4)
         txtFind1.Select(Index, 0)
-        If Index = 4 Then txtFind2.Focus()
-
+        If Index = 4 Then
+            txtFind2.Focus()
+            txtFind2.Select(0, 0)
+        End If
     End Sub
 
     Private Sub txtFind2_TextChanged(sender As Object, e As EventArgs) Handles txtFind2.TextChanged
@@ -159,8 +161,10 @@ Public Class frmVanity
         Dim result As String = txtFind2.Text
         txtFind2.Text = sanitizeTxt(result, 4)
         txtFind2.Select(Index, 0)
-        If Index = 4 Then txtFind3.Focus()
-        '  If Index = 0 Then txtFind1.Focus()
+        If Index = 4 Then
+            txtFind3.Focus()
+            txtFind3.Select(0, 0)
+        End If
     End Sub
     Private Sub txtFind2_TextKeyDown(sender As Object, e As KeyEventArgs) Handles txtFind2.KeyDown
         If txtFind2.SelectionStart = 0 Then
@@ -175,8 +179,10 @@ Public Class frmVanity
         Dim result As String = txtFind3.Text
         txtFind3.Text = sanitizeTxt(result, 4)
         txtFind3.Select(Index, 0)
-        If Index = 4 Then txtFind4.Focus()
-        '  If Index = 0 Then txtFind2.Focus()
+        If Index = 4 Then
+            txtFind4.Focus()
+            txtFind4.Select(0, 0)
+        End If
     End Sub
     Private Sub txtFind3_TextKeyDown(sender As Object, e As KeyEventArgs) Handles txtFind3.KeyDown
         If txtFind3.SelectionStart = 0 Then
@@ -191,8 +197,6 @@ Public Class frmVanity
         Dim result As String = txtFind4.Text
         txtFind4.Text = sanitizeTxt(result, 5)
         txtFind4.Select(Index, 0)
-        '  If Index = 0 Then txtFind3.Focus()
-
     End Sub
     Private Sub txtFind4_TextKeyDown(sender As Object, e As KeyEventArgs) Handles txtFind4.KeyDown
         If txtFind4.SelectionStart = 0 Then
