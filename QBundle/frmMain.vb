@@ -283,26 +283,39 @@
         Me.Close()
     End Sub
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
-        Dim s As New frmSettings
-        s.ShowDialog()
+        frmSettings.Show()
+        frmSettings.Focus()
+
     End Sub
     Private Sub ContributorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ContributorsToolStripMenuItem.Click
         frmContributors.Show()
+        frmContributors.Focus()
+
     End Sub
     Private Sub CheckForUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdatesToolStripMenuItem.Click
         frmUpdate.Show()
+        frmUpdate.Focus()
+
     End Sub
     Private Sub ChangeDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeDatabaseToolStripMenuItem.Click
         frmChangeDatabase.Show()
+        frmChangeDatabase.Focus()
+
     End Sub
     Private Sub ExportDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportDatabaseToolStripMenuItem.Click
         frmExportDb.Show()
+        frmExportDb.Focus()
+
     End Sub
     Private Sub ImportDatabaseToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ImportDatabaseToolStripMenuItem1.Click
         frmImport.Show()
+        frmImport.Focus()
+
     End Sub
     Private Sub DeveloperToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeveloperToolStripMenuItem.Click
         frmDeveloper.Show()
+        frmDeveloper.Focus()
+
     End Sub
 
 #End Region
@@ -786,18 +799,26 @@
 
     Private Sub AddAccountToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAccountToolStripMenuItem.Click
         frmAccounts.Show()
+        frmAccounts.Focus()
+
     End Sub
 
     Private Sub PlotterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotterToolStripMenuItem.Click
         frmPlotter.Show()
+        frmPlotter.Focus()
+
     End Sub
 
     Private Sub SetRewardassignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRewardassignmentToolStripMenuItem.Click
         frmSetrewardassignment.Show()
+        frmSetrewardassignment.Focus()
+
     End Sub
 
     Private Sub MinerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MinerToolStripMenuItem.Click
         frmMiner.Show()
+        frmMiner.Focus()
+
     End Sub
 
     Private Sub InstallAsAServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallAsAServiceToolStripMenuItem.Click
@@ -835,10 +856,14 @@
 
     Private Sub ViewConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewConsoleToolStripMenuItem.Click
         frmConsole.Show()
+        frmConsole.Focus()
+
     End Sub
 
     Private Sub DynamicPlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DynamicPlottingToolStripMenuItem.Click
         frmDynamicPlotting.Show()
+        frmDynamicPlotting.Focus()
+
     End Sub
 
 
@@ -972,6 +997,7 @@
 
     Private Sub RollbackChainpopoffToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RollbackChainpopoffToolStripMenuItem.Click
         frmPopOff.Show()
+        frmPopOff.Focus()
 
     End Sub
 
@@ -1012,6 +1038,7 @@
 
     Private Sub VanityAddressGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VanityAddressGeneratorToolStripMenuItem.Click
         frmVanity.Show()
+        frmVanity.Focus()
 
     End Sub
 

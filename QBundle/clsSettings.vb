@@ -42,6 +42,22 @@
     Private _DynPlotFree As Integer
     Private _DynPlotHide As Boolean
 
+    'minner
+    Private _SoloMining As Boolean
+    Private _MiningServer As String
+    Private _UpdateServer As String
+    Private _InfoServer As String
+    Private _MiningServerPort As Integer
+    Private _UpdateServerPort As Integer
+    Private _InfoServerPort As Integer
+    Private _Deadline As String
+    Private _Hddwakeup As Boolean
+    Private _ShowWinner As Boolean
+    Private _UseMultithread As Boolean
+
+
+
+
     'NRS
     Public Property AutoIp() As Boolean
         Get
@@ -321,6 +337,99 @@
         End Set
     End Property
 
+    Public Property Solomining() As Boolean
+        Get
+            Return _SoloMining
+        End Get
+        Set(ByVal value As Boolean)
+            _SoloMining = value
+        End Set
+    End Property
+    Public Property MiningServer() As String
+        Get
+            Return _MiningServer
+        End Get
+        Set(ByVal value As String)
+            _MiningServer = value
+        End Set
+    End Property
+    Public Property UpdateServer() As String
+        Get
+            Return _UpdateServer
+        End Get
+        Set(ByVal value As String)
+            _UpdateServer = value
+        End Set
+    End Property
+    Public Property InfoServer() As String
+        Get
+            Return _InfoServer
+        End Get
+        Set(ByVal value As String)
+            _InfoServer = value
+        End Set
+    End Property
+    Public Property Deadline() As String
+        Get
+            Return _Deadline
+        End Get
+        Set(ByVal value As String)
+            _Deadline = value
+        End Set
+    End Property
+    Public Property MiningServerPort() As Integer
+        Get
+            Return _MiningServerPort
+        End Get
+        Set(ByVal value As Integer)
+            _MiningServerPort = value
+        End Set
+    End Property
+    Public Property UpdateServerPort() As Integer
+        Get
+            Return _UpdateServerPort
+        End Get
+        Set(ByVal value As Integer)
+            _UpdateServerPort = value
+        End Set
+    End Property
+    Public Property InfoServerPort() As Integer
+        Get
+            Return _InfoServerPort
+        End Get
+        Set(ByVal value As Integer)
+            _InfoServerPort = value
+        End Set
+    End Property
+    Public Property Hddwakeup() As Boolean
+        Get
+            Return _Hddwakeup
+        End Get
+        Set(ByVal value As Boolean)
+            _Hddwakeup = value
+        End Set
+    End Property
+    Public Property ShowWinner() As Boolean
+        Get
+            Return _ShowWinner
+        End Get
+        Set(ByVal value As Boolean)
+            _ShowWinner = value
+        End Set
+    End Property
+    Public Property UseMultithread() As Boolean
+        Get
+            Return _UseMultithread
+        End Get
+        Set(ByVal value As Boolean)
+            _UseMultithread = value
+        End Set
+    End Property
+
+
+
+
+
     Friend Sub New()
         _autoip = False
         _WalletException = True
@@ -361,8 +470,54 @@
         _DynPlotFree = 10
         _DynPlotHide = True
 
+        _SoloMining = True
+        _MiningServer = ""
+        _UpdateServer = ""
+        _InfoServer = ""
+        _MiningServerPort = 8124
+        _UpdateServerPort = 8124
+        _InfoServerPort = 8124
+        _Deadline = "80000000"
+        _Hddwakeup = True
+        _ShowWinner = False
+        _UseMultithread = True
+
+
 
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     Friend Sub LoadSettings()
 

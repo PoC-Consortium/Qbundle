@@ -89,10 +89,15 @@
                 End Try
 
                 lblStatus.Text = "Downloading " & DownloadName
-                lblSpeed.Text = CStr(Speed) & "KiB / sec"
+                If Speed > 1024 Then
+                    lblSpeed.Text = CStr(Math.Round(Speed / 1024, 2)) & " MiB / sec"
+                Else
+                    lblSpeed.Text = CStr(Speed) & " KiB / sec"
+                End If
+
                 lblRead.Text = CStr(lRead) & " / " & CStr(lLength) & " bytes"
                 Try
-                    lblTime.Text = TimeLeft.Hours & ":" & TimeLeft.Minutes & ":" & TimeLeft.Seconds
+                    lblTime.Text = TimeLeft.Hours & "h " & TimeLeft.Minutes & "m " & TimeLeft.Seconds & "s"
                 Catch ex As Exception
                 End Try
             Case 1

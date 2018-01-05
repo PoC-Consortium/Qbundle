@@ -69,6 +69,7 @@ Partial Class frmSettings
         Me.Button3 = New System.Windows.Forms.Button()
         Me.pnlMaria = New System.Windows.Forms.Panel()
         Me.pnlDbSettings = New System.Windows.Forms.Panel()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtDbPass = New System.Windows.Forms.TextBox()
@@ -98,7 +99,6 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -608,6 +608,15 @@ Partial Class frmSettings
         Me.pnlDbSettings.Size = New System.Drawing.Size(574, 126)
         Me.pnlDbSettings.TabIndex = 10
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(327, 74)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(76, 24)
+        Me.Button7.TabIndex = 8
+        Me.Button7.Text = "Set default"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -906,15 +915,6 @@ Partial Class frmSettings
         Me.Label1.Size = New System.Drawing.Size(181, 25)
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(327, 74)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(76, 24)
-        Me.Button7.TabIndex = 8
-        Me.Button7.Text = "Set default"
-        Me.Button7.UseVisualStyleBackColor = True
         '
         'frmSettings
         '

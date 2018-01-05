@@ -107,7 +107,6 @@ Public Class clsProcessHandler
     End Sub
     Public Sub StopProcessSquence(ByVal Appid() As Object)
         Dim trda As Thread
-        '   trda = New Thread(New ParameterizedThreadStart(AddressOf StopPS))
         trda = New Thread(AddressOf StopPS)
         trda.IsBackground = True
         trda.Start(Appid)
@@ -189,9 +188,9 @@ Public Class clsProcessHandler
 
         Private Sub ShutDown(ByVal SigIntSleep As Integer, ByVal SigKillSleep As Integer)
             Try
-                AttachConsole(CUInt(p.Id))
+                AttachConsole(p.Id)
                 SetConsoleCtrlHandler(New ConsoleCtrlDelegate(AddressOf OnExit), True)
-                GenerateConsoleCtrlEvent(CShort(CtrlTypes.CTRL_C_EVENT), 0)
+                GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0)
                 p.WaitForExit(SigIntSleep) 'wait for exit before we release. if not we might get ourself terminated.
                 If Not p.HasExited Then
                     p.Kill()
@@ -204,7 +203,7 @@ Public Class clsProcessHandler
             Try
                 p.Kill() 'fixing no java cleanup.
             Catch ex As Exception
-
+                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try
         End Sub
         Private Function OnExit(CtrlType As CtrlTypes) As Boolean
@@ -258,7 +257,7 @@ Public Class clsProcessHandler
 
             If Not p.HasExited Then
                 RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Stopping, "")
-                ShutDown(25000, 10000) '25 sec and 10 sec
+                ShutDown(300000, 30000) '5min and 30 sec
             End If
             _state = QGlobal.ProcOp.Stopped
             RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Stopped, "")

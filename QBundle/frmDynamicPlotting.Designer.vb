@@ -45,6 +45,7 @@ Partial Class frmDynamicPlotting
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.lblDeselectAll = New System.Windows.Forms.Label()
         Me.lblSelectAll = New System.Windows.Forms.Label()
         Me.btnRemove = New System.Windows.Forms.Button()
@@ -54,7 +55,6 @@ Partial Class frmDynamicPlotting
         Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -285,6 +285,15 @@ Partial Class frmDynamicPlotting
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(288, 78)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(237, 13)
+        Me.Label12.TabIndex = 8
+        Me.Label12.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
+        '
         'lblDeselectAll
         '
         Me.lblDeselectAll.AutoSize = True
@@ -357,15 +366,6 @@ Partial Class frmDynamicPlotting
         Me.ImportFolderToolStripMenuItem.Name = "ImportFolderToolStripMenuItem"
         Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(288, 78)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(237, 13)
-        Me.Label12.TabIndex = 8
-        Me.Label12.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'frmDynamicPlotting
         '

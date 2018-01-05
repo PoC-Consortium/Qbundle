@@ -25,6 +25,7 @@ Partial Class frmMiner
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMiner))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.lblDeselectAll = New System.Windows.Forms.Label()
         Me.lblSelectAll = New System.Windows.Forms.Label()
         Me.btnRemove = New System.Windows.Forms.Button()
@@ -65,7 +66,6 @@ Partial Class frmMiner
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrRemovePass = New System.Windows.Forms.Timer(Me.components)
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.grpMiner.SuspendLayout()
         Me.pnlPool.SuspendLayout()
@@ -89,6 +89,15 @@ Partial Class frmMiner
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(266, 78)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(237, 13)
+        Me.Label12.TabIndex = 7
+        Me.Label12.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'lblDeselectAll
         '
@@ -471,15 +480,6 @@ Partial Class frmMiner
         'tmrRemovePass
         '
         Me.tmrRemovePass.Interval = 3000
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(266, 78)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(237, 13)
-        Me.Label12.TabIndex = 7
-        Me.Label12.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'frmMiner
         '

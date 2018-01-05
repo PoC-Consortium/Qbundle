@@ -13,13 +13,19 @@ pipeclient+server implementation in service
 Make More data Updatabable. Like online wallets and pool lists.
 minimize to tray on exit ?
 Iconify(?)
-Change to Chrome?
+Change to Chrome(?) CEFSharp but must check license before it is implemented.
+
 
 ~1.8
-* Fixed Connectionstring when changing database
-* minor information changes.
-* Select / Deselect multiple plotfiles. Issue #4
-* Better error handling in Sanitycheck.
+* Changing database should no longer cause issues.
+* Miner window now remembers your settings when you start to mine
+* Ability to Select / Deselect multiple plot files. Issue #4
+* Better error handling in Sanity check.
+* Pool list updated.
+* minor visual changes.
+* new logo for better visibility
+
+
 
 ~1.7
 * Corrected errors in predefined pool list

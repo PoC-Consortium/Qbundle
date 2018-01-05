@@ -299,7 +299,7 @@
     Private Sub Complete()
         frmMain.SetDbInfo() 'update frmmain as well
         Dim ElapsedTime As TimeSpan = Now.Subtract(StartTime)
-        lblStatus.Text = "Done, Conversion completed in " & ElapsedTime.Hours & ":" & ElapsedTime.Minutes & ":" & ElapsedTime.Seconds
+        lblStatus.Text = "Done, Conversion completed in " & ElapsedTime.Hours & "h " & ElapsedTime.Minutes & "m " & ElapsedTime.Seconds & "s"
         btnStart.Text = "Close"
         btnStart.Enabled = True
         pb1.Value = 100

@@ -31,6 +31,7 @@ Partial Class frmPlotter
         Me.btnPath = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.lblDeselectAll = New System.Windows.Forms.Label()
         Me.lblSelectAll = New System.Windows.Forms.Label()
         Me.btnRemove = New System.Windows.Forms.Button()
@@ -76,7 +77,6 @@ Partial Class frmPlotter
         Me.ActionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumePlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -153,6 +153,15 @@ Partial Class frmPlotter
         Me.GroupBox1.TabIndex = 13
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "My Plotfiles"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(264, 78)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(237, 13)
+        Me.Label21.TabIndex = 8
+        Me.Label21.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'lblDeselectAll
         '
@@ -577,15 +586,6 @@ Partial Class frmPlotter
         Me.ResumePlottingToolStripMenuItem.Name = "ResumePlottingToolStripMenuItem"
         Me.ResumePlottingToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.ResumePlottingToolStripMenuItem.Text = "Resume plotting"
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(264, 78)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(237, 13)
-        Me.Label21.TabIndex = 8
-        Me.Label21.Text = "Hold Ctrl or Shift to select/deselect multiple plots."
         '
         'frmPlotter
         '

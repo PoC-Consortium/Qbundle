@@ -36,6 +36,24 @@
         If QGlobal.CPUInstructions.SSE Then lblcputype.Text = "SSE"
         If QGlobal.CPUInstructions.AVX Then lblcputype.Text = "AVX"
         If QGlobal.CPUInstructions.AVX2 Then lblcputype.Text = "AVX2"
+
+        If Q.settings.Solomining Then
+            If rbSolo.Enabled = True Then rbSolo.Checked = True
+        Else
+            If rbPool.Enabled = True Then rbPool.Checked = True
+        End If
+
+        txtMiningServer.Text = Q.settings.MiningServer
+        txtUpdateServer.Text = Q.settings.UpdateServer
+        txtInfoServer.Text = Q.settings.InfoServer
+        nrMiningPort.Value = Q.settings.MiningServerPort
+        nrUpdatePort.Value = Q.settings.UpdateServerPort
+        nrInfoPort.Value = Q.settings.InfoServerPort
+        txtDeadLine.Text = Q.settings.Deadline
+        chkUseHDD.Checked = Q.settings.Hddwakeup
+        chkShowWinner.Checked = Q.settings.ShowWinner
+        chkUseBoost.Checked = Q.settings.UseMultithread
+
     End Sub
 
     Private Sub CheckRewardAssignment(ByVal WalletId As Integer)
@@ -326,6 +344,25 @@
             System.IO.File.WriteAllText(QGlobal.AppDir & "\BlagoMiner\passphrases.txt", PassPhrase)
         End If
         WriteConfig()
+
+        If rbSolo.Checked Then
+            Q.settings.Solomining = True
+        Else
+            Q.settings.Solomining = False
+        End If
+        Q.settings.MiningServer = txtMiningServer.Text
+        Q.settings.UpdateServer = txtUpdateServer.Text
+        Q.settings.InfoServer = txtInfoServer.Text
+        Q.settings.MiningServerPort = nrMiningPort.Value
+        Q.settings.UpdateServerPort = nrUpdatePort.Value
+        Q.settings.InfoServerPort = nrInfoPort.Value
+        Q.settings.Deadline = txtDeadLine.Text
+        Q.settings.Hddwakeup = chkUseHDD.Checked
+        Q.settings.ShowWinner = chkShowWinner.Checked
+        Q.settings.UseMultithread = chkUseBoost.Checked
+
+
+
         Try
             Dim p As Process = New Process
             p.StartInfo.WorkingDirectory = QGlobal.AppDir & "BlagoMiner"

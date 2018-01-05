@@ -311,7 +311,7 @@
 
         If IsAborted = False Then
             Dim ElapsedTime As TimeSpan = Now.Subtract(StartTime)
-            lblStatus.Text = "Done! Import completed in " & ElapsedTime.Hours & ":" & ElapsedTime.Minutes & ":" & ElapsedTime.Seconds
+            lblStatus.Text = "Done! Import completed in " & ElapsedTime.Hours & "h " & ElapsedTime.Minutes & "m " & ElapsedTime.Seconds & "s"
             SetSelect(SelectedType)
             btnStart.Text = "Close"
             btnStart.Enabled = True
@@ -371,7 +371,7 @@
 
                                 Dim ts As New TimeSpan(0, 0, CInt(Val(darray(8).Replace("seconds", ""))))
 
-                                lblStatus.Text = "Done! Export completed in " & ts.Hours & ":" & ts.Minutes & ":" & ts.Seconds
+                                lblStatus.Text = "Done! Export completed in " & ts.Hours & "h " & ts.Minutes & "m " & ts.Seconds & "s"
                             End If
                             'Compacting database - this may take a while
 

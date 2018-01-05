@@ -152,6 +152,13 @@
         Pools(9).Port = "8124"
         Pools(9).BurstAddress = "BURST-YXZW-JH7M-QKR9-9PKBN"
         Pools(9).DeadLine = "6048000"
+
+        Pools(10).Name = "burst.btfg.space"
+        Pools(10).Address = "burst.btfg.space"
+        Pools(10).Port = "8124"
+        Pools(10).BurstAddress = "BURST-6YBP-TDPA-27KD-9MQVX"
+        Pools(10).DeadLine = "169344000"
+
         'might go away with dymaxion 
         Pools(6).Name = "pool.burstcoin.ro"
         Pools(6).Address = "pool.burstcoin.ro"
@@ -165,11 +172,12 @@
         Pools(5).BurstAddress = "BURST-SPAC-EWWF-CRX2-78Z6Z"
         Pools(5).DeadLine = "2592000"
 
-        Pools(10).Name = "Burst Minig club"
-        Pools(10).Address = "pool.burstmining.club"
-        Pools(10).Port = "8124"
-        Pools(10).BurstAddress = "BURST-RNMB-9FJW-3BJW-F3Z3M"
-        Pools(10).DeadLine = "129600"
+        'Pools(10).Name = "Burst Minig club"
+        'Pools(10).Address = "pool.burstmining.club"
+        'Pools(10).Port = "8124"
+        'Pools(10).BurstAddress = "BURST-RNMB-9FJW-3BJW-F3Z3M"
+        'Pools(10).DeadLine = "129600"
+
 
 
 

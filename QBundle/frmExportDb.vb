@@ -148,7 +148,7 @@
     End Sub
     Private Sub Complete()
         Dim ElapsedTime As TimeSpan = Now.Subtract(StartTime)
-        lblStatus.Text = "Done! Export completed in " & ElapsedTime.Hours & ":" & ElapsedTime.Minutes & ":" & ElapsedTime.Seconds
+        lblStatus.Text = "Done! Export completed in " & ElapsedTime.Hours & "h " & ElapsedTime.Minutes & "m " & ElapsedTime.Seconds & "s"
         btnBrowse.Enabled = True
         txtFilename.Enabled = True
         btnStart.Text = "Close"

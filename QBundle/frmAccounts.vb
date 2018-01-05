@@ -37,7 +37,7 @@
             lstAccounts.Items.Add(newAcc.txtName.Text)
             Q.Accounts.SaveAccounts()
             frmMain.SetLoginMenu()
-            MsgBox("Please make sure that you write down the passphrase on paper or remember it. The passphrase is your only access to your account. If you loose it you will never be able to access your account again.", MsgBoxStyle.Information, "Save your passphrase")
+            MsgBox("Please make sure that you write down the passphrase on paper or remember it. The passphrase is your only access to your account. If you lose it you will never be able to access your account again.", MsgBoxStyle.Information, "Save your passphrase")
         End If
     End Sub
 
