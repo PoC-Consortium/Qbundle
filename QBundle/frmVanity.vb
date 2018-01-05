@@ -1,5 +1,6 @@
 ﻿Imports System.Numerics
 Imports System.Security.Cryptography
+Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Threading
 
@@ -68,7 +69,7 @@ Public Class frmVanity
     End Sub
     Private Sub VanityGeneration()
         Dim AccountAddress As String
-        Dim KeySeed As String = ""
+        Dim KeySeed As New StringBuilder(NrofChars)
         Dim PrivateKey As Byte()
         Dim PublicKey As Byte()
         Dim PublicKeyHash As Byte()
@@ -84,9 +85,9 @@ Public Class frmVanity
         Dim TotalChars As Integer = UBound(chars)
         Do
             If running = False Then Exit Do
-            KeySeed = ""
+            KeySeed.Clear()
             For x = 1 To NrofChars
-                KeySeed &= chars(rand.Next(TotalChars))
+                KeySeed.Append(chars(rand.Next(TotalChars)))
             Next
             cSHA256 = SHA256Managed.Create()
             PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
@@ -100,7 +101,7 @@ Public Class frmVanity
             End SyncLock
             If Regex.IsMatch(AccountAddress, AddressToFind) Then
                 If ValidateAddress(AccountAddress) Then
-                    Found(AccountAddress, KeySeed)
+                    Found(AccountAddress, KeySeed.ToString())
                     Exit Sub
                 End If
             End If
