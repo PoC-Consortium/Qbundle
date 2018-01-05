@@ -148,23 +148,7 @@ Public Class frmVanity
     Private Sub txtFind1_TextChanged(sender As Object, e As EventArgs) Handles txtFind1.TextChanged
         Dim Index As Integer = txtFind1.SelectionStart
         Dim result As String = txtFind1.Text
-        If result.Length < 4 Then
-            Do
-                result &= "@"
-                If result.Length = 4 Then Exit Do
-            Loop
-        End If
-        Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
-        result = ""
-        For t As Integer = 0 To 3
-            If Not chars.Contains(txt(t)) Then
-                txt(t) = CChar("@")
-
-            End If
-            result &= txt(t)
-        Next
-        txtFind1.Text = result
+        txtFind1.Text = sanitizeTxt(result, 4)
         txtFind1.Select(Index, 0)
         If Index = 4 Then txtFind2.Focus()
 
@@ -173,22 +157,7 @@ Public Class frmVanity
     Private Sub txtFind2_TextChanged(sender As Object, e As EventArgs) Handles txtFind2.TextChanged
         Dim Index As Integer = txtFind2.SelectionStart
         Dim result As String = txtFind2.Text
-        If result.Length < 4 Then
-            Do
-                result &= "@"
-                If result.Length = 4 Then Exit Do
-            Loop
-        End If
-        Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
-        result = ""
-        For t As Integer = 0 To 3
-            If Not chars.Contains(txt(t)) Then
-                txt(t) = CChar("@")
-            End If
-            result &= txt(t)
-        Next
-        txtFind2.Text = result
+        txtFind2.Text = sanitizeTxt(result, 4)
         txtFind2.Select(Index, 0)
         If Index = 4 Then txtFind3.Focus()
         '  If Index = 0 Then txtFind1.Focus()
@@ -204,23 +173,7 @@ Public Class frmVanity
     Private Sub txtFind3_TextChanged(sender As Object, e As EventArgs) Handles txtFind3.TextChanged
         Dim Index As Integer = txtFind3.SelectionStart
         Dim result As String = txtFind3.Text
-        If result.Length < 4 Then
-            Do
-                result &= "@"
-                If result.Length = 4 Then Exit Do
-            Loop
-        End If
-        Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
-        result = ""
-        For t As Integer = 0 To 3
-            If Not chars.Contains(txt(t)) Then
-                txt(t) = CChar("@")
-
-            End If
-            result &= txt(t)
-        Next
-        txtFind3.Text = result
+        txtFind3.Text = sanitizeTxt(result, 4)
         txtFind3.Select(Index, 0)
         If Index = 4 Then txtFind4.Focus()
         '  If Index = 0 Then txtFind2.Focus()
@@ -236,23 +189,7 @@ Public Class frmVanity
     Private Sub txtFind4_TextChanged(sender As Object, e As EventArgs) Handles txtFind4.TextChanged
         Dim Index As Integer = txtFind4.SelectionStart
         Dim result As String = txtFind4.Text
-        If result.Length < 5 Then
-            Do
-                result &= "@"
-                If result.Length = 5 Then Exit Do
-            Loop
-        End If
-        Dim txt() As Char = UCase(result).ToCharArray
-        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
-        result = ""
-        For t As Integer = 0 To 4
-            If Not chars.Contains(txt(t)) Then
-                txt(t) = CChar("@")
-
-            End If
-            result &= txt(t)
-        Next
-        txtFind4.Text = result
+        txtFind4.Text = sanitizeTxt(result, 5)
         txtFind4.Select(Index, 0)
         '  If Index = 0 Then txtFind3.Focus()
 
@@ -264,6 +201,22 @@ Public Class frmVanity
             End If
         End If
     End Sub
+
+    Private Function sanitizeTxt(result As String, allowedLength As Integer) As String
+        While result.Length < allowedLength
+            result &= "@"
+        End While
+        Dim txt() As Char = UCase(result).ToCharArray
+        Dim chars As String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789@"
+        result = ""
+        For t As Integer = 0 To (allowedLength - 1)
+            If Not chars.Contains(txt(t)) Then
+                txt(t) = CChar("@")
+            End If
+            result &= txt(t)
+        Next
+        Return result
+    End Function
 
     Private Sub SaveAsTextfileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsTextfileToolStripMenuItem.Click
         Dim sfd As New SaveFileDialog
