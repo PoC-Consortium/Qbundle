@@ -65,6 +65,11 @@ Public Class frmVanity
                 nrThreads.Value = Environment.ProcessorCount - 1
         End Select
     End Sub
+
+    Private Sub frmVanity_FormClosing(sender As System.Object, e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        running = False
+    End Sub
+
     Private Sub VanityGeneration()
         Dim AccountAddress As String
         Dim KeySeed As String = ""
