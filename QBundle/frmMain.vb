@@ -208,7 +208,8 @@
         Try
             If Running And Not Q.Service.IsServiceRunning Then
                 e.Cancel = True
-                If MsgBox("Do you want to shutdown the wallet?", MsgBoxStyle.YesNo, "Exit") = MsgBoxResult.No Then
+                If e.CloseReason = CloseReason.UserClosing And
+                    MsgBox("Do you want to shutdown the wallet?", MsgBoxStyle.YesNo, "Exit") = MsgBoxResult.No Then
                     Exit Sub
                 End If
                 ShutdownWallet.Interval = 100
