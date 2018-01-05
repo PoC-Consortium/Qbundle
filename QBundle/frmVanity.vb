@@ -12,6 +12,7 @@ Public Class frmVanity
     Private LockObj As Object
     Private counter As Integer
     Private lastval As Integer
+    Private mainRand As New Random
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Me.cmSave.Show(Me.btnSave, Me.btnSave.PointToClient(Cursor.Position))
     End Sub
@@ -72,6 +73,7 @@ Public Class frmVanity
         Dim PublicKey As Byte()
         Dim PublicKeyHash As Byte()
         Dim cSHA256 As SHA256
+        Dim rand As New Random(mainRand.Next())
         Dim b As Byte()
         Dim x As Integer
         ' Dim Crv As New Curve
@@ -80,12 +82,11 @@ Public Class frmVanity
          "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "X",
          "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
         Dim TotalChars As Integer = UBound(chars)
-        Randomize()
         Do
             If running = False Then Exit Do
             KeySeed = ""
             For x = 1 To NrofChars
-                KeySeed &= chars(Int(Rnd() * TotalChars))
+                KeySeed &= chars(rand.Next(TotalChars))
             Next
             cSHA256 = SHA256Managed.Create()
             PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
