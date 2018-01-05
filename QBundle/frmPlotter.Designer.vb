@@ -457,10 +457,10 @@ Partial Class frmPlotter
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(399, 272)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(223, 39)
+        Me.Label13.Size = New System.Drawing.Size(228, 39)
         Me.Label13.TabIndex = 22
-        Me.Label13.Text = "Do not change theese values unless you are " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "absolutley sure of what you are doin" &
-    "g." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle automatically calculate these values."
+        Me.Label13.Text = "Do not change these values unless you are " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "absolutley sure of what you are doing" &
+    "." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Qbundle automatically calculates these values."
         '
         'Label14
         '

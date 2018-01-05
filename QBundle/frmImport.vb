@@ -18,14 +18,17 @@
 
         Select Case Q.settings.DbType
             Case QGlobal.DbType.H2
-                ReDim RepoDBUrls(1)
+                ReDim RepoDBUrls(2)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
                 RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
+                RepoDBUrls(2) = "https://burstneon-bc.ddns.net/neonDb.zip"
+
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.Items.Add("Burst Wiki")
-                cmbRepo.SelectedIndex = 1
+                cmbRepo.Items.Add("Burstneon Block catcher")
+                cmbRepo.SelectedIndex = 2
             Case Else
-                ReDim RepoDBUrls(0)
+                ReDim RepoDBUrls(1)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
                 RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
                 cmbRepo.Items.Add("Cryptoguru repository")
@@ -57,6 +60,9 @@
         If Not MsgBox("Warning!" & vbCrLf & vbCrLf & "All existing data in your database will be erased." & vbCrLf & "Do you want to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "All existing data removed") = MsgBoxResult.Yes Then
             Exit Sub
         End If
+
+
+
 
         r1.Enabled = False
         r2.Enabled = False
@@ -120,8 +126,9 @@
         Select Case SelectedType
             Case 1
                 ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
-                '     If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
-           '     If cmbRepo.SelectedIndex = 1 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
+                If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+                If cmbRepo.SelectedIndex = 1 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+                If cmbRepo.SelectedIndex = 2 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
             Case 2
                 ImportFromUrl(txtUrl.Text)
             Case 3
@@ -130,6 +137,17 @@
 
     End Sub
     Private Sub ImportFromFile(ByVal FileName As String)
+
+        'verify that h2 is gone if we are using h2
+        If Q.settings.DbType = QGlobal.DbType.H2 Then
+            Try
+                If IO.File.Exists(QGlobal.BaseDir & "burst_db\burst.mv.db") Then
+                    IO.File.Delete(QGlobal.BaseDir & "burst_db\burst.mv.db")
+                End If
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+        End If
 
         If FileName.Contains(" ") Then FileName = Chr(34) & FileName & Chr(34)
         Dim Pset As New clsProcessHandler.pSettings
@@ -152,13 +170,13 @@
         Dim S As frmDownloadExtract
         S = New frmDownloadExtract
         S.Url = Url
-        S.Unzip = False
+        S.Unzip = True
         Me.Hide()
         If S.ShowDialog = DialogResult.OK Then
             Me.Show()
             Try
                 If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then
-                    '     IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
+                    IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
                 End If
             Catch ex As Exception
                 If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
