@@ -406,7 +406,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BurstLogo.ico" />
-    <Content Include="burstnewlogo.ico" />
     <Content Include="Changelog.txt" />
     <Content Include="favicon_9.ico" />
     <Content Include="HowToUpgradeversion.txt" />

@@ -24,8 +24,7 @@ Change to Chrome(?) CEFSharp but must check license before it is implemented.
 * Pool list updated.
 * minor visual changes.
 * new logo for better visibility
-
-
+* updated well known peers.
 
 ~1.7
 * Corrected errors in predefined pool list

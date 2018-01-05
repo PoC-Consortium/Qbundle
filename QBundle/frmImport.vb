@@ -20,15 +20,17 @@
             Case QGlobal.DbType.H2
                 ReDim RepoDBUrls(1)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
-                RepoDBUrls(1) = "https://burstneon-bc.ddns.net/burst.mv.db"
+                RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
                 cmbRepo.Items.Add("Cryptoguru repository")
-                cmbRepo.Items.Add("Burstneon Block Catcher")
+                cmbRepo.Items.Add("Burst Wiki")
                 cmbRepo.SelectedIndex = 1
             Case Else
                 ReDim RepoDBUrls(0)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
+                RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
                 cmbRepo.Items.Add("Cryptoguru repository")
-                cmbRepo.SelectedIndex = 0
+                cmbRepo.Items.Add("Burst Wiki")
+                cmbRepo.SelectedIndex = 1
         End Select
 
 
@@ -117,8 +119,9 @@
         IsAborted = False
         Select Case SelectedType
             Case 1
-                If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
-                If cmbRepo.SelectedIndex = 1 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
+                ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+                '     If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+           '     If cmbRepo.SelectedIndex = 1 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
             Case 2
                 ImportFromUrl(txtUrl.Text)
             Case 3
