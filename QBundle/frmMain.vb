@@ -17,7 +17,6 @@
     Private WithEvents PasswordTimer As Timer
     Private WithEvents OneMinCron As Timer
 
-
     Private CurHeight As Integer
     Private LastShowHeight As Integer
     Private LastMinuteHeight As Integer

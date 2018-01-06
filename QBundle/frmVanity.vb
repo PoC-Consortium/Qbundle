@@ -95,7 +95,7 @@ Public Class frmVanity
             For x = 1 To NrofChars
                 KeySeed.Append(chars(rand.Next(TotalChars)))
             Next
-            PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
+            PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed.ToString))
             PublicKey = Curve25519.GetPublicKey(PrivateKey)
             PublicKeyHash = cSHA256.ComputeHash(PublicKey)
             b = New Byte() {PublicKeyHash(0), PublicKeyHash(1), PublicKeyHash(2), PublicKeyHash(3), PublicKeyHash(4), PublicKeyHash(5), PublicKeyHash(6), PublicKeyHash(7)}
