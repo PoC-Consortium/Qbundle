@@ -248,6 +248,39 @@
         PasswordTimer.Stop()
         PasswordTimer.Enabled = False
     End Sub
+
+    Private Sub PrepareUpdate()
+        Dim f As New frmUpdate
+        If f.ShowDialog = DialogResult.Yes Then
+            ShutdownOnUpdate()
+        End If
+
+    End Sub
+    Private Sub ShutdownOnUpdate()
+
+
+        RemoveHandler Q.ProcHandler.Started, AddressOf Starting
+        RemoveHandler Q.ProcHandler.Stopped, AddressOf Stopped
+        RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
+        RemoveHandler Q.ProcHandler.Aborting, AddressOf Aborted
+        RemoveHandler Q.Service.Stopped, AddressOf Stopped
+        RemoveHandler Q.Service.Update, AddressOf ProcEvents
+
+        Dim p As Process = New Process
+        p.StartInfo.WorkingDirectory = QGlobal.BaseDir
+        p.StartInfo.Arguments = "BWLUpdate" & " " & IO.Path.GetFileName(Application.ExecutablePath)
+        p.StartInfo.UseShellExecute = True
+        p.StartInfo.FileName = QGlobal.BaseDir & "Restarter.exe"
+        p.Start()
+
+        Threading.Thread.Sleep(500)
+        p.Dispose()
+
+        End
+
+
+    End Sub
+
 #End Region
 
 #Region " Clickabe Objects "
