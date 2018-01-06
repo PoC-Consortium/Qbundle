@@ -22,10 +22,12 @@
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
                 RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
                 RepoDBUrls(2) = "https://burstneon-bc.ddns.net/neonDb.zip"
+                '   RepoDBUrls(3) = "http://files.getburst.net/minidb.zip"
 
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.Items.Add("Burst Wiki")
                 cmbRepo.Items.Add("Burstneon Block catcher")
+                'cmbRepo.Items.Add("Test")
                 cmbRepo.SelectedIndex = 2
             Case Else
                 ReDim RepoDBUrls(1)
@@ -60,9 +62,6 @@
         If Not MsgBox("Warning!" & vbCrLf & vbCrLf & "All existing data in your database will be erased." & vbCrLf & "Do you want to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "All existing data removed") = MsgBoxResult.Yes Then
             Exit Sub
         End If
-
-
-
 
         r1.Enabled = False
         r2.Enabled = False
@@ -125,10 +124,11 @@
         IsAborted = False
         Select Case SelectedType
             Case 1
-                ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
+                '   ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
                 If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
                 If cmbRepo.SelectedIndex = 1 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
                 If cmbRepo.SelectedIndex = 2 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
+                If cmbRepo.SelectedIndex = 3 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
             Case 2
                 ImportFromUrl(txtUrl.Text)
             Case 3

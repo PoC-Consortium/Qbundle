@@ -299,17 +299,20 @@ Public Class clsApp
             End If
         End If
         Dim fromRepo As Boolean = True
+
         If _Apps(appid).RemoteUrl.StartsWith("http") Then fromRepo = False
         If Not Download(appid, fromRepo) Then 'ok lets start download
             RaiseEvent Aborted(appid)
             Exit Sub
         End If
         If _Aborted Then Exit Sub
+
         RaiseEvent Progress(1, appid, 0, 0, 0, 0)
         If Not Extract(appid) Then 'ok lets start download
             RaiseEvent Aborted(appid)
             Exit Sub
         End If
+
         DeleteFile(appid)
         If _Aborted Then Exit Sub
         _Apps(appid).Updated = True

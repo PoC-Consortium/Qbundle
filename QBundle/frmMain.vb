@@ -37,6 +37,7 @@
         End If
 
 
+        If Q.settings.DebugMode = True Then QB.Generic.DebugMe = True
         If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
         LastException = Now 'for brs exception monitoring
 
