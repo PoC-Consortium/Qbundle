@@ -549,7 +549,7 @@
                 pset(1).Cores = Q.settings.Cpulimit
                 pset(1).Params = QGlobal.WalletLaunchString.NormalLaunch
                 pset(1).StartSignal = "Started API server at"
-                pset(1).StartsignalMaxTime = 600
+                pset(1).StartsignalMaxTime = 3600
                 pset(1).WorkingDirectory = QGlobal.AppDir
                 Q.ProcHandler.StartProcessSquence(pset)
             Else 'normal start
@@ -563,7 +563,7 @@
                 Pset.Cores = Q.settings.Cpulimit
                 Pset.Params = QGlobal.WalletLaunchString.NormalLaunch
                 Pset.StartSignal = "Started API server at"
-                Pset.StartsignalMaxTime = 600
+                Pset.StartsignalMaxTime = 3600
                 Pset.WorkingDirectory = QGlobal.AppDir
                 Q.ProcHandler.StartProcess(Pset)
             End If
