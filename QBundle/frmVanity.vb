@@ -1,5 +1,6 @@
 ﻿Imports System.Numerics
 Imports System.Security.Cryptography
+Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Threading
 
@@ -12,6 +13,7 @@ Public Class frmVanity
     Private LockObj As Object
     Private counter As Integer
     Private lastval As Integer
+    Private mainRand As New Random
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Me.cmSave.Show(Me.btnSave, Me.btnSave.PointToClient(Cursor.Position))
     End Sub
@@ -72,11 +74,13 @@ Public Class frmVanity
 
     Private Sub VanityGeneration()
         Dim AccountAddress As String
-        Dim KeySeed As String = ""
+        Dim KeySeed As New StringBuilder(NrofChars)
         Dim PrivateKey As Byte()
         Dim PublicKey As Byte()
         Dim PublicKeyHash As Byte()
-        Dim cSHA256 As SHA256
+        Dim cSHA256 As SHA256 = SHA256Managed.Create()
+        Dim rand As New Random(mainRand.Next())
+        Dim toFindPattern As Regex = New Regex(AddressToFind)
         Dim b As Byte()
         Dim x As Integer
         ' Dim Crv As New Curve
@@ -87,12 +91,10 @@ Public Class frmVanity
         Dim TotalChars As Integer = UBound(chars)
         Do
             If running = False Then Exit Do
-            KeySeed = ""
+            KeySeed.Clear()
             For x = 1 To NrofChars
-                Randomize()
-                KeySeed &= chars(Int(Rnd() * TotalChars))
+                KeySeed.Append(chars(rand.Next(TotalChars)))
             Next
-            cSHA256 = SHA256Managed.Create()
             PrivateKey = cSHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(KeySeed))
             PublicKey = Curve25519.GetPublicKey(PrivateKey)
             PublicKeyHash = cSHA256.ComputeHash(PublicKey)
@@ -102,9 +104,9 @@ Public Class frmVanity
             SyncLock LockObj
                 Tested += 1
             End SyncLock
-            If Regex.IsMatch(AccountAddress, AddressToFind) Then
+            If toFindPattern.IsMatch(AccountAddress) Then
                 If ValidateAddress(AccountAddress) Then
-                    Found(AccountAddress, KeySeed)
+                    Found(AccountAddress, KeySeed.ToString())
                     Exit Sub
                 End If
             End If
