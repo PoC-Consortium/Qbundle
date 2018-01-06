@@ -310,7 +310,7 @@
         Process.Start(url)
     End Sub
     Private Sub lblUpdates_Click(sender As Object, e As EventArgs) Handles lblUpdates.Click
-        frmUpdate.Show()
+        PrepareUpdate()
     End Sub
     'toolstrips
     Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
@@ -327,8 +327,7 @@
 
     End Sub
     Private Sub CheckForUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdatesToolStripMenuItem.Click
-        frmUpdate.Show()
-        frmUpdate.Focus()
+        PrepareUpdate()
 
     End Sub
     Private Sub ChangeDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeDatabaseToolStripMenuItem.Click
@@ -1077,6 +1076,6 @@
     End Sub
 
     Private Sub lblUpdateAvail2_Click(sender As Object, e As EventArgs) Handles lblUpdateAvail2.Click
-        frmUpdate.Show()
+        PrepareUpdate()
     End Sub
 End Class
