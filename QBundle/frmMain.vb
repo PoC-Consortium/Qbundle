@@ -807,7 +807,7 @@
             Dim BlockDate As Date = TimeZoneInfo.ConvertTime(New System.DateTime(2014, 8, 11, 2, 0, 0).AddSeconds(Val(TimeStamp)), TimeZoneInfo.Utc, TimeZoneInfo.Local)
             If Now.AddHours(-1) > BlockDate Then
                 lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Downloading blockchain at " & CStr(LastShowHeight) & " blocks/min)"
-                lblBlockDate.ForeColor = Color.DarkRed
+                lblBlockDate.ForeColor = Color.DarkOrange
                 FullySynced = False
             Else
                 lblBlockDate.Text = BlockDate.ToString("yyyy-MM-dd HH:mm:ss") & " (Fully Syncronized)"

@@ -30,15 +30,15 @@ Partial Class frmShutdown
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(20, 12)
+        Me.Label1.Location = New System.Drawing.Point(17, 14)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(160, 13)
+        Me.Label1.Size = New System.Drawing.Size(189, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Shutting core wallet. Please wait"
+        Me.Label1.Text = "Shutting down core wallet. Please wait"
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(8, 28)
+        Me.ProgressBar1.Location = New System.Drawing.Point(19, 28)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(184, 13)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
@@ -49,7 +49,7 @@ Partial Class frmShutdown
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(200, 49)
+        Me.ClientSize = New System.Drawing.Size(222, 57)
         Me.ControlBox = False
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Label1)
