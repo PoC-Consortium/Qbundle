@@ -65,7 +65,7 @@ Public Class frmRestart
 
             End Try
             Thread.Sleep(500)
-            i += 1
+            If i < 4 Then i += 1
             If i > 4 Then
                 Try
                     p = Process.GetProcessesByName(PName)
