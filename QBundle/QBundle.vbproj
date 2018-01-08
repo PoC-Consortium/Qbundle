@@ -407,11 +407,7 @@
   <ItemGroup>
     <Content Include="BurstLogo.ico" />
     <Content Include="Changelog.txt" />
-    <Content Include="favicon_9.ico" />
     <Content Include="HowToUpgradeversion.txt" />
-    <Content Include="icon_blue.ico" />
-    <Content Include="icon_blue_.ico" />
-    <Content Include="icon_blue_KaK_icon.ico" />
     <Content Include="Resources\blago.jpg" />
     <None Include="Resources\CPUInstructions.exe" />
     <None Include="Resources\Download.png" />
