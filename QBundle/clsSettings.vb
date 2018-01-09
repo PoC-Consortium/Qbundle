@@ -9,6 +9,7 @@
     Private _ListenPeer As String
     Private _ConnectFrom As String
     Private _AutoStart As Boolean
+    Private _Broadcast As String
     'DB
     Private _DbType As Integer
     Private _DbServer As String 'connectionstring from now on
@@ -129,6 +130,14 @@
         End Get
         Set(ByVal value As Boolean)
             _AutoStart = value
+        End Set
+    End Property
+    Public Property Broadcast() As String
+        Get
+            Return _Broadcast
+        End Get
+        Set(ByVal value As String)
+            _Broadcast = value
         End Set
     End Property
     'DB
@@ -439,7 +448,7 @@
         _ListenIf = "127.0.0.1;8125"
         _ListenPeer = "0.0.0.0;8123"
         _ConnectFrom = "127.0.0.1"
-
+        _Broadcast = ""
         _DbType = 0
         _DbServer = "127.0.0.1:3306"
         _DbName = "burstwallet"

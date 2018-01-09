@@ -123,6 +123,8 @@ Public Class frmSettings
             buffer &= lstConnectFrom.Items.Item(x).ToString & ";"
         Next
 
+        Q.settings.Broadcast = txtBroadcast.Text
+
         Q.settings.ConnectFrom = buffer
         Q.settings.DbServer = txtDbServer.Text
 
@@ -159,7 +161,15 @@ Public Class frmSettings
         chkMinToTray.Checked = Q.settings.MinToTray
         chkCoinmarket.Checked = Q.settings.GetCoinMarket
         chkAutoStart.Checked = Q.settings.AutoStart
-        chkAutoIP.Checked = Q.settings.CheckForUpdates
+        chkAutoIP.Checked = Q.settings.AutoIp
+        If Q.settings.AutoIp Then
+            txtBroadcast.Enabled = False
+            txtBroadcast.Text = Generic.GetMyIp()
+        Else
+            txtBroadcast.Enabled = True
+            txtBroadcast.Text = Q.settings.Broadcast
+        End If
+
         chkDynPlatform.Checked = Q.settings.DynPlatform
         txtDbServer.Text = Q.settings.DbServer
         txtDbUser.Text = Q.settings.DbUser
@@ -290,6 +300,14 @@ Public Class frmSettings
             txtDbServer.Text = QGlobal.Dbinfo(Q.settings.DbType).ConnString
             txtDbUser.Text = QGlobal.Dbinfo(Q.settings.DbType).Username
             txtDbPass.Text = QGlobal.Dbinfo(Q.settings.DbType).Pass
+        End If
+    End Sub
+
+    Private Sub chkAutoIP_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoIP.Click
+        If chkAutoIP.Checked Then
+            txtBroadcast.Enabled = False
+        Else
+            txtBroadcast.Enabled = True
         End If
     End Sub
 End Class

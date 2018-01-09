@@ -100,7 +100,7 @@ Public Class frmPlotter
             nrRam.Maximum = CDec(Math.Round((My.Computer.Info.TotalPhysicalMemory / 1024 / 1024 / 1024)))
             Dim freeram As Integer = CInt(Math.Floor(My.Computer.Info.AvailablePhysicalMemory / 1024 / 1024 / 1024) - 1)
             If freeram < 1 Then freeram = 1
-            If freeram > 2 Then freeram = 2
+            If freeram > 4 Then freeram = 4
             nrRam.Value = freeram
         Catch ex As Exception
 

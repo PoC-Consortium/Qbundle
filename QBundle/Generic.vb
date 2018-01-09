@@ -146,12 +146,9 @@ Friend Class Generic
         End If
 
         'Dyn platform
-        If Q.settings.AutoIp Then
-            Dim ip As String = GetMyIp()
-            If ip <> "" Then
-                Data &= "#Dynamic platform" & vbCrLf
-                Data &= "brs.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
-            End If
+        If Q.settings.DynPlatform Then
+            Data &= "#Dynamic platform" & vbCrLf
+            Data &= "brs.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
         End If
 
         Select Case Q.settings.DbType
@@ -250,15 +247,17 @@ Friend Class Generic
                 Data &= "#Auto IP set" & vbCrLf
                 Data &= "nxt.myAddress = " & ip & vbCrLf & vbCrLf
             End If
+        Else
+            If Q.settings.Broadcast.Length > 0 Then
+                Data &= "#Manual broadcast" & vbCrLf
+                Data &= "nxt.myAddress = " & Q.settings.Broadcast & vbCrLf & vbCrLf
+            End If
         End If
 
         'Dyn platform
-        If Q.settings.AutoIp Then
-            Dim ip As String = GetMyIp()
-            If ip <> "" Then
-                Data &= "#Dynamic platform" & vbCrLf
-                Data &= "nxt.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
-            End If
+        If Q.settings.DynPlatform Then
+            Data &= "#Dynamic platform" & vbCrLf
+            Data &= "nxt.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
         End If
 
         Select Case Q.settings.DbType
@@ -303,7 +302,6 @@ Friend Class Generic
             Data &= "nxt.disableRebroadcastTransactionsThread = true" & vbCrLf
             Data &= "nxt.apiServerEnforcePOST = false" & vbCrLf
             Data &= "nxt.enableDebugAPI = true" & vbCrLf & vbCrLf
-
         End If
         Try
             IO.File.WriteAllText(QGlobal.AppDir & "conf\nxt.properties", Data)

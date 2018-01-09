@@ -147,9 +147,9 @@
         Pools(8).BurstAddress = "BURST-E4ZX-KCBL-5F8A-CPU6G"
         Pools(8).DeadLine = "2592000"
 
-        Pools(9).Name = "burstneon.ddns.net"
-        Pools(9).Address = "burstneon.ddns.net"
-        Pools(9).Port = "8124"
+        Pools(9).Name = "burstneon.com"
+        Pools(9).Address = "burstneon.com"
+        Pools(9).Port = "8080"
         Pools(9).BurstAddress = "BURST-YXZW-JH7M-QKR9-9PKBN"
         Pools(9).DeadLine = "6048000"
 

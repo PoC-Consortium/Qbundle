@@ -15,8 +15,15 @@ minimize to tray on exit ?
 Iconify(?)
 Change to Chrome(?) CEFSharp but must check license before it is implemented.
 
+Be able to set DNS name for peer broadcast
 
-~1.8
+~1.9
+Updated pool lists.
+Ability to set manual broadcast address.
+Tray icon updated.
+Improved Vanity address generator speed
+
+1.8
 * Changing database should no longer cause issues.
 * Miner window now remembers your settings when you start to mine
 * Ability to Select / Deselect multiple plot files. Issue #4
