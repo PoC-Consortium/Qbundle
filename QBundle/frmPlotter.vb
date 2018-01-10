@@ -456,6 +456,7 @@ Public Class frmPlotter
             MsgBox("Error parsing current plotfile.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Error")
             Exit Sub
         End Try
+        If FilePath.Contains(" ") Then FilePath = Chr(34) & FilePath & Chr(34)
 
         Dim Arg As String = "-id " & FileParts(0) & " -sn " & FileParts(1) & " -n " & FileParts(2) & " -t " & nrThreads.Value.ToString & " -path " & FilePath & " -mem " & nrRam.Value.ToString & "G"
 

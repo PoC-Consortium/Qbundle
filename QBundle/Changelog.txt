@@ -22,6 +22,7 @@ Updated pool lists.
 Ability to set manual broadcast address.
 Tray icon updated.
 Improved Vanity address generator speed
+Resume plotting can now contain spaces in path to plotfile.
 
 1.8
 * Changing database should no longer cause issues.
