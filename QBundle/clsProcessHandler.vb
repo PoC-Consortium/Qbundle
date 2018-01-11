@@ -182,14 +182,19 @@ Public Class clsProcessHandler
         End Enum
         Private Delegate Function ConsoleCtrlDelegate(CtrlType As CtrlTypes) As Boolean
         Private Declare Function AttachConsole Lib "kernel32" (dwProcessId As UInteger) As Boolean
-        Private Declare Sub GenerateConsoleCtrlEvent Lib "kernel32" (ByVal dwCtrlEvent As Short, ByVal dwProcessGroupId As Short)
+        Private Declare Function GenerateConsoleCtrlEvent Lib "kernel32" Alias "GenerateConsoleCtrlEvent" (ByVal dwCtrlEvent As Long, ByVal dwProcessGroupId As Long) As Long
         Private Declare Function SetConsoleCtrlHandler Lib "kernel32" (Handler As ConsoleCtrlDelegate, Add As Boolean) As Boolean
         Private Declare Function FreeConsole Lib "kernel32" () As Boolean
 
         Private Sub ShutDown(ByVal SigIntSleep As Integer, ByVal SigKillSleep As Integer)
             Try
+                FreeConsole()
+            Catch ex As Exception
+                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+            Try
                 AttachConsole(p.Id)
-                SetConsoleCtrlHandler(New ConsoleCtrlDelegate(AddressOf OnExit), True)
+                SetConsoleCtrlHandler(AddressOf OnExit, True)
                 GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0)
                 p.WaitForExit(SigIntSleep) 'wait for exit before we release. if not we might get ourself terminated.
                 If Not p.HasExited Then
@@ -197,6 +202,7 @@ Public Class clsProcessHandler
                     p.WaitForExit(SigKillSleep)
                 End If
                 FreeConsole()
+                SetConsoleCtrlHandler(AddressOf OnExit, False)
             Catch ex As Exception
                 If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
             End Try

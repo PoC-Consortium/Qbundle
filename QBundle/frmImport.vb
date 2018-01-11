@@ -198,22 +198,26 @@
 
             Exit Sub
         End If
-        Me.Show()
-        'we have aborted return to download again
-        IsAborted = True
-        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then StopMaria()
+        Try
+            Me.Show()
+            'we have aborted return to download again
+            IsAborted = True
+            If Q.settings.DbType = QGlobal.DbType.pMariaDB Then StopMaria()
 
-        Running = False
-        r1.Enabled = True
-        r2.Enabled = True
-        r3.Enabled = True
-        cmbRepo.Enabled = True
-        txtUrl.Enabled = True
-        txtFile.Enabled = True
-        btnBrowse.Enabled = True
-        btnStart.Enabled = True
-        SetSelect(SelectedType)
-        lblStatus.Text = "Aborted"
+            Running = False
+            r1.Enabled = True
+            r2.Enabled = True
+            r3.Enabled = True
+            cmbRepo.Enabled = True
+            txtUrl.Enabled = True
+            txtFile.Enabled = True
+            btnBrowse.Enabled = True
+            btnStart.Enabled = True
+            SetSelect(SelectedType)
+            lblStatus.Text = "Aborted"
+        Catch ex As Exception
+
+        End Try
 
 
     End Sub
