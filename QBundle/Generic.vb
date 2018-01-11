@@ -177,6 +177,7 @@ Friend Class Generic
                 Data &= "brs.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
             Case QGlobal.DbType.H2
                 Data &= "#Using H2" & vbCrLf
+                Data &= "brs.dbMaximumPoolSize = 30" & vbCrLf
                 Data &= "brs.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
                 Data &= "brs.dbUsername = sa" & vbCrLf
                 Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
@@ -278,6 +279,7 @@ Friend Class Generic
                 Data &= "#Using installed MariaDb" & vbCrLf
             Case QGlobal.DbType.H2
                 Data &= "#Using H2" & vbCrLf
+                Data &= "nxt.dbMaximumPoolSize = 30" & vbCrLf
         End Select
 
         Data &= "nxt.dbUrl = " & Q.settings.DbServer & vbCrLf

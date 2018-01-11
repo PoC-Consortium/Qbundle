@@ -18,24 +18,24 @@
 
         Select Case Q.settings.DbType
             Case QGlobal.DbType.H2
-                ReDim RepoDBUrls(2)
+                ReDim RepoDBUrls(1)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
                 RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
-                RepoDBUrls(2) = "https://burstneon-bc.ddns.net/neonDb.zip"
+                '  RepoDBUrls(2) = "https://burstneon-bc.ddns.net/neonDb.zip"
                 '   RepoDBUrls(3) = "http://files.getburst.net/minidb.zip"
 
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.Items.Add("Burst Wiki")
-                cmbRepo.Items.Add("Burstneon Block catcher")
+                '    cmbRepo.Items.Add("Burstneon Block catcher")
                 'cmbRepo.Items.Add("Test")
-                cmbRepo.SelectedIndex = 2
+                cmbRepo.SelectedIndex = 0
             Case Else
                 ReDim RepoDBUrls(1)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
                 RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.Items.Add("Burst Wiki")
-                cmbRepo.SelectedIndex = 1
+                cmbRepo.SelectedIndex = 0
         End Select
 
 
