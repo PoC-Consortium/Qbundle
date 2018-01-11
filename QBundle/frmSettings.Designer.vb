@@ -27,6 +27,8 @@ Partial Class frmSettings
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtBroadcast = New System.Windows.Forms.TextBox()
         Me.chkAutoStart = New System.Windows.Forms.CheckBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -87,6 +89,7 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkWalletException = New System.Windows.Forms.CheckBox()
         Me.chkNoDirectLogin = New System.Windows.Forms.CheckBox()
         Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
         Me.chkMinToTray = New System.Windows.Forms.CheckBox()
@@ -98,9 +101,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkWalletException = New System.Windows.Forms.CheckBox()
-        Me.txtBroadcast = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmbCurrency = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -200,6 +201,22 @@ Partial Class frmSettings
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(699, 286)
         Me.Panel4.TabIndex = 12
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(10, 50)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(57, 13)
+        Me.Label6.TabIndex = 48
+        Me.Label6.Text = "broadcast:"
+        '
+        'txtBroadcast
+        '
+        Me.txtBroadcast.Location = New System.Drawing.Point(67, 47)
+        Me.txtBroadcast.Name = "txtBroadcast"
+        Me.txtBroadcast.Size = New System.Drawing.Size(209, 20)
+        Me.txtBroadcast.TabIndex = 47
         '
         'chkAutoStart
         '
@@ -778,6 +795,7 @@ Partial Class frmSettings
         '
         Me.Panel2.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.cmbCurrency)
         Me.Panel2.Controls.Add(Me.chkWalletException)
         Me.Panel2.Controls.Add(Me.chkNoDirectLogin)
         Me.Panel2.Controls.Add(Me.chkCoinmarket)
@@ -794,6 +812,18 @@ Partial Class frmSettings
         Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
         '
+        'chkWalletException
+        '
+        Me.chkWalletException.AutoSize = True
+        Me.chkWalletException.Checked = True
+        Me.chkWalletException.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkWalletException.Location = New System.Drawing.Point(11, 220)
+        Me.chkWalletException.Name = "chkWalletException"
+        Me.chkWalletException.Size = New System.Drawing.Size(292, 17)
+        Me.chkWalletException.TabIndex = 46
+        Me.chkWalletException.Text = "Restart wallet if exception occur (max once every 60min)"
+        Me.chkWalletException.UseVisualStyleBackColor = True
+        '
         'chkNoDirectLogin
         '
         Me.chkNoDirectLogin.AutoSize = True
@@ -809,9 +839,9 @@ Partial Class frmSettings
         Me.chkCoinmarket.AutoSize = True
         Me.chkCoinmarket.Location = New System.Drawing.Point(12, 178)
         Me.chkCoinmarket.Name = "chkCoinmarket"
-        Me.chkCoinmarket.Size = New System.Drawing.Size(186, 17)
+        Me.chkCoinmarket.Size = New System.Drawing.Size(272, 17)
         Me.chkCoinmarket.TabIndex = 9
-        Me.chkCoinmarket.Text = "Get price info from Coinmarketcap"
+        Me.chkCoinmarket.Text = "Get price info from Coinmarketcap and show price in"
         Me.chkCoinmarket.UseVisualStyleBackColor = True
         '
         'chkMinToTray
@@ -908,33 +938,16 @@ Partial Class frmSettings
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
         '
-        'chkWalletException
+        'cmbCurrency
         '
-        Me.chkWalletException.AutoSize = True
-        Me.chkWalletException.Checked = True
-        Me.chkWalletException.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkWalletException.Location = New System.Drawing.Point(11, 220)
-        Me.chkWalletException.Name = "chkWalletException"
-        Me.chkWalletException.Size = New System.Drawing.Size(292, 17)
-        Me.chkWalletException.TabIndex = 46
-        Me.chkWalletException.Text = "Restart wallet if exception occur (max once every 60min)"
-        Me.chkWalletException.UseVisualStyleBackColor = True
-        '
-        'txtBroadcast
-        '
-        Me.txtBroadcast.Location = New System.Drawing.Point(67, 47)
-        Me.txtBroadcast.Name = "txtBroadcast"
-        Me.txtBroadcast.Size = New System.Drawing.Size(209, 20)
-        Me.txtBroadcast.TabIndex = 47
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(10, 50)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 13)
-        Me.Label6.TabIndex = 48
-        Me.Label6.Text = "broadcast:"
+        Me.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbCurrency.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbCurrency.FormattingEnabled = True
+        Me.cmbCurrency.Items.AddRange(New Object() {"AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "USD", "ZAR"})
+        Me.cmbCurrency.Location = New System.Drawing.Point(290, 176)
+        Me.cmbCurrency.Name = "cmbCurrency"
+        Me.cmbCurrency.Size = New System.Drawing.Size(68, 21)
+        Me.cmbCurrency.TabIndex = 47
         '
         'frmSettings
         '
@@ -1052,4 +1065,5 @@ Partial Class frmSettings
     Friend WithEvents chkWalletException As CheckBox
     Friend WithEvents Label6 As Label
     Friend WithEvents txtBroadcast As TextBox
+    Friend WithEvents cmbCurrency As ComboBox
 End Class

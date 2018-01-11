@@ -984,7 +984,7 @@
     Private Sub FetchCoinMarket()
         Try
             Dim http As New clsHttp
-            Dim result As String = http.GetUrl("https://api.coinmarketcap.com/v1/ticker/burst/")
+            Dim result As String = http.GetUrl("https://api.coinmarketcap.com/v1/ticker/burst/?convert=" & Q.settings.Currency)
             HttpResult(result)
         Catch ex As Exception
 
@@ -1006,19 +1006,24 @@
             Data = Replace(Data, Chr(34), "")
             Data = Replace(Data, vbLf, "")
             Data = Replace(Data, " ", "")
+            Data = Replace(Data, "}", "")
+            Data = Replace(Data, "]", "")
+            Data = Replace(Data, "{", "")
+            Data = Replace(Data, "[", "")
             Dim Entries() As String = Split(Data, ",")
             For t As Integer = 0 To UBound(Entries)
-                If Entries(t).StartsWith("price_usd") Then
+
+                If Entries(t).StartsWith("price_" & Q.settings.Currency.ToLower) Then
                     PriceUSD = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US"))
                 End If
                 If Entries(t).StartsWith("price_btc") Then
                     PriceBtc = Convert.ToDecimal(Mid(Entries(t), 11), System.Globalization.CultureInfo.GetCultureInfo("en-US"))
                 End If
-                If Entries(t).StartsWith("market_cap_usd") Then
+                If Entries(t).StartsWith("market_cap_" & Q.settings.Currency.ToLower) Then
                     MktCap = Convert.ToDecimal(Mid(Entries(t), 16), System.Globalization.CultureInfo.GetCultureInfo("en-US"))
                 End If
             Next
-            lblCoinMarket.Text = "Burst price: " & PriceBtc.ToString & " btc | $" & Math.Round(PriceUSD, 3).ToString & " | Market cap : $" & Math.Round(MktCap / 1000000, 2).ToString & "M"
+            lblCoinMarket.Text = "Burst price: " & PriceBtc.ToString & " btc | " & Q.settings.Currency & " " & Math.Round(PriceUSD, 3).ToString & " | Market cap : " & Q.settings.Currency & " " & Math.Round(MktCap / 1000000, 2).ToString & "M"
         Catch ex As Exception
             lblCoinMarket.Text = "Burst price: N/A"
         End Try

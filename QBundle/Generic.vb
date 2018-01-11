@@ -103,7 +103,8 @@ Friend Class Generic
                     End Select
                     Q.settings.SaveSettings()
                 Case 18 '18 -19
-
+                    Q.settings.Currency = "USD"
+                    Q.settings.SaveSettings()
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do

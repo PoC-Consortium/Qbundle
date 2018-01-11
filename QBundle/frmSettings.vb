@@ -101,6 +101,10 @@ Public Class frmSettings
         Q.settings.NTPCheck = chkNTP.Checked
         Q.settings.MinToTray = chkMinToTray.Checked
         Q.settings.GetCoinMarket = chkCoinmarket.Checked
+        If cmbCurrency.SelectedIndex > -1 Then
+            Q.settings.Currency = cmbCurrency.Items.Item(cmbCurrency.SelectedIndex).ToString
+        End If
+
         'nrs
         Q.settings.AutoStart = chkAutoStart.Checked
         Q.settings.AutoIp = chkAutoIP.Checked
@@ -169,6 +173,12 @@ Public Class frmSettings
             txtBroadcast.Enabled = True
             txtBroadcast.Text = Q.settings.Broadcast
         End If
+        For t As Integer = 0 To cmbCurrency.Items.Count - 1
+            If cmbCurrency.Items.Item(t).ToString = Q.settings.Currency Then
+                cmbCurrency.SelectedIndex = t
+                Exit For
+            End If
+        Next
 
         chkDynPlatform.Checked = Q.settings.DynPlatform
         txtDbServer.Text = Q.settings.DbServer
@@ -195,6 +205,10 @@ Public Class frmSettings
             Case Else
                 lblRecommendedCPU.Text = CStr(Environment.ProcessorCount - 2) & " cores."
         End Select
+
+
+
+
 
         'SetNRSnet
         SetIf()

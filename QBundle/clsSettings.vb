@@ -33,6 +33,8 @@
     Private _MinToTray As Boolean
     Private _CoinMarket As Boolean
     Private _NoDirectLogin As Boolean
+    Private _Currency As String
+
     'Plotting And Mining
     Private _Plots As String
     'dynamic plotting
@@ -337,6 +339,14 @@
             _CoinMarket = value
         End Set
     End Property
+    Public Property Currency() As String
+        Get
+            Return _Currency
+        End Get
+        Set(ByVal value As String)
+            _Currency = value
+        End Set
+    End Property
     Public Property NoDirectLogin() As Boolean
         Get
             Return _NoDirectLogin
@@ -454,7 +464,7 @@
         _DbName = "burstwallet"
         _DbUser = ""
         _DbPass = ""
-
+        _Currency = "USD"
         _JavaType = QGlobal.AppNames.JavaInstalled
 
         _FirstRun = True
