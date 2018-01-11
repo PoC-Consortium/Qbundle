@@ -369,7 +369,7 @@
     Private Sub finalSteps()
         Try
             Q.settings.QBMode = 0
-            If Q.App.CheckOpenCL() Then Q.settings.useOpenCL = True
+            '  If Q.App.CheckOpenCL() Then Q.settings.useOpenCL = True
             Q.settings.SaveSettings()
             'writing brs.properties since we need it for tools.
 
