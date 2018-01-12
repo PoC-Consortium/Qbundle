@@ -207,10 +207,9 @@
                 Exit Sub
             End If
 
-
+            Dim msg As String
             For t As Integer = 0 To UBound(QGlobal.Pools)
                 If QGlobal.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
-                    Dim msg As String
                     msg = "Your current reward recipient is:" & vbCrLf
                     msg &= "Burst address: " & QGlobal.Pools(t).BurstAddress & vbCrLf
                     msg &= "Name: " & QGlobal.Pools(t).Name & vbCrLf
@@ -223,7 +222,6 @@
             If UBound(result) > 0 Then
                 For t As Integer = 0 To UBound(result)
                     If result(t).StartsWith("name:") Then
-                        Dim msg As String
                         msg = "Your current reward recipient is:" & vbCrLf
                         msg &= "Burst address: BURST-" & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
                         msg &= "Name: " & Mid(result(t), 6)
@@ -231,12 +229,11 @@
                         Exit Sub
                     End If
                 Next
-            Else
-                Dim msg As String
-                msg = "Your current reward recipient is:" & vbCrLf
-                msg &= "Burst address: " & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
-                MsgBox(msg, MsgBoxStyle.Information, "Reward recipient")
             End If
+
+            msg = "Your current reward recipient is:" & vbCrLf
+            msg &= "Burst address: BURST-" & Q.Accounts.ConvertIdToRS(AccountID) & vbCrLf
+            MsgBox(msg, MsgBoxStyle.Information, "Reward recipient")
 
         Catch ex As Exception
             MsgBox("Unable to get reward recipient status with selected wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No response")

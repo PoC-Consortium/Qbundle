@@ -386,7 +386,7 @@ Public Class frmPlotter
     Private Sub ImportFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFileToolStripMenuItem.Click
         Dim ofd As New OpenFileDialog
         If ofd.ShowDialog = DialogResult.OK Then
-            If IO.File.Exists(ofd.FileName) Then
+            If IO.File.Exists(ofd.FileName) And Generic.IsValidPlottFilename(ofd.FileName) Then
                 lstPlots.Items.Add(ofd.FileName)
                 Q.settings.Plots &= ofd.FileName & "|"
                 txtStartNonce.Text = CStr(GetStartNonce())
@@ -403,8 +403,10 @@ Public Class frmPlotter
             If IO.Directory.Exists(ofd.SelectedPath) Then
                 Dim fileEntries As String() = IO.Directory.GetFiles(ofd.SelectedPath)
                 For Each file As String In fileEntries
-                    lstPlots.Items.Add(file)
-                    Q.settings.Plots &= file & "|"
+                    If Generic.IsValidPlottFilePath(file) Then
+                        lstPlots.Items.Add(file)
+                        Q.settings.Plots &= file & "|"
+                    End If
                 Next
                 txtStartNonce.Text = CStr(GetStartNonce())
                 Q.settings.SaveSettings()
@@ -415,6 +417,9 @@ Public Class frmPlotter
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
 
+    End Sub
+    Private Sub StartPlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartPlottingToolStripMenuItem.Click
+        StartPlotting()
     End Sub
 
     Private Sub ResumePlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResumePlottingToolStripMenuItem.Click
@@ -446,10 +451,15 @@ Public Class frmPlotter
             If ofd.ShowDialog = DialogResult.OK Then
                 If IO.File.Exists(ofd.FileName) Then
                     'now check the plotfile
+                    If Not Generic.IsValidPlottFilePath(ofd.FileName) Then
+                        MsgBox("Selected File is not a plotfile.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Error")
+                        Exit Sub
+                    End If
                     FileParts = Split(IO.Path.GetFileName(ofd.FileName), "_")
                     FilePath = IO.Path.GetDirectoryName(ofd.FileName)
-
                 End If
+            Else
+                Exit Sub
             End If
         Catch ex As Exception
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
@@ -510,4 +520,5 @@ Public Class frmPlotter
             Next
         End If
     End Sub
+
 End Class
