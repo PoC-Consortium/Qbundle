@@ -1,6 +1,7 @@
 ﻿Imports System.Management
 Imports System.Net
 Imports System.Net.Sockets
+Imports System.Text.RegularExpressions
 Imports Microsoft.Win32
 
 Friend Class Generic
@@ -742,6 +743,15 @@ Friend Class Generic
         Return False
     End Function
 
+    Friend Shared Function IsValidPlottFilename(filename As String) As Boolean
+        If IsNothing(filename) Then Return False
+        Return Regex.IsMatch(filename, "\d+_\d+_\d+_\d+")
+    End Function
+
+    Friend Shared Function IsValidPlottFilePath(filepath As String) As Boolean
+        If IsNothing(filepath) Then Return False
+        Return IsValidPlottFilename(IO.Path.GetFileName(filepath))
+    End Function
 
 
 End Class
