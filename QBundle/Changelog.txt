@@ -16,15 +16,15 @@ Iconify(?)
 Change to Chrome(?) CEFSharp but must check license before it is implemented.
 
 ~1.9
-Updated pool lists.
-Ability to set manual broadcast address.
-Tray icon updated.
-Improved Vanity address generator speed
-Resume plotting can now contain spaces in path to plot file.
-Ability to show coinmarketcap info in different currencies. Issue #20
-Sigint improved to work on windows 7 Issue #18
-Updated database repositories.
-Wallet should now be more stable while solomining on H2
+* Updated pool lists.
+* Ability to set manual broadcast address.
+* Tray icon updated.
+* Improved Vanity address generator speed.
+* Resume plotting can now contain spaces in path to plot file.
+* Ability to show coinmarketcap info in different currencies. Issue #20
+* Sigint improved to work on windows 7 Issue #18
+* Updated database repositories.
+* Wallet should now be more stable while solomining on H2 db.
 
 1.8
 * Changing database should no longer cause issues.
