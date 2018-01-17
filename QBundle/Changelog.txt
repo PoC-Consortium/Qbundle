@@ -10,10 +10,13 @@ Known problems:
 
 ''''To Be done:''''
 pipeclient+server implementation in service
-Make More data Updatabable. Like online wallets and pool lists.
 minimize to tray on exit ?
 Iconify(?)
 Change to Chrome(?) CEFSharp but must check license before it is implemented.
+
+v2.0
+Check for updates now automatically updates Pool/wallet info
+
 
 ~1.9
 * Updated pool lists.

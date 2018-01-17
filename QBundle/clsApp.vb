@@ -2,6 +2,7 @@
 Imports System.IO.Compression
 Imports System.Net
 Imports System.Threading
+Imports System.Xml.Serialization
 
 Public Class clsApp
     Public Event DownloadDone(ByVal AppId As Integer)
@@ -11,6 +12,7 @@ Public Class clsApp
     Private Structure StrucApps
         Dim LocalFound As Boolean
         Dim RemoteUrl As String
+        Dim FullUrl As String
         Dim RemoteVersion As String
         Dim LocalVersion As String
         Dim ExtractToDir As String
@@ -19,11 +21,11 @@ Public Class clsApp
     End Structure
     Private _Apps() As StrucApps
     Private _Aborted As Boolean
-    Private _Repositories() As String
+
     Private _UpdateNotifyState As Integer
     Public ErrMSg As String
     Public UpdateInfo As String
-
+    Public DynamicInfo As UpdateObject
     Public Sub New()
 
         'our appstore
@@ -35,21 +37,77 @@ Public Class clsApp
             _Apps(i).LocalVersion = ""
             _Apps(i).RemoteVersion = ""
             _Apps(i).RemoteUrl = ""
+            _Apps(i).FullUrl = ""
             _Apps(i).ExtractToDir = ""
             _Apps(i).Updated = False
             _Apps(i).Message = ""
         Next
-        UpdateInfo = "QInfo"
+        UpdateInfo = "QInfo.xml"
+        DynamicInfo = New UpdateObject
+
         'repositories to download from
-        ReDim _Repositories(1)
-        _Repositories(0) = "http://files.getburst.net/"
-        _Repositories(1) = "http://files.getburst.net/"
+
 
 
 
     End Sub
 
 #Region " Detection "
+
+    Public Sub LoadDynamicInfo()
+        'load previous data
+        Dim data As String = ""
+        If DynamicInfo.Repositories(0) = "" Then LoadUpdateInfoXML()
+        If Q.settings.CheckForUpdates Then
+            If Not IsNothing(DynamicInfo.Repositories) Then
+                For i = 0 To UBound(DynamicInfo.Repositories)
+                    Dim Http As New clsHttp
+                    data = Http.GetUrl(DynamicInfo.Repositories(i) & UpdateInfo)
+                    If Http.Errmsg <> "" Then ErrMSg = Http.Errmsg
+                    Http = Nothing
+                    If data.Length <> 0 Then Exit For
+                Next
+            End If
+        End If
+
+        'save info if sucessfull. if not load previous config
+        If data.Length > 0 Then
+            Try
+                IO.File.WriteAllText(QGlobal.BaseDir & "UpdateInfo.xml", data)
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+            'xml deserialize
+            Try
+                Dim x As New XmlSerializer(GetType(UpdateObject))
+                Dim Reader As TextReader = New StringReader(data)
+                DynamicInfo = DirectCast(x.Deserialize(Reader), UpdateObject)
+                Reader.Close()
+                Reader.Dispose()
+                x = Nothing
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+        End If
+    End Sub
+    Public Sub LoadUpdateInfoXML()
+
+        Try
+            Dim data As String
+            data = File.ReadAllText(QGlobal.BaseDir & "UpdateInfo.xml")
+            Dim x As New XmlSerializer(GetType(UpdateObject))
+            Dim Reader As TextReader = New StringReader(data)
+            DynamicInfo = DirectCast(x.Deserialize(Reader), UpdateObject)
+            Reader.Close()
+            Reader.Dispose()
+            x = Nothing
+        Catch ex As Exception
+            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+
+    End Sub
+
+
     Public Sub SetLocalInfo()
         'Set Launcher version
         Launcher()
@@ -62,41 +120,28 @@ Public Class clsApp
         'check portable maria
         MariaDB()
 
-        XPlotter()
+        Xplotter()
         BlagoMiner()
     End Sub
     Public Function SetRemoteInfo() As Boolean
-        Dim data As String = ""
-        Dim AllOk As Boolean = False
-        For i = 0 To UBound(_Repositories)
-            Dim Http As New clsHttp
-            data = Http.GetUrl(_Repositories(i) & UpdateInfo)
-            If Http.Errmsg <> "" Then ErrMSg = Http.Errmsg
-            Http = Nothing
-            If data.Length <> 0 Then Exit For
-        Next
+        LoadDynamicInfo()
 
-        'ok we have the data to parse
-        'now we need to translate the names into correct integer values corresponding to Appname enum
+        Dim allok As Boolean = False
         Dim AppId As Integer
-        If data.Length <> 0 Then
-            Dim Lines() As String = Split(data, vbCrLf)
-            For Each Line In Lines
-                If Trim(Line) <> "" Then
-                    Try
-                        Dim Cell() As String = Split(Line, "|")
-                        AppId = CInt([Enum].Parse(GetType(QGlobal.AppNames), Cell(0))) 'converting name to appid 'if not exist it will move on
-                        _Apps(AppId).RemoteVersion = Cell(1)
-                        _Apps(AppId).ExtractToDir = Cell(2)
-                        _Apps(AppId).RemoteUrl = Cell(3)
-                        _Apps(AppId).Updated = False 'reset updates
-                        AllOk = True
-                    Catch ex As Exception
-                        If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
-                    End Try
-                End If
-            Next
-        End If
+        'setting AppInfo
+        For x As Integer = 0 To UBound(DynamicInfo.Apps)
+            Try
+                AppId = CInt([Enum].Parse(GetType(QGlobal.AppNames), DynamicInfo.Apps(x).Name)) 'converting name to appid 'if not exist it will move on
+                _Apps(AppId).RemoteVersion = DynamicInfo.Apps(x).RemoteVersion
+                _Apps(AppId).ExtractToDir = ""
+                _Apps(AppId).RemoteUrl = DynamicInfo.Apps(x).UpgradeUrl
+                _Apps(AppId).FullUrl = DynamicInfo.Apps(x).FullUrl
+                _Apps(AppId).Updated = False 'reset updates
+                allok = True
+            Catch ex As Exception
+                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
+        Next
 
         Return AllOk
     End Function
@@ -324,7 +369,7 @@ Public Class clsApp
         Dim DLOk As Boolean = False
         Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
         Dim File As FileStream = Nothing
-        For x = 0 To UBound(_Repositories) 'try next repo if fail.
+        For x = 0 To UBound(DynamicInfo.Repositories) 'try next repo if fail.
             Try
                 Dim bBuffer(262143) As Byte '256k chunks downloadbuffer
                 Dim TotalRead As Long = 0
@@ -333,7 +378,7 @@ Public Class clsApp
                 Dim percent As Integer = 0
                 Dim url As String = ""
                 If FromRepos Then
-                    url = _Repositories(x) & _Apps(AppId).RemoteUrl
+                    url = DynamicInfo.Repositories(x) & _Apps(AppId).RemoteUrl
                 Else
                     url = _Apps(AppId).RemoteUrl
                 End If
@@ -598,5 +643,42 @@ Public Class clsApp
         Return _Apps(appid).Message
     End Function
 #End Region
+
+
+    <Serializable>
+    Public Class UpdateObject
+        Public Structure AppObject
+            Public Name As String
+            Public UpgradeUrl As String
+            Public FullUrl As String
+            Public RemoteVersion As String
+            Public UpdateInfo As String
+        End Structure
+
+        Public Structure PoolObject
+            Public Name As String
+            Public Address As String
+            Public Port As String
+            Public BurstAddress As String
+            Public DeadLine As String
+        End Structure
+        Public Structure WalletObject
+            Public Name As String
+            Public Address As String
+        End Structure
+        Public Apps() As AppObject
+        Public Pools() As PoolObject
+        Public Wallets() As WalletObject
+        Public Repositories() As String
+
+        Sub New()
+            ReDim Apps(0)
+            ReDim Pools(0)
+            ReDim Wallets(0)
+            ReDim Repositories(0)
+            Wallets(0).Name = "Local wallet"
+
+        End Sub
+    End Class
 
 End Class

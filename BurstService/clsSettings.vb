@@ -237,7 +237,7 @@
 
         _FirstRun = True
         _CheckForUpdates = True
-        _Upgradev = 11
+        _Upgradev = 20
         _AlwaysAdmin = False
         _Repo = ""
         _QBMode = 1 '0 = AIO 1 = Launcher

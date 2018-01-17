@@ -112,8 +112,8 @@
         End If
 
         Generic.UpdateLocalWallet()
-        For t As Integer = 0 To UBound(QGlobal.Wallets)
-            cmbSelectWallet.Items.Add(QGlobal.Wallets(t).Name)
+        For t As Integer = 0 To UBound(Q.App.DynamicInfo.Wallets)
+            cmbSelectWallet.Items.Add(Q.App.DynamicInfo.Wallets(t).Name)
         Next
         cmbSelectWallet.SelectedIndex = 0
 
@@ -1057,7 +1057,7 @@
     Private Sub cmbSelectWallet_Click(sender As Object, e As EventArgs) Handles cmbSelectWallet.SelectedIndexChanged
         Try
             If OneMinCron.Enabled = True Then
-                Dim address = QGlobal.Wallets(cmbSelectWallet.SelectedIndex).Address
+                Dim address = Q.App.DynamicInfo.Wallets(cmbSelectWallet.SelectedIndex).Address
                 If cmbSelectWallet.SelectedIndex > 0 Then
                     wb1.Navigate(address)
                 Else

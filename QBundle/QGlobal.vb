@@ -11,19 +11,7 @@
         Friend AVX2 As Boolean
     End Structure
     Friend Shared CPUInstructions As strucCPUInstructions
-    Friend Structure strucPools
-        Friend Name As String
-        Friend Address As String
-        Friend Port As String
-        Friend BurstAddress As String
-        Friend DeadLine As String
-    End Structure
-    Friend Structure strucWallets
-        Friend Name As String
-        Friend Address As String
-    End Structure
-    Friend Shared Pools() As strucPools
-    Friend Shared Wallets() As strucWallets
+
     Friend Structure strucWalletLaunch
         Friend NormalLaunch As String
         Friend Export As String
@@ -96,107 +84,12 @@
         'WalletLaunchString.NormalLaunch = "-cp burst.jar;conf brs.Burst"
         'WalletLaunchString.Import = "-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
         'WalletLaunchString.Export = "-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
-        InitPools()
-        InitOnlineWallets()
+
+
         InitCPUInstructions()
         SetDefaultDbinfo()
     End Sub
-    Private Shared Sub InitPools()
 
-        ReDim Pools(14)
-
-        Pools(0).Name = "CryptoGuru Pool 50/50"
-        Pools(0).Address = "burst.cryptoguru.org"
-        Pools(0).Port = "8124"
-        Pools(0).BurstAddress = "BURST-8KLL-PBYV-6DBC-AM942"
-        Pools(0).DeadLine = "80000000"
-
-        Pools(1).Name = "CryptoGuru Pool 0-100"
-        Pools(1).Address = "0-100-pool.burst.cryptoguru.org"
-        Pools(1).Port = "8124"
-        Pools(1).BurstAddress = "BURST-HKML-NRG6-VBRA-2F8PS"
-        Pools(1).DeadLine = "80000000"
-
-        Pools(2).Name = "Fastpool.info"
-        Pools(2).Address = "wallet.fastpool.info"
-        Pools(2).Port = "8080"
-        Pools(2).BurstAddress = "BURST-YMJP-8NNG-6HCJ-29XYJ"
-        Pools(2).DeadLine = "80000000"
-
-        Pools(3).Name = "Dobropool aka 100PB online"
-        Pools(3).Address = "100pb.online"
-        Pools(3).Port = "8124"
-        Pools(3).BurstAddress = "BURST-TNHA-2CVB-UQQ8-A9XCQ"
-        Pools(3).DeadLine = "604800"
-
-        Pools(4).Name = "pool poolofd32th"
-        Pools(4).Address = "pool.poolofd32th.club"
-        Pools(4).Port = "8124"
-        Pools(4).BurstAddress = "BURST-GATX-U4KB-7AWU-H3N8S"
-        Pools(4).DeadLine = "2592000"
-
-        Pools(5).Name = "xen poolofd32th"
-        Pools(5).Address = "xen.poolofd32th.club"
-        Pools(5).Port = "8122"
-        Pools(5).BurstAddress = "BURST-LBQ2-XLPT-S2S8-64ZG5"
-        Pools(5).DeadLine = "2592000"
-
-        Pools(6).Name = "falconburstpool.xyz"
-        Pools(6).Address = "falconburstpool.xyz"
-        Pools(6).Port = "8080"
-        Pools(6).BurstAddress = "BURST-UTS4-HPFZ-XJHL-B9BB2"
-        Pools(6).DeadLine = "43200000"
-
-        Pools(7).Name = "pool.burstpay.net"
-        Pools(7).Address = "pool.burstpay.net"
-        Pools(7).Port = "8124"
-        Pools(7).BurstAddress = "BURST-E4ZX-KCBL-5F8A-CPU6G"
-        Pools(7).DeadLine = "2592000"
-
-        Pools(8).Name = "0-100 burst-team us"
-        Pools(8).Address = "0-100.burst-team.us"
-        Pools(8).Port = "8080"
-        Pools(8).BurstAddress = "BURST-YBW4-A3D3-LVUF-F9WVJ"
-        Pools(8).DeadLine = "2592000"
-
-        Pools(9).Name = "pool burst-team us"
-        Pools(9).Address = "pool.burst-team.us"
-        Pools(9).Port = "8080"
-        Pools(9).BurstAddress = "BURST-WRM9-F6JU-NVX5-D7VXS"
-        Pools(9).DeadLine = "2592000"
-
-        Pools(10).Name = "burstneon.com"
-        Pools(10).Address = "burstneon.com"
-        Pools(10).Port = "8080"
-        Pools(10).BurstAddress = "BURST-YXZW-JH7M-QKR9-9PKBN"
-        Pools(10).DeadLine = "6048000"
-
-        Pools(11).Name = "burst.btfg.space"
-        Pools(11).Address = "burst.btfg.space"
-        Pools(11).Port = "8124"
-        Pools(11).BurstAddress = "BURST-6YBP-TDPA-27KD-9MQVX"
-        Pools(11).DeadLine = "169344000"
-
-        Pools(12).Name = "pool.burstcoin.ro"
-        Pools(12).Address = "pool.burstcoin.ro"
-        Pools(12).Port = "8080"
-        Pools(12).BurstAddress = "BURST-GG4B-34Y9-ZXGV-FNTNJ"
-        Pools(12).DeadLine = "7889231"
-
-        Pools(13).Name = "pool.burstcoin.space"
-        Pools(13).Address = "pool.burstcoin.space"
-        Pools(13).Port = "8124"
-        Pools(13).BurstAddress = "BURST-SPAC-EWWF-CRX2-78Z6Z"
-        Pools(13).DeadLine = "2592000"
-
-        Pools(14).Name = "Burst Minig club"
-        Pools(14).Address = "pool.burstmining.club"
-        Pools(14).Port = "8124"
-        Pools(14).BurstAddress = "BURST-RNMB-9FJW-3BJW-F3Z3M"
-        Pools(14).DeadLine = "129600"
-
-
-    End Sub
     Private Shared Sub InitCPUInstructions()
 
         Try
@@ -246,30 +139,7 @@
 
 
     End Sub
-    Private Shared Sub InitOnlineWallets()
 
-        ReDim Wallets(6)
-        Wallets(0).Name = "Local wallet"
-
-        Wallets(1).Name = "Cryptoguru online wallet"
-        Wallets(1).Address = "https://wallet.burst.cryptoguru.org:8125"
-
-        Wallets(2).Name = "Poolofd32th wallet 1"
-        Wallets(2).Address = "https://wallet.poolofd32th.club"
-
-        Wallets(3).Name = "Poolofd32th wallet 2"
-        Wallets(3).Address = "https://wallet2.poolofd32th.club"
-
-        Wallets(4).Name = "Burst-team Wallet 3"
-        Wallets(4).Address = "https://wallet3.burst-team.us:2083"
-
-        Wallets(5).Name = "Burst-team Wallet 4"
-        Wallets(5).Address = "https://wallet4.burst-team.us:2083"
-
-        Wallets(6).Name = "Burst-team Wallet 5"
-        Wallets(6).Address = "https://wallet5.burst-team.us:2083"
-
-    End Sub
 
 
     Private Shared Sub SetDefaultDbinfo()

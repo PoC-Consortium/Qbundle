@@ -5,10 +5,10 @@
 
         cmlServers.Items.Clear()
         Dim mnuitm As ToolStripMenuItem
-        For t As Integer = 0 To UBound(QGlobal.Pools)
+        For t As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
             mnuitm = New ToolStripMenuItem
-            mnuitm.Name = QGlobal.Pools(t).Name
-            mnuitm.Text = QGlobal.Pools(t).Name
+            mnuitm.Name = Q.App.DynamicInfo.Pools(t).Name
+            mnuitm.Text = Q.App.DynamicInfo.Pools(t).Name
             AddHandler(mnuitm.Click), AddressOf SelectPoolID
             cmlServers.Items.Add(mnuitm)
         Next
@@ -67,7 +67,7 @@
             Dim buffer() As String = Nothing
             Dim AccountID As String = ""
             Dim PoolRS As String = ""
-            Dim result() As String = Split(Replace(http.GetUrl(QGlobal.Wallets(WalletId).Address & "/burst?requestType=getRewardRecipient&account=" & PlotAccount), Chr(34), ""), ",")
+            Dim result() As String = Split(Replace(http.GetUrl(Q.App.DynamicInfo.Wallets(WalletId).Address & "/burst?requestType=getRewardRecipient&account=" & PlotAccount), Chr(34), ""), ",")
             If result(0).StartsWith("{rewardRecipient:") Then
                 AccountID = Mid(result(0), 18)
             Else
@@ -91,12 +91,12 @@
             End If
 
 
-            For t As Integer = 0 To UBound(QGlobal.Pools)
-                If QGlobal.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
+            For t As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
+                If Q.App.DynamicInfo.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
                     Dim msg As String
                     msg = "Your reward recipient Is set to" & vbCrLf
-                    msg &= "Account: " & QGlobal.Pools(t).BurstAddress & vbCrLf
-                    msg &= "Name: " & QGlobal.Pools(t).Name
+                    msg &= "Account: " & Q.App.DynamicInfo.Pools(t).BurstAddress & vbCrLf
+                    msg &= "Name: " & Q.App.DynamicInfo.Pools(t).Name
                     lblReward.Text = msg
                     lblReward.Visible = True
                     SelectPoolByAccountID(AccountID)
@@ -104,7 +104,7 @@
                 End If
             Next
 
-            result = Split(Replace(http.GetUrl(QGlobal.Wallets(WalletId).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
+            result = Split(Replace(http.GetUrl(Q.App.DynamicInfo.Wallets(WalletId).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
             If UBound(result) > 0 Then
                 For t As Integer = 0 To UBound(result)
                     If result(t).StartsWith("name:") Then
@@ -143,30 +143,30 @@
             If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
             Exit Sub
         End Try
-        For x As Integer = 0 To UBound(QGlobal.Pools)
-            If mnuitm.Text = QGlobal.Pools(x).Name Then
-                txtMiningServer.Text = QGlobal.Pools(x).Address
-                nrMiningPort.Value = CDec(Val(QGlobal.Pools(x).Port))
-                txtUpdateServer.Text = QGlobal.Pools(x).Address
-                nrUpdatePort.Value = CDec(Val(QGlobal.Pools(x).Port))
-                txtInfoServer.Text = QGlobal.Pools(x).Address
-                nrInfoPort.Value = CDec(Val(QGlobal.Pools(x).Port))
-                txtDeadLine.Text = QGlobal.Pools(x).DeadLine
+        For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
+            If mnuitm.Text = Q.App.DynamicInfo.Pools(x).Name Then
+                txtMiningServer.Text = Q.App.DynamicInfo.Pools(x).Address
+                nrMiningPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
+                txtUpdateServer.Text = Q.App.DynamicInfo.Pools(x).Address
+                nrUpdatePort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
+                txtInfoServer.Text = Q.App.DynamicInfo.Pools(x).Address
+                nrInfoPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
+                txtDeadLine.Text = Q.App.DynamicInfo.Pools(x).DeadLine
                 Exit For
             End If
         Next
 
     End Sub
     Private Sub SelectPoolByAccountID(ByVal AccountID As String)
-        For x As Integer = 0 To UBound(QGlobal.Pools)
-            If AccountID = Q.Accounts.ConvertRSToId(QGlobal.Pools(x).BurstAddress) Then
-                txtMiningServer.Text = QGlobal.Pools(x).Address
-                nrMiningPort.Value = CDec(Val(QGlobal.Pools(x).Port))
-                txtUpdateServer.Text = QGlobal.Pools(x).Address
-                nrUpdatePort.Value = CDec(Val(QGlobal.Pools(x).Port))
-                txtInfoServer.Text = QGlobal.Pools(x).Address
-                nrInfoPort.Value = CDec(Val(QGlobal.Pools(x).Port))
-                txtDeadLine.Text = QGlobal.Pools(x).DeadLine
+        For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
+            If AccountID = Q.Accounts.ConvertRSToId(Q.App.DynamicInfo.Pools(x).BurstAddress) Then
+                txtMiningServer.Text = Q.App.DynamicInfo.Pools(x).Address
+                nrMiningPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
+                txtUpdateServer.Text = Q.App.DynamicInfo.Pools(x).Address
+                nrUpdatePort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
+                txtInfoServer.Text = Q.App.DynamicInfo.Pools(x).Address
+                nrInfoPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
+                txtDeadLine.Text = Q.App.DynamicInfo.Pools(x).DeadLine
                 Exit For
             End If
         Next
@@ -466,7 +466,7 @@
 
         Generic.UpdateLocalWallet()
 
-        Dim buffer() As String = Split(Replace(QGlobal.Wallets(0).Address, "http://", ""), ":")
+        Dim buffer() As String = Split(Replace(Q.App.DynamicInfo.Wallets(0).Address, "http://", ""), ":")
         nrMiningPort.Value = CDec(Val(buffer(1)))
         nrUpdatePort.Value = CDec(Val(buffer(1)))
         nrInfoPort.Value = CDec(Val(buffer(1)))

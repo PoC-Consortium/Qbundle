@@ -106,6 +106,8 @@ Friend Class Generic
                 Case 18 '18 -19
                     Q.settings.Currency = "USD"
                     Q.settings.SaveSettings()
+                Case 19 '19-20
+
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do
@@ -652,7 +654,7 @@ Friend Class Generic
         Else
             url = "http://" & s(0) & ":" & s(1)
         End If
-        QGlobal.Wallets(0).Address = url
+        Q.App.DynamicInfo.Wallets(0).Address = url
     End Sub
     Friend Shared Function GetStartNonce(ByVal AccountID As String, ByVal Length As Double) As Double
 
@@ -693,7 +695,7 @@ Friend Class Generic
             Dim addresses = Dns.GetHostEntry(ntpServer).AddressList
             Dim ipEndPoint = New IPEndPoint(addresses(0), 123)
 
-            Socket.SendTimeout = 5000
+            socket.SendTimeout = 5000
             socket.ReceiveTimeout = 5000
 
             socket.Connect(ipEndPoint)

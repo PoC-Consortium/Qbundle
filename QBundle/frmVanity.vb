@@ -117,7 +117,7 @@ Public Class frmVanity
 
         'if account returns it has a public key. we do not want to give password to existing address
         Dim http As New clsHttp
-        Dim result As String = http.GetUrl(QGlobal.Wallets(1).Address & "/burst?requestType=getAccount&account=BURST-" & Addr)
+        Dim result As String = http.GetUrl(Q.App.DynamicInfo.Wallets(1).Address & "/burst?requestType=getAccount&account=BURST-" & Addr)
         If result.Contains("errorDescription") Then Return True
 
         Return False
