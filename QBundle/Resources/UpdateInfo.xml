@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UpdateObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Apps>
+    <AppObject>
+      <Name>Launcher</Name>
+      <UpgradeUrl>Launcher/Qb1.9Upgrade.zip</UpgradeUrl>
+      <FullUrl>Launcher/Qb1.9Upgrade.zip</FullUrl>
+      <RemoteVersion>1.9</RemoteVersion>
+      <UpdateInfo>V 1.9</UpdateInfo>
+    </AppObject>
+    <AppObject>
+      <Name>BRS</Name>
+      <UpgradeUrl>NRS/burstcoin1.3.6cg.zip</UpgradeUrl>
+      <FullUrl>NRS/burstcoin1.3.6cg.zip</FullUrl>
+      <RemoteVersion>1.3.6</RemoteVersion>
+      <UpdateInfo>V 1.3.6</UpdateInfo>
+    </AppObject>
+    <AppObject>
+      <Name>JavaPortable</Name>
+      <UpgradeUrl>Java/Java1.8.0_152.zip</UpgradeUrl>
+      <FullUrl>Java/Java1.8.0_152.zip</FullUrl>
+      <RemoteVersion>1.8.0_152</RemoteVersion>
+      <UpdateInfo>V 1.8.0_152</UpdateInfo>
+    </AppObject>
+    <AppObject>
+      <Name>MariaPortable</Name>
+      <UpgradeUrl>MariaDB/MariaDb-5.5.29.zip</UpgradeUrl>
+      <FullUrl>MariaDB/MariaDb-5.5.29.zip</FullUrl>
+      <RemoteVersion>5.5.29</RemoteVersion>
+      <UpdateInfo>V 5.5.29</UpdateInfo>
+    </AppObject>
+    <AppObject>
+      <Name>Xplotter</Name>
+      <UpgradeUrl>plotter/XPlotter.v1.0.zip</UpgradeUrl>
+      <FullUrl>plotter/XPlotter.v1.0.zip</FullUrl>
+      <RemoteVersion>1.0</RemoteVersion>
+      <UpdateInfo>V 1.0</UpdateInfo>
+    </AppObject>
+    <AppObject>
+      <Name>BlagoMiner</Name>
+      <UpgradeUrl>miner/BlagoMiner_1.170820.zip</UpgradeUrl>
+      <FullUrl>miner/BlagoMiner_1.170820.zip</FullUrl>
+      <RemoteVersion>1.170820</RemoteVersion>
+      <UpdateInfo>V 1.170820</UpdateInfo>
+    </AppObject>
+  </Apps>
+  <Pools>
+    <PoolObject>
+      <Name>CryptoGuru Pool 50/50</Name>
+      <Address>burst.cryptoguru.org</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-8KLL-PBYV-6DBC-AM942</BurstAddress>
+      <DeadLine>80000000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>CryptoGuru Pool 0-100</Name>
+      <Address>0-100-pool.burst.cryptoguru.org</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-HKML-NRG6-VBRA-2F8PS</BurstAddress>
+      <DeadLine>80000000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>Fastpool.info</Name>
+      <Address>wallet.fastpool.info</Address>
+      <Port>8080</Port>
+      <BurstAddress>BURST-YMJP-8NNG-6HCJ-29XYJ</BurstAddress>
+      <DeadLine>80000000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>Dobropool aka 100PB online</Name>
+      <Address>100pb.online</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-TNHA-2CVB-UQQ8-A9XCQ</BurstAddress>
+      <DeadLine>604800</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>pool poolofd32th</Name>
+      <Address>pool.poolofd32th.club</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-GATX-U4KB-7AWU-H3N8S</BurstAddress>
+      <DeadLine>2592000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>xen poolofd32th</Name>
+      <Address>xen.poolofd32th.club</Address>
+      <Port>8122</Port>
+      <BurstAddress>BURST-LBQ2-XLPT-S2S8-64ZG5</BurstAddress>
+      <DeadLine>2592000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>falconburstpool.xyz</Name>
+      <Address>falconburstpool.xyz</Address>
+      <Port>8080</Port>
+      <BurstAddress>BURST-UTS4-HPFZ-XJHL-B9BB2</BurstAddress>
+      <DeadLine>43200000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>pool.burstpay.net</Name>
+      <Address>pool.burstpay.net</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-E4ZX-KCBL-5F8A-CPU6G</BurstAddress>
+      <DeadLine>2592000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>0-100 burst-team us</Name>
+      <Address>0-100.burst-team.us</Address>
+      <Port>8080</Port>
+      <BurstAddress>BURST-YBW4-A3D3-LVUF-F9WVJ</BurstAddress>
+      <DeadLine>2592000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>pool burst-team us</Name>
+      <Address>pool.burst-team.us</Address>
+      <Port>8080</Port>
+      <BurstAddress>BURST-WRM9-F6JU-NVX5-D7VXS</BurstAddress>
+      <DeadLine>2592000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>burstneon.com</Name>
+      <Address>burstneon.com</Address>
+      <Port>8080</Port>
+      <BurstAddress>BURST-YXZW-JH7M-QKR9-9PKBN</BurstAddress>
+      <DeadLine>6048000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>burst.btfg.space</Name>
+      <Address>burst.btfg.space</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-6YBP-TDPA-27KD-9MQVX</BurstAddress>
+      <DeadLine>169344000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>pool.burstcoin.ro</Name>
+      <Address>pool.burstcoin.ro</Address>
+      <Port>8080</Port>
+      <BurstAddress>BURST-GG4B-34Y9-ZXGV-FNTNJ</BurstAddress>
+      <DeadLine>7889231</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>pool.burstcoin.space</Name>
+      <Address>pool.burstcoin.space</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-SPAC-EWWF-CRX2-78Z6Z</BurstAddress>
+      <DeadLine>2592000</DeadLine>
+    </PoolObject>
+    <PoolObject>
+      <Name>Burst Minig club</Name>
+      <Address>pool.burstmining.club</Address>
+      <Port>8124</Port>
+      <BurstAddress>BURST-RNMB-9FJW-3BJW-F3Z3M</BurstAddress>
+      <DeadLine>129600</DeadLine>
+    </PoolObject>
+  </Pools>
+  <Wallets>
+    <WalletObject>
+      <Name>Local wallet</Name>
+    </WalletObject>
+    <WalletObject>
+      <Name>Cryptoguru online wallet</Name>
+      <Address>https://wallet.burst.cryptoguru.org:8125</Address>
+    </WalletObject>
+    <WalletObject>
+      <Name>Poolofd32th wallet 1</Name>
+      <Address>https://wallet.poolofd32th.club</Address>
+    </WalletObject>
+    <WalletObject>
+      <Name>Poolofd32th wallet 2</Name>
+      <Address>https://wallet2.poolofd32th.club</Address>
+    </WalletObject>
+    <WalletObject>
+      <Name>Burst-team Wallet 3</Name>
+      <Address>https://wallet3.burst-team.us:2083</Address>
+    </WalletObject>
+    <WalletObject>
+      <Name>Burst-team Wallet 4</Name>
+      <Address>https://wallet4.burst-team.us:2083</Address>
+    </WalletObject>
+    <WalletObject>
+      <Name>Burst-team Wallet 5</Name>
+      <Address>https://wallet5.burst-team.us:2083</Address>
+    </WalletObject>
+  </Wallets>
+  <Repositories>
+    <string>http://files.getburst.net/</string>
+  </Repositories>
+</UpdateObject>
