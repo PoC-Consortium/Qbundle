@@ -35,13 +35,20 @@
             End
         End If
 
+        If Generic.DriveCompressed(QGlobal.BaseDir) Then
+            Dim Msg As String = "You are running Qbundle On a NTFS compressed drive or folder."
+            Msg &= " This is not supported and will cause unstable environment." & vbCrLf & vbCrLf
+            Msg &= "Please move Qbundle to another drive or decompress the drive or folder."
+            MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
+
+        End If
 
         If Q.settings.DebugMode = True Then QB.Generic.DebugMe = True
         If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
         LastException = Now 'for brs exception monitoring
 
         If Not QB.Generic.CheckWritePermission Then
-            MsgBox("Qbundle do not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
+            MsgBox("Qbundle Do Not have writepermission To it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
             End
         End If
 
@@ -922,7 +929,7 @@
                         p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
                         Dim thepath As String = Q.settings.DynPlotPath
                         If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
-                        p.StartInfo.Arguments = "-id " & Q.settings.DynPlotAcc & " -sn " & Sn & " -n " & n & " -path " & thepath & " -mem 1G"
+                        p.StartInfo.Arguments = "-id " & Q.settings.DynPlotAcc & " -sn " & Sn & " -n " & n & " -t " & Q.settings.DynThreads.ToString & " -path " & thepath & " -mem " & Q.settings.DynRam.ToString & "G"
                         p.StartInfo.UseShellExecute = False
                         If Q.settings.DynPlotHide Then
                             p.StartInfo.CreateNoWindow = True

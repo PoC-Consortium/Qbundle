@@ -732,7 +732,13 @@ Friend Class Generic
         Return False
 
     End Function
-
+    Friend Shared Function DriveCompressed(ByVal path As String) As Boolean
+        Dim dirInfo As IO.DirectoryInfo = New IO.DirectoryInfo("d:\")
+        If (dirInfo.Attributes And IO.FileAttributes.Compressed) = IO.FileAttributes.Compressed Then
+            Return True
+        End If
+        Return False
+    End Function
     Friend Shared Function CheckDotNet() As Boolean
         Const subkey As String = "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"
         Using ndpKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey)

@@ -55,12 +55,19 @@ Partial Class frmDynamicPlotting
         Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.nrRam = New System.Windows.Forms.NumericUpDown()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.nrThreads = New System.Windows.Forms.NumericUpDown()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.cmImport.SuspendLayout()
+        CType(Me.nrRam, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox3
@@ -70,13 +77,18 @@ Partial Class frmDynamicPlotting
         Me.GroupBox3.Controls.Add(Me.rDisable)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(359, 324)
+        Me.GroupBox3.Size = New System.Drawing.Size(359, 356)
         Me.GroupBox3.TabIndex = 34
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Settings"
         '
         'pnlOnOff
         '
+        Me.pnlOnOff.Controls.Add(Me.Label17)
+        Me.pnlOnOff.Controls.Add(Me.nrRam)
+        Me.pnlOnOff.Controls.Add(Me.Label16)
+        Me.pnlOnOff.Controls.Add(Me.nrThreads)
+        Me.pnlOnOff.Controls.Add(Me.Label7)
         Me.pnlOnOff.Controls.Add(Me.lblFreeSpace)
         Me.pnlOnOff.Controls.Add(Me.lblPlotSize)
         Me.pnlOnOff.Controls.Add(Me.Label5)
@@ -93,7 +105,7 @@ Partial Class frmDynamicPlotting
         Me.pnlOnOff.Enabled = False
         Me.pnlOnOff.Location = New System.Drawing.Point(10, 66)
         Me.pnlOnOff.Name = "pnlOnOff"
-        Me.pnlOnOff.Size = New System.Drawing.Size(338, 248)
+        Me.pnlOnOff.Size = New System.Drawing.Size(338, 280)
         Me.pnlOnOff.TabIndex = 33
         '
         'lblFreeSpace
@@ -263,7 +275,7 @@ Partial Class frmDynamicPlotting
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(535, 307)
+        Me.btnSave.Location = New System.Drawing.Point(535, 341)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(100, 29)
         Me.btnSave.TabIndex = 37
@@ -278,7 +290,7 @@ Partial Class frmDynamicPlotting
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 342)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 373)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(623, 98)
         Me.GroupBox1.TabIndex = 38
@@ -367,12 +379,57 @@ Partial Class frmDynamicPlotting
         Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(211, 254)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(22, 13)
+        Me.Label17.TabIndex = 37
+        Me.Label17.Text = "GB"
+        '
+        'nrRam
+        '
+        Me.nrRam.Location = New System.Drawing.Point(159, 250)
+        Me.nrRam.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nrRam.Name = "nrRam"
+        Me.nrRam.Size = New System.Drawing.Size(48, 20)
+        Me.nrRam.TabIndex = 36
+        Me.nrRam.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(115, 253)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(44, 13)
+        Me.Label16.TabIndex = 35
+        Me.Label16.Text = "Memory"
+        '
+        'nrThreads
+        '
+        Me.nrThreads.Location = New System.Drawing.Point(53, 250)
+        Me.nrThreads.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nrThreads.Name = "nrThreads"
+        Me.nrThreads.Size = New System.Drawing.Size(48, 20)
+        Me.nrThreads.TabIndex = 33
+        Me.nrThreads.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 253)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(46, 13)
+        Me.Label7.TabIndex = 34
+        Me.Label7.Text = "Threads"
+        '
         'frmDynamicPlotting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(647, 454)
+        Me.ClientSize = New System.Drawing.Size(647, 482)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label6)
@@ -393,6 +450,8 @@ Partial Class frmDynamicPlotting
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.cmImport.ResumeLayout(False)
+        CType(Me.nrRam, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -428,4 +487,9 @@ Partial Class frmDynamicPlotting
     Friend WithEvents lblDeselectAll As Label
     Friend WithEvents lblSelectAll As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents nrRam As NumericUpDown
+    Friend WithEvents Label16 As Label
+    Friend WithEvents nrThreads As NumericUpDown
+    Friend WithEvents Label7 As Label
 End Class

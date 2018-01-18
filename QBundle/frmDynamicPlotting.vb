@@ -39,6 +39,8 @@
         Q.settings.DynPlotSize = HSSize.Value
         Q.settings.DynPlotFree = trFreeSpace.Value
         Q.settings.DynPlotHide = chkHide.Checked
+        Q.settings.DynThreads = nrThreads.Value
+        Q.settings.DynRam = nrRam.Value
         Q.settings.SaveSettings()
 
         Me.Close()
@@ -49,11 +51,22 @@
             rEnable.Checked = True
             rDisable.Checked = False
         End If
+
+        Try
+            nrThreads.Maximum = Environment.ProcessorCount
+            nrRam.Maximum = CDec(Math.Round((My.Computer.Info.TotalPhysicalMemory / 1024 / 1024 / 1024)))
+        Catch ex As Exception
+
+        End Try
+
+
         txtPath.Text = Q.settings.DynPlotPath
         txtAccount.Text = Q.settings.DynPlotAcc
         HSSize.Value = Q.settings.DynPlotSize
         trFreeSpace.Value = Q.settings.DynPlotFree
         chkHide.Checked = Q.settings.DynPlotHide
+        nrThreads.Value = Q.settings.DynThreads
+        nrRam.Value = Q.settings.DynRam
 
         Dim TotalSpace As Long
         If Q.settings.DynPlotEnabled Then
@@ -119,6 +132,12 @@
             If IO.Path.GetPathRoot(FD.SelectedPath) = FD.SelectedPath Then
                 MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             End If
+            If Generic.DriveCompressed(FD.SelectedPath) Then
+                Dim Msg As String = "The selected path is on a NTFS compressed drive or folder."
+                Msg &= " This is not supported by Xplotter." & vbCrLf & vbCrLf
+                MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
+            End If
+
             Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
             TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
             trFreeSpace.Minimum = 1

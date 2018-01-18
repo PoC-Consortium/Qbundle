@@ -16,6 +16,8 @@ Change to Chrome(?) CEFSharp but must check license before it is implemented.
 
 v2.0
 Check for updates now automatically updates Pool/wallet info
+Ability to set amount of threads and ram on dynamic plotting
+Qbundle checks for NTFS compressed drive or folder and warns when it is not supported.
 
 
 ~1.9

@@ -12,6 +12,14 @@ Public Class frmPlotter
             If Not Generic.PlotDriveTypeOk(FD.SelectedPath) Then
                 MsgBox("The drive format is not NTFS. Please use another drive or reformat it to NTFS.")
             End If
+
+            If Generic.DriveCompressed(FD.SelectedPath) Then
+                Dim Msg As String = "The selected path is on a NTFS compressed drive or folder."
+                Msg &= " This is not supported by Xplotter." & vbCrLf & vbCrLf
+                MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
+            End If
+
+
             Dim FreeSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
             Dim nonces As Long = CLng(Math.Floor(FreeSpace / 1024 / 256))
             nonces = CLng(Math.Floor(nonces / 8)) 'make it devidable by 8
@@ -81,6 +89,8 @@ Public Class frmPlotter
             Case Else
                 nrThreads.Value = Environment.ProcessorCount - 1
         End Select
+
+
 
         UpdatePlotList()
 
@@ -166,6 +176,14 @@ Public Class frmPlotter
             MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             Exit Sub
         End If
+        If Generic.DriveCompressed(Path) Then
+            Dim Msg As String = "The selected path is on a NTFS compressed drive or folder."
+            Msg &= " This is not supported by Xplotter." & vbCrLf & vbCrLf
+            MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
+            Exit Sub
+        End If
+
+
         Dim nonces As Double = HSSize.Value
         Dim StartNonce As Double = 0
         Try
