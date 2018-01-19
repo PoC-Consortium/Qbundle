@@ -61,7 +61,7 @@
     </PoolObject>
     <PoolObject>
       <Name>Fastpool.info</Name>
-      <Address>wallet.fastpool.info</Address>
+      <Address>fastpool.info</Address>
       <Port>8080</Port>
       <BurstAddress>BURST-YMJP-8NNG-6HCJ-29XYJ</BurstAddress>
       <DeadLine>80000000</DeadLine>
