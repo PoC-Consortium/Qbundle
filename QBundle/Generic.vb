@@ -125,14 +125,14 @@ Friend Class Generic
         'Peer settings
         Data &= "#Peer network" & vbCrLf
         Buffer = Split(Q.settings.ListenPeer, ";")
-        Data &= "brs.peerServerPort = " & Buffer(1) & vbCrLf
-        Data &= "brs.peerServerHost = " & Buffer(0) & vbCrLf & vbCrLf
+        Data &= "P2P.Port = " & Buffer(1) & vbCrLf
+        Data &= "P2P.Listen = " & Buffer(0) & vbCrLf & vbCrLf
 
         'API settings
         Data &= "#API network" & vbCrLf
         Buffer = Split(Q.settings.ListenIf, ";")
-        Data &= "brs.apiServerPort = " & Buffer(1) & vbCrLf
-        Data &= "brs.apiServerHost = " & Buffer(0) & vbCrLf
+        Data &= "API.ServerPort = " & Buffer(1) & vbCrLf
+        Data &= "API.ServerHost = " & Buffer(0) & vbCrLf
         If Q.settings.ConnectFrom.Contains("0.0.0.0") Then
             Data &= "brs.allowedBotHosts = *" & vbCrLf & vbCrLf
         Else
@@ -145,14 +145,19 @@ Friend Class Generic
             Dim ip As String = GetMyIp()
             If ip <> "" Then
                 Data &= "#Auto IP set" & vbCrLf
-                Data &= "brs.myAddress = " & ip & vbCrLf & vbCrLf
+                Data &= "P2P.myAddress = " & ip & vbCrLf & vbCrLf
+            End If
+        Else
+            If Q.settings.Broadcast.Length > 0 Then
+                Data &= "#Manual broadcast" & vbCrLf
+                Data &= "P2P.myAddress = " & Q.settings.Broadcast & vbCrLf & vbCrLf
             End If
         End If
 
         'Dyn platform
         If Q.settings.DynPlatform Then
             Data &= "#Dynamic platform" & vbCrLf
-            Data &= "brs.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
+            Data &= "P2P.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
         End If
 
         Select Case Q.settings.DbType
@@ -165,25 +170,14 @@ Friend Class Generic
                     If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
-                Data &= "brs.dbUrl = jdbc:firebirdsql:embedded:./burst_db/burst.firebird.db" & vbCrLf
-                Data &= "brs.dbUsername = sa" & vbCrLf
-                Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
+
             Case QGlobal.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
-                Data &= "brs.dbUrl = jdbc:mariadb://localhost:3306/burstwallet" & vbCrLf
-                Data &= "brs.dbUsername = burstwallet" & vbCrLf
-                Data &= "brs.dbPassword = burstwallet" & vbCrLf & vbCrLf
             Case QGlobal.DbType.MariaDB
                 Data &= "#Using installed MariaDb" & vbCrLf
-                Data &= "brs.dbUrl=jdbc:mariadb://" & Q.settings.DbServer & "/" & Q.settings.DbName & vbCrLf
-                Data &= "brs.dbUsername = " & Q.settings.DbUser & vbCrLf
-                Data &= "brs.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
             Case QGlobal.DbType.H2
                 Data &= "#Using H2" & vbCrLf
                 Data &= "brs.dbMaximumPoolSize = 30" & vbCrLf
-                Data &= "brs.dbUrl=jdbc:h2:./burst_db/burst;DB_CLOSE_ON_EXIT=False" & vbCrLf
-                Data &= "brs.dbUsername = sa" & vbCrLf
-                Data &= "brs.dbPassword = sa" & vbCrLf & vbCrLf
         End Select
 
         Data &= "brs.dbUrl = " & Q.settings.DbServer & vbCrLf
@@ -194,21 +188,21 @@ Friend Class Generic
 
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
-            Data &= "brs.oclAuto = true" & vbCrLf
+            Data &= "GPU.AutoDetect = on" & vbCrLf
             Data &= "brs.oclHashesPerEnqueue=100" & vbCrLf
-            Data &= "brs.oclVerify = true" & vbCrLf & vbCrLf
+            Data &= "GPU.Acceleration = on" & vbCrLf & vbCrLf
 
         End If
         If WriteDebug Then
             Data &= "#Debug mode" & vbCrLf
             Data &= "brs.disablePeerConnectingThread = true" & vbCrLf
             Data &= "brs.enableTransactionRebroadcasting=false" & vbCrLf
-            Data &= "brs.disableGetMorePeersThread = true " & vbCrLf
+            Data &= "brs.getMorePeers = false " & vbCrLf
             Data &= "brs.disableProcessTransactionsThread = true" & vbCrLf
             Data &= "brs.disableRemoveUnconfirmedTransactionsThread = true" & vbCrLf
             Data &= "brs.disableRebroadcastTransactionsThread = true" & vbCrLf
-            Data &= "brs.apiServerEnforcePOST = false" & vbCrLf
-            Data &= "brs.enableDebugAPI = true" & vbCrLf & vbCrLf
+            Data &= "API.ServerEnforcePOST = false" & vbCrLf
+            Data &= "API.Debug = true" & vbCrLf & vbCrLf
         End If
         Try
             IO.File.WriteAllText(QGlobal.AppDir & "conf\brs.properties", Data)
