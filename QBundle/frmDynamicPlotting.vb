@@ -71,7 +71,7 @@
         Dim TotalSpace As Long
         If Q.settings.DynPlotEnabled Then
             Try
-                TotalSpace = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalSize  'bytes
+                TotalSpace = Generic.GetDiskspace(Q.settings.DynPlotPath) ' My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalSize  'bytes
                 TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
                 trFreeSpace.Minimum = 1
                 trFreeSpace.Maximum = CInt(TotalSpace)
@@ -138,7 +138,7 @@
                 MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
             End If
 
-            Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
+            Dim TotalSpace As Long = Generic.GetDiskspace(txtPath.Text) ' My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
             TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
             trFreeSpace.Minimum = 1
             trFreeSpace.Maximum = CInt(TotalSpace)
@@ -152,7 +152,7 @@
     End Sub
     Private Sub trFreeSpace_Scroll(sender As Object, e As EventArgs) Handles trFreeSpace.ValueChanged
         Try
-            Dim TotalSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
+            Dim TotalSpace As Long = Generic.GetDiskspace(txtPath.Text) ' My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalSize  'bytes
             TotalSpace = CLng(Math.Floor(TotalSpace / 1024 / 1024 / 1024)) 'GiB
             lblFreeSpace.Text = CStr(trFreeSpace.Value) & "GiB (" & Math.Floor((trFreeSpace.Value / TotalSpace) * 100).ToString & "%)"
         Catch ex As Exception

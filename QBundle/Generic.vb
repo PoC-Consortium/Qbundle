@@ -5,6 +5,7 @@ Imports System.Text.RegularExpressions
 Imports Microsoft.Win32
 
 Friend Class Generic
+    Private Declare Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" (ByVal lpDirectoryName As String, ByRef lpFreeBytesAvailableToCaller As Long, ByRef lpTotalNumberOfBytes As Long, ByRef lpTotalNumberOfFreeBytes As Long) As Long
     Public Shared DebugMe As Boolean
     Friend Shared Sub CheckUpgrade()
         Dim CurVer As Integer = Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major * 10
@@ -214,8 +215,8 @@ Friend Class Generic
 
     End Sub
     Friend Shared Sub WriteWalletConfig(Optional ByVal WriteDebug As Boolean = False)
-        WriteNRSConfig(WriteDebug)
-        ' WriteBRSConfig(WriteDebug)
+        ' WriteNRSConfig(WriteDebug)
+        WriteBRSConfig(WriteDebug)
     End Sub
     Friend Shared Sub WriteNRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Data As String = ""
@@ -754,6 +755,17 @@ Friend Class Generic
         If IsNothing(filepath) Then Return False
         Return IsValidPlottFilename(IO.Path.GetFileName(filepath))
     End Function
+    Friend Shared Function GetDiskspace(ByVal path As String) As Long
 
+        Try
+            Dim FreeSpace As Long
+            GetDiskFreeSpaceEx(path, vbNull, vbNull, FreeSpace)
+            Return FreeSpace
+        Catch ex As Exception
+            If DebugMe Then WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Return 0
+
+    End Function
 
 End Class

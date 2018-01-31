@@ -1,6 +1,7 @@
-﻿Imports System.ComponentModel
+﻿
 
 Public Class frmPlotter
+
     Private Sub btnPath_Click(sender As Object, e As EventArgs) Handles btnPath.Click
         Dim FD As New FolderBrowserDialog
         If FD.ShowDialog() = DialogResult.OK Then
@@ -19,8 +20,7 @@ Public Class frmPlotter
                 MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
             End If
 
-
-            Dim FreeSpace As Long = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
+            Dim FreeSpace As Long = Generic.GetDiskspace(txtPath.Text)  '= My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
             Dim nonces As Long = CLng(Math.Floor(FreeSpace / 1024 / 256))
             nonces = CLng(Math.Floor(nonces / 8)) 'make it devidable by 8
             nonces = nonces * 8
@@ -203,9 +203,11 @@ Public Class frmPlotter
 
         'check size ok
         Try
-            Dim FreeSpace As Double = My.Computer.FileSystem.GetDriveInfo(Path).TotalFreeSpace
+            Dim FreeSpace As Long = Generic.GetDiskspace(Path) ' = My.Computer.FileSystem.GetDriveInfo(Path).TotalFreeSpace
+
+
             Dim tobeused As Double = nonces * 1024 * 256
-            If tobeused > FreeSpace Then
+            If tobeused > CDbl(FreeSpace) Then
                 MsgBox("Free space on drive have changed and the plotfile will now be to big. Please lower the size of plotfile or select a new path.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Free space changed.")
                 Exit Sub
             End If
@@ -389,7 +391,7 @@ Public Class frmPlotter
 
     Private Sub HSSize_ValueChanged(sender As Object, e As EventArgs) Handles HSSize.ValueChanged
         Try
-            Dim FreeSpace As Double = My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
+            Dim FreeSpace As Double = CDbl(Generic.GetDiskspace(txtPath.Text)) 'My.Computer.FileSystem.GetDriveInfo(txtPath.Text).TotalFreeSpace
             lblTotalNonces.Text = HSSize.Value.ToString
             Dim Space As Double = HSSize.Value
 

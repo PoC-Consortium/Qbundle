@@ -915,7 +915,7 @@
             'check free space
             Dim Totalfree As Long
             Try
-                Totalfree = My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalFreeSpace   'bytes
+                Totalfree = Generic.GetDiskspace(Q.settings.DynPlotPath) ' My.Computer.FileSystem.GetDriveInfo(Q.settings.DynPlotPath).TotalFreeSpace   'bytes
                 Totalfree = CLng(Math.Floor(Totalfree / 1024 / 1024 / 1024)) 'GiB
 
                 If Totalfree > Q.settings.DynPlotFree + Q.settings.DynPlotSize Then 'we must still have free space efter creation
