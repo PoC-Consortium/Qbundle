@@ -5,13 +5,13 @@ Imports System.Threading
 Imports System.Xml.Serialization
 
 Public Class clsApp
-    Public Event DownloadDone(ByVal AppId As Integer)
+    Public Event DownloadDone()
     Public Event Progress(ByVal JobType As Integer, ByVal AppId As Integer, ByVal Percernt As Integer, ByVal Speed As Integer, ByVal lRead As Long, ByVal lLength As Long)
-    Public Event Aborted(ByVal AppId As Integer)
+    Public Event Aborted()
     Public Event UpdateAvailable()
     Private Structure StrucApps
         Dim LocalFound As Boolean
-        Dim RemoteUrl As String
+        Dim UppgradeUrl As String
         Dim FullUrl As String
         Dim RemoteVersion As String
         Dim LocalVersion As String
@@ -36,7 +36,7 @@ Public Class clsApp
             _Apps(i).LocalFound = False
             _Apps(i).LocalVersion = ""
             _Apps(i).RemoteVersion = ""
-            _Apps(i).RemoteUrl = ""
+            _Apps(i).UppgradeUrl = ""
             _Apps(i).FullUrl = ""
             _Apps(i).ExtractToDir = ""
             _Apps(i).Updated = False
@@ -134,7 +134,7 @@ Public Class clsApp
                 AppId = CInt([Enum].Parse(GetType(QGlobal.AppNames), DynamicInfo.Apps(x).Name)) 'converting name to appid 'if not exist it will move on
                 _Apps(AppId).RemoteVersion = DynamicInfo.Apps(x).RemoteVersion
                 _Apps(AppId).ExtractToDir = ""
-                _Apps(AppId).RemoteUrl = DynamicInfo.Apps(x).UpgradeUrl
+                _Apps(AppId).UppgradeUrl = DynamicInfo.Apps(x).UpgradeUrl
                 _Apps(AppId).FullUrl = DynamicInfo.Apps(x).FullUrl
                 _Apps(AppId).Updated = False 'reset updates
                 allok = True
@@ -293,146 +293,220 @@ Public Class clsApp
 #End Region
 
 #Region " Download and unpack "
+
+    '#########
+    ' Here he have some Private vars we pass on to threads.
+    '########
+    Private DoDownload As Boolean 'if we are going to download anything at all
+    Private DoUnpack As Boolean 'Unpack after download
+    Private DoCleanUp As Boolean 'Remove downloaded file 
+    Private AppNr As Integer 'Get from Qinfo.xml 
+    Private Url As String 'Use this for download (overide AppId)
+    Private DoUpgrade As Boolean 'Download from upgrade Qinfo.xml
+
     Public Sub AbortDownload()
         _Aborted = True
     End Sub
-    Public Sub DownloadApp(ByVal Appid As Integer)
+
+    ' #######
+    ' Public Functions
+    ' #######
+
+    Public Sub InstallApp(ByVal Appid As Integer)
         'ok we have an integer
+
+        DoDownload = True
+        DoUnpack = True
+        DoCleanUp = True
+        AppNr = Appid
+        Url = ""
+        DoUpgrade = False
         _Aborted = False
+
         Dim trda As Thread
-        trda = New Thread(AddressOf DownloadUnpack)
+        trda = New Thread(AddressOf ProcessApp)
+        trda.IsBackground = True
+        trda.Start()
+        trda = Nothing
+    End Sub
+    Public Sub UpgradeApp(ByVal Appid As Integer)
+
+        DoDownload = True
+        DoUnpack = True
+        DoCleanUp = True
+        AppNr = Appid
+        Url = ""
+        DoUpgrade = True
+        _Aborted = False
+
+
+        Dim trda As Thread
+        trda = New Thread(AddressOf ProcessApp)
         trda.IsBackground = True
         trda.Start(Appid)
         trda = Nothing
     End Sub
-    Public Sub DownloadFile(ByVal Url As String)
+
+    Public Sub DownloadFile(ByVal inUrl As String)
         _Aborted = False
-        _Apps(QGlobal.AppNames.DownloadFile).RemoteUrl = Url
+        '_Apps(QGlobal.AppNames.DownloadFile).RemoteUrl = Url
+
+
+        DoDownload = True
+        DoUnpack = False
+        DoCleanUp = False
+        AppNr = 0
+        Url = inUrl
+        DoUpgrade = False
+        _Aborted = False
+
         Dim trda As Thread
-        trda = New Thread(AddressOf DownloadOnly)
+        trda = New Thread(AddressOf ProcessApp)
         trda.IsBackground = True
-        trda.Start(QGlobal.AppNames.DownloadFile)
+        trda.Start()
         trda = Nothing
     End Sub
-    Public Sub DownloadUnzip(ByVal Url As String)
+    Public Sub DownloadUnzip(ByVal inUrl As String)
+        _Aborted = False
+        DoDownload = True
+        DoUnpack = True
+        DoCleanUp = True
+        AppNr = 0
+        Url = inUrl
+        DoUpgrade = False
         _Aborted = False
         Dim trda As Thread
-        _Apps(QGlobal.AppNames.DownloadFile).RemoteUrl = Url
-        trda = New Thread(AddressOf DownloadUnpack)
+        trda = New Thread(AddressOf ProcessApp)
         trda.IsBackground = True
-        trda.Start(QGlobal.AppNames.DownloadFile)
+        trda.Start()
         trda = Nothing
     End Sub
-    Private Sub DownloadOnly(ByVal obj As Object)
 
-        Dim appid As Integer = CType(obj, Integer)
-        If Not Download(appid, False) Then 'ok lets start download
-            RaiseEvent Aborted(appid)
-            Exit Sub
-        End If
-        If Not _Aborted Then RaiseEvent DownloadDone(appid)
-    End Sub
+    ' ######
+    ' Private Functions in thread
+    ' ######
 
-    Private Sub DownloadUnpack(ByVal obj As Object)
-        Dim appid As Integer = CType(obj, Integer)
-        'we are now in threaded environment
-        'if we do not have remoteinfo lets get it.
-        If _Apps(appid).RemoteUrl = "" Then
-            If Not SetRemoteInfo() Then
-                RaiseEvent Aborted(appid)
-                Exit Sub
+    Private Sub ProcessApp()
+        Dim LastProcessOk As Boolean = False
+
+        '## Download Processing
+        If DoDownload Then
+            If Url <> "" Then
+                If Download() Then LastProcessOk = True
+            Else
+                For x = 0 To UBound(DynamicInfo.Repositories)
+                    If DoUpgrade Then
+                        Url = DynamicInfo.Repositories(x) & _Apps(AppNr).UppgradeUrl
+                    Else
+                        Url = DynamicInfo.Repositories(x) & _Apps(AppNr).FullUrl
+                    End If
+                    If Download() Then
+                        LastProcessOk = True
+                        Exit For
+                    End If
+                Next
             End If
-        End If
-        Dim fromRepo As Boolean = True
-
-        If _Apps(appid).RemoteUrl.StartsWith("http") Then fromRepo = False
-        If Not Download(appid, fromRepo) Then 'ok lets start download
-            RaiseEvent Aborted(appid)
-            Exit Sub
-        End If
-        If _Aborted Then Exit Sub
-
-        RaiseEvent Progress(1, appid, 0, 0, 0, 0)
-        If Not Extract(appid) Then 'ok lets start download
-            RaiseEvent Aborted(appid)
-            Exit Sub
+        Else
+            LastProcessOk = True
         End If
 
-        DeleteFile(appid)
-        If _Aborted Then Exit Sub
-        _Apps(appid).Updated = True
-        RaiseEvent DownloadDone(appid)
+
+        '## Unpack Processing (only if no dl or dl was ok)
+        If LastProcessOk And DoCleanUp Then
+            RaiseEvent Progress(1, AppNr, 0, 0, 0, 0) 'signal extract
+            LastProcessOk = False
+            If Extract() Then LastProcessOk = True
+        End If
+
+
+        '## Unpack Processing
+        LastProcessOk = False
+        If DoUnpack Then
+            RaiseEvent Progress(1, AppNr, 0, 0, 0, 0)
+            If Extract() Then LastProcessOk = True
+        End If
+
+
+        '## Cleanup Processing (we still want cleanup if something goes wrong with extract)
+        If DoCleanUp Then
+            DeleteFile()
+        End If
+
+        '## Now we exit with correct signaling
+        If LastProcessOk Then
+            'all done
+            RaiseEvent DownloadDone()
+        Else
+            'aborted
+            RaiseEvent Aborted()
+        End If
+
+
+
+
     End Sub
 
-    Private Function Download(ByVal AppId As Integer, Optional ByVal FromRepos As Boolean = True) As Boolean
+    Private Function Download() As Boolean
 
         Dim DLOk As Boolean = False
-        Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
+        Dim filename As String = QGlobal.AppDir & Path.GetFileName(Url)
         Dim File As FileStream = Nothing
-        For x = 0 To UBound(DynamicInfo.Repositories) 'try next repo if fail.
-            Try
-                Dim bBuffer(262143) As Byte '256k chunks downloadbuffer
-                Dim TotalRead As Long = 0
-                Dim iBytesRead As Integer = 0
-                Dim ContentLength As Long = 0
-                Dim percent As Integer = 0
-                Dim url As String = ""
-                If FromRepos Then
-                    url = DynamicInfo.Repositories(x) & _Apps(AppId).RemoteUrl
-                Else
-                    url = _Apps(AppId).RemoteUrl
-                End If
-                Dim http As WebRequest = WebRequest.Create(url)
-                Dim WebResponse As WebResponse = http.GetResponse
-                ContentLength = WebResponse.ContentLength
-                Dim sChunks As Stream = WebResponse.GetResponseStream
-                File = New FileStream(filename, FileMode.Create, FileAccess.Write)
-                TotalRead = 0
-                Dim SW As Stopwatch = Stopwatch.StartNew
-                Dim speed As Integer = 0
-                Do
-                    If _Aborted Then
-                        RaiseEvent Aborted(AppId)
-                        Exit Do
-                    End If
-                    iBytesRead = sChunks.Read(bBuffer, 0, 262144)
-                    If iBytesRead = 0 Then Exit Do
-                    TotalRead += iBytesRead
-                    File.Write(bBuffer, 0, iBytesRead)
-                    If SW.ElapsedMilliseconds > 0 Then speed = CInt(TotalRead / SW.ElapsedMilliseconds)
-                    percent = CInt(Math.Round((TotalRead / ContentLength) * 100, 0))
-                    RaiseEvent Progress(0, AppId, percent, speed, TotalRead, ContentLength)
-                Loop
-                File.Flush()
-                sChunks.Close()
-                DLOk = True
-            Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
-            End Try
-            Try
-                File.Close()
-            Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
-            End Try
-            'we need to cleanup
-            If DLOk Then Exit For
-        Next
+
+        Try
+            Dim bBuffer(262143) As Byte '256k chunks downloadbuffer
+            Dim TotalRead As Long = 0
+            Dim iBytesRead As Integer = 0
+            Dim ContentLength As Long = 0
+            Dim percent As Integer = 0
+
+            Dim http As WebRequest = WebRequest.Create(Url)
+            Dim WebResponse As WebResponse = http.GetResponse
+            ContentLength = WebResponse.ContentLength
+            Dim sChunks As Stream = WebResponse.GetResponseStream
+            File = New FileStream(filename, FileMode.Create, FileAccess.Write)
+            TotalRead = 0
+            Dim SW As Stopwatch = Stopwatch.StartNew
+            Dim speed As Integer = 0
+            Do
+                If _Aborted Then Exit Do 'we will return false 
+                iBytesRead = sChunks.Read(bBuffer, 0, 262144)
+                If iBytesRead = 0 Then Exit Do
+                TotalRead += iBytesRead
+                File.Write(bBuffer, 0, iBytesRead)
+                If SW.ElapsedMilliseconds > 0 Then speed = CInt(TotalRead / SW.ElapsedMilliseconds)
+                percent = CInt(Math.Round((TotalRead / ContentLength) * 100, 0))
+                RaiseEvent Progress(0, 0, percent, speed, TotalRead, ContentLength)
+            Loop
+            File.Flush()
+            sChunks.Close()
+            DLOk = True
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
+        Try
+            File.Close()
+        Catch ex As Exception
+            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+        End Try
         Return DLOk
     End Function
-    Private Function Extract(ByVal AppId As Integer) As Boolean
+    Private Function Extract() As Boolean
         Dim AllOk As Boolean = False
         Try
-            Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(AppId).RemoteUrl)
-            Dim target As String = QGlobal.AppDir & _Apps(AppId).ExtractToDir
+            Dim filename As String = QGlobal.AppDir & Path.GetFileName(Url)
+            Dim target As String = QGlobal.AppDir
             Dim Archive As ZipArchive = ZipFile.OpenRead(filename)
             Dim totalfiles As Integer = Archive.Entries.Count
             Dim counter As Integer = 0
             Dim percent As Integer = 0
+
+
             For Each entry As ZipArchiveEntry In Archive.Entries
                 If _Aborted Then
-                    RaiseEvent Aborted(AppId)
+                    RaiseEvent Aborted()
                     Exit For
                 End If
+
                 If entry.FullName.EndsWith("/") Then
                     If Not Directory.Exists(Path.Combine(target, entry.FullName)) Then
                         Directory.CreateDirectory(Path.Combine(target, entry.FullName))
@@ -440,9 +514,10 @@ Public Class clsApp
                 Else
                     entry.ExtractToFile(Path.Combine(target, entry.FullName), True)
                 End If
+
                 counter += 1
                 percent = CInt(Math.Round((counter / totalfiles) * 100, 0))
-                RaiseEvent Progress(1, AppId, percent, 0, 0, 0)
+                RaiseEvent Progress(1, 0, percent, 0, 0, 0)
             Next
             AllOk = True
             Archive.Dispose()
@@ -454,9 +529,9 @@ Public Class clsApp
 
 
     End Function
-    Private Sub DeleteFile(ByVal appid As Integer)
+    Private Sub DeleteFile()
         Try
-            Dim filename As String = QGlobal.AppDir & Path.GetFileName(_Apps(appid).RemoteUrl)
+            Dim filename As String = QGlobal.AppDir & Path.GetFileName(Url)
             If File.Exists(filename) Then
                 File.Delete(filename)
             End If
@@ -464,6 +539,9 @@ Public Class clsApp
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
         End Try
     End Sub
+
+
+
 #End Region
 
 #Region " Updates "
@@ -626,8 +704,11 @@ Public Class clsApp
     Public Function isUpdated(ByVal AppId As Integer) As Boolean
         Return _Apps(AppId).Updated
     End Function
-    Public Function GetRemoteUrl(ByVal AppId As Integer) As String
-        Return _Apps(AppId).RemoteUrl
+    Public Function GetFullUrl(ByVal AppId As Integer) As String
+        Return _Apps(AppId).FullUrl
+    End Function
+    Public Function GetUppgradeUrl(ByVal AppId As Integer) As String
+        Return _Apps(AppId).UppgradeUrl
     End Function
     Public Function CheckOpenCL() As Boolean
         Try

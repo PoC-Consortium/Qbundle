@@ -114,6 +114,7 @@
                 Me.Hide()
                 Dim S As frmDownloadExtract = New frmDownloadExtract
                 S.Appid = QGlobal.AppNames.MariaPortable
+                S.Upgrade = False
                 S.DialogResult = Nothing
                 Dim Res As DialogResult = S.ShowDialog()
                 If Res = DialogResult.Abort Then

@@ -2,11 +2,12 @@
 
     Friend OverideFilename As String
     Friend Appid As Integer
+    Friend Upgrade As Boolean = False
     Friend Url As String
     Friend Unzip As Boolean = False
     Private Delegate Sub DProgress(ByVal [Job] As Integer, ByVal [AppId] As Integer, ByVal [percent] As Integer, ByVal [Speed] As Integer, ByVal [lRead] As Long, ByVal [lLength] As Long)
-    Private Delegate Sub DDone(ByVal [AppId] As Integer)
-    Private Delegate Sub DAborting(ByVal [AppId] As Integer)
+    Private Delegate Sub DDone()
+    Private Delegate Sub DAborting()
 
     Private DownloadName As String 'set depending on dl type
     Private Result As DialogResult = Nothing
@@ -21,6 +22,7 @@
         lblProgress.Text = "0%"
         TimeElapsed.Start()
         Pb1.Value = 0
+
         If Url <> "" Then
             If Unzip Then
                 Q.App.DownloadUnzip(Url)
@@ -29,17 +31,24 @@
             End If
             DownloadName = IO.Path.GetFileName(Url) 'just download
         Else
-            Q.App.DownloadApp(Appid) 'download and extract
+            If Upgrade Then
+                Q.App.UpgradeApp(Appid) 'download and extract
+            Else
+                Q.App.InstallApp(Appid) 'download and extract
+            End If
+
             DownloadName = Q.App.GetAppNameFromId(Appid)
         End If
+
         If OverideFilename <> "" Then
             DownloadName = OverideFilename
         End If
+
     End Sub
-    Public Sub Done(ByVal AppId As Integer)
+    Public Sub Done()
         If Me.InvokeRequired Then
             Dim d As New DDone(AddressOf Done)
-            Me.Invoke(d, New Object() {AppId})
+            Me.Invoke(d, New Object() {})
             Return
         End If
 
@@ -63,10 +72,10 @@
         Me.Close()
     End Sub
 
-    Private Sub Aborting(ByVal AppId As Integer)
+    Private Sub Aborting()
         If Me.InvokeRequired Then
             Dim d As New DAborting(AddressOf Aborting)
-            Me.Invoke(d, New Object() {AppId})
+            Me.Invoke(d, New Object() {})
             Return
         End If
         If Result = Nothing Then Result = DialogResult.Abort

@@ -24,10 +24,10 @@
     </AppObject>
     <AppObject>
       <Name>MariaPortable</Name>
-      <UpgradeUrl>MariaDB/MariaDb-5.5.29.zip</UpgradeUrl>
-      <FullUrl>MariaDB/MariaDb-5.5.29.zip</FullUrl>
-      <RemoteVersion>5.5.29</RemoteVersion>
-      <UpdateInfo>V 5.5.29</UpdateInfo>
+      <UpgradeUrl>MariaDB/MariaDb_10.1.29_upg.zip</UpgradeUrl>
+      <FullUrl>MariaDB/MariaDb_10.1.29-full.zip</FullUrl>
+      <RemoteVersion>10.1.29</RemoteVersion>
+      <UpdateInfo>V 10.1.29</UpdateInfo>
     </AppObject>
     <AppObject>
       <Name>Xplotter</Name>
