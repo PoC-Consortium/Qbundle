@@ -55,7 +55,7 @@ Partial Class frmConsole
         'cmbLog
         '
         Me.cmbLog.FormattingEnabled = True
-        Me.cmbLog.Items.AddRange(New Object() {"NRS (Wallet)", "MariaDB"})
+        Me.cmbLog.Items.AddRange(New Object() {"BRS (Wallet)", "MariaDB"})
         Me.cmbLog.Location = New System.Drawing.Point(148, 4)
         Me.cmbLog.Name = "cmbLog"
         Me.cmbLog.Size = New System.Drawing.Size(267, 21)

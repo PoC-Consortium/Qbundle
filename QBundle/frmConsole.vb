@@ -3,7 +3,8 @@
     Private Sub frmConsole_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             cmbLog.SelectedIndex = 0
-            txtLog.Text = String.Join(vbCrLf, frmMain.Console(0))
+            txtLog.Text = ""
+            txtLog.AppendText(String.Join(vbCrLf, frmMain.Console(0)))
             AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
