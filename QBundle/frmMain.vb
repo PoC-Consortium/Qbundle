@@ -474,7 +474,6 @@
 
                     UpdateUIState(QGlobal.ProcOp.FoundSignal)
 
-
                     StartAPIFetch()
                     Dim s() As String = Split(Q.settings.ListenIf, ";")
                     Dim url As String = Nothing

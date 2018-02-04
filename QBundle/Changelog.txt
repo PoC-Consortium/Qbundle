@@ -13,6 +13,8 @@ pipeclient+server implementation in service
 minimize to tray on exit ?
 Iconify(?)
 Change to Chrome(?) CEFSharp but must check license before it is implemented.
+Add upgrade for MariaDB
+
 
 v2.0
 Check for updates now automatically updates Pool/wallet info.

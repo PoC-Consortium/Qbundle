@@ -45,7 +45,6 @@
                             txtLog.AppendText(data & vbCrLf)
                         End If
                     End If
-
             End Select
         Catch ex As Exception
             If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
