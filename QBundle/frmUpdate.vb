@@ -92,6 +92,7 @@
             If Q.App.ShouldUpdate(t) Then
                 S = New frmDownloadExtract
                 S.Appid = t
+                S.Upgrade = True 'we download UpgradeUrl not full
                 res = S.ShowDialog
                 If res = DialogResult.Cancel Then
                     btnUpdate.Enabled = True

@@ -29,7 +29,6 @@ Partial Class frmFirstTime
         Me.lblFireBirdHeader = New System.Windows.Forms.Label()
         Me.r1 = New System.Windows.Forms.RadioButton()
         Me.btnNext = New System.Windows.Forms.Button()
-        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.P3 = New System.Windows.Forms.Panel()
         Me.lblOwnDesc = New System.Windows.Forms.Label()
         Me.lblOwnHeader = New System.Windows.Forms.Label()
@@ -89,6 +88,7 @@ Partial Class frmFirstTime
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.pnlMode = New System.Windows.Forms.Panel()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.pnlWiz1.SuspendLayout()
         Me.P1.SuspendLayout()
         Me.P3.SuspendLayout()
@@ -111,7 +111,6 @@ Partial Class frmFirstTime
         '
         Me.pnlWiz1.Controls.Add(Me.P1)
         Me.pnlWiz1.Controls.Add(Me.btnNext)
-        Me.pnlWiz1.Controls.Add(Me.chkUpdates)
         Me.pnlWiz1.Controls.Add(Me.P3)
         Me.pnlWiz1.Controls.Add(Me.P2)
         Me.pnlWiz1.Controls.Add(Me.P0)
@@ -169,19 +168,6 @@ Partial Class frmFirstTime
         Me.btnNext.TabIndex = 12
         Me.btnNext.Text = "Continue >>"
         Me.btnNext.UseVisualStyleBackColor = True
-        '
-        'chkUpdates
-        '
-        Me.chkUpdates.AutoSize = True
-        Me.chkUpdates.CheckAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.chkUpdates.Checked = True
-        Me.chkUpdates.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkUpdates.Location = New System.Drawing.Point(26, 344)
-        Me.chkUpdates.Name = "chkUpdates"
-        Me.chkUpdates.Size = New System.Drawing.Size(221, 30)
-        Me.chkUpdates.TabIndex = 11
-        Me.chkUpdates.Text = "Allow connection to remote resources for " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "verifications and updates."
-        Me.chkUpdates.UseVisualStyleBackColor = True
         '
         'P3
         '
@@ -367,6 +353,7 @@ Partial Class frmFirstTime
         'PnlWiz2
         '
         Me.PnlWiz2.AutoScroll = True
+        Me.PnlWiz2.Controls.Add(Me.chkUpdates)
         Me.PnlWiz2.Controls.Add(Me.pnlDb)
         Me.PnlWiz2.Controls.Add(Me.lblStatusInfo)
         Me.PnlWiz2.Controls.Add(Me.btnBack)
@@ -793,12 +780,25 @@ Partial Class frmFirstTime
         Me.pnlMode.Size = New System.Drawing.Size(420, 380)
         Me.pnlMode.TabIndex = 15
         '
+        'chkUpdates
+        '
+        Me.chkUpdates.AutoSize = True
+        Me.chkUpdates.CheckAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.chkUpdates.Checked = True
+        Me.chkUpdates.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkUpdates.Location = New System.Drawing.Point(9, 340)
+        Me.chkUpdates.Name = "chkUpdates"
+        Me.chkUpdates.Size = New System.Drawing.Size(221, 30)
+        Me.chkUpdates.TabIndex = 21
+        Me.chkUpdates.Text = "Allow connection to remote resources for " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "verifications and updates."
+        Me.chkUpdates.UseVisualStyleBackColor = True
+        '
         'frmFirstTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1200, 457)
+        Me.ClientSize = New System.Drawing.Size(1109, 491)
         Me.Controls.Add(Me.pnlMode)
         Me.Controls.Add(Me.PnlWiz3)
         Me.Controls.Add(Me.PictureBox2)
@@ -854,7 +854,6 @@ Partial Class frmFirstTime
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents btnNext As Button
-    Friend WithEvents chkUpdates As CheckBox
     Friend WithEvents P3 As Panel
     Friend WithEvents lblOwnDesc As Label
     Friend WithEvents lblOwnHeader As Label
@@ -915,4 +914,5 @@ Partial Class frmFirstTime
     Friend WithEvents RadioButton3 As RadioButton
     Friend WithEvents Button3 As Button
     Friend WithEvents pnlMode As Panel
+    Friend WithEvents chkUpdates As CheckBox
 End Class
