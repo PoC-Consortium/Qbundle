@@ -343,7 +343,7 @@ Public Class clsApp
         Dim trda As Thread
         trda = New Thread(AddressOf ProcessApp)
         trda.IsBackground = True
-        trda.Start(Appid)
+        trda.Start()
         trda = Nothing
     End Sub
 
@@ -417,15 +417,6 @@ Public Class clsApp
             LastProcessOk = False
             If Extract() Then LastProcessOk = True
         End If
-
-
-        '## Unpack Processing
-        LastProcessOk = False
-        If DoUnpack Then
-            RaiseEvent Progress(1, AppNr, 0, 0, 0, 0)
-            If Extract() Then LastProcessOk = True
-        End If
-
 
         '## Cleanup Processing (we still want cleanup if something goes wrong with extract)
         If DoCleanUp Then

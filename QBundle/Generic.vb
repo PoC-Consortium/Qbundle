@@ -215,8 +215,8 @@ Friend Class Generic
 
     End Sub
     Friend Shared Sub WriteWalletConfig(Optional ByVal WriteDebug As Boolean = False)
-        ' WriteNRSConfig(WriteDebug)
-        WriteBRSConfig(WriteDebug)
+        WriteNRSConfig(WriteDebug)
+        ' WriteBRSConfig(WriteDebug)
     End Sub
     Friend Shared Sub WriteNRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Data As String = ""
@@ -728,7 +728,7 @@ Friend Class Generic
 
     End Function
     Friend Shared Function DriveCompressed(ByVal path As String) As Boolean
-        Dim dirInfo As IO.DirectoryInfo = New IO.DirectoryInfo("d:\")
+        Dim dirInfo As IO.DirectoryInfo = New IO.DirectoryInfo(path)
         If (dirInfo.Attributes And IO.FileAttributes.Compressed) = IO.FileAttributes.Compressed Then
             Return True
         End If

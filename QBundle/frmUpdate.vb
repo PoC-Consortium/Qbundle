@@ -12,12 +12,17 @@
         If CheckAndUpdateLW() Then
             btnUpdate.Enabled = True
         Else
-            btnUpdate.Enabled = False
+            btnUpdate.Enabled = True
+            btnUpdate.Text = "Close"
         End If
 
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        If btnUpdate.Text = "Close" Then
+            Me.Close()
+        End If
 
         If frmMain.Running Then
             If MsgBox("Do you want to stop the wallet?" & vbCrLf & " It must be stopped before updating the components.", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
@@ -119,9 +124,15 @@
                 End Try
             End If
         End If
+        Q.App.SetLocalInfo()
+        CheckAndUpdateLW()
         frmMain.lblUpdates.Visible = False
+        frmMain.lblUpdateAvail2.Visible = False
         pb1.Visible = False
         lblStatus.Text = "Update complete."
+        btnUpdate.Text = "Close"
+        btnUpdate.Enabled = True
+
     End Sub
 
 

@@ -162,8 +162,8 @@ Public Class clsProcessHandler
         Public StartSignal As String = ""
         Public WorkingDirectory As String = ""
         Public StartsignalMaxTime As Integer = 300 '5 minutes
-        Public UpgradeSignal As String
-        Public UpgradeCmd As String
+        Public UpgradeSignal As String = ""
+        Public UpgradeCmd As String = ""
     End Class
 
     Private Class clsProcessWorker
@@ -328,15 +328,16 @@ Public Class clsProcessHandler
         End Sub
         Sub OutputHandler(sender As Object, e As DataReceivedEventArgs)
             If Not String.IsNullOrEmpty(e.Data) Then
+                If UpgradeSignal.Length > 0 And e.Data.Contains(UpgradeSignal) Then FoundUpgradeSignal = True
+
                 If FoundStartSignal = False Then
-                    If e.Data.Contains(UpgradeSignal) Then FoundUpgradeSignal = True
-                    If e.Data.Contains(StartSignal) Then
-                        FoundStartSignal = True 'we have this before upgrade so we do not kill proces during upgrade
+                    If StartSignal.Length > 0 And e.Data.Contains(StartSignal) Then
+
                         If FoundUpgradeSignal Then
                             RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleOut, "Qbundle: Executing second stage upgrade. Please wait up to 5 minutes for completion.")
                             ExecuteUpgradeCmd()
                         End If
-
+                        FoundStartSignal = True 'we have this before upgrade so we do not kill proces during upgrade
                         RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.FoundSignal, "")
                     End If
                 End If
@@ -347,14 +348,16 @@ Public Class clsProcessHandler
         Sub ErroutHandler(sender As Object, e As DataReceivedEventArgs)
 
             If Not String.IsNullOrEmpty(e.Data) Then
-                If e.Data.Contains(UpgradeSignal) Then FoundUpgradeSignal = True
+
+                If UpgradeSignal.Length > 0 And e.Data.Contains(UpgradeSignal) Then FoundUpgradeSignal = True
+
                 If FoundStartSignal = False Then
-                    If e.Data.Contains(StartSignal) Then
-                        FoundStartSignal = True 'we have this before upgrade so we do not kill proces during upgrade
+                    If StartSignal.Length > 0 And e.Data.Contains(StartSignal) Then
                         If FoundUpgradeSignal Then
                             RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleErr, "Qbundle: Executing second stage upgrade. Please wait up to 5 minutes for completion.")
                             ExecuteUpgradeCmd()
                         End If
+                        FoundStartSignal = True 'we have this before upgrade so we do not kill proces during upgrade
                         RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.FoundSignal, "")
                     End If
                 End If
@@ -365,16 +368,19 @@ Public Class clsProcessHandler
 
 
         Private Sub ExecuteUpgradeCmd()
-
-            p = New Process
-            p.StartInfo.WorkingDirectory = WorkingDirectory
-            p.StartInfo.Arguments = ""
-            p.StartInfo.UseShellExecute = False
-            p.StartInfo.CreateNoWindow = True
-            p.StartInfo.FileName = UpgradeCmd
-            p.Start()
-            p.WaitForExit(300000)
-
+            Try
+                Dim pr As Process = New Process
+                pr.StartInfo.WorkingDirectory = WorkingDirectory
+                pr.StartInfo.Arguments = ""
+                pr.StartInfo.UseShellExecute = False
+                pr.StartInfo.CreateNoWindow = True
+                pr.StartInfo.FileName = UpgradeCmd
+                pr.Start()
+                pr.WaitForExit(300000)
+                pr = Nothing
+            Catch ex As Exception
+                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            End Try
         End Sub
 
     End Class

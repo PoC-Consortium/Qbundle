@@ -409,17 +409,13 @@
         Select Case State
             Case QGlobal.ProcOp.Stopped
                 Running = False
-
                 btnStartStop.Text = "Start wallet"
                 btnStartStop.Enabled = True
-
                 tsStartStop.Enabled = True
                 tsStartStop.Text = "Start wallet"
-
                 lblWalletStatus.Text = "Stopped"
-
                 lblGotoWallet.Visible = False
-
+                StopAPIFetch()
             Case QGlobal.ProcOp.FoundSignal ' Running
 
                 btnStartStop.Text = "Stop wallet"
@@ -561,7 +557,10 @@
 
     End Sub
     Friend Sub StartWallet(Optional ByVal WriteDebug As Boolean = False)
-        If Not QB.Generic.SanityCheck() Then Exit Sub
+        If Not QB.Generic.SanityCheck() Then
+            UpdateUIState(QGlobal.ProcOp.Stopped)
+            Exit Sub
+        End If
         QB.Generic.WriteWalletConfig(WriteDebug)
         If Q.Service.IsInstalled Then
             Q.Service.StartService()
