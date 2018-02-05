@@ -30,28 +30,28 @@ Public Class clsHttp
             stbuffer = readStream.ReadToEnd()
         Catch ex As Exception
             Mystate = False 'we shall return false after we have tried to clean up
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             readStream.Close()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             receiveStream.Close()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             WebResponse.Close()
             WebResponse.Dispose()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             Http = Nothing
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
         Return stbuffer
@@ -87,28 +87,28 @@ Public Class clsHttp
             stbuffer = readStream.ReadToEnd()
         Catch ex As Exception
             Mystate = False 'we shall return false after we have tried to clean up
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             readStream.Close()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             receiveStream.Close()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             WebResponse.Close()
             WebResponse.Dispose()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             Http = Nothing
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
         Return stbuffer
@@ -134,7 +134,7 @@ Public Class clsHttp
                 CurChr = CurChr + 1
             Loop
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return TempAns
     End Function

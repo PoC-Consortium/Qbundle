@@ -119,8 +119,8 @@
                 Try
                     Me.DialogResult = DialogResult.Yes
                 Catch ex As Exception
-                    MsgBox("Restartprocess went wrong")
-                    If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+
+                    Generic.WriteDebug(ex)
                 End Try
             End If
         End If

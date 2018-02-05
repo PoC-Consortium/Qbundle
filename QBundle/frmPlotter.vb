@@ -131,7 +131,7 @@ Public Class frmPlotter
         Try
             mnuitm = DirectCast(sender, ToolStripMenuItem)
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
         End Try
         txtAccount.Text = Q.Accounts.GetAccountID(mnuitm.Text)
@@ -176,6 +176,7 @@ Public Class frmPlotter
             MsgBox("Xplotter does not allow to plot directly to root path of a drive. Create a directory and put your plots in there.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Wrong path")
             Exit Sub
         End If
+
         If Generic.DriveCompressed(Path) Then
             Dim Msg As String = "The selected path is on a NTFS compressed drive or folder."
             Msg &= " This is not supported by Xplotter." & vbCrLf & vbCrLf
@@ -333,7 +334,7 @@ Public Class frmPlotter
                 End If
             End If
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Return False
         End Try
 
@@ -482,7 +483,7 @@ Public Class frmPlotter
                 Exit Sub
             End If
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             MsgBox("Error parsing current plotfile.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Error")
             Exit Sub
         End Try
@@ -504,7 +505,7 @@ Public Class frmPlotter
             p.StartInfo.Verb = "runas"
             p.Start()
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             MsgBox("Failed to start Xplotter.")
         End Try
 

@@ -96,7 +96,7 @@
             Dim b As Byte() = My.Resources.CPU
             IO.File.WriteAllBytes(AppDir & "readCPUInstructions.exe", b)
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             Dim p As New Process
@@ -129,12 +129,12 @@
             End If
 
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             IO.File.Delete(AppDir & "readCPUInstructions.exe")
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
 

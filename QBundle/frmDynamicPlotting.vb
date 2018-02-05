@@ -112,7 +112,7 @@
         Try
             mnuitm = DirectCast(sender, ToolStripMenuItem)
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
         End Try
         txtAccount.Text = Q.Accounts.GetAccountID(mnuitm.Text)

@@ -93,7 +93,7 @@
                 Exit Sub
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
     End Sub

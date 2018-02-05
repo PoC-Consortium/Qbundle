@@ -110,7 +110,7 @@ Public Class clsProcessHandler
                 P(Appid).StopProc()
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            QB.Generic.WriteDebug(ex)
         End Try
     End Sub
     Public Sub StopProcessSquence(ByVal Appid() As Object)
@@ -204,7 +204,7 @@ Public Class clsProcessHandler
             Try
                 FreeConsole()
             Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                QB.Generic.WriteDebug(ex)
             End Try
             Try
                 AttachConsole(p.Id)
@@ -218,12 +218,12 @@ Public Class clsProcessHandler
                 FreeConsole()
                 SetConsoleCtrlHandler(AddressOf OnExit, False)
             Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
             Try
                 p.Kill() 'fixing no java cleanup.
             Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         End Sub
         Private Function OnExit(CtrlType As CtrlTypes) As Boolean
@@ -291,7 +291,7 @@ Public Class clsProcessHandler
                     Return False
                 End If
             Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
             If FoundStartSignal Then Return True
             Return False
@@ -309,7 +309,7 @@ Public Class clsProcessHandler
                 p.Kill()
                 Return True
             Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
             Return False
         End Function
@@ -379,7 +379,7 @@ Public Class clsProcessHandler
                 pr.WaitForExit(300000)
                 pr = Nothing
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         End Sub
 

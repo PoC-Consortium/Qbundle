@@ -59,7 +59,7 @@
             RemoveHandler Q.App.DownloadDone, AddressOf Done
             RemoveHandler Q.App.Aborted, AddressOf Aborting
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
         'we are done so close

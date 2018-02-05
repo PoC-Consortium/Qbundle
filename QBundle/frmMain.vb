@@ -229,7 +229,7 @@
                 Exit Sub
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
     End Sub
@@ -663,7 +663,7 @@
         Try
             mnuitm = DirectCast(sender, ToolStripMenuItem)
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
         End Try
         pwdf.Text = "Enter your pin"
@@ -683,7 +683,7 @@
                             Me.wb1.Document.InvokeScript("eval", codeString)
                             Pass = ""
                         Catch ex As Exception
-                            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                            Generic.WriteDebug(ex)
                         End Try
                     Else 'coppy to clipboard
                         MsgBox("Your passphrase is copied to clipoard. And will be erased after 30 seconds.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Clipboard")
@@ -731,7 +731,7 @@
             lblUpdates.Visible = True
             lblUpdateAvail2.Visible = True
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
 #End Region
@@ -798,7 +798,7 @@
             Next
             APIResult(Height, TimeStamp)
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
 
@@ -823,7 +823,7 @@
             End If
 
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
 
@@ -974,7 +974,7 @@
                     Next
                 End If
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         End If
 

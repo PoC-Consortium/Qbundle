@@ -7,21 +7,21 @@
             txtLog.AppendText(String.Join(vbCrLf, frmMain.Console(0)))
             AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
             RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
     Private Sub cmbLog_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLog.SelectedIndexChanged
         Try
             txtLog.Text = String.Join(vbCrLf, frmMain.Console(cmbLog.SelectedIndex))
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
     End Sub
@@ -47,7 +47,7 @@
                     End If
             End Select
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
     End Sub

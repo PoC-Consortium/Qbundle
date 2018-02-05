@@ -75,7 +75,7 @@ Public Class clsApp
             Try
                 IO.File.WriteAllText(QGlobal.BaseDir & "UpdateInfo.xml", data)
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
             'xml deserialize
             Try
@@ -86,7 +86,7 @@ Public Class clsApp
                 Reader.Dispose()
                 x = Nothing
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         End If
     End Sub
@@ -102,7 +102,7 @@ Public Class clsApp
             Reader.Dispose()
             x = Nothing
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
     End Sub
@@ -139,7 +139,7 @@ Public Class clsApp
                 _Apps(AppId).Updated = False 'reset updates
                 allok = True
             Catch ex As Exception
-                If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         Next
 
@@ -155,7 +155,7 @@ Public Class clsApp
             _Apps(QGlobal.AppNames.Launcher).LocalFound = True
             _Apps(QGlobal.AppNames.Launcher).LocalVersion = Major & "." & Minor
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
     Private Sub Nrs()
@@ -173,7 +173,7 @@ Public Class clsApp
                 End If
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
 
@@ -193,7 +193,7 @@ Public Class clsApp
             p.Start()
             p.WaitForExit(1000)
             result = LCase(p.StandardError.ReadLine())
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug("Java installed version ", result)
+
             If result <> "" Then
                 If LCase(result).Contains("java version") Then
                     result = result.Replace("java version", "")
@@ -215,7 +215,7 @@ Public Class clsApp
             p.Dispose()
             p.Dispose()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         _Apps(QGlobal.AppNames.JavaInstalled).LocalFound = JavaFound
     End Sub
@@ -233,7 +233,7 @@ Public Class clsApp
                 End If
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
     Private Sub MariaDB()
@@ -251,7 +251,7 @@ Public Class clsApp
 
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
     Private Sub Xplotter()
@@ -269,7 +269,7 @@ Public Class clsApp
 
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
     Private Sub BlagoMiner()
@@ -287,7 +287,7 @@ Public Class clsApp
 
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
 #End Region
@@ -472,12 +472,12 @@ Public Class clsApp
             sChunks.Close()
             DLOk = True
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             File.Close()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return DLOk
     End Function
@@ -513,7 +513,7 @@ Public Class clsApp
             AllOk = True
             Archive.Dispose()
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
         Return AllOk
@@ -527,7 +527,7 @@ Public Class clsApp
                 File.Delete(filename)
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
 
@@ -707,7 +707,7 @@ Public Class clsApp
                 Return True
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return False
     End Function

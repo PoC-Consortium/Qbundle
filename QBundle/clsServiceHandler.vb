@@ -30,7 +30,7 @@ Public Class clsServiceHandler
                 Return False
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return False
 
@@ -53,7 +53,7 @@ Public Class clsServiceHandler
                 Return False
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return False
     End Function

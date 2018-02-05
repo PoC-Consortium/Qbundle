@@ -47,7 +47,7 @@
         Try
             mnuitm = DirectCast(sender, ToolStripMenuItem)
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
         End Try
         txtAccount.Text = Q.Accounts.GetAccountRS(mnuitm.Text)
@@ -57,7 +57,7 @@
         Try
             mnuitm = DirectCast(sender, ToolStripMenuItem)
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
         End Try
         If mnuitm.Text = "Solo mining" Then
@@ -173,7 +173,7 @@
                 MsgBox("Wallet seem to be offline. Try another wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No connection")
             End If
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
     End Sub
 
@@ -237,7 +237,7 @@
 
         Catch ex As Exception
             MsgBox("Unable to get reward recipient status with selected wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No response")
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
 
         End Try

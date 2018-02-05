@@ -127,7 +127,7 @@
 
         Catch ex As Exception
             '   MsgBox("Unable to get reward recipient status with selected wallet.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "No response")
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
 
         End Try
@@ -140,7 +140,7 @@
         Try
             mnuitm = DirectCast(sender, ToolStripMenuItem)
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
             Exit Sub
         End Try
         For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)

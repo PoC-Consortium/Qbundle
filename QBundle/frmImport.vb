@@ -49,7 +49,7 @@
                 Exit Sub
             End If
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
     End Sub
@@ -145,7 +145,7 @@
                     IO.File.Delete(QGlobal.BaseDir & "burst_db\burst.mv.db")
                 End If
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         End If
 
@@ -179,19 +179,19 @@
                     IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
                 End If
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
             Try
                 If IO.File.Exists(QGlobal.BaseDir & "burst_db\burst.mv.db") Then
                     IO.File.Delete(QGlobal.BaseDir & "burst_db\burst.mv.db")
                 End If
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
             Try
                 IO.File.Move(QGlobal.BaseDir & "burst.mv.db", QGlobal.BaseDir & "burst_db\burst.mv.db")
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
 
             Complete()
@@ -331,7 +331,7 @@
             RemoveHandler Q.ProcHandler.Stopped, AddressOf Stopped
             RemoveHandler Q.ProcHandler.Update, AddressOf ProcEvents
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
         If IsAborted = False Then
@@ -346,7 +346,7 @@
                 Try
                     frmMain.StartWallet()
                 Catch ex As Exception
-                    If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                    Generic.WriteDebug(ex)
                 End Try
             End If
         Else

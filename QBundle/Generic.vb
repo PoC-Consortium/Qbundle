@@ -50,7 +50,7 @@ Friend Class Generic
 
 
                     Catch ex As Exception
-                        If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                        Generic.WriteDebug(ex)
                     End Try
 
                 Case 12 'from 12-13
@@ -67,7 +67,7 @@ Friend Class Generic
                             Q.Accounts.LoadAccounts()
                         End If
                     Catch ex As Exception
-                        If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                        Generic.WriteDebug(ex)
                     End Try
 
                     Select Case Q.settings.DbType
@@ -168,7 +168,7 @@ Friend Class Generic
                         IO.Directory.CreateDirectory(QGlobal.AppDir & "burst_db")
                     End If
                 Catch ex As Exception
-                    If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                    Generic.WriteDebug(ex)
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
 
@@ -208,7 +208,7 @@ Friend Class Generic
         Try
             IO.File.WriteAllText(QGlobal.AppDir & "conf\brs.properties", Data)
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
 
@@ -267,7 +267,7 @@ Friend Class Generic
                         IO.Directory.CreateDirectory(QGlobal.AppDir & "burst_db")
                     End If
                 Catch ex As Exception
-                    If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+                    Generic.WriteDebug(ex)
                 End Try
                 Data &= "#Using Firebird" & vbCrLf
 
@@ -307,7 +307,7 @@ Friend Class Generic
         Try
             IO.File.WriteAllText(QGlobal.AppDir & "conf\nxt.properties", Data)
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
 
 
@@ -467,7 +467,7 @@ Friend Class Generic
                 Case "Debug"
                     QB.Generic.DebugMe = True
                 Case "BetaUpdate"
-                    Q.App.UpdateInfo = "BetaUpdate"
+                    Q.App.UpdateInfo = "BetaUpdate.xml"
             End Select
         End If
     End Sub
@@ -505,7 +505,7 @@ Friend Class Generic
             Next
 
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Try
             If Q.settings.DbType = QGlobal.DbType.pMariaDB And Ok = True Then
@@ -534,7 +534,7 @@ Friend Class Generic
                 Next
             End If
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         If Q.settings.NTPCheck Then
             Try
@@ -559,7 +559,7 @@ Friend Class Generic
                     Ok = False
                 End If
             Catch ex As Exception
-                If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+                Generic.WriteDebug(ex)
             End Try
         End If
         Return Ok
@@ -597,7 +597,7 @@ Friend Class Generic
             Dim WC As Net.WebClient = New Net.WebClient()
             Return WC.DownloadString("http://files.getburst.net/ip.php")
         Catch ex As Exception
-            If QB.Generic.DebugMe Then QB.Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return ""
     End Function
@@ -610,15 +610,21 @@ Friend Class Generic
             Return False
         End Try
     End Function
-    Friend Shared Sub WriteDebug(ByVal strace As String, ByVal msg As String)
+    Friend Shared Sub WriteDebug(ByVal exc As Exception)
 
         Try
-            Dim strErr As String = "------------------------- " & Now.ToString & " --------------------------" & vbCrLf
-            strErr &= "Message: " & msg & vbCrLf
-            strErr &= "StackTrace:" & strace & vbCrLf
-            IO.File.AppendAllText(QGlobal.LogDir & "\bwl_debug.txt", strErr)
+            If DebugMe Then
+                Dim strErr As String = "------------------------- " & Now.ToString & " --------------------------" & vbCrLf
+                strErr &= "Message: " & exc.Message & vbCrLf
+                strErr &= "StackTrace:" & exc.StackTrace & vbCrLf
+
+                IO.File.AppendAllText(QGlobal.LogDir & "\bwl_debug.txt", strErr)
+
+
+
+            End If
         Catch ex As Exception
-            MsgBox(msg)
+            MsgBox(ex.Message)
         End Try
 
 
@@ -707,7 +713,7 @@ Friend Class Generic
             Return networkDateTime
 
         Catch ex As Exception
-            If Generic.DebugMe Then Generic.WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         Finally
             socket.Dispose()
         End Try
@@ -762,7 +768,7 @@ Friend Class Generic
             GetDiskFreeSpaceEx(path, vbNull, vbNull, FreeSpace)
             Return FreeSpace
         Catch ex As Exception
-            If DebugMe Then WriteDebug(ex.StackTrace, ex.Message)
+            Generic.WriteDebug(ex)
         End Try
         Return 0
 
