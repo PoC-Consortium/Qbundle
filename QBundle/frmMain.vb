@@ -572,6 +572,8 @@
                 'mariadb
                 pset(0).AppId = QGlobal.AppNames.MariaPortable
                 pset(0).AppPath = QGlobal.AppDir & "MariaDb\bin\mysqld.exe"
+                pset(0).UpgradeSignal = "mysql_upgrade"
+                pset(0).UpgradeCmd = QGlobal.AppDir & "MariaDb\bin\mysql_upgrade.exe"
                 pset(0).Cores = 0
                 pset(0).Params = "--console"
                 pset(0).WorkingDirectory = QGlobal.AppDir & "MariaDb\bin\"

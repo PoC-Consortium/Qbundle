@@ -22,6 +22,10 @@ Public Class clsProcessHandler
         P(Pcls.AppId).StartSignal = Pcls.StartSignal
         P(Pcls.AppId).Cores = CInt(2 ^ Pcls.Cores) - 1 'processaffinity is set bitwise 
         P(Pcls.AppId).SSMTEnd = Pcls.StartsignalMaxTime
+
+        P(Pcls.AppId).UpgradeSignal = Pcls.UpgradeSignal
+        P(Pcls.AppId).UpgradeCmd = Pcls.UpgradeCmd
+
         AddHandler P(Pcls.AppId).UpdateConsole, AddressOf ProcUpdate
 
         Dim trda As Thread
@@ -80,6 +84,10 @@ Public Class clsProcessHandler
             P(Proc.AppId).StartSignal = Proc.StartSignal
             P(Proc.AppId).Cores = CInt(2 ^ Proc.Cores) - 1 'processaffinity is set bitwise 
             P(Proc.AppId).SSMTEnd = Proc.StartsignalMaxTime
+
+            P(Proc.AppId).UpgradeSignal = Proc.UpgradeSignal
+            P(Proc.AppId).UpgradeCmd = Proc.UpgradeCmd
+
             AddHandler P(Proc.AppId).UpdateConsole, AddressOf ProcUpdate
             Dim trda As Thread
             trda = New Thread(AddressOf P(Proc.AppId).Work)
@@ -154,6 +162,8 @@ Public Class clsProcessHandler
         Public StartSignal As String = ""
         Public WorkingDirectory As String = ""
         Public StartsignalMaxTime As Integer = 300 '5 minutes
+        Public UpgradeSignal As String
+        Public UpgradeCmd As String
     End Class
 
     Private Class clsProcessWorker
@@ -168,10 +178,14 @@ Public Class clsProcessHandler
         Public Arguments As String
         Public Appid As Integer
         Public StartSignal As String
-        Public FoundStartSignal As Boolean
+        Public FoundUpgradeSignal As Boolean
         Public Cores As Integer
         Public SSMTEnd As Integer
         Private Abort As Boolean
+
+        Public FoundStartSignal As Boolean
+        Public UpgradeSignal As String
+        Public UpgradeCmd As String
 
         Private Enum CtrlTypes As UInteger
             CTRL_C_EVENT = 0
@@ -219,6 +233,7 @@ Public Class clsProcessHandler
         Public Sub Work()
             _state = QGlobal.ProcOp.Running
             FoundStartSignal = False
+            FoundUpgradeSignal = False
             Abort = False
             p = New Process
             p.StartInfo.WorkingDirectory = WorkingDirectory
@@ -251,6 +266,7 @@ Public Class clsProcessHandler
             'if no startsignal then just asume we did
             If StartSignal = "" Then FoundStartSignal = True
             Dim SSMTEndTime As Date = Now.AddSeconds(SSMTEnd)
+
             Do 'just wait and see if we have exit.
                 If FoundStartSignal = False And Now > SSMTEndTime Then
                     RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Err, "Process did not completely start in reasonable time. Shutting down.")
@@ -313,11 +329,16 @@ Public Class clsProcessHandler
         Sub OutputHandler(sender As Object, e As DataReceivedEventArgs)
             If Not String.IsNullOrEmpty(e.Data) Then
                 If FoundStartSignal = False Then
+                    If e.Data.Contains(UpgradeSignal) Then FoundUpgradeSignal = True
                     If e.Data.Contains(StartSignal) Then
-                        FoundStartSignal = True
+                        FoundStartSignal = True 'we have this before upgrade so we do not kill proces during upgrade
+                        If FoundUpgradeSignal Then
+                            RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleOut, "Qbundle: Executing second stage upgrade. Please wait up to 5 minutes for completion.")
+                            ExecuteUpgradeCmd()
+                        End If
+
                         RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.FoundSignal, "")
                     End If
-
                 End If
 
                 RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleOut, e.Data)
@@ -326,9 +347,14 @@ Public Class clsProcessHandler
         Sub ErroutHandler(sender As Object, e As DataReceivedEventArgs)
 
             If Not String.IsNullOrEmpty(e.Data) Then
+                If e.Data.Contains(UpgradeSignal) Then FoundUpgradeSignal = True
                 If FoundStartSignal = False Then
                     If e.Data.Contains(StartSignal) Then
-                        FoundStartSignal = True
+                        FoundStartSignal = True 'we have this before upgrade so we do not kill proces during upgrade
+                        If FoundUpgradeSignal Then
+                            RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleErr, "Qbundle: Executing second stage upgrade. Please wait up to 5 minutes for completion.")
+                            ExecuteUpgradeCmd()
+                        End If
                         RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.FoundSignal, "")
                     End If
                 End If
@@ -336,6 +362,21 @@ Public Class clsProcessHandler
                 RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.ConsoleErr, e.Data)
             End If
         End Sub
+
+
+        Private Sub ExecuteUpgradeCmd()
+
+            p = New Process
+            p.StartInfo.WorkingDirectory = WorkingDirectory
+            p.StartInfo.Arguments = ""
+            p.StartInfo.UseShellExecute = False
+            p.StartInfo.CreateNoWindow = True
+            p.StartInfo.FileName = UpgradeCmd
+            p.Start()
+            p.WaitForExit(300000)
+
+        End Sub
+
     End Class
 
 

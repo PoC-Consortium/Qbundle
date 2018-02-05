@@ -13,17 +13,20 @@ pipeclient+server implementation in service
 minimize to tray on exit ?
 Iconify(?)
 Change to Chrome(?) CEFSharp but must check license before it is implemented.
-Add upgrade for MariaDB
 
+Add upgrade for MariaDB
 
 v2.0
 Check for updates now automatically updates Pool/wallet info.
 Ability to set amount of threads and ram on dynamic plotting.
 Qbundle checks for NTFS compressed drive or folder and warns when it is not supported.
 Drives mounted in folders now show free space correctly.
-Core wallet configuration schema updated to fit BRS 2.0.
 Pool lists updated
+Upgrade system changed slightly to support second grade upgrades.
 
+
+
+Core wallet configuration schema updated to fit BRS 2.0.
 
 ~1.9
 * Updated pool lists.
