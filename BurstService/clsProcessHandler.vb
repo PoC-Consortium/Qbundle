@@ -27,7 +27,7 @@ Public Class clsProcessHandler
     End Enum
     Private Delegate Function ConsoleCtrlDelegate(CtrlType As CtrlTypes) As Boolean
     Private Declare Function AttachConsole Lib "kernel32" (dwProcessId As UInteger) As Boolean
-    Private Declare Sub GenerateConsoleCtrlEvent Lib "kernel32" (ByVal dwCtrlEvent As Short, ByVal dwProcessGroupId As Short)
+    Private Declare Function GenerateConsoleCtrlEvent Lib "kernel32" Alias "GenerateConsoleCtrlEvent" (ByVal dwCtrlEvent As Long, ByVal dwProcessGroupId As Long) As Long
     Private Declare Function SetConsoleCtrlHandler Lib "kernel32" (Handler As ConsoleCtrlDelegate, Add As Boolean) As Boolean
     Private Declare Function FreeConsole Lib "kernel32" () As Boolean
     Private ShouldStop As Boolean
@@ -107,7 +107,7 @@ Public Class clsProcessHandler
 
 
         nrs.StartInfo.WorkingDirectory = AppDir
-        nrs.StartInfo.Arguments = "-cp burst.jar;conf nxt.Nxt"
+        nrs.StartInfo.Arguments = "-cp burst.jar;conf brs.Burst"
         nrs.StartInfo.UseShellExecute = False
 
         '   nrs.StartInfo.RedirectStandardError = True

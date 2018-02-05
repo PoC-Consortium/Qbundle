@@ -58,6 +58,11 @@ Public Class clsApp
         'load previous data
         Dim data As String = ""
         If DynamicInfo.Repositories(0) = "" Then LoadUpdateInfoXML()
+        If IsNothing(DynamicInfo.Repositories) Or DynamicInfo.Repositories(0) = "" Then
+            ReDim DynamicInfo.Repositories(0)
+            DynamicInfo.Repositories(0) = "http://files.getburst.net/" 'fallback / rescue
+        End If
+
         If Q.settings.CheckForUpdates Then
             If Not IsNothing(DynamicInfo.Repositories) Then
                 For i = 0 To UBound(DynamicInfo.Repositories)
@@ -152,8 +157,9 @@ Public Class clsApp
         Try
             Dim Major As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major)
             Dim Minor As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor)
+            Dim Revision As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Revision)
             _Apps(QGlobal.AppNames.Launcher).LocalFound = True
-            _Apps(QGlobal.AppNames.Launcher).LocalVersion = Major & "." & Minor
+            _Apps(QGlobal.AppNames.Launcher).LocalVersion = Major & "." & Minor & "." & Revision
         Catch ex As Exception
             Generic.WriteDebug(ex)
         End Try

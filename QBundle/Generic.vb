@@ -8,8 +8,9 @@ Friend Class Generic
     Private Declare Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" (ByVal lpDirectoryName As String, ByRef lpFreeBytesAvailableToCaller As Long, ByRef lpTotalNumberOfBytes As Long, ByRef lpTotalNumberOfFreeBytes As Long) As Long
     Public Shared DebugMe As Boolean
     Friend Shared Sub CheckUpgrade()
-        Dim CurVer As Integer = Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major * 10
-        CurVer += Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor
+        Dim CurVer As Integer = Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major * 100
+        CurVer += Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor * 10
+        CurVer += Reflection.Assembly.GetExecutingAssembly.GetName.Version.Revision
         Dim OldVer As Integer = Q.settings.Upgradev
         If CurVer <= OldVer Then Exit Sub
         Do
@@ -107,7 +108,7 @@ Friend Class Generic
                 Case 18 '18 -19
                     Q.settings.Currency = "USD"
                     Q.settings.SaveSettings()
-                Case 19 '19-20
+                Case 190 '1.9.0-2.0.0
 
             End Select
             OldVer += 1
@@ -215,8 +216,8 @@ Friend Class Generic
 
     End Sub
     Friend Shared Sub WriteWalletConfig(Optional ByVal WriteDebug As Boolean = False)
-        WriteNRSConfig(WriteDebug)
-        ' WriteBRSConfig(WriteDebug)
+        '  WriteNRSConfig(WriteDebug)
+        WriteBRSConfig(WriteDebug)
     End Sub
     Friend Shared Sub WriteNRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Data As String = ""

@@ -44,7 +44,7 @@
         End If
 
         If Q.settings.DebugMode = True Then QB.Generic.DebugMe = True
-        If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
+
         LastException = Now 'for brs exception monitoring
 
         If Not QB.Generic.CheckWritePermission Then
@@ -73,7 +73,7 @@
             AddHandler Q.App.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
         SetDbInfo()
-        lblWallet.Text = "Burst wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, False)
+
 
         If Q.settings.Cpulimit = 0 Or Q.settings.Cpulimit > Environment.ProcessorCount Then 'need to set correct cpu
             Select Case Environment.ProcessorCount
@@ -139,7 +139,14 @@
         If Q.settings.DbType = QGlobal.DbType.FireBird Then
             MsgBox("You are currently set up to use Firebird as database. Due to recent discovery’s firebird is no longer recommended in 1.3.6cg core wallet. It is suggested that you change database backend.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Firebird")
         End If
+        SetWalletInfo()
+    End Sub
+    Friend Sub SetWalletInfo()
 
+        If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
+
+
+        lblWallet.Text = "Burst wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, False)
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode

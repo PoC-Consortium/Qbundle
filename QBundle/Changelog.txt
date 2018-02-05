@@ -23,10 +23,8 @@ Qbundle checks for NTFS compressed drive or folder and warns when it is not supp
 Drives mounted in folders now show free space correctly.
 Pool lists updated
 Upgrade system changed slightly to support second grade upgrades.
-
-
-
-Core wallet configuration schema updated to fit BRS 2.0.
+servicemodule updated to handle BRS 2.0.0 
+Core wallet configuration schema updated to handle BRS 2.0.
 
 ~1.9
 * Updated pool lists.
