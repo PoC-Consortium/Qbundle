@@ -16,7 +16,7 @@ Change to Chrome(?) CEFSharp but must check license before it is implemented.
 
 Add upgrade for MariaDB
 
-v2.0
+v2.0.0
 Check for updates now automatically updates Pool/wallet info.
 Ability to set amount of threads and ram on dynamic plotting.
 Qbundle checks for NTFS compressed drive or folder and warns when it is not supported.

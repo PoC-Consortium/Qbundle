@@ -129,6 +129,7 @@
         frmMain.lblUpdates.Visible = False
         frmMain.lblUpdateAvail2.Visible = False
         pb1.Visible = False
+        frmMain.SetWalletInfo()
         lblStatus.Text = "Update complete."
         btnUpdate.Text = "Close"
         btnUpdate.Enabled = True

@@ -137,16 +137,19 @@
         End If
 
         If Q.settings.DbType = QGlobal.DbType.FireBird Then
-            MsgBox("You are currently set up to use Firebird as database. Due to recent discovery’s firebird is no longer recommended in 1.3.6cg core wallet. It is suggested that you change database backend.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Firebird")
+            '     MsgBox("You are currently set up to use Firebird as database. Due to recent discovery’s firebird is no longer recommended in 1.3.6cg core wallet. It is suggested that you change database backend.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Firebird")
         End If
         SetWalletInfo()
     End Sub
     Friend Sub SetWalletInfo()
 
-        If QB.Generic.DebugMe Then Me.Text = Me.Text & " (DebugMode)"
 
-
-        lblWallet.Text = "Burst wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, False)
+        Dim Title As String = "Qbundle v"
+        Title &= Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major & "." & Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor & "." & Reflection.Assembly.GetExecutingAssembly.GetName.Version.Revision & " | "
+        Title &= "Burstcoin Wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, True)
+        If Generic.DebugMe Then Title &= " (DebugMode)"
+        Me.Text = Title
+        lblWallet.Text = "Burst wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, True)
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
