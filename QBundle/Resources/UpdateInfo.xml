@@ -120,7 +120,7 @@
       <Address>burstneon.com</Address>
       <Port>8080</Port>
       <BurstAddress>BURST-YXZW-JH7M-QKR9-9PKBN</BurstAddress>
-      <DeadLine>6048000</DeadLine>
+      <DeadLine>63072000</DeadLine>
     </PoolObject>
     <PoolObject>
       <Name>burst.btfg.space</Name>
