@@ -14,10 +14,14 @@
         Next
 
         rbSolo.Enabled = True
+        rbSolo.Checked = False
+        rbPool.Checked = False
+
         rbSolo.Text = "Solo Mining"
 
         If Not frmMain.Running Then
             rbSolo.Enabled = False
+            '   rbPool.Checked = True
             rbSolo.Text = "Solo Mining (Local wallet is not running)"
         ElseIf Not frmMain.fullysynced Then
             rbSolo.Enabled = False
@@ -38,9 +42,13 @@
         If QGlobal.CPUInstructions.AVX2 Then lblcputype.Text = "AVX2"
 
         If Q.settings.Solomining Then
-            If rbSolo.Enabled = True Then rbSolo.Checked = True
+            rbSolo.Enabled = True
+            rbSolo.Checked = True
+            pnlPool.Enabled = False
         Else
-            If rbPool.Enabled = True Then rbPool.Checked = True
+            rbPool.Enabled = True
+            rbPool.Checked = True
+            pnlPool.Enabled = True
         End If
 
         txtMiningServer.Text = Q.settings.MiningServer
@@ -55,6 +63,8 @@
         chkUseBoost.Checked = Q.settings.UseMultithread
 
     End Sub
+
+
 
     Private Sub CheckRewardAssignment(ByVal WalletId As Integer)
 
@@ -340,10 +350,23 @@
         End If
 
         'ok all seems fine. if solo then write password file
-        If PassPhrase.Length > 0 Then
-            System.IO.File.WriteAllText(QGlobal.AppDir & "\BlagoMiner\passphrases.txt", PassPhrase)
+        If rbSolo.Checked Then
+            If PassPhrase.Length > 0 Then
+                System.IO.File.WriteAllText(QGlobal.AppDir & "\BlagoMiner\passphrases.txt", PassPhrase)
+            End If
+        Else
+            'lets make sure pass is not there
+            Try
+                If IO.File.Exists(QGlobal.AppDir & "\BlagoMiner\passphrases.txt") Then
+                    IO.File.Move(QGlobal.AppDir & "\BlagoMiner\passphrases.txt", QGlobal.AppDir & "\BlagoMiner\passphrases.txt.qbundle")
+                End If
+            Catch ex As Exception
+                MsgBox("Unable to remove passphrases.txt. Refusing to start poolmining.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Stop.")
+                Exit Sub
+            End Try
+
         End If
-        WriteConfig()
+            WriteConfig()
 
         If rbSolo.Checked Then
             Q.settings.Solomining = True
@@ -545,5 +568,15 @@
                 End If
             Next
         End If
+    End Sub
+
+    Private Sub rbSolo_CheckedChanged_1(sender As Object, e As EventArgs) Handles rbSolo.CheckedChanged
+        '     setMiningType()
+
+    End Sub
+
+    Private Sub rbPool_CheckedChanged_1(sender As Object, e As EventArgs) Handles rbPool.CheckedChanged
+        '   setMiningType()
+
     End Sub
 End Class
