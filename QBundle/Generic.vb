@@ -133,12 +133,12 @@ Friend Class Generic
         'API settings
         Data &= "#API network" & vbCrLf
         Buffer = Split(Q.settings.ListenIf, ";")
-        Data &= "API.ServerPort = " & Buffer(1) & vbCrLf
-        Data &= "API.ServerHost = " & Buffer(0) & vbCrLf
+        Data &= "API.Port = " & Buffer(1) & vbCrLf
+        Data &= "API.Listen = " & Buffer(0) & vbCrLf
         If Q.settings.ConnectFrom.Contains("0.0.0.0") Then
-            Data &= "brs.allowedBotHosts = *" & vbCrLf & vbCrLf
+            Data &= "API.allowed = *" & vbCrLf & vbCrLf
         Else
-            Data &= "brs.allowedBotHosts = " & Q.settings.ConnectFrom & vbCrLf & vbCrLf
+            Data &= "API.allowed = " & Q.settings.ConnectFrom & vbCrLf & vbCrLf
         End If
 
 
@@ -179,19 +179,18 @@ Friend Class Generic
                 Data &= "#Using installed MariaDb" & vbCrLf
             Case QGlobal.DbType.H2
                 Data &= "#Using H2" & vbCrLf
-                Data &= "brs.dbMaximumPoolSize = 30" & vbCrLf
         End Select
 
-        Data &= "brs.dbUrl = " & Q.settings.DbServer & vbCrLf
-        Data &= "brs.dbUsername = " & Q.settings.DbUser & vbCrLf
-        Data &= "brs.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
+        Data &= "DB.Url = " & Q.settings.DbServer & vbCrLf
+        Data &= "DB.Username = " & Q.settings.DbUser & vbCrLf
+        Data &= "DB.Password = " & Q.settings.DbPass & vbCrLf & vbCrLf
 
 
 
         If Q.settings.useOpenCL Then
             Data &= "#CPU Offload" & vbCrLf
             Data &= "GPU.AutoDetect = on" & vbCrLf
-            Data &= "brs.oclHashesPerEnqueue=100" & vbCrLf
+            Data &= "GPU.HashesPerBatch = 100" & vbCrLf
             Data &= "GPU.Acceleration = on" & vbCrLf & vbCrLf
 
         End If
