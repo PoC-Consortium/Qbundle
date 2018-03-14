@@ -35,9 +35,11 @@
             End
         End If
 
+
+
         If Generic.DriveCompressed(QGlobal.BaseDir) Then
-            Dim Msg As String = "You are running Qbundle On a NTFS compressed drive or folder."
-            Msg &= " This is not supported and will cause unstable environment." & vbCrLf & vbCrLf
+            Dim Msg As String = "You are running Qbundle on a NTFS compressed drive or folder."
+            Msg &= " This is not supported and may cause unstable environment." & vbCrLf & vbCrLf
             Msg &= "Please move Qbundle to another drive or decompress the drive or folder."
             MsgBox(Msg, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Compressed drive")
 
@@ -48,7 +50,7 @@
         LastException = Now 'for brs exception monitoring
 
         If Not QB.Generic.CheckWritePermission Then
-            MsgBox("Qbundle Do Not have writepermission To it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
+            MsgBox("Qbundle does not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
             End
         End If
 
@@ -72,6 +74,20 @@
             Q.App.StartUpdateNotifications()
             AddHandler Q.App.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
+        'special upgrade from 1.9
+        If Q.App.isInstalled(1) Then
+            If Q.App.GetLocalVersion(1) = "1.3.6" Then
+                Q.App.SetRemoteInfo()
+                If Q.App.HasRepository(1) Then
+
+                    PrepareUpdate()
+
+
+                End If
+            End If
+        End If
+
+
         SetDbInfo()
 
 
