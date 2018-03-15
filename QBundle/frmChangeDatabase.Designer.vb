@@ -370,23 +370,24 @@ Partial Class frmChangeDatabase
         'rOP2
         '
         Me.rOP2.AutoSize = True
+        Me.rOP2.Checked = True
         Me.rOP2.Location = New System.Drawing.Point(32, 120)
         Me.rOP2.Name = "rOP2"
         Me.rOP2.Size = New System.Drawing.Size(69, 17)
         Me.rOP2.TabIndex = 3
+        Me.rOP2.TabStop = True
         Me.rOP2.Text = "No Copy."
         Me.rOP2.UseVisualStyleBackColor = True
         '
         'rOP1
         '
         Me.rOP1.AutoSize = True
-        Me.rOP1.Checked = True
+        Me.rOP1.Enabled = False
         Me.rOP1.Location = New System.Drawing.Point(32, 59)
         Me.rOP1.Name = "rOP1"
-        Me.rOP1.Size = New System.Drawing.Size(73, 17)
+        Me.rOP1.Size = New System.Drawing.Size(164, 17)
         Me.rOP1.TabIndex = 2
-        Me.rOP1.TabStop = True
-        Me.rOP1.Text = "Copy data"
+        Me.rOP1.Text = "Copy data (currently disabled)"
         Me.rOP1.UseVisualStyleBackColor = True
         '
         'Label9

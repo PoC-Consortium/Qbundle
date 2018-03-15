@@ -337,12 +337,14 @@ Partial Class frmMain
         '
         'ExportDatabaseToolStripMenuItem
         '
+        Me.ExportDatabaseToolStripMenuItem.Enabled = False
         Me.ExportDatabaseToolStripMenuItem.Name = "ExportDatabaseToolStripMenuItem"
         Me.ExportDatabaseToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.ExportDatabaseToolStripMenuItem.Text = "Export Database"
         '
         'ImportDatabaseToolStripMenuItem1
         '
+        Me.ImportDatabaseToolStripMenuItem1.Enabled = False
         Me.ImportDatabaseToolStripMenuItem1.Name = "ImportDatabaseToolStripMenuItem1"
         Me.ImportDatabaseToolStripMenuItem1.Size = New System.Drawing.Size(166, 22)
         Me.ImportDatabaseToolStripMenuItem1.Text = "Import Database"
