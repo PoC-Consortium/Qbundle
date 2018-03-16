@@ -24,7 +24,14 @@ Drives mounted in folders now show free space correctly.
 Pool lists updated
 Upgrade system changed slightly to support second grade upgrades.
 servicemodule updated to handle BRS 2.0.0 
-Core wallet configuration schema updated to handle BRS 2.0.
+Core wallet configuration schema updated to handle BRS 2.0.0
+
+Due to change in BRS software following features have been removed and changed.
+Export Database removed.
+bbd fileformat removed.
+Import database is changed to bootstrap chain.
+Import database for now only support built in repositories.
+Change database can no longer convert database content
 
 ~1.9
 * Updated pool lists.

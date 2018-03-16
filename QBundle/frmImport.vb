@@ -18,23 +18,14 @@
 
         Select Case Q.settings.DbType
             Case QGlobal.DbType.H2
-                ReDim RepoDBUrls(1)
+                ReDim RepoDBUrls(0)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
-                RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
-                '  RepoDBUrls(2) = "https://burstneon-bc.ddns.net/neonDb.zip"
-                '   RepoDBUrls(3) = "http://files.getburst.net/minidb.zip"
-
                 cmbRepo.Items.Add("Cryptoguru repository")
-                cmbRepo.Items.Add("Burst Wiki")
-                '    cmbRepo.Items.Add("Burstneon Block catcher")
-                'cmbRepo.Items.Add("Test")
                 cmbRepo.SelectedIndex = 0
             Case Else
-                ReDim RepoDBUrls(1)
+                ReDim RepoDBUrls(0)
                 RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
-                RepoDBUrls(1) = "http://burst.wiki/burst12-21-2017.bbd"
                 cmbRepo.Items.Add("Cryptoguru repository")
-                cmbRepo.Items.Add("Burst Wiki")
                 cmbRepo.SelectedIndex = 0
         End Select
 
@@ -64,35 +55,8 @@
         End If
 
         r1.Enabled = False
-        r2.Enabled = False
-        r3.Enabled = False
         cmbRepo.Enabled = False
-        txtUrl.Enabled = False
-        txtFile.Enabled = False
-        btnBrowse.Enabled = False
         btnStart.Enabled = False
-
-        'PreCheck
-        'Repo is ok!
-        If SelectedType = 2 Then
-            Try
-                Dim url As Uri = New Uri(txtUrl.Text)
-            Catch ex As Exception
-                'if not interpreted as url it will fail
-                MsgBox("The url you have entered is not a valid url.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Url error")
-                Exit Sub
-            End Try
-        End If
-        If SelectedType = 3 Then
-            Try
-                If Not IO.File.Exists(txtFile.Text) Then
-                    MsgBox("The file you have selected does not exist. Please select a valid file.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not exist.")
-                    Exit Sub
-                End If
-            Catch ex As Exception
-                MsgBox("The file you have selected does not exist. Please select a valid file.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not exist.")
-            End Try
-        End If
 
         StartTime = Now
         Running = True
@@ -122,17 +86,11 @@
     End Sub
     Sub StartImport()
         IsAborted = False
-        Select Case SelectedType
-            Case 1
-                '   ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
-                If cmbRepo.SelectedIndex = 0 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
-                If cmbRepo.SelectedIndex = 1 Then ImportFromUrl(RepoDBUrls(cmbRepo.SelectedIndex))
-                If cmbRepo.SelectedIndex = 2 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
-                If cmbRepo.SelectedIndex = 3 Then DownloadUnzip(RepoDBUrls(cmbRepo.SelectedIndex))
-            Case 2
-                ImportFromUrl(txtUrl.Text)
-            Case 3
-                ImportFromFile(txtFile.Text)
+        Select Case Q.settings.DbType
+            Case QGlobal.DbType.H2
+                DownloadForH2(RepoDBUrls(cmbRepo.SelectedIndex))
+            Case QGlobal.DbType.pMariaDB
+                DownloadForMaria(RepoDBUrls(cmbRepo.SelectedIndex))
         End Select
 
     End Sub
@@ -166,7 +124,7 @@
 
 
     End Sub
-    Private Sub DownloadUnzip(ByVal Url As String)
+    Private Sub DownloadForH2(ByVal Url As String)
         Dim S As frmDownloadExtract
         S = New frmDownloadExtract
         S.Url = Url
@@ -188,14 +146,13 @@
             Catch ex As Exception
                 Generic.WriteDebug(ex)
             End Try
+            lblStatus.Text = "Moving the file to correct location."
             Try
                 IO.File.Move(QGlobal.BaseDir & "burst.mv.db", QGlobal.BaseDir & "burst_db\burst.mv.db")
             Catch ex As Exception
                 Generic.WriteDebug(ex)
             End Try
-
             Complete()
-
             Exit Sub
         End If
         Try
@@ -203,17 +160,57 @@
             'we have aborted return to download again
             IsAborted = True
             If Q.settings.DbType = QGlobal.DbType.pMariaDB Then StopMaria()
-
             Running = False
             r1.Enabled = True
-            r2.Enabled = True
-            r3.Enabled = True
             cmbRepo.Enabled = True
-            txtUrl.Enabled = True
-            txtFile.Enabled = True
-            btnBrowse.Enabled = True
             btnStart.Enabled = True
-            SetSelect(SelectedType)
+            lblStatus.Text = "Aborted"
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+    Private Sub DownloadForMaria(ByVal Url As String)
+        Dim S As frmDownloadExtract
+        S = New frmDownloadExtract
+        S.Url = Url
+        S.Unzip = True
+        Me.Hide()
+        If S.ShowDialog = DialogResult.OK Then
+            Me.Show()
+            Try
+                If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then
+                    IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
+                End If
+            Catch ex As Exception
+                Generic.WriteDebug(ex)
+            End Try
+            Try
+                If IO.File.Exists(QGlobal.BaseDir & "burst_db\burst.mv.db") Then
+                    IO.File.Delete(QGlobal.BaseDir & "burst_db\burst.mv.db")
+                End If
+            Catch ex As Exception
+                Generic.WriteDebug(ex)
+            End Try
+            lblStatus.Text = "Moving the file to correct location."
+            Try
+                IO.File.Move(QGlobal.BaseDir & "burst.mv.db", QGlobal.BaseDir & "burst_db\burst.mv.db")
+            Catch ex As Exception
+                Generic.WriteDebug(ex)
+            End Try
+            Complete()
+            Exit Sub
+        End If
+        Try
+            Me.Show()
+            'we have aborted return to download again
+            IsAborted = True
+            If Q.settings.DbType = QGlobal.DbType.pMariaDB Then StopMaria()
+            Running = False
+            r1.Enabled = True
+            cmbRepo.Enabled = True
+            btnStart.Enabled = True
             lblStatus.Text = "Aborted"
         Catch ex As Exception
 
@@ -239,55 +236,22 @@
 
         Running = False
         r1.Enabled = True
-        r2.Enabled = True
-        r3.Enabled = True
         cmbRepo.Enabled = True
-        txtUrl.Enabled = True
-        txtFile.Enabled = True
-        btnBrowse.Enabled = True
         btnStart.Enabled = True
-        SetSelect(SelectedType)
         lblStatus.Text = "Aborted"
     End Sub
 
-    Private Sub SetSelect(ByVal id As Integer)
-        r1.Checked = False
-        r2.Checked = False
-        r3.Checked = False
-        cmbRepo.Enabled = False
-        txtUrl.Enabled = False
-        txtFile.Enabled = False
-        btnBrowse.Enabled = False
-        SelectedType = id
-        Select Case id
-            Case 1
-                r1.Checked = True
-                cmbRepo.Enabled = True
-            Case 2
-                r2.Checked = True
-                txtUrl.Enabled = True
-            Case 3
-                r3.Checked = True
-                txtFile.Enabled = True
-                btnBrowse.Enabled = True
-        End Select
-    End Sub
+
     Private Sub r1_Click(sender As Object, e As EventArgs) Handles r1.Click
-        SetSelect(1)
+        ' SetSelect(1)
     End Sub
-    Private Sub r2_Click(sender As Object, e As EventArgs) Handles r2.Click
-        SetSelect(2)
+    Private Sub r2_Click(sender As Object, e As EventArgs)
+        '  SetSelect(2)
     End Sub
-    Private Sub r3_Click(sender As Object, e As EventArgs) Handles r3.Click
-        SetSelect(3)
+    Private Sub r3_Click(sender As Object, e As EventArgs)
+        '  SetSelect(3)
     End Sub
-    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
-        Dim ofd As New OpenFileDialog
-        ofd.Filter = "Burst Binary Database (*.bbd)|*.bbd|All Files (*.*)|*.*"
-        If ofd.ShowDialog = DialogResult.OK Then
-            txtFile.Text = ofd.FileName
-        End If
-    End Sub
+
 
 
 #Region " Proc Events "
@@ -337,7 +301,7 @@
         If IsAborted = False Then
             Dim ElapsedTime As TimeSpan = Now.Subtract(StartTime)
             lblStatus.Text = "Done! Import completed in " & ElapsedTime.Hours & "h " & ElapsedTime.Minutes & "m " & ElapsedTime.Seconds & "s"
-            SetSelect(SelectedType)
+            '  SetSelect(SelectedType)
             btnStart.Text = "Close"
             btnStart.Enabled = True
             pb1.Value = 100
@@ -350,7 +314,7 @@
                 End Try
             End If
         Else
-            SetSelect(SelectedType)
+            '    SetSelect(SelectedType)
             btnStart.Enabled = True
             pb1.Value = 100
             Running = False

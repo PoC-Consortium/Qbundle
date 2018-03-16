@@ -368,7 +368,7 @@
         frmChangeDatabase.Focus()
 
     End Sub
-    Private Sub ExportDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportDatabaseToolStripMenuItem.Click
+    Private Sub ExportDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         frmExportDb.Show()
         frmExportDb.Focus()
 

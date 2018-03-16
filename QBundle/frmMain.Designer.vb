@@ -55,7 +55,6 @@ Partial Class frmMain
         Me.AdvancedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RollbackChainpopoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportDatabaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ChangeDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -330,24 +329,17 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportDatabaseToolStripMenuItem, Me.ImportDatabaseToolStripMenuItem1, Me.ToolStripMenuItem3, Me.ChangeDatabaseToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportDatabaseToolStripMenuItem1, Me.ToolStripMenuItem3, Me.ChangeDatabaseToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.ToolsToolStripMenuItem.Text = "Database"
-        '
-        'ExportDatabaseToolStripMenuItem
-        '
-        Me.ExportDatabaseToolStripMenuItem.Enabled = False
-        Me.ExportDatabaseToolStripMenuItem.Name = "ExportDatabaseToolStripMenuItem"
-        Me.ExportDatabaseToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.ExportDatabaseToolStripMenuItem.Text = "Export Database"
         '
         'ImportDatabaseToolStripMenuItem1
         '
         Me.ImportDatabaseToolStripMenuItem1.Enabled = False
         Me.ImportDatabaseToolStripMenuItem1.Name = "ImportDatabaseToolStripMenuItem1"
         Me.ImportDatabaseToolStripMenuItem1.Size = New System.Drawing.Size(166, 22)
-        Me.ImportDatabaseToolStripMenuItem1.Text = "Import Database"
+        Me.ImportDatabaseToolStripMenuItem1.Text = "Bootstrap chain"
         '
         'ToolStripMenuItem3
         '
@@ -534,9 +526,9 @@ Partial Class frmMain
         Me.lblWallet.Font = New System.Drawing.Font("Rockwell", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWallet.Location = New System.Drawing.Point(38, 7)
         Me.lblWallet.Name = "lblWallet"
-        Me.lblWallet.Size = New System.Drawing.Size(206, 23)
+        Me.lblWallet.Size = New System.Drawing.Size(126, 23)
         Me.lblWallet.TabIndex = 7
-        Me.lblWallet.Text = "Burst wallet v1.3.6cg"
+        Me.lblWallet.Text = "Burst wallet "
         '
         'lblUpdates
         '
@@ -691,7 +683,6 @@ Partial Class frmMain
     Friend WithEvents AboutToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ContributorsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportDatabaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportDatabaseToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ChangeDatabaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
