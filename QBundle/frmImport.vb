@@ -180,22 +180,20 @@
         If S.ShowDialog = DialogResult.OK Then
             Me.Show()
             Try
-                If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then
+                If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then 'delete zip file
                     IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
                 End If
             Catch ex As Exception
                 Generic.WriteDebug(ex)
             End Try
+
+            lblStatus.Text = "Importing SQL file. This will take up to an hour."
             Try
-                If IO.File.Exists(QGlobal.BaseDir & "burst_db\burst.mv.db") Then
-                    IO.File.Delete(QGlobal.BaseDir & "burst_db\burst.mv.db")
-                End If
-            Catch ex As Exception
-                Generic.WriteDebug(ex)
-            End Try
-            lblStatus.Text = "Moving the file to correct location."
-            Try
-                IO.File.Move(QGlobal.BaseDir & "burst.mv.db", QGlobal.BaseDir & "burst_db\burst.mv.db")
+
+
+
+
+
             Catch ex As Exception
                 Generic.WriteDebug(ex)
             End Try
