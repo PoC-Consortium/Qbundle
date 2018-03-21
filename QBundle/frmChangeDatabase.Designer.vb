@@ -40,7 +40,6 @@ Partial Class frmChangeDatabase
         Me.Label13 = New System.Windows.Forms.Label()
         Me.rDB4 = New System.Windows.Forms.RadioButton()
         Me.rDB3 = New System.Windows.Forms.RadioButton()
-        Me.rDB2 = New System.Windows.Forms.RadioButton()
         Me.rDB1 = New System.Windows.Forms.RadioButton()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -137,7 +136,6 @@ Partial Class frmChangeDatabase
         Me.Panel2.Controls.Add(Me.btnNext)
         Me.Panel2.Controls.Add(Me.rDB4)
         Me.Panel2.Controls.Add(Me.rDB3)
-        Me.Panel2.Controls.Add(Me.rDB2)
         Me.Panel2.Controls.Add(Me.rDB1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Location = New System.Drawing.Point(5, 84)
@@ -225,7 +223,7 @@ Partial Class frmChangeDatabase
         'rDB4
         '
         Me.rDB4.AutoSize = True
-        Me.rDB4.Location = New System.Drawing.Point(32, 110)
+        Me.rDB4.Location = New System.Drawing.Point(32, 85)
         Me.rDB4.Name = "rDB4"
         Me.rDB4.Size = New System.Drawing.Size(129, 17)
         Me.rDB4.TabIndex = 4
@@ -235,22 +233,12 @@ Partial Class frmChangeDatabase
         'rDB3
         '
         Me.rDB3.AutoSize = True
-        Me.rDB3.Location = New System.Drawing.Point(32, 87)
+        Me.rDB3.Location = New System.Drawing.Point(32, 62)
         Me.rDB3.Name = "rDB3"
         Me.rDB3.Size = New System.Drawing.Size(108, 17)
         Me.rDB3.TabIndex = 3
         Me.rDB3.Text = "Portable MariaDB"
         Me.rDB3.UseVisualStyleBackColor = True
-        '
-        'rDB2
-        '
-        Me.rDB2.AutoSize = True
-        Me.rDB2.Location = New System.Drawing.Point(32, 64)
-        Me.rDB2.Name = "rDB2"
-        Me.rDB2.Size = New System.Drawing.Size(59, 17)
-        Me.rDB2.TabIndex = 2
-        Me.rDB2.Text = "Firebird"
-        Me.rDB2.UseVisualStyleBackColor = True
         '
         'rDB1
         '
@@ -417,9 +405,9 @@ Partial Class frmChangeDatabase
         Me.lblFromTo.AutoSize = True
         Me.lblFromTo.Location = New System.Drawing.Point(245, 31)
         Me.lblFromTo.Name = "lblFromTo"
-        Me.lblFromTo.Size = New System.Drawing.Size(70, 13)
+        Me.lblFromTo.Size = New System.Drawing.Size(77, 13)
         Me.lblFromTo.TabIndex = 2
-        Me.lblFromTo.Text = "H2 to Firebird"
+        Me.lblFromTo.Text = "H2 to MariaDB"
         '
         'Label7
         '
@@ -494,7 +482,6 @@ Partial Class frmChangeDatabase
     Friend WithEvents Panel2 As Panel
     Friend WithEvents rDB4 As RadioButton
     Friend WithEvents rDB3 As RadioButton
-    Friend WithEvents rDB2 As RadioButton
     Friend WithEvents rDB1 As RadioButton
     Friend WithEvents Label2 As Label
     Friend WithEvents pnlMariaSettings As Panel

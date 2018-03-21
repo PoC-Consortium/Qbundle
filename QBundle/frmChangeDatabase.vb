@@ -33,7 +33,7 @@
                 rDB1.Enabled = False
                 rDB1.Text = rDB1.Text & " (Currently used)"
             Case QGlobal.DbType.FireBird
-                rDB2.Enabled = False
+            '    rDB2.Enabled = False
             '   rDB2.Text = rDB2.Text & " (Currently used)"
             Case QGlobal.DbType.pMariaDB
                 rDB3.Enabled = False
@@ -43,10 +43,6 @@
                 rDB4.Text = rDB4.Text & " (Currently used)"
                 pnlMariaSettings.Enabled = True
         End Select
-        '   If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
-        '    rDB3.Enabled = False
-        '   '    rDB3.Text = rDB3.Text & " (Not installed)"
-        '  End If
         lblCurDB.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
         If Not Q.settings.DbType = QGlobal.DbType.H2 Then
             setdb(QGlobal.DbType.H2)
@@ -54,10 +50,10 @@
             setdb(QGlobal.DbType.pMariaDB)
         End If
 
-        OP = 0
+        OP = 1
         '/disable firebird
-        rDB2.Enabled = False
-        rDB2.Text = rDB2.Text & " (Currently Disabled)"
+        ' rDB2.Enabled = False
+        '    rDB2.Text = rDB2.Text & " (Currently Disabled)"
 
         'Me.Width = 501
         'Me.Height = 436
@@ -70,7 +66,7 @@
     End Sub
     Private Sub setdb(ByVal id As Integer)
         rDB1.Checked = False
-        rDB2.Checked = False
+        '   rDB2.Checked = False
         rDB3.Checked = False
         rDB4.Checked = False
         pnlMariaSettings.Enabled = False
@@ -79,9 +75,6 @@
             Case QGlobal.DbType.H2
                 rDB1.Checked = True
                 lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.H2)
-            Case QGlobal.DbType.FireBird
-                rDB2.Checked = True
-                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.FireBird)
             Case QGlobal.DbType.pMariaDB
                 rDB3.Checked = True
                 lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.pMariaDB)
@@ -94,7 +87,7 @@
     Private Sub rDB1_Click(sender As Object, e As EventArgs) Handles rDB1.Click
         setdb(QGlobal.DbType.H2)
     End Sub
-    Private Sub rDB2_Click(sender As Object, e As EventArgs) Handles rDB2.Click
+    Private Sub rDB2_Click(sender As Object, e As EventArgs)
         setdb(QGlobal.DbType.FireBird)
     End Sub
     Private Sub rDB3_Click(sender As Object, e As EventArgs) Handles rDB3.Click
@@ -144,8 +137,8 @@
         pnlWiz1.Show()
     End Sub
     Private Sub rOP1_CheckedChanged(sender As Object, e As EventArgs) Handles rOP1.Click
-        OP = 0
-        btnStart.Text = "Start Copy"
+        '   OP = 0
+        '   btnStart.Text = "Start Copy"
     End Sub
     Private Sub rOP2_CheckedChanged(sender As Object, e As EventArgs) Handles rOP2.CheckedChanged
         OP = 1
@@ -159,29 +152,29 @@
         End If
 
         If OP = 0 Then
-            OldDB = Q.settings.DbType
-            If frmMain.Running Then
-                If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
-                    lblStatus.Text = "Waiting for wallet to stop."
-                    frmMain.StopWallet()
-                    WaitTimer = New Timer
-                    WaitTimer.Interval = 500
-                    WaitTimer.Enabled = True
-                    WaitTimer.Start()
-                    Exit Sub
-                End If
-            End If
+            '      OldDB = Q.settings.DbType
+            '      If frmMain.Running Then
+            '      If MsgBox("The wallet must be stopped to export the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
+            '      lblStatus.Text = "Waiting for wallet to stop."
+            '      frmMain.StopWallet()
+            '      WaitTimer = New Timer
+            '      WaitTimer.Interval = 500
+            '      WaitTimer.Enabled = True
+            '      WaitTimer.Start()
+            '      Exit Sub
+            '  End If
+            '  End If
 
 
-            AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
-            AddHandler Q.ProcHandler.Started, AddressOf Starting
-            AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
-            AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
-            If SelDB = QGlobal.DbType.pMariaDB Or OldDB = QGlobal.DbType.pMariaDB Then
-                StartMaria()
-            Else
-                StartExport()
-            End If
+            ' AddHandler Q.ProcHandler.Aborting, AddressOf Aborted
+            ' AddHandler Q.ProcHandler.Started, AddressOf Starting
+            ' AddHandler Q.ProcHandler.Stopped, AddressOf Stopped
+            ' AddHandler Q.ProcHandler.Update, AddressOf ProcEvents
+            ' If SelDB = QGlobal.DbType.pMariaDB Or OldDB = QGlobal.DbType.pMariaDB Then
+            ' StartMaria()
+            ' Else
+            '     StartExport()
+            ' End If
         Else
             Q.settings.DbType = SelDB
             If SelDB = QGlobal.DbType.MariaDB Then
