@@ -383,7 +383,7 @@
         Q.settings.Hddwakeup = chkUseHDD.Checked
         Q.settings.ShowWinner = chkShowWinner.Checked
         Q.settings.UseMultithread = chkUseBoost.Checked
-
+        Q.settings.SaveSettings()
 
 
         Try
@@ -401,7 +401,7 @@
             p.StartInfo.Verb = "runas"
             p.Start()
         Catch ex As Exception
-            MsgBox("Failed to start Blago miner")
+            MsgBox("Failed to start Blago miner. This is most likely because of antimalware software.")
         End Try
         If PassPhrase.Length > 0 Then
             tmrRemovePass.Enabled = True
