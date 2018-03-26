@@ -399,7 +399,7 @@
                 p.StartInfo.FileName = QGlobal.AppDir & "BlagoMiner\BlagoMiner_sse.exe"
             End If
             p.StartInfo.Verb = "runas"
-            p.Start()
+            '            p.Start()
         Catch ex As Exception
             MsgBox("Failed to start Blago miner. This is most likely because of antimalware software.")
         End Try

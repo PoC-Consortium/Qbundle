@@ -705,7 +705,7 @@
                             If Not Convert.ToBoolean(element.GetAttribute("checked")) Then
                                 element.InvokeMember("click")
                             End If
-                            Dim codeString As String() = {[String].Format(" {0}('{1}') ", "NRS.login", Pass)}
+                            Dim codeString As String() = {[String].Format(" {0}('{1}') ", "BRS.login", Pass)}
                             Me.wb1.Document.InvokeScript("eval", codeString)
                             Pass = ""
                         Catch ex As Exception
@@ -1115,5 +1115,9 @@
 
     Private Sub lblUpdateAvail2_Click(sender As Object, e As EventArgs) Handles lblUpdateAvail2.Click
         PrepareUpdate()
+    End Sub
+
+    Private Sub mnuLoginAccount_Click(sender As Object, e As EventArgs) Handles mnuLoginAccount.Click
+
     End Sub
 End Class

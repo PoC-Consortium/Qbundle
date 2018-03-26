@@ -89,6 +89,7 @@ Partial Class frmSettings
         Me.General = New System.Windows.Forms.TabPage()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmbCurrency = New System.Windows.Forms.ComboBox()
         Me.chkWalletException = New System.Windows.Forms.CheckBox()
         Me.chkNoDirectLogin = New System.Windows.Forms.CheckBox()
         Me.chkCoinmarket = New System.Windows.Forms.CheckBox()
@@ -101,7 +102,6 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkCheckForUpdates = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbCurrency = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -457,9 +457,9 @@ Partial Class frmSettings
         Me.chkOpenCL.AutoSize = True
         Me.chkOpenCL.Location = New System.Drawing.Point(13, 185)
         Me.chkOpenCL.Name = "chkOpenCL"
-        Me.chkOpenCL.Size = New System.Drawing.Size(210, 17)
+        Me.chkOpenCL.Size = New System.Drawing.Size(255, 17)
         Me.chkOpenCL.TabIndex = 14
-        Me.chkOpenCL.Text = "Try to use OpenCL during sync events."
+        Me.chkOpenCL.Text = "Try to use GPU acceleration during sync events."
         Me.chkOpenCL.UseVisualStyleBackColor = True
         '
         'lblMaxCores
@@ -812,6 +812,17 @@ Partial Class frmSettings
         Me.Panel2.Size = New System.Drawing.Size(699, 289)
         Me.Panel2.TabIndex = 10
         '
+        'cmbCurrency
+        '
+        Me.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbCurrency.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbCurrency.FormattingEnabled = True
+        Me.cmbCurrency.Items.AddRange(New Object() {"AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "USD", "ZAR"})
+        Me.cmbCurrency.Location = New System.Drawing.Point(290, 176)
+        Me.cmbCurrency.Name = "cmbCurrency"
+        Me.cmbCurrency.Size = New System.Drawing.Size(68, 21)
+        Me.cmbCurrency.TabIndex = 47
+        '
         'chkWalletException
         '
         Me.chkWalletException.AutoSize = True
@@ -937,17 +948,6 @@ Partial Class frmSettings
         Me.Label1.Size = New System.Drawing.Size(181, 25)
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "General settings"
-        '
-        'cmbCurrency
-        '
-        Me.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCurrency.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbCurrency.FormattingEnabled = True
-        Me.cmbCurrency.Items.AddRange(New Object() {"AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "USD", "ZAR"})
-        Me.cmbCurrency.Location = New System.Drawing.Point(290, 176)
-        Me.cmbCurrency.Name = "cmbCurrency"
-        Me.cmbCurrency.Size = New System.Drawing.Size(68, 21)
-        Me.cmbCurrency.TabIndex = 47
         '
         'frmSettings
         '
