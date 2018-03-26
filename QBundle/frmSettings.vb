@@ -101,6 +101,8 @@ Public Class frmSettings
         Q.settings.NTPCheck = chkNTP.Checked
         Q.settings.MinToTray = chkMinToTray.Checked
         Q.settings.GetCoinMarket = chkCoinmarket.Checked
+        Q.settings.NoDirectLogin = chkNoDirectLogin.Checked
+
         If cmbCurrency.SelectedIndex > -1 Then
             Q.settings.Currency = cmbCurrency.Items.Item(cmbCurrency.SelectedIndex).ToString
         End If
@@ -166,6 +168,7 @@ Public Class frmSettings
         chkCoinmarket.Checked = Q.settings.GetCoinMarket
         chkAutoStart.Checked = Q.settings.AutoStart
         chkAutoIP.Checked = Q.settings.AutoIp
+        chkNoDirectLogin.Checked = Q.settings.NoDirectLogin
         If Q.settings.AutoIp Then
             txtBroadcast.Enabled = False
             txtBroadcast.Text = Generic.GetMyIp()
