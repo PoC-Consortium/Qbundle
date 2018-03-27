@@ -303,7 +303,7 @@
         p.StartInfo.WorkingDirectory = QGlobal.BaseDir
         p.StartInfo.Arguments = "BWLUpdate" & " " & IO.Path.GetFileName(Application.ExecutablePath)
         p.StartInfo.UseShellExecute = True
-        p.StartInfo.FileName = QGlobal.BaseDir & "Restarter.exe"
+        p.StartInfo.FileName = QGlobal.BaseDir & "Updater.exe"
         p.Start()
 
         Threading.Thread.Sleep(500)

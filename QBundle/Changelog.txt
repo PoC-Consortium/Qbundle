@@ -18,6 +18,7 @@ v2.0.1
 Fixed Accountmanager login for BRS gui.
 Fixed Miner not starting problem.
 Fixed setting for NoDirectLogin.
+Fixed Updater. 
 
 v2.0.0
 Check for updates now automatically updates Pool/wallet info.
