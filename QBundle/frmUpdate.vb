@@ -107,6 +107,7 @@
                     btnUpdate.Enabled = True
                     Exit Sub
                 End If
+                Q.App.SetUpdated(t)
                 CheckAndUpdateLW()
             End If
         Next
@@ -115,11 +116,10 @@
             'we should restart now since we have updates pending on ourselfs
             Dim wdir As String = Application.StartupPath
             If Not wdir.EndsWith("\") Then wdir &= "\"
-            If IO.File.Exists(wdir & "Restarter.exe") Then
+            If IO.File.Exists(wdir & "Updater.exe") Then
                 Try
                     Me.DialogResult = DialogResult.Yes
                 Catch ex As Exception
-
                     Generic.WriteDebug(ex)
                 End Try
             End If

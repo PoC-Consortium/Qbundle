@@ -110,7 +110,13 @@ Friend Class Generic
                     Q.settings.SaveSettings()
                 Case 190 '1.9.0-2.0.0
                 Case 200 '2.0.0-2.0.1
+                    Try
+                        If IO.File.Exists(QGlobal.BaseDir & "restarter.exe") Then
+                            IO.File.Delete(QGlobal.BaseDir & "restarter.exe")
+                        End If
+                    Catch ex As Exception
 
+                    End Try
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do

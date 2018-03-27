@@ -3,12 +3,17 @@ Imports System.Threading
 
 Public Class frmRestart
     Private Arg As String()
+    Private FromFile As String
+    Private ToFile As String
     Private Sub frmRestart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Arg = Environment.GetCommandLineArgs()
 
         If UBound(Arg) < 2 Then
-            MsgBox("Argument Missing")
-            End
+            FromFile = "BWLUpdate"
+            ToFile = "BurstWallet.exe"
+        Else
+            FromFile = Arg(1)
+            ToFile = Arg(2)
         End If
 
         Me.Show()
@@ -16,17 +21,17 @@ Public Class frmRestart
 
         Dim Workdir As String = Application.StartupPath
         If Not Workdir.EndsWith("\") Then Workdir &= "\"
-        'arg1 Fromfile
-        'arg2 Tofile
+
+
 
         Try
-            If Not IO.File.Exists(Workdir & Arg(1)) Then
-                MsgBox("Argument Missing")
+            If Not IO.File.Exists(Workdir & FromFile) Then
+                MsgBox("No update file available")
                 End
             End If
 
-            If Not IO.File.Exists(Workdir & Arg(2)) Then
-                MsgBox("Argument Missing")
+            If Not IO.File.Exists(Workdir & ToFile) Then
+                MsgBox("Installation is not complete")
                 End
             End If
         Catch ex As Exception
@@ -52,14 +57,14 @@ Public Class frmRestart
         If Not Workdir.EndsWith("\") Then Workdir &= "\"
         Dim i As Integer = 0
         Dim p() As Process
-        Dim PName = Arg(2).Replace(".exe", "")
+        Dim PName = ToFile.Replace(".exe", "")
         Do
             Try
-                File.Delete(Workdir & Arg(2)) 'if we can delete file then we can continue
-                File.Copy(Workdir & Arg(1), Workdir & Arg(2), True)
-                Shell(Workdir & Arg(2), AppWinStyle.NormalFocus)
+                File.Delete(Workdir & ToFile) 'if we can delete file then we can continue
+                File.Copy(Workdir & FromFile, Workdir & ToFile, True)
+                Shell(Workdir & ToFile, AppWinStyle.NormalFocus)
                 Thread.Sleep(100)
-                File.Delete(Workdir & Arg(1))
+                File.Delete(Workdir & FromFile)
                 Exit Do
             Catch ex As Exception
 

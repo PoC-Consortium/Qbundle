@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "QBundle", "QBundle\QBundle.vbproj", "{3F840955-CDF6-4836-8D5F-B8F27F6DF1EC}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Restarter", "Restarter\Restarter.vbproj", "{E6E4142B-3E77-4FD7-90F7-EA4F6CBA6DA4}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Updater", "Restarter\Updater.vbproj", "{E6E4142B-3E77-4FD7-90F7-EA4F6CBA6DA4}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BurstService", "BurstService\BurstService.vbproj", "{9136CBBF-5911-4074-8700-77BC1B09254E}"
 EndProject

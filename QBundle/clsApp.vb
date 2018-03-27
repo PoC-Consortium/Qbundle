@@ -701,6 +701,9 @@ Public Class clsApp
     Public Function isUpdated(ByVal AppId As Integer) As Boolean
         Return _Apps(AppId).Updated
     End Function
+    Public Sub SetUpdated(ByVal AppId As Integer)
+        _Apps(AppId).Updated = True
+    End Sub
     Public Function GetFullUrl(ByVal AppId As Integer) As String
         Return _Apps(AppId).FullUrl
     End Function
