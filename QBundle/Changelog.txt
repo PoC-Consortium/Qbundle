@@ -14,7 +14,10 @@ minimize to tray on exit ?
 Iconify(?)
 Change to Chrome(?) CEFSharp but must check license before it is implemented.
 
-Add upgrade for MariaDB
+v2.0.1
+Fixed Accountmanager login for BRS gui.
+Fixed Miner not starting problem.
+Fixed setting for NoDirectLogin.
 
 v2.0.0
 Check for updates now automatically updates Pool/wallet info.

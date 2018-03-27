@@ -109,6 +109,7 @@ Friend Class Generic
                     Q.settings.Currency = "USD"
                     Q.settings.SaveSettings()
                 Case 190 '1.9.0-2.0.0
+                Case 200 '2.0.0-2.0.1
 
             End Select
             OldVer += 1
