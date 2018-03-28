@@ -21,7 +21,8 @@
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
         If btnUpdate.Text = "Close" Then
-            Me.Close()
+            Me.DialogResult = DialogResult.No
+            Exit Sub
         End If
 
         If frmMain.Running Then
