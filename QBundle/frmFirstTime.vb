@@ -214,6 +214,7 @@
         btnDownload.Enabled = False
         btnDone.Enabled = False
         Q.App.SetLocalInfo()
+        Q.App.SetRemoteInfo()
         If Not Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) And Not Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then
             S = New frmDownloadExtract
             S.Appid = QGlobal.AppNames.JavaPortable
