@@ -1,4 +1,6 @@
-﻿Public Class frmImport
+﻿Imports System.IO
+Imports MySql.Data.MySqlClient
+Public Class frmImport
     Private Running As Boolean
     Private WithEvents WaitTimer As Timer
     Private Delegate Sub DProcEvents(ByVal [AppId] As Integer, ByVal [Operation] As Integer, ByVal [data] As String)
@@ -19,12 +21,12 @@
         Select Case Q.settings.DbType
             Case QGlobal.DbType.H2
                 ReDim RepoDBUrls(0)
-                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
+                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/h2.zip"
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.SelectedIndex = 0
             Case Else
                 ReDim RepoDBUrls(0)
-                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/latest.bbd"
+                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/MariaDB.zip"
                 cmbRepo.Items.Add("Cryptoguru repository")
                 cmbRepo.SelectedIndex = 0
         End Select
@@ -189,9 +191,32 @@
 
             lblStatus.Text = "Importing SQL file. This will take up to an hour."
             Try
+                Dim conn As New MySqlConnection
+                Dim DatabaseName As String = "Burstwallet"
+                Dim server As String = "localhsot"
+                Dim userName As String = "burstwallet"
+                Dim password As String = "burstwallet"
+                If Not conn Is Nothing Then conn.Close()
+                conn.ConnectionString = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false", server, userName, password, DatabaseName)
+                conn.Open()
 
+                Dim sr As StreamReader = New StreamReader("<dumpfile>")
+                Dim sql As String = ""
+                Dim cmd As New MySqlCommand
+                cmd.Connection = conn
+                Do
+                    sql = ""
+                    For t As Integer = 0 To 1000
+                        sql &= sr.ReadLine() & vbCrLf
+                        If sr.EndOfStream Then Exit For
+                    Next
+                    cmd.CommandText = sql
+                    cmd.ExecuteNonQuery()
+                Loop Until sr.EndOfStream
+                cmd.Dispose()
 
-
+                conn.Close()
+                conn.Dispose()
 
 
             Catch ex As Exception
