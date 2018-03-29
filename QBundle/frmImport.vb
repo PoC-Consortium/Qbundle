@@ -188,22 +188,27 @@ Public Class frmImport
             Catch ex As Exception
                 Generic.WriteDebug(ex)
             End Try
-
             lblStatus.Text = "Importing SQL file. This will take up to an hour."
             Try
+                Dim cdata() As String = Split(Q.settings.DbServer, "/")
                 Dim conn As New MySqlConnection
-                Dim DatabaseName As String = "Burstwallet"
-                Dim server As String = "localhsot"
-                Dim userName As String = "burstwallet"
-                Dim password As String = "burstwallet"
+                Dim DatabaseName As String = cdata(UBound(cdata))
+                Dim server As String = cdata(UBound(cdata) - 1)
+                Dim userName As String = Q.settings.DbUser
+                Dim password As String = Q.settings.DbPass
                 If Not conn Is Nothing Then conn.Close()
                 conn.ConnectionString = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false", server, userName, password, DatabaseName)
                 conn.Open()
 
-                Dim sr As StreamReader = New StreamReader("<dumpfile>")
+                Dim sr As StreamReader = New StreamReader(QGlobal.BaseDir & "dump.sql")
                 Dim sql As String = ""
                 Dim cmd As New MySqlCommand
                 cmd.Connection = conn
+
+                cmd.CommandText = "DROP DATABASE IF EXISTS " & DatabaseName & ";"
+                cmd.ExecuteNonQuery()
+                cmd.CommandText = "CREATE DATABASE " & DatabaseName & " DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_general_ci;"
+                cmd.ExecuteNonQuery()
                 Do
                     sql = ""
                     For t As Integer = 0 To 1000
@@ -214,9 +219,9 @@ Public Class frmImport
                     cmd.ExecuteNonQuery()
                 Loop Until sr.EndOfStream
                 cmd.Dispose()
-
                 conn.Close()
                 conn.Dispose()
+                sr.Close()
 
 
             Catch ex As Exception
