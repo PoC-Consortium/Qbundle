@@ -3,7 +3,7 @@
 # Qbundle
 
 [![Get Support at https://discord.gg/NKXGM6N](https://img.shields.io/badge/join-discord-blue.svg)](https://discordapp.com/invite/NnVBPJX)
-[![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
+[![MIT](https://img.shields.io/badge/license-GPLv3-blue.svg)](LICENSE)
 
 Qbundle is a Windows Wrapper / Launcher for the BRS wallet and other burst tools.
 
