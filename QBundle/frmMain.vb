@@ -612,7 +612,7 @@
                     pset(1).AppPath = QGlobal.AppDir & "Java\bin\java.exe"
                 End If
                 pset(1).Cores = Q.settings.Cpulimit
-                pset(1).Params = QGlobal.WalletLaunchString.NormalLaunch
+                pset(1).Params = Q.settings.LaunchString()
                 pset(1).StartSignal = "Started API server at"
                 pset(1).StartsignalMaxTime = 3600
                 pset(1).WorkingDirectory = QGlobal.AppDir
@@ -626,7 +626,8 @@
                     Pset.AppPath = QGlobal.AppDir & "Java\bin\java.exe"
                 End If
                 Pset.Cores = Q.settings.Cpulimit
-                Pset.Params = QGlobal.WalletLaunchString.NormalLaunch
+                Pset.Params = Q.settings.LaunchString
+
                 Pset.StartSignal = "Started API server at"
                 Pset.StartsignalMaxTime = 3600
                 Pset.WorkingDirectory = QGlobal.AppDir

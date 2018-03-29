@@ -264,7 +264,9 @@ Public Class frmPlotter
             If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
             p.StartInfo.Arguments = "-id " & account & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & thepath & " -mem " & nrRam.Value.ToString & "G"
             p.StartInfo.UseShellExecute = True
-            If QGlobal.CPUInstructions.AVX Then
+            If QGlobal.CPUInstructions.AVX2 Then
+                p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx2.exe"
+            ElseIf QGlobal.CPUInstructions.AVX Then
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
             Else
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_sse.exe"

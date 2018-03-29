@@ -25,7 +25,7 @@
         Friend Pass As String
     End Structure
     Friend Shared Dbinfo() As strucDBInfo
-    Friend Shared WalletLaunchString As strucWalletLaunch
+    'Friend Shared WalletLaunchString As strucWalletLaunch
 
     Public Enum DbType As Integer
         H2 = 0
@@ -81,9 +81,9 @@
         '  WalletLaunchString.NormalLaunch = "-cp burst.jar;conf nxt.Nxt" '"-cp burst.jar;conf brs.Burst"
         '  WalletLaunchString.Import = "-cp burst.jar;conf nxt.db.quicksync.LoadBinDump " '"-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
         '  WalletLaunchString.Export = "-cp burst.jar;conf nxt.db.quicksync.CreateBinDump " '"-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
-        WalletLaunchString.NormalLaunch = "-cp burst.jar;conf brs.Burst"
-        WalletLaunchString.Import = "-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
-        WalletLaunchString.Export = "-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
+        '    WalletLaunchString.NormalLaunch = "-cp burst.jar;conf brs.Burst"
+        '   WalletLaunchString.Import = "-cp burst.jar;conf brs.db.quicksync.LoadBinDump "
+        '   WalletLaunchString.Export = "-cp burst.jar;conf brs.db.quicksync.CreateBinDump "
 
 
         InitCPUInstructions()

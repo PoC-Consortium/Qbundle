@@ -1,7 +1,7 @@
 ﻿Friend Class clsSettings
 
 
-    'NRS
+    'BRS
     Private _autoip As Boolean
     Private _WalletException As Boolean
     Private _DynPlatform As Boolean
@@ -10,6 +10,7 @@
     Private _ListenIf As String
     Private _ListenPeer As String
     Private _ConnectFrom As String
+    Private _LaunchString As String
     'DB
     Private _DbType As Integer
     Private _DbServer As String
@@ -102,6 +103,14 @@
         End Get
         Set(ByVal value As String)
             _ConnectFrom = value
+        End Set
+    End Property
+    Public Property LaunchString() As String
+        Get
+            Return _LaunchString
+        End Get
+        Set(ByVal value As String)
+            _LaunchString = value
         End Set
     End Property
     'DB
@@ -226,6 +235,7 @@
         _ListenIf = "127.0.0.1;8125"
         _ListenPeer = "0.0.0.0;8123"
         _ConnectFrom = "127.0.0.1"
+        _LaunchString = "-cp burst.jar;conf brs.Burst"
 
         _DbType = 0
         _DbServer = "127.0.0.1:3306"

@@ -10,6 +10,7 @@
     Private _ConnectFrom As String
     Private _AutoStart As Boolean
     Private _Broadcast As String
+    Private _LaunchString As String
     'DB
     Private _DbType As Integer
     Private _DbServer As String 'connectionstring from now on
@@ -141,6 +142,14 @@
         End Get
         Set(ByVal value As String)
             _Broadcast = value
+        End Set
+    End Property
+    Public Property LaunchString() As String
+        Get
+            Return _LaunchString
+        End Get
+        Set(ByVal value As String)
+            _LaunchString = value
         End Set
     End Property
     'DB
@@ -483,6 +492,7 @@
         _DbPass = ""
         _Currency = "USD"
         _JavaType = QGlobal.AppNames.JavaInstalled
+        _LaunchString = "-cp burst.jar;conf brs.Burst"
 
         _FirstRun = True
         _CheckForUpdates = False

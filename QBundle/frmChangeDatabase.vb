@@ -215,7 +215,7 @@
             Pset.AppPath = QGlobal.AppDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = QGlobal.WalletLaunchString.Export & QGlobal.AppDir & "Convertion.bbd"
+        '  Pset.Params = QGlobal.WalletLaunchString.Export & QGlobal.AppDir & "Convertion.bbd"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.AppDir
@@ -393,7 +393,7 @@
             Pset.AppPath = QGlobal.AppDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = QGlobal.WalletLaunchString.Import & QGlobal.AppDir & "Convertion.bbd -y"
+        '   Pset.Params = QGlobal.WalletLaunchString.Import & QGlobal.AppDir & "Convertion.bbd -y"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.AppDir

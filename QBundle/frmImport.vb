@@ -118,7 +118,7 @@ Public Class frmImport
             Pset.AppPath = QGlobal.AppDir & "Java\bin\java.exe"
         End If
         Pset.Cores = Q.settings.Cpulimit
-        Pset.Params = QGlobal.WalletLaunchString.Import & FileName & " -y"
+        '    Pset.Params = QGlobal.WalletLaunchString.Import & FileName & " -y"
         Pset.StartSignal = ""
         Pset.StartsignalMaxTime = 1
         Pset.WorkingDirectory = QGlobal.AppDir
