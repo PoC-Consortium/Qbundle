@@ -117,6 +117,8 @@ Friend Class Generic
                     Catch ex As Exception
 
                     End Try
+                Case 201 '2.0.1 - 2.0.2
+
             End Select
             OldVer += 1
             If CurVer = OldVer Then Exit Do
