@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Threading
-Imports MySql.Data.MySqlClient
+'Imports MySql.Data.MySqlClient
 Public Class frmImport
     Private Running As Boolean
     Private WithEvents WaitTimer As System.Windows.Forms.Timer
@@ -187,13 +187,13 @@ Public Class frmImport
 
     End Sub
     Private Sub DownloadForMaria(ByVal Url As String)
-        '    Dim S As frmDownloadExtract
-        '    S = New frmDownloadExtract
-        '    S.Url = Url
-        '    S.Unzip = True
-        '    Me.Hide()
-        '    If S.ShowDialog = DialogResult.OK Then
-        Me.Show()
+        Dim S As frmDownloadExtract
+        S = New frmDownloadExtract
+        S.Url = Url
+        S.Unzip = True
+        Me.Hide()
+        If S.ShowDialog = DialogResult.OK Then
+            Me.Show()
             Try
                 If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then 'delete zip file
                     IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
@@ -216,7 +216,7 @@ Public Class frmImport
             End Try
 
             Exit Sub
-        '     End If
+        End If
         Try
             Me.Show()
             'we have aborted return to download again
@@ -239,24 +239,24 @@ Public Class frmImport
         Dim cdata() As String = Split(Q.settings.DbServer, "/")
         Dim svr() As String = Split(cdata(UBound(cdata) - 1), ":")
 
-        Dim conn As New MySqlConnection
+        '     Dim conn As New MySqlConnection
         Dim DatabaseName As String = cdata(UBound(cdata))
         Dim server As String = svr(0)
         Dim userName As String = Q.settings.DbUser
         Dim password As String = Q.settings.DbPass
-        If Not conn Is Nothing Then conn.Close()
-        conn.ConnectionString = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false", server, userName, password, DatabaseName)
-        conn.Open()
+        '   If Not conn Is Nothing Then conn.Close()
+        '   conn.ConnectionString = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false", server, userName, password, DatabaseName)
+        '   conn.Open()
 
         Dim sr As StreamReader = New StreamReader(QGlobal.BaseDir & "dump.sql")
         Dim sql As String = ""
-        Dim cmd As New MySqlCommand
-        cmd.Connection = conn
+        '    Dim cmd As New MySqlCommand
+        'cmd.Connection = conn
 
-        cmd.CommandText = "DROP DATABASE IF EXISTS " & DatabaseName & ";"
-        cmd.ExecuteNonQuery()
-        cmd.CommandText = "CREATE DATABASE " & DatabaseName & " DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
-        cmd.ExecuteNonQuery()
+        'cmd.CommandText = "DROP DATABASE IF EXISTS " & DatabaseName & ";"
+        'cmd.ExecuteNonQuery()
+        'cmd.CommandText = "CREATE DATABASE " & DatabaseName & " DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+        'cmd.ExecuteNonQuery()
 
         Dim dmpfile As New FileInfo(QGlobal.BaseDir & "brs.MariaDB.sql")
         Dim totalbytes As Long = dmpfile.Length
@@ -275,12 +275,12 @@ Public Class frmImport
             Loop
             totalRead += sql.Length
             percent = CInt(Math.Round((totalRead / totalbytes) * 100, 0))
-            cmd.CommandText = sql
-            cmd.ExecuteNonQuery()
+            '       cmd.CommandText = sql
+            '       cmd.ExecuteNonQuery()
         Loop Until sr.EndOfStream
-        cmd.Dispose()
-        conn.Close()
-        conn.Dispose()
+        '   cmd.Dispose()
+        '   conn.Close()
+        '   conn.Dispose()
         sr.Close()
 
 
@@ -330,6 +330,7 @@ Public Class frmImport
         End If
         TotalRead += bytes
         lblStatus.Text = "Importing: " & TotalRead.ToString & " / " & FileSize
+        pb1.Value = CInt(Math.Round((TotalRead / FileSize) * 100, 0))
         If IsDone Then
             StopMaria()
             Complete()

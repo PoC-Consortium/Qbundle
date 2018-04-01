@@ -26,6 +26,7 @@
         ElseIf Not frmMain.fullysynced Then
             rbSolo.Enabled = False
             rbSolo.Text = "Solo Mining (Local wallet is running but not fully syncronized)"
+
         End If
 
         lblReward.Visible = False
@@ -62,6 +63,9 @@
         chkShowWinner.Checked = Q.settings.ShowWinner
         chkUseBoost.Checked = Q.settings.UseMultithread
 
+        If Q.settings.MiningServer = "" And rbSolo.Checked = True Then
+            SetSolo()
+        End If
     End Sub
 
 
@@ -485,6 +489,12 @@
     End Sub
 
     Private Sub rbSolo_CheckedChanged(sender As Object, e As EventArgs) Handles rbSolo.Click
+        SetSolo()
+
+
+
+    End Sub
+    Private Sub SetSolo()
         pnlPool.Enabled = False
 
         Generic.UpdateLocalWallet()
@@ -497,8 +507,6 @@
         txtUpdateServer.Text = buffer(0)
         txtInfoServer.Text = buffer(0)
         txtDeadLine.Text = "86400"
-
-
     End Sub
 
     Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
