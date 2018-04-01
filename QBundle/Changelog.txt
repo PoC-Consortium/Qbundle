@@ -19,6 +19,7 @@ Fixed Downalod of Java at setup screen
 Added support for Xplotter v1.1 AVX2
 Updates will not ask to shut down wallet if no updates are available
 Bootstrap chain is now available again for H2 and MariaDB.
+Fixed problem when solomining where serverdata were never filled.
 
 v2.0.1
 * Accountmanager login for BRS gui.

@@ -30,16 +30,22 @@ Public Class frmImport
                 RepoDBUrls(0) = "https://download.cryptoguru.org/burst/wallet/brs.h2.zip"
                 cmbRepo.Items.Add("Cryptoguru repository (H2)")
                 cmbRepo.SelectedIndex = 0
+                chkStartWallet.Checked = True
+                chkStartWallet.Visible = True
             Case QGlobal.DbType.pMariaDB
                 ReDim RepoDBUrls(0)
                 RepoDBUrls(0) = "https://download.cryptoguru.org/burst/wallet/brs.mariadb.zip"
                 cmbRepo.Items.Add("Cryptoguru repository (MariaDB)")
                 cmbRepo.SelectedIndex = 0
+                chkStartWallet.Checked = False
+                chkStartWallet.Visible = False
             Case Else
                 ReDim RepoDBUrls(0)
                 RepoDBUrls(0) = "https://127.0.0.1:8080"
                 cmbRepo.Items.Add("Not available for this database type.")
                 cmbRepo.SelectedIndex = 0
+                chkStartWallet.Checked = False
+                chkStartWallet.Visible = False
         End Select
 
 
@@ -330,7 +336,10 @@ Public Class frmImport
         End If
         TotalRead += bytes
         lblStatus.Text = "Importing: " & TotalRead.ToString & " / " & FileSize
-        pb1.Value = CInt(Math.Round((TotalRead / FileSize) * 100, 0))
+        Dim percent = CInt(Math.Round((TotalRead / FileSize) * 100, 0))
+        If percent > 100 Then percent = 100
+        pb1.Value = percent
+
         If IsDone Then
             StopMaria()
             Complete()
