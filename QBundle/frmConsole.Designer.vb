@@ -26,6 +26,7 @@ Partial Class frmConsole
         Me.txtLog = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbLog = New System.Windows.Forms.ComboBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtLog
@@ -61,12 +62,22 @@ Partial Class frmConsole
         Me.cmbLog.Size = New System.Drawing.Size(267, 21)
         Me.cmbLog.TabIndex = 2
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(427, 4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(67, 21)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Reset log"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmConsole
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(761, 425)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cmbLog)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtLog)
@@ -83,4 +94,5 @@ Partial Class frmConsole
     Friend WithEvents txtLog As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents cmbLog As ComboBox
+    Friend WithEvents Button1 As Button
 End Class

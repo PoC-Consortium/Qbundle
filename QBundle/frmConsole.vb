@@ -20,6 +20,7 @@
     Private Sub cmbLog_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLog.SelectedIndexChanged
         Try
             txtLog.Text = String.Join(vbCrLf, frmMain.Console(cmbLog.SelectedIndex))
+
         Catch ex As Exception
             Generic.WriteDebug(ex)
         End Try
@@ -52,5 +53,8 @@
 
     End Sub
 
-
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        frmMain.Console(cmbLog.SelectedIndex).Clear()
+        txtLog.Text = ""
+    End Sub
 End Class

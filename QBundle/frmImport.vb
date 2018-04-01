@@ -1,8 +1,10 @@
 ﻿Imports System.IO
+Imports System.Threading
 Imports MySql.Data.MySqlClient
 Public Class frmImport
     Private Running As Boolean
-    Private WithEvents WaitTimer As Timer
+    Private WithEvents WaitTimer As System.Windows.Forms.Timer
+
     Private Delegate Sub DProcEvents(ByVal [AppId] As Integer, ByVal [Operation] As Integer, ByVal [data] As String)
     Private Delegate Sub DStarting(ByVal [AppId] As Integer)
     Private Delegate Sub DStoped(ByVal [AppId] As Integer)
@@ -10,10 +12,14 @@ Public Class frmImport
     Private Delegate Sub DDownloadDone(ByVal [AppId] As Integer)
     Private Delegate Sub DProgress(ByVal [JobType] As Integer, ByVal [AppId] As Integer, ByVal [Percernt] As Integer, ByVal [Speed] As Integer, ByVal [lRead] As Long, ByVal [lLength] As Long)
     Private Delegate Sub DDLAborted(ByVal [AppId] As Integer)
+    Private Delegate Sub DUpdateinfo(ByVal [bytes] As Long, ByVal [isdone] As Boolean)
     Private RepoDBUrls() As String
     Private SelectedType As Integer
     Private StartTime As Date
     Private IsAborted As Boolean
+
+    Private FileSize As Long
+    Private TotalRead As Long
     Private Sub frmImport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Running = False
         cmbRepo.Items.Clear()
@@ -21,13 +27,18 @@ Public Class frmImport
         Select Case Q.settings.DbType
             Case QGlobal.DbType.H2
                 ReDim RepoDBUrls(0)
-                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/h2.zip"
-                cmbRepo.Items.Add("Cryptoguru repository")
+                RepoDBUrls(0) = "https://download.cryptoguru.org/burst/wallet/brs.h2.zip"
+                cmbRepo.Items.Add("Cryptoguru repository (H2)")
+                cmbRepo.SelectedIndex = 0
+            Case QGlobal.DbType.pMariaDB
+                ReDim RepoDBUrls(0)
+                RepoDBUrls(0) = "https://download.cryptoguru.org/burst/wallet/brs.mariadb.zip"
+                cmbRepo.Items.Add("Cryptoguru repository (MariaDB)")
                 cmbRepo.SelectedIndex = 0
             Case Else
                 ReDim RepoDBUrls(0)
-                RepoDBUrls(0) = "http://package.cryptoguru.org/dumps/MariaDB.zip"
-                cmbRepo.Items.Add("Cryptoguru repository")
+                RepoDBUrls(0) = "https://127.0.0.1:8080"
+                cmbRepo.Items.Add("Not available for this database type.")
                 cmbRepo.SelectedIndex = 0
         End Select
 
@@ -67,7 +78,7 @@ Public Class frmImport
             If MsgBox("The wallet must be stopped to import the database." & vbCrLf & " Would you like to stop it now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Stop wallet?") = MsgBoxResult.Yes Then
                 lblStatus.Text = "Waiting for wallet to stop."
                 frmMain.StopWallet()
-                WaitTimer = New Timer
+                WaitTimer = New System.Windows.Forms.Timer
                 WaitTimer.Interval = 500
                 WaitTimer.Enabled = True
                 WaitTimer.Start()
@@ -93,6 +104,8 @@ Public Class frmImport
                 DownloadForH2(RepoDBUrls(cmbRepo.SelectedIndex))
             Case QGlobal.DbType.pMariaDB
                 DownloadForMaria(RepoDBUrls(cmbRepo.SelectedIndex))
+            Case QGlobal.DbType.MariaDB
+                '     DownloadForMaria(RepoDBUrls(cmbRepo.SelectedIndex))
         End Select
 
     End Sub
@@ -174,13 +187,13 @@ Public Class frmImport
 
     End Sub
     Private Sub DownloadForMaria(ByVal Url As String)
-        Dim S As frmDownloadExtract
-        S = New frmDownloadExtract
-        S.Url = Url
-        S.Unzip = True
-        Me.Hide()
-        If S.ShowDialog = DialogResult.OK Then
-            Me.Show()
+        '    Dim S As frmDownloadExtract
+        '    S = New frmDownloadExtract
+        '    S.Url = Url
+        '    S.Unzip = True
+        '    Me.Hide()
+        '    If S.ShowDialog = DialogResult.OK Then
+        Me.Show()
             Try
                 If IO.File.Exists(QGlobal.BaseDir & IO.Path.GetFileName(Url)) Then 'delete zip file
                     IO.File.Delete(QGlobal.BaseDir & IO.Path.GetFileName(Url)) 'not if not ziped
@@ -190,46 +203,20 @@ Public Class frmImport
             End Try
             lblStatus.Text = "Importing SQL file. This will take up to an hour."
             Try
-                Dim cdata() As String = Split(Q.settings.DbServer, "/")
-                Dim conn As New MySqlConnection
-                Dim DatabaseName As String = cdata(UBound(cdata))
-                Dim server As String = cdata(UBound(cdata) - 1)
-                Dim userName As String = Q.settings.DbUser
-                Dim password As String = Q.settings.DbPass
-                If Not conn Is Nothing Then conn.Close()
-                conn.ConnectionString = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false", server, userName, password, DatabaseName)
-                conn.Open()
-
-                Dim sr As StreamReader = New StreamReader(QGlobal.BaseDir & "dump.sql")
-                Dim sql As String = ""
-                Dim cmd As New MySqlCommand
-                cmd.Connection = conn
-
-                cmd.CommandText = "DROP DATABASE IF EXISTS " & DatabaseName & ";"
-                cmd.ExecuteNonQuery()
-                cmd.CommandText = "CREATE DATABASE " & DatabaseName & " DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_general_ci;"
-                cmd.ExecuteNonQuery()
-                Do
-                    sql = ""
-                    For t As Integer = 0 To 1000
-                        sql &= sr.ReadLine() & vbCrLf
-                        If sr.EndOfStream Then Exit For
-                    Next
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-                Loop Until sr.EndOfStream
-                cmd.Dispose()
-                conn.Close()
-                conn.Dispose()
-                sr.Close()
-
-
+                Dim dmpfile As New FileInfo(QGlobal.BaseDir & "brs.MariaDB.sql")
+                FileSize = dmpfile.Length
+                TotalRead = 0
+                Dim trda As Thread
+                trda = New Thread(AddressOf ImportSqlDump)
+                trda.IsBackground = True
+                trda.Start()
+                trda = Nothing
             Catch ex As Exception
                 Generic.WriteDebug(ex)
             End Try
-            Complete()
+
             Exit Sub
-        End If
+        '     End If
         Try
             Me.Show()
             'we have aborted return to download again
@@ -246,6 +233,109 @@ Public Class frmImport
 
 
     End Sub
+    Private Sub MariaDBUnusedCode()
+
+
+        Dim cdata() As String = Split(Q.settings.DbServer, "/")
+        Dim svr() As String = Split(cdata(UBound(cdata) - 1), ":")
+
+        Dim conn As New MySqlConnection
+        Dim DatabaseName As String = cdata(UBound(cdata))
+        Dim server As String = svr(0)
+        Dim userName As String = Q.settings.DbUser
+        Dim password As String = Q.settings.DbPass
+        If Not conn Is Nothing Then conn.Close()
+        conn.ConnectionString = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false", server, userName, password, DatabaseName)
+        conn.Open()
+
+        Dim sr As StreamReader = New StreamReader(QGlobal.BaseDir & "dump.sql")
+        Dim sql As String = ""
+        Dim cmd As New MySqlCommand
+        cmd.Connection = conn
+
+        cmd.CommandText = "DROP DATABASE IF EXISTS " & DatabaseName & ";"
+        cmd.ExecuteNonQuery()
+        cmd.CommandText = "CREATE DATABASE " & DatabaseName & " DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+        cmd.ExecuteNonQuery()
+
+        Dim dmpfile As New FileInfo(QGlobal.BaseDir & "brs.MariaDB.sql")
+        Dim totalbytes As Long = dmpfile.Length
+        Dim totalRead As Long = 0
+        Dim percent As Integer = 0
+        Do
+            sql = ""
+            Dim line As String = ""
+
+
+            Do
+                line = sr.ReadLine()
+                sql &= line & vbCrLf
+                If line.EndsWith(";") Then Exit Do
+                If sr.EndOfStream Then Exit Do
+            Loop
+            totalRead += sql.Length
+            percent = CInt(Math.Round((totalRead / totalbytes) * 100, 0))
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
+        Loop Until sr.EndOfStream
+        cmd.Dispose()
+        conn.Close()
+        conn.Dispose()
+        sr.Close()
+
+
+    End Sub
+
+    Private Sub ImportSqlDump()
+
+        Dim cdata() As String = Split(Q.settings.DbServer, "/")
+        Dim svr() As String = Split(cdata(UBound(cdata) - 1), ":")
+        Dim DatabaseName As String = cdata(UBound(cdata))
+        Dim server As String = svr(0)
+        Dim userName As String = Q.settings.DbUser
+        Dim password As String = Q.settings.DbPass
+        Dim sqlfile As String = QGlobal.BaseDir & "brs.mariadb.sql"
+
+
+        Dim p As Process = New Process
+        p.StartInfo.WorkingDirectory = QGlobal.BaseDir & "MariaDB\bin\"
+        p.StartInfo.Arguments = "--no-defaults -v --host=" & server & " --user=" & userName & " --password=" & password & " " & DatabaseName & " --execute=" & Chr(34) & "source " & sqlfile & Chr(34)
+        p.StartInfo.UseShellExecute = False
+        p.StartInfo.RedirectStandardOutput = True
+        p.StartInfo.RedirectStandardError = True
+        p.StartInfo.CreateNoWindow = True
+        AddHandler p.OutputDataReceived, AddressOf ReadConsoleData
+        AddHandler p.ErrorDataReceived, AddressOf ReadConsoleData
+
+        p.StartInfo.FileName = QGlobal.BaseDir & "MariaDB\bin\mysql.exe"
+        p.Start()
+        p.BeginErrorReadLine()
+        p.BeginOutputReadLine()
+        p.WaitForExit()
+        p.Close()
+        UpdateInfo(0, True)
+    End Sub
+
+
+    Private Sub ReadConsoleData(ByVal Sender As Object, ByVal e As DataReceivedEventArgs)
+        If e.Data IsNot Nothing Then
+            UpdateInfo(e.Data.Length, False)
+        End If
+    End Sub
+    Private Sub UpdateInfo(ByVal bytes As Long, ByVal IsDone As Boolean)
+        If Me.InvokeRequired Then
+            Dim d As New DUpdateinfo(AddressOf UpdateInfo)
+            Me.Invoke(d, New Object() {bytes, IsDone})
+            Return
+        End If
+        TotalRead += bytes
+        lblStatus.Text = "Importing: " & TotalRead.ToString & " / " & FileSize
+        If IsDone Then
+            StopMaria()
+            Complete()
+        End If
+    End Sub
+
     Private Sub ImportFromUrl(ByVal Url As String)
         Dim S As frmDownloadExtract
         S = New frmDownloadExtract
