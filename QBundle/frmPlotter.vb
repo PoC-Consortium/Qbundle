@@ -501,15 +501,23 @@ Public Class frmPlotter
         End Try
         If FilePath.Contains(" ") Then FilePath = Chr(34) & FilePath & Chr(34)
 
-        Dim Arg As String = "-id " & FileParts(0) & " -sn " & FileParts(1) & " -n " & FileParts(2) & " -t " & nrThreads.Value.ToString & " -path " & FilePath & " -mem " & nrRam.Value.ToString & "G"
-
+        Dim Arg As String = "-id " & FileParts(0)
+        Arg &= " -sn " & FileParts(1)
+        Arg &= " -n " & FileParts(2)
+        Arg &= " -t " & nrThreads.Value.ToString
+        Arg &= " -path " & FilePath
+        Arg &= " -mem " & nrRam.Value.ToString & "G"
+        If radPoC2.Checked = True Then
+            Arg &= " -poc2"
+        End If
         Try
             Dim p As Process = New Process
             p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
-
             p.StartInfo.Arguments = Arg
             p.StartInfo.UseShellExecute = True
-            If QGlobal.CPUInstructions.AVX Then
+            If QGlobal.CPUInstructions.AVX2 Then
+                p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx2.exe"
+            ElseIf QGlobal.CPUInstructions.AVX Then
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
             Else
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_sse.exe"
