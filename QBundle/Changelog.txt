@@ -20,6 +20,7 @@ PoC2 plotfiles is now standard for plotting.
 Qbundle now uses Modified versions of Xplotter and Miner for PoC2 compability
 Dynamic plotting now supports avx2 and poc2 format
 JohnnyFFM's plot converter added to tools.
+Help tab is now added with Qbundle Manual and great commuinty burst resources
 
 v2.0.2
 Fixed Downalod of Java at setup screen

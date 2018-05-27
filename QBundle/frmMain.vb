@@ -870,11 +870,6 @@
 
     End Sub
 
-    Private Sub PlotterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotterToolStripMenuItem.Click
-        frmPlotter.Show()
-        frmPlotter.Focus()
-
-    End Sub
 
     Private Sub SetRewardassignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRewardassignmentToolStripMenuItem.Click
         frmSetrewardassignment.Show()
@@ -927,11 +922,6 @@
 
     End Sub
 
-    Private Sub DynamicPlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DynamicPlottingToolStripMenuItem.Click
-        frmDynamicPlotting.Show()
-        frmDynamicPlotting.Focus()
-
-    End Sub
 
 
 #End Region
@@ -1133,11 +1123,8 @@
         PrepareUpdate()
     End Sub
 
-    Private Sub mnuLoginAccount_Click(sender As Object, e As EventArgs) Handles mnuLoginAccount.Click
 
-    End Sub
-
-    Private Sub PlotconverterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotconverterToolStripMenuItem.Click
+    Private Sub PlotconverterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlotconverterToolStripMenuItem1.Click
         If Not Q.App.isInstalled(QGlobal.AppNames.PlotConverter) Then
             If MsgBox("Plotconverter is not installed. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Plotconverter") = MsgBoxResult.Yes Then
                 Dim s As frmDownloadExtract = New frmDownloadExtract
@@ -1166,5 +1153,43 @@
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub PlotterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlotterToolStripMenuItem1.Click
+        frmPlotter.Show()
+        frmPlotter.Focus()
+    End Sub
+
+    Private Sub DynamicPlottingToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DynamicPlottingToolStripMenuItem1.Click
+        frmDynamicPlotting.Show()
+        frmDynamicPlotting.Focus()
+    End Sub
+
+    Private Sub QbundleManualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QbundleManualToolStripMenuItem.Click
+        Process.Start("https://burstwiki.org/wiki/QBundle")
+    End Sub
+
+    Private Sub BurstcoinorgToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BurstcoinorgToolStripMenuItem1.Click
+        Process.Start("https://www.burst-coin.org/")
+    End Sub
+
+    Private Sub BurstcoinistToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BurstcoinistToolStripMenuItem1.Click
+        Process.Start("https://www.burstcoin.ist/")
+    End Sub
+
+    Private Sub BurstforumnetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BurstforumnetToolStripMenuItem.Click
+        Process.Start("https://burstforum.net")
+    End Sub
+
+    Private Sub GetburstnetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetburstnetToolStripMenuItem.Click
+        Process.Start("https://forums.getburst.net/")
+    End Sub
+
+    Private Sub RedditBurstcoinToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RedditBurstcoinToolStripMenuItem.Click
+        Process.Start("https://www.reddit.com/r/burstcoin/")
+    End Sub
+
+    Private Sub BurstWikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BurstWikiToolStripMenuItem.Click
+        Process.Start("https://burstwiki.org/wiki/Main_Page")
     End Sub
 End Class
