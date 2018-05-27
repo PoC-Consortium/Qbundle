@@ -44,6 +44,7 @@
         DownloadFile = 7 'Download whatever
         Xplotter = 8
         BlagoMiner = 9
+        PlotConverter = 10
     End Enum
     Public Enum States
         Stopped = 0

@@ -96,6 +96,7 @@ Partial Class frmMain
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
         Me.lblUpdateAvail2 = New System.Windows.Forms.ToolStripLabel()
+        Me.PlotconverterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -353,7 +354,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.DynamicPlottingToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem, Me.VanityAddressGeneratorToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotterToolStripMenuItem, Me.DynamicPlottingToolStripMenuItem, Me.PlotconverterToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem, Me.VanityAddressGeneratorToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
@@ -619,6 +620,12 @@ Partial Class frmMain
         Me.lblUpdateAvail2.Text = "(New update available)"
         Me.lblUpdateAvail2.Visible = False
         '
+        'PlotconverterToolStripMenuItem
+        '
+        Me.PlotconverterToolStripMenuItem.Name = "PlotconverterToolStripMenuItem"
+        Me.PlotconverterToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.PlotconverterToolStripMenuItem.Text = "Plotconverter"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -725,4 +732,5 @@ Partial Class frmMain
     Friend WithEvents VanityAddressGeneratorToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblUpdateAvail2 As ToolStripLabel
     Private WithEvents wb1 As WebBrowser
+    Friend WithEvents PlotconverterToolStripMenuItem As ToolStripMenuItem
 End Class

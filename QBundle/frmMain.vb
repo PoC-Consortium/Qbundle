@@ -956,12 +956,27 @@
                         p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
                         Dim thepath As String = Q.settings.DynPlotPath
                         If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
-                        p.StartInfo.Arguments = "-id " & Q.settings.DynPlotAcc & " -sn " & Sn & " -n " & n & " -t " & Q.settings.DynThreads.ToString & " -path " & thepath & " -mem " & Q.settings.DynRam.ToString & "G"
                         p.StartInfo.UseShellExecute = False
+
                         If Q.settings.DynPlotHide Then
                             p.StartInfo.CreateNoWindow = True
                         End If
-                        If QGlobal.CPUInstructions.AVX Then
+
+                        Dim Arguments As String = "-id " & Q.settings.DynPlotAcc 'account id
+                        Arguments &= " -sn " & Sn 'start nonce
+                        Arguments &= " -n " & n ' amount of nonces
+                        Arguments &= " -t " & Q.settings.DynThreads.ToString 'threadss
+                        Arguments &= " -path " & thepath ' path
+                        Arguments &= " -mem " & Q.settings.DynRam.ToString & "G" 'memory usage
+                        If Q.settings.DynPlotType = 2 Then
+                            Arguments &= " -poc2"
+                        End If
+
+                        p.StartInfo.Arguments = Arguments
+
+                        If QGlobal.CPUInstructions.AVX2 Then
+                            p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx2.exe"
+                        ElseIf QGlobal.CPUInstructions.AVX Then
                             p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx.exe"
                         Else
                             p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_sse.exe"
@@ -1120,5 +1135,36 @@
 
     Private Sub mnuLoginAccount_Click(sender As Object, e As EventArgs) Handles mnuLoginAccount.Click
 
+    End Sub
+
+    Private Sub PlotconverterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotconverterToolStripMenuItem.Click
+        If Not Q.App.isInstalled(QGlobal.AppNames.PlotConverter) Then
+            If MsgBox("Plotconverter is not installed. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Plotconverter") = MsgBoxResult.Yes Then
+                Dim s As frmDownloadExtract = New frmDownloadExtract
+                s.Appid = QGlobal.AppNames.PlotConverter
+                Dim res As DialogResult
+                Me.Hide()
+                res = s.ShowDialog
+                Me.Show()
+                If res = DialogResult.Cancel Then
+                    Exit Sub
+                ElseIf res = DialogResult.Abort Then
+                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
+                    Exit Sub
+                End If
+                Q.App.SetLocalInfo() 'update so it is installed
+            Else
+                Exit Sub
+            End If
+        End If
+        Try
+            Dim p As Process = New Process
+            p.StartInfo.WorkingDirectory = QGlobal.AppDir & "PlotConverter"
+            p.StartInfo.UseShellExecute = True
+            p.StartInfo.FileName = QGlobal.AppDir & "PlotConverter\Poc1Poc2Conv.exe"
+            p.Start()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

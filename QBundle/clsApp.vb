@@ -115,18 +115,14 @@ Public Class clsApp
 
     Public Sub SetLocalInfo()
         'Set Launcher version
-        Launcher()
-        'check nrs
-        Nrs()
-        'check installed java
+        Qbundle()
+        Brs()
         JavaInstalled()
-        'check portable java
         JavaPortable()
-        'check portable maria
         MariaDB()
-
         Xplotter()
         BlagoMiner()
+        Plotconverter()
     End Sub
     Public Function SetRemoteInfo() As Boolean
         LoadDynamicInfo()
@@ -153,7 +149,7 @@ Public Class clsApp
     Public Function isInstalled(ByVal id As Integer) As Boolean
         Return _Apps(id).LocalFound
     End Function
-    Private Sub Launcher()
+    Private Sub Qbundle()
         Try
             Dim Major As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major)
             Dim Minor As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor)
@@ -164,7 +160,7 @@ Public Class clsApp
             Generic.WriteDebug(ex)
         End Try
     End Sub
-    Private Sub Nrs()
+    Private Sub Brs()
 
         Try
             If File.Exists(QGlobal.AppDir & "burst.jar") Then 'check if burst jar is here then we have nrs?
@@ -296,6 +292,25 @@ Public Class clsApp
             Generic.WriteDebug(ex)
         End Try
     End Sub
+
+    Private Sub Plotconverter()
+        Try
+            If File.Exists(QGlobal.AppDir & "PlotConverter\Poc1Poc2Conv.exe") Then
+                _Apps(QGlobal.AppNames.PlotConverter).LocalFound = True
+                If File.Exists(QGlobal.AppDir & "PlotConverter\version") Then
+                    Dim version As String = File.ReadAllText(QGlobal.AppDir & "PlotConverter\version")
+                    _Apps(QGlobal.AppNames.PlotConverter).LocalVersion = version
+                Else
+                    'asume 1.7
+                    _Apps(QGlobal.AppNames.PlotConverter).LocalVersion = "1.7"
+                End If
+            End If
+        Catch ex As Exception
+            Generic.WriteDebug(ex)
+        End Try
+    End Sub
+
+
 #End Region
 
 #Region " Download and unpack "
@@ -661,6 +676,8 @@ Public Class clsApp
                 Return "Xplotter"
             Case QGlobal.AppNames.BlagoMiner
                 Return "Blago Miner"
+            Case QGlobal.AppNames.PlotConverter
+                Return "Plot converter by JohnnyFFM"
         End Select
         Return ""
     End Function

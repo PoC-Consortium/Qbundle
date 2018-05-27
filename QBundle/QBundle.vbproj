@@ -180,6 +180,7 @@
     <Compile Include="clsAccounts.vb" />
     <Compile Include="clsApp.vb" />
     <Compile Include="clsHttp.vb" />
+    <Compile Include="clsNonceMaker.vb" />
     <Compile Include="clsProcessHandler.vb" />
     <Compile Include="clsQ.vb" />
     <Compile Include="clsServiceHandler.vb" />

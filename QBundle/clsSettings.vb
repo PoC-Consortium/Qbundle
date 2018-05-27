@@ -47,6 +47,7 @@
     Private _DynPlotHide As Boolean
     Private _DynThreads As Integer
     Private _DynRam As Integer
+    Private _DynPlotType As Integer
     'minner
     Private _SoloMining As Boolean
     Private _MiningServer As String
@@ -333,6 +334,14 @@
             _DynPlotHide = value
         End Set
     End Property
+    Public Property DynPlotType() As Integer
+        Get
+            Return _DynPlotType
+        End Get
+        Set(ByVal value As Integer)
+            _DynPlotType = value
+        End Set
+    End Property
     Public Property DynThreads() As Integer
         Get
             Return _DynThreads
@@ -514,7 +523,7 @@
         _DynPlotHide = True
         _DynRam = 1
         _DynThreads = 1
-
+        _DynPlotType = 2
 
         _SoloMining = True
         _MiningServer = ""

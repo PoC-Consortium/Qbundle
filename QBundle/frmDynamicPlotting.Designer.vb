@@ -26,6 +26,11 @@ Partial Class frmDynamicPlotting
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDynamicPlotting))
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.pnlOnOff = New System.Windows.Forms.Panel()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.nrRam = New System.Windows.Forms.NumericUpDown()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.nrThreads = New System.Windows.Forms.NumericUpDown()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.lblFreeSpace = New System.Windows.Forms.Label()
         Me.lblPlotSize = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -55,19 +60,17 @@ Partial Class frmDynamicPlotting
         Me.cmImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.nrRam = New System.Windows.Forms.NumericUpDown()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.nrThreads = New System.Windows.Forms.NumericUpDown()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.radPoC2 = New System.Windows.Forms.RadioButton()
+        Me.radPoC1 = New System.Windows.Forms.RadioButton()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.pnlOnOff.SuspendLayout()
+        CType(Me.nrRam, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.cmImport.SuspendLayout()
-        CType(Me.nrRam, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox3
@@ -77,13 +80,16 @@ Partial Class frmDynamicPlotting
         Me.GroupBox3.Controls.Add(Me.rDisable)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(359, 356)
+        Me.GroupBox3.Size = New System.Drawing.Size(359, 377)
         Me.GroupBox3.TabIndex = 34
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Settings"
         '
         'pnlOnOff
         '
+        Me.pnlOnOff.Controls.Add(Me.radPoC2)
+        Me.pnlOnOff.Controls.Add(Me.radPoC1)
+        Me.pnlOnOff.Controls.Add(Me.Label22)
         Me.pnlOnOff.Controls.Add(Me.Label17)
         Me.pnlOnOff.Controls.Add(Me.nrRam)
         Me.pnlOnOff.Controls.Add(Me.Label16)
@@ -105,8 +111,53 @@ Partial Class frmDynamicPlotting
         Me.pnlOnOff.Enabled = False
         Me.pnlOnOff.Location = New System.Drawing.Point(10, 66)
         Me.pnlOnOff.Name = "pnlOnOff"
-        Me.pnlOnOff.Size = New System.Drawing.Size(338, 280)
+        Me.pnlOnOff.Size = New System.Drawing.Size(338, 302)
         Me.pnlOnOff.TabIndex = 33
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(211, 254)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(22, 13)
+        Me.Label17.TabIndex = 37
+        Me.Label17.Text = "GB"
+        '
+        'nrRam
+        '
+        Me.nrRam.Location = New System.Drawing.Point(159, 250)
+        Me.nrRam.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nrRam.Name = "nrRam"
+        Me.nrRam.Size = New System.Drawing.Size(48, 20)
+        Me.nrRam.TabIndex = 36
+        Me.nrRam.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(115, 253)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(44, 13)
+        Me.Label16.TabIndex = 35
+        Me.Label16.Text = "Memory"
+        '
+        'nrThreads
+        '
+        Me.nrThreads.Location = New System.Drawing.Point(53, 250)
+        Me.nrThreads.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nrThreads.Name = "nrThreads"
+        Me.nrThreads.Size = New System.Drawing.Size(48, 20)
+        Me.nrThreads.TabIndex = 33
+        Me.nrThreads.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 253)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(46, 13)
+        Me.Label7.TabIndex = 34
+        Me.Label7.Text = "Threads"
         '
         'lblFreeSpace
         '
@@ -275,7 +326,7 @@ Partial Class frmDynamicPlotting
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(535, 341)
+        Me.btnSave.Location = New System.Drawing.Point(535, 360)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(100, 29)
         Me.btnSave.TabIndex = 37
@@ -290,12 +341,12 @@ Partial Class frmDynamicPlotting
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 373)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 393)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(623, 98)
         Me.GroupBox1.TabIndex = 38
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "My Plotfiles"
+        Me.GroupBox1.Text = "My plotfiles"
         '
         'Label12
         '
@@ -379,57 +430,43 @@ Partial Class frmDynamicPlotting
         Me.ImportFolderToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ImportFolderToolStripMenuItem.Text = "Import Folder"
         '
-        'Label17
+        'radPoC2
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(211, 254)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(22, 13)
-        Me.Label17.TabIndex = 37
-        Me.Label17.Text = "GB"
+        Me.radPoC2.AutoSize = True
+        Me.radPoC2.Checked = True
+        Me.radPoC2.Location = New System.Drawing.Point(119, 278)
+        Me.radPoC2.Name = "radPoC2"
+        Me.radPoC2.Size = New System.Drawing.Size(51, 17)
+        Me.radPoC2.TabIndex = 40
+        Me.radPoC2.TabStop = True
+        Me.radPoC2.Text = "PoC2"
+        Me.radPoC2.UseVisualStyleBackColor = True
         '
-        'nrRam
+        'radPoC1
         '
-        Me.nrRam.Location = New System.Drawing.Point(159, 250)
-        Me.nrRam.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nrRam.Name = "nrRam"
-        Me.nrRam.Size = New System.Drawing.Size(48, 20)
-        Me.nrRam.TabIndex = 36
-        Me.nrRam.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.radPoC1.AutoSize = True
+        Me.radPoC1.Location = New System.Drawing.Point(63, 278)
+        Me.radPoC1.Name = "radPoC1"
+        Me.radPoC1.Size = New System.Drawing.Size(51, 17)
+        Me.radPoC1.TabIndex = 39
+        Me.radPoC1.Text = "PoC1"
+        Me.radPoC1.UseVisualStyleBackColor = True
         '
-        'Label16
+        'Label22
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(115, 253)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(44, 13)
-        Me.Label16.TabIndex = 35
-        Me.Label16.Text = "Memory"
-        '
-        'nrThreads
-        '
-        Me.nrThreads.Location = New System.Drawing.Point(53, 250)
-        Me.nrThreads.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nrThreads.Name = "nrThreads"
-        Me.nrThreads.Size = New System.Drawing.Size(48, 20)
-        Me.nrThreads.TabIndex = 33
-        Me.nrThreads.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 253)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(46, 13)
-        Me.Label7.TabIndex = 34
-        Me.Label7.Text = "Threads"
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(6, 279)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(51, 13)
+        Me.Label22.TabIndex = 38
+        Me.Label22.Text = "Plot type:"
         '
         'frmDynamicPlotting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(647, 482)
+        Me.ClientSize = New System.Drawing.Size(647, 505)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label6)
@@ -445,13 +482,13 @@ Partial Class frmDynamicPlotting
         Me.GroupBox3.PerformLayout()
         Me.pnlOnOff.ResumeLayout(False)
         Me.pnlOnOff.PerformLayout()
+        CType(Me.nrRam, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.trFreeSpace, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HSSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.cmImport.ResumeLayout(False)
-        CType(Me.nrRam, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nrThreads, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -492,4 +529,7 @@ Partial Class frmDynamicPlotting
     Friend WithEvents Label16 As Label
     Friend WithEvents nrThreads As NumericUpDown
     Friend WithEvents Label7 As Label
+    Friend WithEvents radPoC2 As RadioButton
+    Friend WithEvents radPoC1 As RadioButton
+    Friend WithEvents Label22 As Label
 End Class

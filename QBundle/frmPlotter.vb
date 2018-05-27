@@ -262,7 +262,17 @@ Public Class frmPlotter
             p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
             Dim thepath As String = txtPath.Text
             If thepath.Contains(" ") Then thepath = Chr(34) & thepath & Chr(34)
-            p.StartInfo.Arguments = "-id " & account & " -sn " & txtStartNonce.Text & " -n " & CStr(HSSize.Value) & " -t " & nrThreads.Value.ToString & " -path " & thepath & " -mem " & nrRam.Value.ToString & "G"
+            Dim Arguments As String = "-id " & account 'account id
+            Arguments &= " -sn " & txtStartNonce.Text 'start nonce
+            Arguments &= " -n " & CStr(HSSize.Value) ' amount of nonces
+            Arguments &= " -t " & nrThreads.Value.ToString 'threadss
+            Arguments &= " -path " & thepath ' path
+            Arguments &= " -mem " & nrRam.Value.ToString & "G" 'memory usage
+            If radPoC2.Checked = True Then
+                Arguments &= " -poc2"
+            End If
+
+            p.StartInfo.Arguments = Arguments
             p.StartInfo.UseShellExecute = True
             If QGlobal.CPUInstructions.AVX2 Then
                 p.StartInfo.FileName = QGlobal.AppDir & "Xplotter\XPlotter_avx2.exe"

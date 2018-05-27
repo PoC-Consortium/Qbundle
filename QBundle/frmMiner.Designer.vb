@@ -499,7 +499,7 @@ Partial Class frmMiner
         Me.MaximizeBox = False
         Me.Name = "frmMiner"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Miner (Blago CPU Miner)"
+        Me.Text = "Miner (Blago CPU Miner) modified by Quibus and JohnnyFFM in 2018"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.grpMiner.ResumeLayout(False)

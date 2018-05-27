@@ -77,6 +77,9 @@ Partial Class frmPlotter
         Me.ActionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumePlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.radPoC1 = New System.Windows.Forms.RadioButton()
+        Me.radPoC2 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -90,7 +93,7 @@ Partial Class frmPlotter
         '
         'btnStartPotting
         '
-        Me.btnStartPotting.Location = New System.Drawing.Point(402, 351)
+        Me.btnStartPotting.Location = New System.Drawing.Point(402, 378)
         Me.btnStartPotting.Name = "btnStartPotting"
         Me.btnStartPotting.Size = New System.Drawing.Size(119, 34)
         Me.btnStartPotting.TabIndex = 0
@@ -147,7 +150,7 @@ Partial Class frmPlotter
         Me.GroupBox1.Controls.Add(Me.btnRemove)
         Me.GroupBox1.Controls.Add(Me.btnImport)
         Me.GroupBox1.Controls.Add(Me.lstPlots)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 389)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 413)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(615, 100)
         Me.GroupBox1.TabIndex = 13
@@ -218,13 +221,16 @@ Partial Class frmPlotter
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 37)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(380, 348)
+        Me.GroupBox2.Size = New System.Drawing.Size(380, 375)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Create new plotfile"
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.radPoC2)
+        Me.GroupBox4.Controls.Add(Me.radPoC1)
+        Me.GroupBox4.Controls.Add(Me.Label22)
         Me.GroupBox4.Controls.Add(Me.Label1)
         Me.GroupBox4.Controls.Add(Me.Label7)
         Me.GroupBox4.Controls.Add(Me.Label17)
@@ -236,7 +242,7 @@ Partial Class frmPlotter
         Me.GroupBox4.Controls.Add(Me.Label4)
         Me.GroupBox4.Location = New System.Drawing.Point(13, 227)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(355, 113)
+        Me.GroupBox4.Size = New System.Drawing.Size(355, 143)
         Me.GroupBox4.TabIndex = 34
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Advanced Settings"
@@ -530,7 +536,7 @@ Partial Class frmPlotter
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(527, 370)
+        Me.Label20.Location = New System.Drawing.Point(527, 397)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(69, 12)
         Me.Label20.TabIndex = 26
@@ -540,7 +546,7 @@ Partial Class frmPlotter
         '
         Me.lblcputype.AutoSize = True
         Me.lblcputype.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblcputype.Location = New System.Drawing.Point(594, 370)
+        Me.lblcputype.Location = New System.Drawing.Point(594, 397)
         Me.lblcputype.Name = "lblcputype"
         Me.lblcputype.Size = New System.Drawing.Size(30, 12)
         Me.lblcputype.TabIndex = 27
@@ -551,7 +557,7 @@ Partial Class frmPlotter
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ActionToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(645, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(643, 24)
         Me.MenuStrip1.TabIndex = 28
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -587,12 +593,43 @@ Partial Class frmPlotter
         Me.ResumePlottingToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.ResumePlottingToolStripMenuItem.Text = "Resume plotting"
         '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(16, 116)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(51, 13)
+        Me.Label22.TabIndex = 33
+        Me.Label22.Text = "Plot type:"
+        '
+        'radPoC1
+        '
+        Me.radPoC1.AutoSize = True
+        Me.radPoC1.Location = New System.Drawing.Point(69, 115)
+        Me.radPoC1.Name = "radPoC1"
+        Me.radPoC1.Size = New System.Drawing.Size(51, 17)
+        Me.radPoC1.TabIndex = 34
+        Me.radPoC1.Text = "PoC1"
+        Me.radPoC1.UseVisualStyleBackColor = True
+        '
+        'radPoC2
+        '
+        Me.radPoC2.AutoSize = True
+        Me.radPoC2.Checked = True
+        Me.radPoC2.Location = New System.Drawing.Point(125, 115)
+        Me.radPoC2.Name = "radPoC2"
+        Me.radPoC2.Size = New System.Drawing.Size(51, 17)
+        Me.radPoC2.TabIndex = 35
+        Me.radPoC2.TabStop = True
+        Me.radPoC2.Text = "PoC2"
+        Me.radPoC2.UseVisualStyleBackColor = True
+        '
         'frmPlotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(645, 494)
+        Me.ClientSize = New System.Drawing.Size(643, 525)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.lblcputype)
         Me.Controls.Add(Me.Label20)
@@ -616,7 +653,7 @@ Partial Class frmPlotter
         Me.MaximizeBox = False
         Me.Name = "frmPlotter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Plotter (Xplotter by Blago)"
+        Me.Text = "Plotter (Xplotter by Blago) modified by JohnnyFFM in 2018"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -688,4 +725,7 @@ Partial Class frmPlotter
     Friend WithEvents lblDeselectAll As Label
     Friend WithEvents lblSelectAll As Label
     Friend WithEvents Label21 As Label
+    Friend WithEvents radPoC2 As RadioButton
+    Friend WithEvents radPoC1 As RadioButton
+    Friend WithEvents Label22 As Label
 End Class

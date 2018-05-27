@@ -34,6 +34,11 @@
         Else
             Q.settings.DynPlotEnabled = False
         End If
+        If radPoC2.Checked = True Then
+            Q.settings.DynPlotType = 2
+        Else
+            Q.settings.DynPlotType = 1
+        End If
         Q.settings.DynPlotPath = txtPath.Text
         Q.settings.DynPlotAcc = txtAccount.Text
         Q.settings.DynPlotSize = HSSize.Value
