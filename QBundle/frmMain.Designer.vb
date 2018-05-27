@@ -562,7 +562,6 @@ Partial Class frmMain
         '
         'wb1
         '
-        Me.wb1.CausesValidation = False
         Me.wb1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.wb1.Location = New System.Drawing.Point(0, 0)
         Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
@@ -718,7 +717,6 @@ Partial Class frmMain
     Friend WithEvents ModeToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents WalletModeToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents LauncherModeToolStripMenuItem1 As ToolStripMenuItem
-    Public WithEvents wb1 As WebBrowser
     Friend WithEvents MenuBar As ToolStrip
     Friend WithEvents lblSelectWallet As ToolStripLabel
     Friend WithEvents cmbSelectWallet As ToolStripComboBox
@@ -726,4 +724,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents VanityAddressGeneratorToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblUpdateAvail2 As ToolStripLabel
+    Private WithEvents wb1 As WebBrowser
 End Class

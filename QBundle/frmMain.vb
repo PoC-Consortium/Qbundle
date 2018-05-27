@@ -809,7 +809,7 @@
             Else
                 url = "http://" & s(0) & ":" & s(1)
             End If
-            Dim Result() As String = Split(http.GetUrl(url & "/burst?requestType=getBlock&lastIndex=1"), ",")
+            Dim Result() As String = Split(http.GetUrl(url & "/burst?requestType=getBlock"), ",")
             Dim Height As String = ""
             Dim TimeStamp As String = ""
             For Each Line As String In Result

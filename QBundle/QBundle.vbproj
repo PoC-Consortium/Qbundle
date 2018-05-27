@@ -142,6 +142,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HashLib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HashLib.2.0.1\lib\net40\HashLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -433,6 +436,7 @@
     <Content Include="Changelog.txt" />
     <Content Include="HowToUpgradeversion.txt" />
     <Content Include="Resources\blago.jpg" />
+    <None Include="packages.config" />
     <None Include="Resources\CPUInstructions.exe" />
     <None Include="Resources\Download.png" />
     <None Include="Resources\vps_168_57.jpg" />
