@@ -461,6 +461,7 @@
         cfg &= "" & vbCrLf
         cfg &= "   " & Chr(34) & "Paths" & Chr(34) & ":[" & plots & "]," & vbCrLf
         cfg &= "   " & Chr(34) & "CacheSize" & Chr(34) & " : 10000," & vbCrLf
+        cfg &= "   " & Chr(34) & "CacheSize2" & Chr(34) & " : 512000," & vbCrLf
         cfg &= "" & vbCrLf
         cfg &= "   " & Chr(34) & "Debug" & Chr(34) & ": true," & vbCrLf
         cfg &= "   " & Chr(34) & "UseHDDWakeUp" & Chr(34) & ": " & UseHdd & "," & vbCrLf
@@ -475,7 +476,10 @@
         cfg &= "   " & Chr(34) & "UseBoost" & Chr(34) & " : " & UseBoost & "," & vbCrLf
         cfg &= "" & vbCrLf
         cfg &= "   " & Chr(34) & "WinSizeX" & Chr(34) & ": 76," & vbCrLf
-        cfg &= "   " & Chr(34) & "WinSizeY" & Chr(34) & ": 60" & vbCrLf
+        cfg &= "   " & Chr(34) & "WinSizeY" & Chr(34) & ": 60," & vbCrLf
+        cfg &= "" & vbCrLf
+        cfg &= "  " & Chr(34) & "POC2StartBlock" & Chr(34) & ": 502000" & vbCrLf
+
         cfg &= "}" & vbCrLf
 
         System.IO.File.WriteAllText(QGlobal.AppDir & "BlagoMiner\miner.conf", cfg)
@@ -578,13 +582,5 @@
         End If
     End Sub
 
-    Private Sub rbSolo_CheckedChanged_1(sender As Object, e As EventArgs) Handles rbSolo.CheckedChanged
-        '     setMiningType()
 
-    End Sub
-
-    Private Sub rbPool_CheckedChanged_1(sender As Object, e As EventArgs) Handles rbPool.CheckedChanged
-        '   setMiningType()
-
-    End Sub
 End Class
