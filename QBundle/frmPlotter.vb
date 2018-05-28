@@ -250,14 +250,16 @@ Public Class frmPlotter
             If Not filePath.EndsWith("\") Then filePath &= "\"
             filePath &= account & "_" 'account 
             filePath &= txtStartNonce.Text & "_" 'startnonce
-            filePath &= CStr(HSSize.Value) & "_" 'length
-            filePath &= CStr(HSSize.Value) 'stagger
+            filePath &= CStr(HSSize.Value) 'length
+            If radPoC2.Checked = False Then
+                filePath &= "_" & CStr(HSSize.Value) 'stagger
+            End If
             Q.settings.Plots &= filePath & "|"
             Q.settings.SaveSettings()
             lstPlots.Items.Add(filePath)
-        End If
+            End If
 
-        Try
+            Try
             Dim p As Process = New Process
             p.StartInfo.WorkingDirectory = QGlobal.AppDir & "Xplotter"
             Dim thepath As String = txtPath.Text

@@ -977,8 +977,8 @@
                         If Not filePath.EndsWith("\") Then filePath &= "\"
                         filePath &= Q.settings.DynPlotAcc & "_" 'account 
                         filePath &= Sn & "_" 'startnonce
-                        filePath &= n & "_" 'length
-                        filePath &= n 'stagger
+                        filePath &= n  'length
+                        If Q.settings.DynPlotType = 1 Then filePath &= "_" & n 'stagger
                         Q.settings.Plots &= filePath & "|"
                         Q.settings.SaveSettings()
 
