@@ -680,7 +680,7 @@ Friend Class Generic
                 For Each Plot As String In Plotfiles
                     If Plot.Length > 1 Then
                         Dim N() As String = Split(IO.Path.GetFileName(Plot), "_")
-                        If UBound(N) = 3 Then
+                        If UBound(N) > 1 Then
                             If N(0) = Trim(AccountID) Then
                                 PEndNonce = CDbl(N(1)) + CDbl(N(2))
                                 If PEndNonce > HighestEndNonce Then HighestEndNonce = PEndNonce
@@ -763,7 +763,13 @@ Friend Class Generic
 
     Friend Shared Function IsValidPlottFilename(filename As String) As Boolean
         If IsNothing(filename) Then Return False
-        Return Regex.IsMatch(filename, "\d+_\d+_\d+_\d+")
+        If Regex.IsMatch(filename, "\d+_\d+_\d+_\d+") Then 'PoC1
+            Return True
+        ElseIf Regex.IsMatch(filename, "\d+_\d+_\d+") Then 'PoC2
+            Return True
+        End If
+
+        Return False
     End Function
 
     Friend Shared Function IsValidPlottFilePath(filepath As String) As Boolean

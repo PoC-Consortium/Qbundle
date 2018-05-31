@@ -504,7 +504,9 @@
                     Else
                         url = "http://" & s(0) & ":" & s(1)
                     End If
-                    wb1.Navigate(url)
+                    wb1.Stop()
+                    wb1.Navigate(url & "?refreshToken=" + Guid.NewGuid().ToString())
+                    wb1.Refresh(WebBrowserRefreshOption.Completely)
                 End If
             Case QGlobal.ProcOp.Stopping
                 If AppId = QGlobal.AppNames.MariaPortable Then
@@ -1098,10 +1100,13 @@
             If OneMinCron.Enabled = True Then
                 Dim address = Q.App.DynamicInfo.Wallets(cmbSelectWallet.SelectedIndex).Address
                 If cmbSelectWallet.SelectedIndex > 0 Then
+                    wb1.Stop()
                     wb1.Navigate(address)
+                    wb1.Refresh(WebBrowserRefreshOption.Completely)
                 Else
                     If Running Then
-                        wb1.Navigate(address)
+                        wb1.Navigate(address & "?refreshToken=" + Guid.NewGuid().ToString())
+                        wb1.Refresh(WebBrowserRefreshOption.Completely)
                     Else
                         MsgBox("Your local wallet is not running. Checked address: " + address, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Local wallet")
                     End If
@@ -1192,4 +1197,6 @@
     Private Sub BurstWikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BurstWikiToolStripMenuItem.Click
         Process.Start("https://burstwiki.org/wiki/Main_Page")
     End Sub
+
+
 End Class

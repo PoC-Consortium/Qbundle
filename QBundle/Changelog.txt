@@ -14,7 +14,7 @@ minimize to tray on exit ?
 Iconify(?)
 Use CefSharp. but need to fix the fxxkload of library in mainfolder
 
-~v2.1.0
+v2.1.0
 Compatible with new core wallet API standard.
 PoC2 plotfiles is now standard for plotting. 
 Qbundle now uses Modified versions of Xplotter and Miner for PoC2 compability

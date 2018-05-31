@@ -66,16 +66,20 @@ Partial Class frmMain
         Me.MinerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRewardassignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VanityAddressGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QbundleManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BurstcoinorgToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BurstcoinistToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BurstforumnetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GetburstnetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RedditBurstcoinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BurstWikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContributorsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeveloperToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.QbundleManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BurstcoinorgToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BurstcoinistToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BurstforumnetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GetburstnetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RedditBurstcoinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckForUpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
@@ -105,10 +109,6 @@ Partial Class frmMain
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
         Me.lblUpdateAvail2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.BurstWikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -414,6 +414,70 @@ Partial Class frmMain
         Me.VanityAddressGeneratorToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.VanityAddressGeneratorToolStripMenuItem.Text = "Vanity Address generator"
         '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.QbundleManualToolStripMenuItem, Me.ToolStripMenuItem5, Me.BurstcoinorgToolStripMenuItem1, Me.BurstcoinistToolStripMenuItem1, Me.ToolStripMenuItem6, Me.BurstforumnetToolStripMenuItem, Me.GetburstnetToolStripMenuItem, Me.ToolStripMenuItem7, Me.RedditBurstcoinToolStripMenuItem, Me.BurstWikiToolStripMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'QbundleManualToolStripMenuItem
+        '
+        Me.QbundleManualToolStripMenuItem.Name = "QbundleManualToolStripMenuItem"
+        Me.QbundleManualToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.QbundleManualToolStripMenuItem.Text = "Qbundle Manual"
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(160, 6)
+        '
+        'BurstcoinorgToolStripMenuItem1
+        '
+        Me.BurstcoinorgToolStripMenuItem1.Name = "BurstcoinorgToolStripMenuItem1"
+        Me.BurstcoinorgToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
+        Me.BurstcoinorgToolStripMenuItem1.Text = "Official Website"
+        '
+        'BurstcoinistToolStripMenuItem1
+        '
+        Me.BurstcoinistToolStripMenuItem1.Name = "BurstcoinistToolStripMenuItem1"
+        Me.BurstcoinistToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
+        Me.BurstcoinistToolStripMenuItem1.Text = "Burstcoin.ist"
+        '
+        'ToolStripMenuItem6
+        '
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(160, 6)
+        '
+        'BurstforumnetToolStripMenuItem
+        '
+        Me.BurstforumnetToolStripMenuItem.Name = "BurstforumnetToolStripMenuItem"
+        Me.BurstforumnetToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.BurstforumnetToolStripMenuItem.Text = "Burstforum"
+        '
+        'GetburstnetToolStripMenuItem
+        '
+        Me.GetburstnetToolStripMenuItem.Name = "GetburstnetToolStripMenuItem"
+        Me.GetburstnetToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.GetburstnetToolStripMenuItem.Text = "Getburst forum"
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(160, 6)
+        '
+        'RedditBurstcoinToolStripMenuItem
+        '
+        Me.RedditBurstcoinToolStripMenuItem.Name = "RedditBurstcoinToolStripMenuItem"
+        Me.RedditBurstcoinToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.RedditBurstcoinToolStripMenuItem.Text = "Reddit Burstcoin"
+        '
+        'BurstWikiToolStripMenuItem
+        '
+        Me.BurstWikiToolStripMenuItem.Name = "BurstWikiToolStripMenuItem"
+        Me.BurstWikiToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.BurstWikiToolStripMenuItem.Text = "Burst Wiki"
+        '
         'AboutToolStripMenuItem2
         '
         Me.AboutToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContributorsToolStripMenuItem, Me.DeveloperToolStripMenuItem})
@@ -432,49 +496,6 @@ Partial Class frmMain
         Me.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem"
         Me.DeveloperToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.DeveloperToolStripMenuItem.Text = "Developer"
-        '
-        'HelpToolStripMenuItem
-        '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.QbundleManualToolStripMenuItem, Me.ToolStripMenuItem5, Me.BurstcoinorgToolStripMenuItem1, Me.BurstcoinistToolStripMenuItem1, Me.ToolStripMenuItem6, Me.BurstforumnetToolStripMenuItem, Me.GetburstnetToolStripMenuItem, Me.ToolStripMenuItem7, Me.RedditBurstcoinToolStripMenuItem, Me.BurstWikiToolStripMenuItem})
-        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.HelpToolStripMenuItem.Text = "Help"
-        '
-        'QbundleManualToolStripMenuItem
-        '
-        Me.QbundleManualToolStripMenuItem.Name = "QbundleManualToolStripMenuItem"
-        Me.QbundleManualToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.QbundleManualToolStripMenuItem.Text = "Qbundle Manual"
-        '
-        'BurstcoinorgToolStripMenuItem1
-        '
-        Me.BurstcoinorgToolStripMenuItem1.Name = "BurstcoinorgToolStripMenuItem1"
-        Me.BurstcoinorgToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
-        Me.BurstcoinorgToolStripMenuItem1.Text = "Official Website"
-        '
-        'BurstcoinistToolStripMenuItem1
-        '
-        Me.BurstcoinistToolStripMenuItem1.Name = "BurstcoinistToolStripMenuItem1"
-        Me.BurstcoinistToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
-        Me.BurstcoinistToolStripMenuItem1.Text = "Burstcoin.ist"
-        '
-        'BurstforumnetToolStripMenuItem
-        '
-        Me.BurstforumnetToolStripMenuItem.Name = "BurstforumnetToolStripMenuItem"
-        Me.BurstforumnetToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.BurstforumnetToolStripMenuItem.Text = "Burstforum"
-        '
-        'GetburstnetToolStripMenuItem
-        '
-        Me.GetburstnetToolStripMenuItem.Name = "GetburstnetToolStripMenuItem"
-        Me.GetburstnetToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.GetburstnetToolStripMenuItem.Text = "Getburst forum"
-        '
-        'RedditBurstcoinToolStripMenuItem
-        '
-        Me.RedditBurstcoinToolStripMenuItem.Name = "RedditBurstcoinToolStripMenuItem"
-        Me.RedditBurstcoinToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.RedditBurstcoinToolStripMenuItem.Text = "Reddit Burstcoin"
         '
         'FileToolStripMenuItem
         '
@@ -687,27 +708,6 @@ Partial Class frmMain
         Me.lblUpdateAvail2.Size = New System.Drawing.Size(128, 22)
         Me.lblUpdateAvail2.Text = "(New update available)"
         Me.lblUpdateAvail2.Visible = False
-        '
-        'ToolStripMenuItem5
-        '
-        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(160, 6)
-        '
-        'ToolStripMenuItem6
-        '
-        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(160, 6)
-        '
-        'ToolStripMenuItem7
-        '
-        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(160, 6)
-        '
-        'BurstWikiToolStripMenuItem
-        '
-        Me.BurstWikiToolStripMenuItem.Name = "BurstWikiToolStripMenuItem"
-        Me.BurstWikiToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.BurstWikiToolStripMenuItem.Text = "Burst Wiki"
         '
         'frmMain
         '
