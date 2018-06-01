@@ -38,7 +38,7 @@
             Exit Sub
         End If
         If txtPass.Text.Length < 35 Then
-            If MsgBox("Your Burst passphrase is considered as a weak passphrase. You should concider another one. " & vbCrLf & "Do you still want to save it?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Weak account") = MsgBoxResult.No Then
+            If MsgBox("Your Burst passphrase is considered as a weak passphrase. You should consider another one. " & vbCrLf & "Do you still want to save it?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Weak account") = MsgBoxResult.No Then
                 Exit Sub
             End If
         End If
