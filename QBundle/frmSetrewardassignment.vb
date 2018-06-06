@@ -161,7 +161,6 @@
 
             postData &= "&deadline=" & http.URLEncode("1440")
             postData &= "&feeNQT=" & http.URLEncode("100000000")
-            postData &= "&submit="
             Dim result As String = http.PostUrl(Q.App.DynamicInfo.Wallets(cmbWallet.SelectedIndex).Address & "/burst", postData)
             If result.Length > 0 Then
                 If result.Contains("error") Then
@@ -176,6 +175,8 @@
             Generic.WriteDebug(ex)
         End Try
     End Sub
+
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If txtAccount.Text.Length < 10 Then
@@ -244,4 +245,6 @@
 
 
     End Sub
+
+
 End Class
