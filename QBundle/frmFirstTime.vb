@@ -1,96 +1,8 @@
 ﻿Public Class frmFirstTime
-    Private SelectedDBType As Integer = 0
-    Private DbVerified As Boolean = False
-    Private Chosen As Boolean = False
 
 #Region " DB Selection "
 
 
-
-    Private Sub ChangeButton(ByVal Dbver As Integer)
-        If Chosen Then Exit Sub 
-        'disable all
-        r0.Checked = False
-        r1.Checked = False
-        r2.Checked = False
-        r3.Checked = False
-
-        P0.BackColor = Color.White
-        P1.BackColor = Color.White
-        P2.BackColor = Color.White
-        P3.BackColor = Color.White
-        SelectedDBType = Dbver
-        Select Case Dbver
-            Case QGlobal.DbType.H2
-                r0.Checked = True
-                P0.BackColor = SystemColors.GradientInactiveCaption
-            Case QGlobal.DbType.FireBird
-                r1.Checked = True
-                P1.BackColor = SystemColors.GradientInactiveCaption
-            Case QGlobal.DbType.pMariaDB
-                r2.Checked = True
-                P2.BackColor = SystemColors.GradientInactiveCaption
-            Case QGlobal.DbType.MariaDB
-                r3.Checked = True
-                P3.BackColor = SystemColors.GradientInactiveCaption
-        End Select
-    End Sub
-
-    'h2
-    Private Sub lblH2Desc_Click(sender As Object, e As EventArgs) Handles lblH2Desc.Click
-        ChangeButton(QGlobal.DbType.H2)
-    End Sub
-    Private Sub lblH2Header_Click(sender As Object, e As EventArgs) Handles lblH2Header.Click
-        ChangeButton(QGlobal.DbType.H2)
-    End Sub
-    Private Sub r4_Click(sender As Object, e As EventArgs) Handles r0.Click
-        ChangeButton(QGlobal.DbType.H2)
-    End Sub
-    Private Sub P0_Click(sender As Object, e As EventArgs) Handles P0.Click
-        ChangeButton(QGlobal.DbType.H2)
-    End Sub
-
-    'FireBird
-    Private Sub P1_Click(sender As Object, e As EventArgs) Handles P1.Click
-        ChangeButton(QGlobal.DbType.FireBird)
-    End Sub
-    Private Sub r1_Click(sender As Object, e As EventArgs) Handles r1.Click
-        ChangeButton(QGlobal.DbType.FireBird)
-    End Sub
-    Private Sub lblFireBirdHeader_Click(sender As Object, e As EventArgs) Handles lblFireBirdHeader.Click
-        ChangeButton(QGlobal.DbType.FireBird)
-    End Sub
-    Private Sub lblFireBirdDesc_Click(sender As Object, e As EventArgs) Handles lblFireBirdDesc.Click
-        ChangeButton(QGlobal.DbType.FireBird)
-    End Sub
-
-    'PMaria
-    Private Sub P2_Click(sender As Object, e As EventArgs) Handles P2.Click
-        ChangeButton(QGlobal.DbType.pMariaDB)
-    End Sub
-    Private Sub lblPMariaHeader_Click(sender As Object, e As EventArgs) Handles lblPMariaHeader.Click
-        ChangeButton(QGlobal.DbType.pMariaDB)
-    End Sub
-    Private Sub lblPMariaDesc_Click(sender As Object, e As EventArgs) Handles lblPMariaDesc.Click
-        ChangeButton(QGlobal.DbType.pMariaDB)
-    End Sub
-    Private Sub r2_click(sender As Object, e As EventArgs) Handles r2.Click
-        ChangeButton(QGlobal.DbType.pMariaDB)
-    End Sub
-
-    'DB Own
-    Private Sub P3_Click(sender As Object, e As EventArgs) Handles P3.Click
-        ChangeButton(QGlobal.DbType.MariaDB)
-    End Sub
-    Private Sub lblOwnHeader_Click(sender As Object, e As EventArgs) Handles lblOwnHeader.Click
-        ChangeButton(QGlobal.DbType.MariaDB)
-    End Sub
-    Private Sub lblOwnDesc_Click(sender As Object, e As EventArgs) Handles lblOwnDesc.Click
-        ChangeButton(QGlobal.DbType.MariaDB)
-    End Sub
-    Private Sub r3_Click(sender As Object, e As EventArgs) Handles r3.Click
-        ChangeButton(QGlobal.DbType.MariaDB)
-    End Sub
 
 #End Region
 
@@ -98,42 +10,21 @@
 
         Me.AutoScaleMode = AutoScaleMode.None
 
-        Me.Width = pnlWiz1.Left + pnlWiz1.Width + 25
-        Me.Height = pnlWiz1.Top + pnlWiz1.Height + 39
-
-        '  Me.Width = 674 ' * dpiX
-        '  Me.Height = 418 ' * dpiY ' 405
+        Me.Width = PnlWiz2.Left + PnlWiz2.Width + 25
+        Me.Height = PnlWiz2.Top + PnlWiz2.Height + 39
 
         Me.AutoScaleMode = AutoScaleMode.Font
-
-
-        '        Dim g As Graphics = Me.CreateGraphics()
-        '        Dim dpiX As Decimal = CDec(g.DpiX) / 100
-        '        Dim dpiY As Decimal = CDec(g.DpiY) / 100
-        '        If dpiY > 1 Then
-        '        dpiX = 1 - (dpiX - 1)
-        '        dpiY = 1 - (dpiY - 1)
-        '        Dim res As New SizeF(dpiX, dpiY)
-        '        Me.Scale(res)
-        '        For Each s As Control In Me.Controls
-        '        s.Font = New Font(s.Font.FontFamily, s.Font.Size * dpiX)
-        '        Next
-        '        End If
-
-
 
         If QB.Generic.DebugMe Then
             Me.Text = Me.Text & " (DebugMode)"
         End If
-        ' Me.DialogResult = DialogResult.No
-
 
         FirstNext()
 
 
     End Sub
     Private Sub FirstNext()
-        Chosen = True
+
         Dim Ok As Boolean = True
 
         'Set Default settings
@@ -160,51 +51,20 @@
 
         'set DB panel
 
-        Select Case SelectedDBType
-            Case QGlobal.DbType.H2
-                pnlDb.BackColor = Color.PaleGreen
-                lblDbHeader.Text = "H2"
-                lblDBstatus.Text = "H2 embedded does not require aditional components."
-            Case QGlobal.DbType.FireBird
-                pnlDb.BackColor = Color.PaleGreen
-                lblDbHeader.Text = "Firebird"
-                lblDBstatus.Text = "Firebird embedded does not require aditional components."
-            Case QGlobal.DbType.pMariaDB
-                If Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
-                    pnlDb.BackColor = Color.PaleGreen
-                    lblDbHeader.Text = "MariaDB"
-                    lblDBstatus.Text = "MariaDB was found as a portable version."
-                Else
-                    pnlDb.BackColor = Color.LightCoral
-                    lblDbHeader.Text = "MariaDB"
-                    lblDBstatus.Text = "MariaDB was not found." & vbCrLf & "Use download components to download a portable version."
-                    btnDone.Enabled = False
-                    btnDownload.Enabled = True
-                End If
-            Case QGlobal.DbType.MariaDB 'we require settings
-                btnDone.Enabled = False
-                lblDbHeader.Text = "MariaDB / Mysql"
-                lblDBstatus.Text = "Use settings below to configure the database settings."
-                pnlDb.BackColor = Color.LightCoral
-                pnlDb.Height = 180
-                pnlMariaSettings.Visible = True
-        End Select
-        pnlWiz1.Visible = False
-        PnlWiz2.Top = pnlWiz1.Top
-        PnlWiz2.Left = pnlWiz1.Left
+
+        pnlDb.BackColor = Color.PaleGreen
+        lblDbHeader.Text = "H2"
+        lblDBstatus.Text = "H2 embedded does not require aditional components."
+
         PnlWiz2.Visible = True
 
     End Sub
-    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+    Private Sub btnNext_Click(sender As Object, e As EventArgs)
         FirstNext()
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        PnlWiz2.Visible = False
-        pnlWiz1.Visible = True
-        Chosen = False
-    End Sub
+
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
         Me.Hide()
@@ -243,43 +103,11 @@
             lblJavaStatus.Text = "Java was found in a portable version."
         End If
         Q.App.SetLocalInfo()
-        If SelectedDBType = QGlobal.DbType.pMariaDB And Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
-            S = New frmDownloadExtract
-            S.Appid = QGlobal.AppNames.MariaPortable
-            S.DialogResult = Nothing
-            res = S.ShowDialog()
-            If res = DialogResult.Abort Then
-                lblStatusInfo.Text = "Error: Internet is unreachable or repository offline."
-                lblStatusInfo.Visible = True
-                btnDownload.Enabled = True
-                btnBack.Enabled = True
-                S = Nothing
-                Me.Show()
-                Exit Sub
-            End If
-            If res = DialogResult.Cancel Then
-                lblStatusInfo.Text = "Error: You have canceled the download."
-                lblStatusInfo.Visible = True
-                btnDownload.Enabled = True
-                btnBack.Enabled = True
-                S = Nothing
-                Me.Show()
-                Exit Sub
-            End If
-            S = Nothing
-            pnlDb.BackColor = Color.PaleGreen
-            lblDBstatus.Text = "MariaDB was found as a portable version."
-        End If
-        Q.App.SetLocalInfo()
-        If SelectedDBType = QGlobal.DbType.MariaDB And DbVerified Then
-            btnDone.Enabled = True
-        ElseIf SelectedDBType <> QGlobal.DbType.MariaDB Then
-            btnDone.Enabled = True
-        End If
+
         Me.Show()
     End Sub
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
-        Q.settings.DbType = SelectedDBType
+
         If Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then
             Q.settings.JavaType = QGlobal.AppNames.JavaInstalled
         Else
@@ -303,66 +131,19 @@
         Q.settings.Upgradev = CurVer
 
 
-        'temp untill repo in place
-        '  BWL.settings.SaveSettings()
-        '  BWL.Generic.WriteNRSConfig()
-        '  Me.Close()
         finalSteps()
 
-        'Temp unavail untill repo in place
-        '   PnlWiz2.Visible = False
-        '   PnlWiz3.Top = pnlWiz1.Top
-        '   PnlWiz3.Left = pnlWiz1.Left
-        '   PnlWiz3.Visible = True
 
     End Sub
 
-    Private Sub txtDbAddress_TextChanged(sender As Object, e As EventArgs) Handles txtDbAddress.TextChanged
-        CheckMariaSettings()
-    End Sub
 
-    Private Sub txtDbName_TextChanged(sender As Object, e As EventArgs) Handles txtDbName.TextChanged
-        CheckMariaSettings()
-    End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
 
-    Private Sub txtDbUser_TextChanged(sender As Object, e As EventArgs) Handles txtDbUser.TextChanged
-        CheckMariaSettings()
-    End Sub
-
-    Private Sub txtDbPass_TextChanged(sender As Object, e As EventArgs) Handles txtDbPass.TextChanged
-        CheckMariaSettings()
-    End Sub
-    Private Sub CheckMariaSettings()
-        Dim Ok As Boolean = True
-        If Not txtDbAddress.Text <> "" Then Ok = False
-        If Not txtDbName.Text <> "" Then Ok = False
-        If Not txtDbUser.Text <> "" Then Ok = False
-        If Not txtDbPass.Text <> "" Then Ok = False
-
-        If Ok = False Then
-            pnlDb.BackColor = Color.LightCoral
-            DbVerified = False
-        Else
-            pnlDb.BackColor = Color.PaleGreen
-            DbVerified = True
-        End If
-        'also check that we have downloaded all
-        If DbVerified = True Then
-            If Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Or Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then
-                btnDone.Enabled = True
-            End If
-        Else
-            btnDone.Enabled = False
-        End If
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        PnlWiz3.Visible = False
         PnlWiz2.Visible = True
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         finalSteps()
 
     End Sub
@@ -370,21 +151,12 @@
     Private Sub finalSteps()
         Try
             Q.settings.QBMode = 0
-            '  If Q.App.CheckOpenCL() Then Q.settings.useOpenCL = True
             Q.settings.SaveSettings()
-            'writing brs.properties since we need it for tools.
-
         Catch ex As Exception
 
         End Try
         QB.Generic.WriteWalletConfig()
         Me.DialogResult = DialogResult.No
-        '        If rYes.Checked Then
-        '        Me.DialogResult = DialogResult.Yes
-        '        Else
-        '        Me.DialogResult = DialogResult.No
-
-        '        End If
 
 
     End Sub
