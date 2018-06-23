@@ -13,13 +13,36 @@ pipeclient+server implementation in service
 minimize to tray on exit ?
 Iconify(?)
 Use CefSharp. but need to fix the fxxkload of library in mainfolder
+Make a complete transactionObject
 
-Remake firststime to sanitycheck and download missing components only if all is missing.
-Make BRS downloadable
-Make HTML pages that show wallet if offline/starting/stopping.
-Remake Updater to be able to download ALL components in a selectable style and uninstall components.
-Include check of MariaDB ports if mariaDB is selected. Readed from config.
+1. Remake clsapp and clsprocesshandler to be more generic
+2. Remake Updater to be able to download ALL components in a selectable style and uninstall components. and show last updateinfo
+3. Remake firststime to sanitycheck and download missing components only if all is missing.
+4. Make HTML pages that show wallet if offline/starting/stopping.
+5. Include check of MariaDB ports if mariaDB is selected. Readed from config.
+6. Make Read of BRS config and change those parts Qbundle sets only.
+7. Dynplotter should have multiple pathes.
+8. Remove BurstService
+9. Fee system in reward assignment.
+
 Create plotchecker / verifier.
+Connection checker. Something went wrong error.
+Make full settings of BRS? Make Settings profiles?
+Updater should not stop wallet unless wallet/Qbundle needs updates.
+
+
+
+'Notes
+Qinfo should inclue versionfile path,Exepath,Processname. 
+versionfile to determine version
+exepath for possible future launchstrings
+processname to detrmine if it is updateable 
+If it exist then it will be treated installed. (generic check system.)
+Autoinstalling should be done by Hardcoded Names so we can skip ID numbers of components.
+Java,Qbundle have special treatments.
+
+with https://www.nuget.org/packages/PrettyBin we can move all externals to Qlib folders easily. but not cef
+
 
 
 v2.1.2

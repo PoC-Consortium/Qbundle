@@ -1,25 +1,26 @@
-﻿Public Class frmNewAccount
+﻿Imports System.Security.Cryptography
+
+Public Class frmNewAccount
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
-        Dim KeySeed As String = ""
-        Dim curwords As String = ""
-
-        Randomize()
-        Dim value As Integer = 0
-        KeySeed = QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd()))) & " "
-        KeySeed &= QGlobal.PassPhraseWords(CInt(Int(1626 * Rnd())))
-        txtPass.Text = KeySeed
+        txtPass.Text = MakeSeed(12)
     End Sub
+
+
+    Private Function MakeSeed(ByVal nrWords As Integer) As String
+        Dim KeySeed As String = ""
+        Dim RNGCSP As RNGCryptoServiceProvider = New RNGCryptoServiceProvider()
+        Dim rngdata((nrWords * 2) - 1) As Byte
+        RNGCSP.GetBytes(rngdata)
+        For t As Integer = 0 To (nrWords * 2) - 1 Step 2
+            KeySeed &= QGlobal.PassPhraseWords(((rngdata(t) * 256) + rngdata(t + 1)) Mod 1626) & " "
+        Next
+        If KeySeed.Length > 0 Then
+            Return Mid(KeySeed, 1, KeySeed.Length - 1)
+        End If
+        Return ""
+    End Function
+
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
