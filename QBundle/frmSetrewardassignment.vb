@@ -25,18 +25,18 @@
         AddHandler(mnuitm.Click), AddressOf SelectPoolID
         cmlPools.Items.Add(mnuitm)
 
-        For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
+        For x As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
             mnuitm = New ToolStripMenuItem
-            mnuitm.Name = Q.App.DynamicInfo.Pools(x).Name
-            mnuitm.Text = Q.App.DynamicInfo.Pools(x).Name
+            mnuitm.Name = Q.AppManager.AppStore.Pools(x).Name
+            mnuitm.Text = Q.AppManager.AppStore.Pools(x).Name
             AddHandler(mnuitm.Click), AddressOf SelectPoolID
             cmlPools.Items.Add(mnuitm)
         Next
 
         cmbWallet.Items.Clear()
         Generic.UpdateLocalWallet()
-        For t As Integer = 0 To UBound(Q.App.DynamicInfo.Wallets)
-            cmbWallet.Items.Add(Q.App.DynamicInfo.Wallets(t).Name)
+        For t As Integer = 0 To UBound(Q.AppManager.AppStore.Wallets)
+            cmbWallet.Items.Add(Q.AppManager.AppStore.Wallets(t).Name)
         Next
         cmbWallet.SelectedIndex = 0
 
@@ -63,9 +63,9 @@
         If mnuitm.Text = "Solo mining" Then
             txtPool.Text = txtAccount.Text
         Else
-            For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
-                If mnuitm.Text = Q.App.DynamicInfo.Pools(x).Name Then
-                    txtPool.Text = Q.App.DynamicInfo.Pools(x).BurstAddress
+            For x As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
+                If mnuitm.Text = Q.AppManager.AppStore.Pools(x).Name Then
+                    txtPool.Text = Q.AppManager.AppStore.Pools(x).BurstAddress
                     Exit For
                 End If
             Next
@@ -171,7 +171,7 @@
             postData &= "&feeNQT=" & http.URLEncode(fee)
 
 
-            Dim result As String = http.PostUrl(Q.App.DynamicInfo.Wallets(cmbWallet.SelectedIndex).Address & "/burst", postData)
+            Dim result As String = http.PostUrl(Q.AppManager.AppStore.Wallets(cmbWallet.SelectedIndex).Address & "/burst", postData)
             If result.Length > 0 Then
                 If result.Contains("error") Then
                     MsgBox("Rewardassignment did not succeed. Make sure the wallet you are using works and that you atleast have the fee amount in your account.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Error :(")
@@ -210,7 +210,7 @@
             Dim buffer() As String = Nothing
             Dim AccountID As String = ""
             Dim PoolRS As String = ""
-            Dim result() As String = Split(Replace(http.GetUrl(Q.App.DynamicInfo.Wallets(cmbWallet.SelectedIndex).Address & "/burst?requestType=getRewardRecipient&account=" & txtAccount.Text), Chr(34), ""), ",")
+            Dim result() As String = Split(Replace(http.GetUrl(Q.AppManager.AppStore.Wallets(cmbWallet.SelectedIndex).Address & "/burst?requestType=getRewardRecipient&account=" & txtAccount.Text), Chr(34), ""), ",")
             If result(0).StartsWith("{rewardRecipient:") Then
                 AccountID = Mid(result(0), 18)
             Else
@@ -219,17 +219,17 @@
             End If
 
             Dim msg As String
-            For t As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
-                If Q.App.DynamicInfo.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
+            For t As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
+                If Q.AppManager.AppStore.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
                     msg = "Your current reward recipient is:" & vbCrLf
-                    msg &= "Burst address: " & Q.App.DynamicInfo.Pools(t).BurstAddress & vbCrLf
-                    msg &= "Name: " & Q.App.DynamicInfo.Pools(t).Name & vbCrLf
+                    msg &= "Burst address: " & Q.AppManager.AppStore.Pools(t).BurstAddress & vbCrLf
+                    msg &= "Name: " & Q.AppManager.AppStore.Pools(t).Name & vbCrLf
                     MsgBox(msg, MsgBoxStyle.Information, "Reward recipient")
                     Exit Sub
                 End If
             Next
 
-            result = Split(Replace(http.GetUrl(Q.App.DynamicInfo.Wallets(cmbWallet.SelectedIndex).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
+            result = Split(Replace(http.GetUrl(Q.AppManager.AppStore.Wallets(cmbWallet.SelectedIndex).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
             If UBound(result) > 0 Then
                 For t As Integer = 0 To UBound(result)
                     If result(t).StartsWith("name:") Then

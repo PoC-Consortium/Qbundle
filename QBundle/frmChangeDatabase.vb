@@ -43,7 +43,7 @@
                 rDB4.Text = rDB4.Text & " (Currently used)"
                 pnlMariaSettings.Enabled = True
         End Select
-        lblCurDB.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
+        lblCurDB.Text = Generic.GetDbNameFromType(Q.settings.DbType)
         If Not Q.settings.DbType = QGlobal.DbType.H2 Then
             setdb(QGlobal.DbType.H2)
         Else
@@ -74,13 +74,13 @@
         Select Case SelDB
             Case QGlobal.DbType.H2
                 rDB1.Checked = True
-                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.H2)
+                lblFromTo.Text = Generic.GetDbNameFromType(Q.settings.DbType) & " to " & Generic.GetDbNameFromType(QGlobal.DbType.H2)
             Case QGlobal.DbType.pMariaDB
                 rDB3.Checked = True
-                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.pMariaDB)
+                lblFromTo.Text = Generic.GetDbNameFromType(Q.settings.DbType) & " to " & Generic.GetDbNameFromType(QGlobal.DbType.pMariaDB)
             Case QGlobal.DbType.MariaDB
                 rDB4.Checked = True
-                lblFromTo.Text = Q.App.GetDbNameFromType(Q.settings.DbType) & " to " & Q.App.GetDbNameFromType(QGlobal.DbType.MariaDB)
+                lblFromTo.Text = Generic.GetDbNameFromType(Q.settings.DbType) & " to " & Generic.GetDbNameFromType(QGlobal.DbType.MariaDB)
                 pnlMariaSettings.Enabled = True
         End Select
     End Sub

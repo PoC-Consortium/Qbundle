@@ -151,12 +151,11 @@ Public Class frmSettings
 
     End Sub
     Private Sub LoadSettings()
-        If Not Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then rJava0.Enabled = False
-        If Not Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then rJava1.Enabled = False
+
 
         pnlMaria.Enabled = True
         pnlDbSettings.Enabled = True
-        lblDb.Text = Q.App.GetDbNameFromType(Q.settings.DbType)
+        lblDb.Text = Generic.GetDbNameFromType(Q.settings.DbType)
 
         chkCheckForUpdates.Checked = Q.settings.CheckForUpdates
         chkAlwaysAdmin.Checked = Q.settings.AlwaysAdmin
@@ -188,7 +187,7 @@ Public Class frmSettings
         txtDbUser.Text = Q.settings.DbUser
         txtDbPass.Text = Q.settings.DbPass
         ChangeJavaType(Q.settings.JavaType)
-        If Q.App.CheckOpenCL() Then
+        If Generic.CheckOpenCL() Then
             chkOpenCL.Checked = Q.settings.useOpenCL
         Else
             chkOpenCL.Enabled = False

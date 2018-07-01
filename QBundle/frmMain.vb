@@ -59,7 +59,7 @@ Public Class frmMain
             End
         End If
 
-        Q.App.SetLocalInfo()
+
 
         For i As Integer = 0 To UBound(Console)
             Console(i) = New List(Of String)
@@ -76,20 +76,8 @@ Public Class frmMain
         End If
 
         If Q.settings.CheckForUpdates Then
-            Q.App.StartUpdateNotifications()
-            AddHandler Q.App.UpdateAvailable, AddressOf NewUpdatesAvilable
-        End If
-        'special upgrade from 1.9
-        If Q.App.isInstalled(1) Then
-            If Q.App.GetLocalVersion(1) = "1.3.6" Then
-                Q.App.SetRemoteInfo()
-                If Q.App.HasRepository(1) Then
-
-                    PrepareUpdate()
-
-
-                End If
-            End If
+            Q.AppManager.StartUpdateNotifications()
+            AddHandler Q.AppManager.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
 
 
@@ -147,8 +135,8 @@ Public Class frmMain
         End If
 
         Generic.UpdateLocalWallet()
-        For t As Integer = 0 To UBound(Q.App.DynamicInfo.Wallets)
-            cmbSelectWallet.Items.Add(Q.App.DynamicInfo.Wallets(t).Name)
+        For t As Integer = 0 To UBound(Q.AppManager.AppStore.Wallets)
+            cmbSelectWallet.Items.Add(Q.AppManager.AppStore.Wallets(t).Name)
         Next
         cmbSelectWallet.SelectedIndex = 0
 
@@ -174,10 +162,10 @@ Public Class frmMain
 
         Dim Title As String = "Qbundle v"
         Title &= Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major & "." & Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor & "." & Reflection.Assembly.GetExecutingAssembly.GetName.Version.Revision & " | "
-        Title &= "Burstcoin Wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, True)
+        Title &= "Burstcoin Wallet v" & Q.AppManager.GetInstalledVersion("BRS", True)
         If Generic.DebugMe Then Title &= " (DebugMode)"
         Me.Text = Title
-        lblWallet.Text = "Burst wallet v" & Q.App.GetLocalVersion(QGlobal.AppNames.BRS, True)
+        lblWallet.Text = "Burst wallet v" & Q.AppManager.GetInstalledVersion("BRS", True)
     End Sub
     Private Sub SetMode(ByVal NewMode As Integer)
         Select Case NewMode
@@ -317,9 +305,9 @@ Public Class frmMain
         p.StartInfo.UseShellExecute = True
         p.StartInfo.FileName = QGlobal.BaseDir & "Updater.exe"
         p.Start()
-
-        Threading.Thread.Sleep(500)
         p.Dispose()
+        Threading.Thread.Sleep(500)
+
 
         End
 
@@ -751,19 +739,19 @@ Public Class frmMain
 
         Select Case Q.settings.DbType
             Case QGlobal.DbType.FireBird
-                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.FireBird)
+                lblDbName.Text = Generic.GetDbNameFromType(QGlobal.DbType.FireBird)
                 LblDbStatus.Text = "Embeded"
                 LblDbStatus.ForeColor = Color.DarkGreen
             Case QGlobal.DbType.pMariaDB
-                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.pMariaDB)
+                lblDbName.Text = Generic.GetDbNameFromType(QGlobal.DbType.pMariaDB)
                 LblDbStatus.Text = "Stopped"
                 LblDbStatus.ForeColor = Color.Red
             Case QGlobal.DbType.MariaDB
-                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.MariaDB)
+                lblDbName.Text = Generic.GetDbNameFromType(QGlobal.DbType.MariaDB)
                 LblDbStatus.Text = "Unknown"
                 LblDbStatus.ForeColor = Color.DarkOrange
             Case QGlobal.DbType.H2
-                lblDbName.Text = Q.App.GetDbNameFromType(QGlobal.DbType.H2)
+                lblDbName.Text = Generic.GetDbNameFromType(QGlobal.DbType.H2)
                 LblDbStatus.Text = "Embeded"
                 LblDbStatus.ForeColor = Color.DarkGreen
         End Select
@@ -1117,7 +1105,7 @@ Public Class frmMain
     Private Sub cmbSelectWallet_Click(sender As Object, e As EventArgs) Handles cmbSelectWallet.SelectedIndexChanged
         Try
             If OneMinCron.Enabled = True Then
-                Dim address = Q.App.DynamicInfo.Wallets(cmbSelectWallet.SelectedIndex).Address
+                Dim address = Q.AppManager.AppStore.Wallets(cmbSelectWallet.SelectedIndex).Address
                 If cmbSelectWallet.SelectedIndex > 0 Then
 
                     WB1.LoadUrl(address)

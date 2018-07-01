@@ -35,19 +35,19 @@
         pnlMariaSettings.Visible = False
 
         'Set java panael
-        If Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then
-            pnlJava.BackColor = Color.PaleGreen
-            lblJavaStatus.Text = "Java was found installed."
-        ElseIf Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then
-            pnlJava.BackColor = Color.PaleGreen
-            lblJavaStatus.Text = "Java was found in a portable version."
-        Else
-            pnlJava.BackColor = Color.LightCoral
-            lblJavaStatus.Text = Q.App.getAppMessage(QGlobal.AppNames.JavaInstalled) & vbCrLf & "Use download components to download a portable version."
-            'offer the download
-            btnDone.Enabled = False
-            btnDownload.Enabled = True
-        End If
+        '   If Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then
+        '   pnlJava.BackColor = Color.PaleGreen
+        '   lblJavaStatus.Text = "Java was found installed."
+        '   ElseIf Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then
+        '   pnlJava.BackColor = Color.PaleGreen
+        '   lblJavaStatus.Text = "Java was found in a portable version."
+        '   Else
+        '   pnlJava.BackColor = Color.LightCoral
+        '   lblJavaStatus.Text = Q.App.getAppMessage(QGlobal.AppNames.JavaInstalled) & vbCrLf & "Use download components to download a portable version."
+        '   'offer the download
+        '   btnDone.Enabled = False
+        '   btnDownload.Enabled = True
+        '   End If
 
         'set DB panel
 
@@ -72,8 +72,8 @@
         btnBack.Enabled = False
         btnDownload.Enabled = False
         btnDone.Enabled = False
-        Q.App.SetLocalInfo()
-        Q.App.SetRemoteInfo()
+
+
         If Not Q.AppManager.isJavaInstalled() Then
             Q.AppManager.InstallApp("JavaPortable")
             'now java is installed
@@ -81,17 +81,17 @@
             lblJavaStatus.Text = "Java was found in a portable version."
         End If
 
-        Q.App.SetLocalInfo()
+
 
         Me.Show()
     End Sub
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
 
-        If Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then
-            Q.settings.JavaType = QGlobal.AppNames.JavaInstalled
-        Else
-            Q.settings.JavaType = QGlobal.AppNames.JavaPortable
-        End If
+        '     If Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) Then
+        '     Q.settings.JavaType = QGlobal.AppNames.JavaInstalled
+        '     Else
+        '     Q.settings.JavaType = QGlobal.AppNames.JavaPortable
+        '     End If
         Q.settings.CheckForUpdates = chkUpdates.Checked
         Q.settings.AutoIp = chkUpdates.Checked
         Q.settings.UseOnlineWallet = chkUpdates.Checked

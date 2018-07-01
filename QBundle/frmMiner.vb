@@ -5,10 +5,10 @@
 
         cmlServers.Items.Clear()
         Dim mnuitm As ToolStripMenuItem
-        For t As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
+        For t As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
             mnuitm = New ToolStripMenuItem
-            mnuitm.Name = Q.App.DynamicInfo.Pools(t).Name
-            mnuitm.Text = Q.App.DynamicInfo.Pools(t).Name
+            mnuitm.Name = Q.AppManager.AppStore.Pools(t).Name
+            mnuitm.Text = Q.AppManager.AppStore.Pools(t).Name
             AddHandler(mnuitm.Click), AddressOf SelectPoolID
             cmlServers.Items.Add(mnuitm)
         Next
@@ -81,7 +81,7 @@
             Dim buffer() As String = Nothing
             Dim AccountID As String = ""
             Dim PoolRS As String = ""
-            Dim result() As String = Split(Replace(http.GetUrl(Q.App.DynamicInfo.Wallets(WalletId).Address & "/burst?requestType=getRewardRecipient&account=" & PlotAccount), Chr(34), ""), ",")
+            Dim result() As String = Split(Replace(http.GetUrl(Q.AppManager.AppStore.Wallets(WalletId).Address & "/burst?requestType=getRewardRecipient&account=" & PlotAccount), Chr(34), ""), ",")
             If result(0).StartsWith("{rewardRecipient:") Then
                 AccountID = Mid(result(0), 18)
             Else
@@ -105,12 +105,12 @@
             End If
 
 
-            For t As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
-                If Q.App.DynamicInfo.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
+            For t As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
+                If Q.AppManager.AppStore.Pools(t).BurstAddress = "BURST-" & Q.Accounts.ConvertIdToRS(AccountID) Then
                     Dim msg As String
                     msg = "Your reward recipient Is set to" & vbCrLf
-                    msg &= "Account: " & Q.App.DynamicInfo.Pools(t).BurstAddress & vbCrLf
-                    msg &= "Name: " & Q.App.DynamicInfo.Pools(t).Name
+                    msg &= "Account: " & Q.AppManager.AppStore.Pools(t).BurstAddress & vbCrLf
+                    msg &= "Name: " & Q.AppManager.AppStore.Pools(t).Name
                     lblReward.Text = msg
                     lblReward.Visible = True
                     SelectPoolByAccountID(AccountID)
@@ -118,7 +118,7 @@
                 End If
             Next
 
-            result = Split(Replace(http.GetUrl(Q.App.DynamicInfo.Wallets(WalletId).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
+            result = Split(Replace(http.GetUrl(Q.AppManager.AppStore.Wallets(WalletId).Address & "/burst?requestType=getAccount&account=" & AccountID), Chr(34), ""), ",")
             If UBound(result) > 0 Then
                 For t As Integer = 0 To UBound(result)
                     If result(t).StartsWith("name:") Then
@@ -157,30 +157,30 @@
             Generic.WriteDebug(ex)
             Exit Sub
         End Try
-        For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
-            If mnuitm.Text = Q.App.DynamicInfo.Pools(x).Name Then
-                txtMiningServer.Text = Q.App.DynamicInfo.Pools(x).Address
-                nrMiningPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
-                txtUpdateServer.Text = Q.App.DynamicInfo.Pools(x).Address
-                nrUpdatePort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
-                txtInfoServer.Text = Q.App.DynamicInfo.Pools(x).Address
-                nrInfoPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
-                txtDeadLine.Text = Q.App.DynamicInfo.Pools(x).DeadLine
+        For x As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
+            If mnuitm.Text = Q.AppManager.AppStore.Pools(x).Name Then
+                txtMiningServer.Text = Q.AppManager.AppStore.Pools(x).Address
+                nrMiningPort.Value = CDec(Val(Q.AppManager.AppStore.Pools(x).Port))
+                txtUpdateServer.Text = Q.AppManager.AppStore.Pools(x).Address
+                nrUpdatePort.Value = CDec(Val(Q.AppManager.AppStore.Pools(x).Port))
+                txtInfoServer.Text = Q.AppManager.AppStore.Pools(x).Address
+                nrInfoPort.Value = CDec(Val(Q.AppManager.AppStore.Pools(x).Port))
+                txtDeadLine.Text = Q.AppManager.AppStore.Pools(x).DeadLine
                 Exit For
             End If
         Next
 
     End Sub
     Private Sub SelectPoolByAccountID(ByVal AccountID As String)
-        For x As Integer = 0 To UBound(Q.App.DynamicInfo.Pools)
-            If AccountID = Q.Accounts.ConvertRSToId(Q.App.DynamicInfo.Pools(x).BurstAddress) Then
-                txtMiningServer.Text = Q.App.DynamicInfo.Pools(x).Address
-                nrMiningPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
-                txtUpdateServer.Text = Q.App.DynamicInfo.Pools(x).Address
-                nrUpdatePort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
-                txtInfoServer.Text = Q.App.DynamicInfo.Pools(x).Address
-                nrInfoPort.Value = CDec(Val(Q.App.DynamicInfo.Pools(x).Port))
-                txtDeadLine.Text = Q.App.DynamicInfo.Pools(x).DeadLine
+        For x As Integer = 0 To UBound(Q.AppManager.AppStore.Pools)
+            If AccountID = Q.Accounts.ConvertRSToId(Q.AppManager.AppStore.Pools(x).BurstAddress) Then
+                txtMiningServer.Text = Q.AppManager.AppStore.Pools(x).Address
+                nrMiningPort.Value = CDec(Val(Q.AppManager.AppStore.Pools(x).Port))
+                txtUpdateServer.Text = Q.AppManager.AppStore.Pools(x).Address
+                nrUpdatePort.Value = CDec(Val(Q.AppManager.AppStore.Pools(x).Port))
+                txtInfoServer.Text = Q.AppManager.AppStore.Pools(x).Address
+                nrInfoPort.Value = CDec(Val(Q.AppManager.AppStore.Pools(x).Port))
+                txtDeadLine.Text = Q.AppManager.AppStore.Pools(x).DeadLine
                 Exit For
             End If
         Next
@@ -327,7 +327,7 @@
         msg &= "Please be advised that Miners can be detected as malware by antimalware software." & vbCrLf
         msg &= "If you have a antimalware software you might need to whitelist the miner." & vbCrLf
 
-        Q.App.SetLocalInfo() 'do a precheck due to antivir removals
+
         If Not Q.AppManager.IsAppInstalled("BlagoMiner") Then
             If MsgBox(msg, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Download Miner") = MsgBoxResult.Yes Then
                 Me.Hide()
@@ -339,11 +339,11 @@
             End If
         End If
         Threading.Thread.Sleep(100)
-        Q.App.SetLocalInfo() 'update to check that it really is installed.
-        If Not Q.App.isInstalled(QGlobal.AppNames.BlagoMiner) Then
-            MsgBox("Miner was downloaded but removed. Please check Antimalware software.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-            Exit Sub
-        End If
+
+        '     If Not Q.App.isInstalled(QGlobal.AppNames.BlagoMiner) Then
+        '     MsgBox("Miner was downloaded but removed. Please check Antimalware software.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
+        '     Exit Sub
+        '     End If
 
         'ok all seems fine. if solo then write password file
         If rbSolo.Checked Then
@@ -495,7 +495,7 @@
 
         Generic.UpdateLocalWallet()
 
-        Dim buffer() As String = Split(Replace(Q.App.DynamicInfo.Wallets(0).Address, "http://", ""), ":")
+        Dim buffer() As String = Split(Replace(Q.AppManager.AppStore.Wallets(0).Address, "http://", ""), ":")
         nrMiningPort.Value = CDec(Val(buffer(1)))
         nrUpdatePort.Value = CDec(Val(buffer(1)))
         nrInfoPort.Value = CDec(Val(buffer(1)))

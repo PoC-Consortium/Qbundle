@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Management
+Imports System.Threading
 Imports System.Xml.Serialization
 
 Public Class clsAppManager
@@ -7,6 +8,8 @@ Public Class clsAppManager
     Public ActiveRepo As String
     Public AppStore As UpdateObject
     Friend Messages As String
+    Private _UpdateNotifyState As Integer
+    Public Event UpdateAvailable()
     Sub New()
         AppXML = "QInfo.xml"
         AppStore = New UpdateObject
@@ -156,17 +159,20 @@ Public Class clsAppManager
             End If
         Next
         If ProcessName = "" Then Return False
-        Try
-            Dim searcher As ManagementObjectSearcher
-            searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='" & ProcessName & "'")
-            For Each p As ManagementObject In searcher.[Get]()
-                ' cmdline = p("CommandLine")
+        Dim ProcArray() As String = Split(ProcessName, "|")
+        For Each ProcessName In ProcArray
+            Try
+                Dim searcher As ManagementObjectSearcher
+                searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='" & ProcessName & "'")
+                For Each p As ManagementObject In searcher.[Get]()
+                    ' cmdline = p("CommandLine")
 
-                Return True
-            Next
-        Catch ex As Exception
-            Generic.WriteDebug(ex)
-        End Try
+                    Return True
+                Next
+            Catch ex As Exception
+                Generic.WriteDebug(ex)
+            End Try
+        Next
         Return False
     End Function
     Friend Function GetQbundleVersion() As String
@@ -277,6 +283,50 @@ Public Class clsAppManager
         Loop
         Return data
     End Function
+
+#Region " Updates "
+    Public Sub StartUpdateNotifications()
+
+        If Not _UpdateNotifyState = QGlobal.States.Stopped Then
+            Exit Sub
+        End If
+        _UpdateNotifyState = QGlobal.States.Running
+
+        Dim trda As Thread
+        trda = New Thread(AddressOf UpdateNotifyTimer)
+        trda.IsBackground = True
+        trda.Start()
+        trda = Nothing
+    End Sub
+    Public Sub StopUpdateNotifications()
+        _UpdateNotifyState = QGlobal.States.Abort
+    End Sub
+    Private Sub UpdateNotifyTimer()
+        Dim Nextcheck As New Date
+        Dim Data As String = ""
+        Do
+            Nextcheck = Now.AddDays(1) '24 hours check
+            Do 'sleepthread
+                Thread.Sleep(600000) 'sleep for 10 minutes
+                If Now >= Nextcheck Then Exit Do
+                If _UpdateNotifyState = QGlobal.States.Abort Then Exit Do
+            Loop
+            If _UpdateNotifyState = QGlobal.States.Abort Then Exit Do
+
+            UpdateAppStoreInformation()
+            For t As Integer = 0 To UBound(AppStore.Apps)
+                If DoesAppNeedUpdate(AppStore.Apps(t).Name) Then
+                    RaiseEvent UpdateAvailable()
+                    Exit For
+                End If
+            Next
+        Loop
+        _UpdateNotifyState = QGlobal.States.Stopped
+    End Sub
+#End Region
+
+
+
 
     <Serializable>
     Public Class UpdateObject

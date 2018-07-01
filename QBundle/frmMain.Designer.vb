@@ -209,8 +209,8 @@ Partial Class frmMain
         'CheckForUpdatesToolStripMenuItem
         '
         Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
-        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates"
+        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.CheckForUpdatesToolStripMenuItem.Text = "Application Manager"
         '
         'ModeToolStripMenuItem1
         '

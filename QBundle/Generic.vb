@@ -168,7 +168,7 @@ Friend Class Generic
         'Dyn platform
         If Q.settings.DynPlatform Then
             Data &= "#Dynamic platform" & vbCrLf
-            Data &= "P2P.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
+            Data &= "P2P.myPlatform = Q-" & GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
         End If
 
         Select Case Q.settings.DbType
@@ -266,7 +266,7 @@ Friend Class Generic
         'Dyn platform
         If Q.settings.DynPlatform Then
             Data &= "#Dynamic platform" & vbCrLf
-            Data &= "nxt.myPlatform = Q-" & Q.App.GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
+            Data &= "nxt.myPlatform = Q-" & GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
         End If
 
         Select Case Q.settings.DbType
@@ -451,32 +451,10 @@ Friend Class Generic
                         MsgBox("Failed to apply firewall rules. Maybe you run another firewall on your computer?", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Firewall")
                     End Try
                     End
-                Case "InstallService"
-                    If Q.Service.InstallService() Then
-                        MsgBox("Sucessfully installed burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    Else
-                        MsgBox("Unable to install burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    End If
-                    End
-
-                Case "UnInstallService"
-                    If Q.Service.UninstallService Then
-                        MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    Else
-                        MsgBox("Unable to remove burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-                    End If
-                    End
-
-                Case "StartService"
-                    Q.Service.StartService()
-                    End
-                Case "StopService"
-                    Q.Service.StopService()
-                    End
                 Case "Debug"
                     QB.Generic.DebugMe = True
                 Case "BetaUpdate"
-                    Q.App.UpdateInfo = "BetaUpdate.xml"
+                    Q.AppManager.AppXML = clArgs(2)
             End Select
         End If
     End Sub
@@ -664,7 +642,7 @@ Friend Class Generic
         Else
             url = "http://" & s(0) & ":" & s(1)
         End If
-        Q.App.DynamicInfo.Wallets(0).Address = url
+        Q.AppManager.AppStore.Wallets(0).Address = url
     End Sub
     Friend Shared Function GetStartNonce(ByVal AccountID As String, ByVal Length As Double) As Double
 
@@ -788,5 +766,30 @@ Friend Class Generic
         Return 0
 
     End Function
+
+    Friend Shared Function GetDbNameFromType(ByVal Dtype As Integer) As String
+        Select Case Dtype
+            Case QGlobal.DbType.H2
+                Return "H2"
+            Case QGlobal.DbType.FireBird
+                Return "FireBird"
+            Case QGlobal.DbType.MariaDB
+                Return "MariaDB"
+            Case QGlobal.DbType.pMariaDB
+                Return "MariaDB"
+        End Select
+        Return ""
+    End Function
+    Public Shared Function CheckOpenCL() As Boolean
+        Try
+            If IO.File.Exists(Environment.SystemDirectory & "\OpenCL.dll") Then
+                Return True
+            End If
+        Catch ex As Exception
+            Generic.WriteDebug(ex)
+        End Try
+        Return False
+    End Function
+
 
 End Class

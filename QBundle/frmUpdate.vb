@@ -1,6 +1,6 @@
 ﻿Public Class frmUpdate
 
-
+    Dim WalletWasRunning As Boolean
     Private WithEvents tmr As New Timer
     Private Sub frmUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lw1.CheckBoxes = True
@@ -10,10 +10,7 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-
-
-        Dim WalletWasRunning As Boolean = frmMain.Running
-
+        WalletWasRunning = frmMain.Running
 
         'Check if lw1.Items(1).checked
         If lw1.Items(1).Checked Then
@@ -21,6 +18,17 @@
         End If
 
 
+        If WalletWasRunning Then
+            frmMain.StopWallet()
+            tmr.Interval = 1000
+            tmr.Enabled = True
+        Else
+            ProcessDownload()
+        End If
+
+    End Sub
+
+    Sub ProcessDownload()
 
 
         Dim item As ListViewItem
@@ -32,12 +40,13 @@
         Next
 
         If lw1.Items(0).Checked Then
+
             'we need to restart Qbundle
         End If
 
 
         If WalletWasRunning Then
-            'start wallet 
+            frmMain.StartWallet()
         End If
 
         UpdateLW() 'show new versions
@@ -45,11 +54,12 @@
 
     End Sub
 
+
+
     Public Sub tmr_tick() Handles tmr.Tick
         If frmMain.Running = False Then
             tmr.Stop()
             tmr.Enabled = False
-
         End If
     End Sub
 
@@ -60,7 +70,7 @@
         Dim AnyUpdates As Boolean = False
         lw1.Items.Clear()
         Dim item1 As ListViewItem
-        Dim AppName, DisplayName, LocalVer, RemoteVer, AppInfo As String
+        Dim AppName, DisplayName, LocalVer, RemoteVer As String ', AppInfo 
         Dim IsInstalled, IsRunning, NeedUpdate As Boolean
 
         For t As Integer = 0 To UBound(Q.AppManager.AppStore.Apps)
@@ -102,39 +112,25 @@
 
             If IsRunning Then
                 item1.Checked = False
-
                 item1.SubItems(0).BackColor = Color.Gray
                 item1.SubItems(1).BackColor = Color.Gray
                 item1.SubItems(2).BackColor = Color.Gray
                 item1.SubItems(3).BackColor = Color.Gray
                 item1.SubItems(4).BackColor = Color.Gray
             End If
-
-            'item1.SubItems(2).ForeColor = Color.DarkRed
-            'item1.SubItems(2).ForeColor = Color.DarkGreen
-
             lw1.Items.Add(item1)
-
         Next
-
         Return True
     End Function
 
     Private Sub lw1_ItemCheck1(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lw1.ItemChecked
-
         If (e.Item.Checked = True) Then
             If e.Item.SubItems(4).Text = "Is running" Then
                 MsgBox("The application you have choosen to update is running. You must close the application before any updates can be made.")
                 e.Item.Checked = False
                 lw1.Refresh()
             End If
-
-
         End If
-
-        ' Output the price to TextBox1.
-
-
     End Sub
 
 

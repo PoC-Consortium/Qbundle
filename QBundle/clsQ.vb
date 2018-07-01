@@ -4,14 +4,14 @@ Imports System.Xml.Serialization
 Friend Class clsQ
 
     Public WithEvents ProcHandler As clsProcessHandler
-    Public WithEvents App As clsApp
+    '  Public WithEvents App As clsApp
     Public settings As clsSettings
     Public Accounts As clsAccounts
     Public Service As clsServiceHandler
-    Public AppManager As clsAppManager
+    Public WithEvents AppManager As clsAppManager
     Public Sub New()
         QGlobal.Init()
-        Me.App = New clsApp
+        '    Me.App = New clsApp
         Me.AppManager = New clsAppManager
         Me.ProcHandler = New clsProcessHandler
         Me.settings = New clsSettings

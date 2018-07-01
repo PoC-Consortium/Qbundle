@@ -40,12 +40,14 @@ If it exist then it will be treated installed. (generic check system.)
 Autoinstalling should be done by Hardcoded Names so we can skip ID numbers of components.
 Java,Qbundle have special treatments.
 
-v2.1.2
+v2.5.0
 Account manger seed generation now uses RFC4086 compliant method.
 moved from IE to ChromiumFX
 Reward assignment works again.
 You can now set fee in rewardassignment
 Burst as Service is no supported in Qbundle.
+Check for updates is now Application Manager and allow you to update/install individual components.
+BRS is no longer shipped with Qbundle but installed on first run.
 
 
 ~v2.1.1
