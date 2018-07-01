@@ -904,26 +904,26 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub InstallAsAServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallAsAServiceToolStripMenuItem.Click
-        If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
-            MsgBox("You can not run MariaDB portable together with this service function.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Wrong DB version")
-            Exit Sub
-        End If
-        If Running Then
-            MsgBox("You must stop the wallet before you can install it as a service.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Stop wallet.")
-            Exit Sub
-        End If
-        If Q.Service.InstallService() Then
-            MsgBox("Sucessfully installed burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-        End If
-    End Sub
+    '  Private Sub InstallAsAServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InstallAsAServiceToolStripMenuItem.Click
+    '  If Q.settings.DbType = QGlobal.DbType.pMariaDB Then
+    '          MsgBox("You can not run MariaDB portable together with this service function.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Wrong DB version")
+    '  Exit Sub
+    '  End If
+    '  If Running Then
+    '          MsgBox("You must stop the wallet before you can install it as a service.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Stop wallet.")
+    '  Exit Sub
+    '  End If
+    '  If Q.Service.InstallService() Then
+    '          MsgBox("Sucessfully installed burstwallet as a service.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
+    '  End If
+    '  End Sub
 
-    Private Sub UninstallServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UninstallServiceToolStripMenuItem.Click
-        If Q.Service.UninstallService() Then
-            MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
-        End If
-
-    End Sub
+    ' Private Sub UninstallServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UninstallServiceToolStripMenuItem.Click
+    ' If Q.Service.UninstallService() Then
+    '         MsgBox("Sucessfully removed burstwallet from services.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Service")
+    ' End If
+    '
+    '    End Sub
 
     Private Sub ConfigureWindowsFirewallToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ConfigureWindowsFirewallToolStripMenuItem1.Click
 

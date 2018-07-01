@@ -22,9 +22,9 @@ Make a complete transactionObject
 5. Include check of MariaDB ports if mariaDB is selected. Readed from config.
 6. Make Read of BRS config and change those parts Qbundle sets only.
 7. Dynplotter should have multiple pathes.
-8. Remove BurstService
-9. Fee system in reward assignment.
-10. ChromiumFX
+* 8. Remove BurstService
+* 9. Fee system in reward assignment.
+* 10. ChromiumFX
 
 Create plotchecker / verifier.
 Connection checker. Something went wrong error.
@@ -47,7 +47,10 @@ Java,Qbundle have special treatments.
 
 v2.1.2
 Account manger seed generation now uses RFC4086 compliant method.
-
+moved from IE to ChromiumFX
+Reward assignment works again.
+You can now set fee in rewardassignment
+Burst as Service is no supported in Qbundle.
 
 
 ~v2.1.1

@@ -82,6 +82,14 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnSend.Click
         Dim pwdf As New frmInput
+
+        If Double.Parse(txtFee.Text) < 0.00735 Then
+            MsgBox("You must set atleast 0.00735 as fee.")
+            Exit Sub
+        End If
+
+        Dim fee As String = txtFee.Text.Replace(".", "").Replace(",", "").TrimStart("0").Trim
+
         Try
 
             Dim Passphrase As String = ""
@@ -160,11 +168,13 @@
             postData &= "&requestType=" & http.URLEncode("setRewardRecipient")
 
             postData &= "&deadline=" & http.URLEncode("1440")
-            postData &= "&feeNQT=" & http.URLEncode("100000000")
+            postData &= "&feeNQT=" & http.URLEncode(fee)
+
+
             Dim result As String = http.PostUrl(Q.App.DynamicInfo.Wallets(cmbWallet.SelectedIndex).Address & "/burst", postData)
             If result.Length > 0 Then
                 If result.Contains("error") Then
-                    MsgBox("Rewardassignment did not succeed.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Error :(")
+                    MsgBox("Rewardassignment did not succeed. Make sure the wallet you are using works and that you atleast have the fee amount in your account.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Error :(")
                 Else
                     MsgBox("Rewardassignment has been set.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "All done.")
                 End If

@@ -49,9 +49,6 @@ Partial Class frmMain
         Me.WalletToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsStartStop = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InstallAsAServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UninstallServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AdvancedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RollbackChainpopoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -290,7 +287,7 @@ Partial Class frmMain
         '
         'WalletToolStripMenuItem
         '
-        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsStartStop, Me.ToolStripMenuItem4, Me.ServiceToolStripMenuItem, Me.AdvancedToolStripMenuItem})
+        Me.WalletToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsStartStop, Me.ToolStripMenuItem4, Me.AdvancedToolStripMenuItem})
         Me.WalletToolStripMenuItem.Name = "WalletToolStripMenuItem"
         Me.WalletToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.WalletToolStripMenuItem.Text = "Wallet"
@@ -298,38 +295,19 @@ Partial Class frmMain
         'tsStartStop
         '
         Me.tsStartStop.Name = "tsStartStop"
-        Me.tsStartStop.Size = New System.Drawing.Size(162, 22)
+        Me.tsStartStop.Size = New System.Drawing.Size(152, 22)
         Me.tsStartStop.Text = "Start Wallet"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(159, 6)
-        '
-        'ServiceToolStripMenuItem
-        '
-        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InstallAsAServiceToolStripMenuItem, Me.UninstallServiceToolStripMenuItem})
-        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
-        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.ServiceToolStripMenuItem.Text = "Windows service"
-        '
-        'InstallAsAServiceToolStripMenuItem
-        '
-        Me.InstallAsAServiceToolStripMenuItem.Name = "InstallAsAServiceToolStripMenuItem"
-        Me.InstallAsAServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.InstallAsAServiceToolStripMenuItem.Text = "Install as a service"
-        '
-        'UninstallServiceToolStripMenuItem
-        '
-        Me.UninstallServiceToolStripMenuItem.Name = "UninstallServiceToolStripMenuItem"
-        Me.UninstallServiceToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.UninstallServiceToolStripMenuItem.Text = "Uninstall service"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(149, 6)
         '
         'AdvancedToolStripMenuItem
         '
         Me.AdvancedToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RollbackChainpopoffToolStripMenuItem})
         Me.AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem"
-        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AdvancedToolStripMenuItem.Text = "Advanced"
         '
         'RollbackChainpopoffToolStripMenuItem
@@ -779,9 +757,6 @@ Partial Class frmMain
     Friend WithEvents lblSplitterWallet As ToolStripStatusLabel
     Friend WithEvents lblWalletIS As ToolStripStatusLabel
     Friend WithEvents lblWalletStatus As ToolStripStatusLabel
-    Friend WithEvents ServiceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents InstallAsAServiceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UninstallServiceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ConfigureWindowsFirewallToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ViewConsoleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
