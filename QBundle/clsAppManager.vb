@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Management
 Imports System.Xml.Serialization
 
 Public Class clsAppManager
@@ -53,7 +54,7 @@ Public Class clsAppManager
     End Sub
 
     Friend Function IsAppInstalled(ByVal AppName As String) As Boolean
-
+        If AppName = "Qbundle" Then Return True
         For t As Integer = 0 To UBound(AppStore.Apps)
             If AppStore.Apps(t).Name = AppName Then Return IO.File.Exists(QGlobal.BaseDir & AppStore.Apps(t).VersionPath)
         Next
@@ -64,6 +65,7 @@ Public Class clsAppManager
     End Function
     Friend Function GetInstalledVersion(ByVal AppName As String, Optional ByVal UseFilter As Boolean = False) As String
         Dim Version As String = ""
+        If AppName = "Qbundle" Then Return GetQbundleVersion()
         Try
             For t As Integer = 0 To UBound(AppStore.Apps)
                 If AppStore.Apps(t).Name = AppName Then
@@ -95,12 +97,12 @@ Public Class clsAppManager
         End Try
         Return Version
     End Function
-    Friend Function IsAppUpdated(ByVal AppName As String) As Boolean
+    Friend Function DoesAppNeedUpdate(ByVal AppName As String) As Boolean
 
         Try
             For t As Integer = 0 To UBound(AppStore.Apps)
                 If AppStore.Apps(t).Name = AppName Then
-                    Return CheckVersion(GetInstalledVersion(AppName), GetAppStoreVersion(AppName), False)
+                    Return CheckVersion(GetInstalledVersion(AppName), GetAppStoreVersion(AppName), True)
                 End If
             Next
         Catch ex As Exception
@@ -145,6 +147,38 @@ Public Class clsAppManager
         End If
 
         Return result
+    End Function
+    Friend Function IsAppRunning(ByVal AppName As String) As Boolean
+        Dim ProcessName As String = ""
+        For t As Integer = 0 To UBound(AppStore.Apps)
+            If AppStore.Apps(t).Name = AppName Then
+                ProcessName = AppStore.Apps(t).ProcessName
+            End If
+        Next
+        If ProcessName = "" Then Return False
+        Try
+            Dim searcher As ManagementObjectSearcher
+            searcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_Process WHERE Name='" & ProcessName & "'")
+            For Each p As ManagementObject In searcher.[Get]()
+                ' cmdline = p("CommandLine")
+
+                Return True
+            Next
+        Catch ex As Exception
+            Generic.WriteDebug(ex)
+        End Try
+        Return False
+    End Function
+    Friend Function GetQbundleVersion() As String
+        Try
+            Dim Major As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Major)
+            Dim Minor As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Minor)
+            Dim Revision As String = CStr(Reflection.Assembly.GetExecutingAssembly.GetName.Version.Revision)
+            Return Major & "." & Minor & "." & Revision
+        Catch ex As Exception
+            Generic.WriteDebug(ex)
+        End Try
+        Return "1.0"
     End Function
 
     Friend Function InstallApp(ByVal AppName As String, Optional ForceReinstall As Boolean = False)

@@ -1207,5 +1207,25 @@ Public Class frmMain
         Process.Start("https://burstwiki.org/wiki/Main_Page")
     End Sub
 
+    Private Sub PaperburstToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PaperburstToolStripMenuItem.Click
+        If Not Q.AppManager.IsAppInstalled("Paperburst") Then
+            If MsgBox("PaperBurst is not installed. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Plotconverter") = MsgBoxResult.Yes Then
+                Me.Hide()
+                Dim res As Boolean = Q.AppManager.InstallApp("Paperburst")
+                Me.Show()
+                If res = False Then Exit Sub
+            Else
+                Exit Sub
+            End If
+        End If
+        Try
+            Dim p As Process = New Process
+            p.StartInfo.WorkingDirectory = QGlobal.AppDir & "PaperBurst"
+            p.StartInfo.UseShellExecute = True
+            p.StartInfo.FileName = QGlobal.AppDir & "PaperBurst\PaperBurst.exe"
+            p.Start()
+        Catch ex As Exception
 
+        End Try
+    End Sub
 End Class

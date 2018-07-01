@@ -105,6 +105,7 @@ Partial Class frmMain
         Me.cmbSelectWallet = New System.Windows.Forms.ToolStripComboBox()
         Me.lblCoinMarket = New System.Windows.Forms.ToolStripLabel()
         Me.lblUpdateAvail2 = New System.Windows.Forms.ToolStripLabel()
+        Me.PaperburstToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -295,19 +296,19 @@ Partial Class frmMain
         'tsStartStop
         '
         Me.tsStartStop.Name = "tsStartStop"
-        Me.tsStartStop.Size = New System.Drawing.Size(152, 22)
+        Me.tsStartStop.Size = New System.Drawing.Size(134, 22)
         Me.tsStartStop.Text = "Start Wallet"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(131, 6)
         '
         'AdvancedToolStripMenuItem
         '
         Me.AdvancedToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RollbackChainpopoffToolStripMenuItem})
         Me.AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem"
-        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AdvancedToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.AdvancedToolStripMenuItem.Text = "Advanced"
         '
         'RollbackChainpopoffToolStripMenuItem
@@ -342,7 +343,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem1
         '
-        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlottingToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem, Me.VanityAddressGeneratorToolStripMenuItem})
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlottingToolStripMenuItem, Me.MinerToolStripMenuItem, Me.SetRewardassignmentToolStripMenuItem, Me.VanityAddressGeneratorToolStripMenuItem, Me.PaperburstToolStripMenuItem})
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
         Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(47, 20)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
@@ -674,6 +675,12 @@ Partial Class frmMain
         Me.lblUpdateAvail2.Text = "(New update available)"
         Me.lblUpdateAvail2.Visible = False
         '
+        'PaperburstToolStripMenuItem
+        '
+        Me.PaperburstToolStripMenuItem.Name = "PaperburstToolStripMenuItem"
+        Me.PaperburstToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.PaperburstToolStripMenuItem.Text = "Paperburst"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -788,4 +795,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem6 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem7 As ToolStripSeparator
     Friend WithEvents BurstWikiToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PaperburstToolStripMenuItem As ToolStripMenuItem
 End Class

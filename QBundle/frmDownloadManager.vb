@@ -158,7 +158,7 @@ Public Class frmDownloadManager
             Extract()
             DeleteFile()
         End If
-        Return DLOk
+        Done()
     End Function
     Private Function Extract() As Boolean
         Dim AllOk As Boolean = False
