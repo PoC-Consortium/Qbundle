@@ -14,9 +14,9 @@ Iconify(?)
 Make a complete transactionObject
 '''''''''''''''''''''''''''''''''''''''
 
-1. Remake clsapp and clsprocesshandler to be more generic
-2. Remake Updater to be able to download ALL components in a selectable style and uninstall components. and show last updateinfo
-3. Remake firststime to sanitycheck and download missing components only if all is missing.
+* 1. Remake clsapp to be more generic
+* 2. Remake Updater to be able to download ALL components in a selectable style and uninstall components. and show last updateinfo
+* 3. Firsttime
 4. Make HTML pages that show wallet if offline/starting/stopping.
 5. Include check of MariaDB ports if mariaDB is selected. Readed from config.
 6. Make Read of BRS config and change those parts Qbundle sets only.
@@ -28,30 +28,21 @@ Make a complete transactionObject
 Create plotchecker / verifier.
 Connection checker. Something went wrong error.
 Make full settings of BRS? Make Settings profiles?
-Updater should not stop wallet unless wallet/Qbundle needs updates.
-
 
 'Notes
-Qinfo should inclue versionfile path,Exepath,Processname. 
-versionfile to determine version
-exepath for possible future launchstrings
-processname to detrmine if it is updateable.
-If it exist then it will be treated installed. (generic check system.)
-Autoinstalling should be done by Hardcoded Names so we can skip ID numbers of components.
-Java,Qbundle have special treatments.
 
 v2.5.0
 Account manger seed generation now uses RFC4086 compliant method.
-moved from IE to ChromiumFX
-Reward assignment works again.
-You can now set fee in rewardassignment
-Burst as Service is no supported in Qbundle.
+Moved from IE to Chromium
+Reward assignment works again and you are able to specify a fee.
+Burst as Service is no longer supported in Qbundle.
 Check for updates is now Application Manager and allow you to update/install individual components.
-BRS is no longer shipped with Qbundle but installed on first run.
-
+BRS is no longer shipped with Qbundle but installed by user on first run.
+Wallet mode start size is more adapted to new BRS gui.
+Paperburst is added under tools.
+A lot of code refactoring.
 
 ~v2.1.1
-
 
 
 v2.1.0

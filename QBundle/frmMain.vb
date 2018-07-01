@@ -29,8 +29,9 @@ Public Class frmMain
 
 #Region " Form Events "
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If QB.Generic.CheckDotNet() = False Then
-            MsgBox("You need to install .net 4.5.2. Check the Readme.txt file for more information.")
+            MsgBox("You need to install .net 4.5.2.")
         End If
 
         Q = New clsQ
@@ -39,9 +40,6 @@ Public Class frmMain
             QB.Generic.RestartAsAdmin()
             End
         End If
-
-
-
         If Generic.DriveCompressed(QGlobal.BaseDir) Then
             Dim Msg As String = "You are running Qbundle on a NTFS compressed drive or folder."
             Msg &= " This is not supported and may cause unstable environment." & vbCrLf & vbCrLf
@@ -51,28 +49,27 @@ Public Class frmMain
         End If
 
         If Q.settings.DebugMode = True Then QB.Generic.DebugMe = True
-
         LastException = Now 'for brs exception monitoring
-
         If Not QB.Generic.CheckWritePermission Then
             MsgBox("Qbundle does not have writepermission to it's own folder. Please move to another location or change the permissions.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Permissions")
             End
         End If
-
-
 
         For i As Integer = 0 To UBound(Console)
             Console(i) = New List(Of String)
         Next
 
         QB.Generic.CheckUpgrade() 'if there is any upgradescenarios
-        Dim StartImport As DialogResult = DialogResult.No
-        If Q.settings.FirstRun Then
-            StartImport = frmFirstTime.ShowDialog()
+
+
+        'Check Core installation. If not satisfying then run checkenv dialog
+
+        If Not CheckEnvironment() Then
+            frmFirstTime.ShowDialog()
         End If
 
         If Q.settings.FirstRun Then
-            End 'we have canceled firstrun screen
+            End 'we have canceled environment screen
         End If
 
         If Q.settings.CheckForUpdates Then
@@ -80,9 +77,7 @@ Public Class frmMain
             AddHandler Q.AppManager.UpdateAvailable, AddressOf NewUpdatesAvilable
         End If
 
-
         SetDbInfo()
-
 
         If Q.settings.Cpulimit = 0 Or Q.settings.Cpulimit > Environment.ProcessorCount Then 'need to set correct cpu
             Select Case Environment.ProcessorCount
@@ -112,34 +107,25 @@ Public Class frmMain
 
         'Init Browser
         ChromiumWebBrowser.Initialize()
-
         WB1 = New ChromiumWebBrowser()
-        WB1.Dock = DockStyle.Fill
-        pnlAIO.Controls.Add(WB1)
-        '  WB1.LoadUrl("https://google.se")
-
-
 
         SetLoginMenu()
 
-        Running = Q.Service.IsServiceRunning
-        If Running Then ProcEvents(QGlobal.AppNames.BRS, QGlobal.ProcOp.FoundSignal, "")
-        If Q.settings.QBMode = 0 And StartImport = DialogResult.No Then
-            If Running = False And Q.settings.AutoStart Then
+        If Q.settings.QBMode = 0 Then
+            If Q.settings.AutoStart Then
                 StartWallet()
             End If
         End If
         SetMode(Q.settings.QBMode)
-        If StartImport = DialogResult.Yes Then
-            frmImport.Show()
-        End If
+
+        pnlAIO.Controls.Add(WB1)
+        WB1.Dock = DockStyle.Fill
 
         Generic.UpdateLocalWallet()
         For t As Integer = 0 To UBound(Q.AppManager.AppStore.Wallets)
             cmbSelectWallet.Items.Add(Q.AppManager.AppStore.Wallets(t).Name)
         Next
         cmbSelectWallet.SelectedIndex = 0
-
         OneMinCron.Interval = 60000
         OneMinCron.Enabled = True
         OneMinCron.Start()
@@ -152,9 +138,6 @@ Public Class frmMain
             trda = Nothing
         End If
 
-        If Q.settings.DbType = QGlobal.DbType.FireBird Then
-            '     MsgBox("You are currently set up to use Firebird as database. Due to recent discovery’s firebird is no longer recommended in 1.3.6cg core wallet. It is suggested that you change database backend.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Firebird")
-        End If
         SetWalletInfo()
     End Sub
     Friend Sub SetWalletInfo()
@@ -173,7 +156,7 @@ Public Class frmMain
                 Me.FormBorderStyle = FormBorderStyle.Sizable
                 Me.MaximizeBox = True
                 Me.Width = 1024
-                Me.Height = 980
+                Me.Height = 760
                 If Me.Height > My.Computer.Screen.WorkingArea.Height - 50 Then
                     Me.Height = My.Computer.Screen.WorkingArea.Height - 50
                 End If
@@ -315,6 +298,9 @@ Public Class frmMain
     End Sub
 
 #End Region
+
+
+
 
 #Region " Clickabe Objects "
     'buttons
@@ -1216,4 +1202,22 @@ Public Class frmMain
 
         End Try
     End Sub
+
+
+    Private Function CheckEnvironment()
+
+        If Not Q.AppManager.IsAppInstalled("BRS") Then
+            Return False
+        End If
+        'making sure we have java
+        If Not Q.AppManager.isJavaInstalled Then
+            Return False
+        End If
+
+
+        Return True
+
+    End Function
+
+
 End Class
