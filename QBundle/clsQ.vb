@@ -8,16 +8,20 @@ Friend Class clsQ
     Public settings As clsSettings
     Public Accounts As clsAccounts
     Public Service As clsServiceHandler
+    Public AppManager As clsAppManager
     Public Sub New()
         QGlobal.Init()
-
         Me.App = New clsApp
+        Me.AppManager = New clsAppManager
         Me.ProcHandler = New clsProcessHandler
         Me.settings = New clsSettings
         Me.settings.LoadSettings()
         Me.Accounts = New clsAccounts
         Me.Accounts.LoadAccounts()
         Me.Service = New clsServiceHandler
+
+
+
     End Sub
 
 

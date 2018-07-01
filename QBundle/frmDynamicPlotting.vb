@@ -9,19 +9,12 @@
         End If
 
         'we are enabled. lets make checks
-        If Not Q.App.isInstalled(QGlobal.AppNames.Xplotter) Then
+        If Not Q.AppManager.IsAppInstalled("Xplotter") Then
             If MsgBox("Xplotter is not installed yet. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Xplotter") = MsgBoxResult.Yes Then
-                Dim s As frmDownloadExtract = New frmDownloadExtract
-                s.Appid = QGlobal.AppNames.Xplotter
-                Dim res As DialogResult
-                res = s.ShowDialog
-                If res = DialogResult.Cancel Then
-                    Exit Sub
-                ElseIf res = DialogResult.Abort Then
-                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-                    Exit Sub
-                End If
-                Q.App.SetLocalInfo() 'update so it is installed
+                Me.Hide()
+                Dim res As Boolean = Q.AppManager.InstallApp("Xplotter")
+                Me.Show()
+                If res = False Then Exit Sub
             Else
                 Exit Sub
             End If

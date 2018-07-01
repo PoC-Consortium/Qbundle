@@ -1148,21 +1148,12 @@ Public Class frmMain
 
 
     Private Sub PlotconverterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlotconverterToolStripMenuItem1.Click
-        If Not Q.App.isInstalled(QGlobal.AppNames.PlotConverter) Then
+        If Not Q.AppManager.IsAppInstalled("PlotConverter") Then
             If MsgBox("Plotconverter is not installed. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Plotconverter") = MsgBoxResult.Yes Then
-                Dim s As frmDownloadExtract = New frmDownloadExtract
-                s.Appid = QGlobal.AppNames.PlotConverter
-                Dim res As DialogResult
                 Me.Hide()
-                res = s.ShowDialog
+                Dim res As Boolean = Q.AppManager.InstallApp("PlotConverter")
                 Me.Show()
-                If res = DialogResult.Cancel Then
-                    Exit Sub
-                ElseIf res = DialogResult.Abort Then
-                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-                    Exit Sub
-                End If
-                Q.App.SetLocalInfo() 'update so it is installed
+                If res = False Then Exit Sub
             Else
                 Exit Sub
             End If

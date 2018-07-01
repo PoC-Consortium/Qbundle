@@ -9,11 +9,10 @@ Get-FileHash <filename> -Algorithm SHA256 | Format-List
 Known problems:
 
 ''''To Be done:''''
-pipeclient+server implementation in service
 minimize to tray on exit ?
 Iconify(?)
 Make a complete transactionObject
-
+'''''''''''''''''''''''''''''''''''''''
 
 1. Remake clsapp and clsprocesshandler to be more generic
 2. Remake Updater to be able to download ALL components in a selectable style and uninstall components. and show last updateinfo
@@ -36,14 +35,10 @@ Updater should not stop wallet unless wallet/Qbundle needs updates.
 Qinfo should inclue versionfile path,Exepath,Processname. 
 versionfile to determine version
 exepath for possible future launchstrings
-processname to detrmine if it is updateable 
+processname to detrmine if it is updateable.
 If it exist then it will be treated installed. (generic check system.)
 Autoinstalling should be done by Hardcoded Names so we can skip ID numbers of components.
 Java,Qbundle have special treatments.
-
-
-
-
 
 v2.1.2
 Account manger seed generation now uses RFC4086 compliant method.

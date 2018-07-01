@@ -28,7 +28,7 @@ Public Class clsApp
     Public DynamicInfo As UpdateObject
     Public Sub New()
 
-        'our appstore
+
         Dim l As String() = [Enum].GetNames(GetType(QGlobal.AppNames))
         ReDim _Apps(UBound(l))
         l = Nothing
@@ -751,6 +751,9 @@ Public Class clsApp
             Public FullUrl As String
             Public RemoteVersion As String
             Public UpdateInfo As String
+            Public VersionPath As String
+            Public ProcessName As String
+            Public ExePath As String
         End Structure
 
         Public Structure PoolObject

@@ -100,32 +100,17 @@
 
         'download and install mariadb if that is checked and not installed
         If SelDB = QGlobal.DbType.pMariaDB Then
-            If Not Q.App.isInstalled(QGlobal.AppNames.MariaPortable) Then
+            If Not Q.AppManager.IsAppInstalled("MariaPortable") Then
                 If Not MsgBox("MariaDB Portable is not installed. Would you like to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Maria DB?") = MsgBoxResult.Yes Then
-                    Exit Sub
-                End If
-                Me.Hide()
-                Dim S As frmDownloadExtract = New frmDownloadExtract
-                S.Appid = QGlobal.AppNames.MariaPortable
-                S.Upgrade = False
-                S.DialogResult = Nothing
-                Dim Res As DialogResult = S.ShowDialog()
-                If Res = DialogResult.Abort Then
-                    S = Nothing
+                    Me.Hide()
+                    Dim res As Boolean = Q.AppManager.InstallApp("MariaPortable")
                     Me.Show()
+                    If res = False Then Exit Sub
+                Else
                     Exit Sub
                 End If
-                If Res = DialogResult.Cancel Then
-                    S = Nothing
-                    Me.Show()
-                    Exit Sub
-                End If
-                S = Nothing
-                Q.App.SetLocalInfo()
             End If
         End If
-        Me.Show()
-
         pnlWiz1.Hide()
         pnlWiz2.Show()
         pnlWiz2.Top = pnlWiz1.Top

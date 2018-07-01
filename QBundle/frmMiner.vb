@@ -328,20 +328,12 @@
         msg &= "If you have a antimalware software you might need to whitelist the miner." & vbCrLf
 
         Q.App.SetLocalInfo() 'do a precheck due to antivir removals
-        If Not Q.App.isInstalled(QGlobal.AppNames.BlagoMiner) Then
+        If Not Q.AppManager.IsAppInstalled("BlagoMiner") Then
             If MsgBox(msg, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Download Miner") = MsgBoxResult.Yes Then
-                Dim s As frmDownloadExtract = New frmDownloadExtract
-                s.Appid = QGlobal.AppNames.BlagoMiner
-                Dim res As DialogResult
                 Me.Hide()
-                res = s.ShowDialog
+                Dim res As Boolean = Q.AppManager.InstallApp("BlagoMiner")
                 Me.Show()
-                If res = DialogResult.Cancel Then
-                    Exit Sub
-                ElseIf res = DialogResult.Abort Then
-                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-                    Exit Sub
-                End If
+                If res = False Then Exit Sub
             Else
                 Exit Sub
             End If

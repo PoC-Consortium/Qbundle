@@ -142,21 +142,12 @@ Public Class frmPlotter
     End Sub
 
     Private Sub StartPlotting()
-        If Not Q.App.isInstalled(QGlobal.AppNames.Xplotter) Then
+        If Not Q.AppManager.IsAppInstalled("Xplotter") Then
             If MsgBox("Xplotter is not installed yet. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Xplotter") = MsgBoxResult.Yes Then
-                Dim s As frmDownloadExtract = New frmDownloadExtract
-                s.Appid = QGlobal.AppNames.Xplotter
-                Dim res As DialogResult
                 Me.Hide()
-                res = s.ShowDialog
+                Dim res As Boolean = Q.AppManager.InstallApp("Xplotter")
                 Me.Show()
-                If res = DialogResult.Cancel Then
-                    Exit Sub
-                ElseIf res = DialogResult.Abort Then
-                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-                    Exit Sub
-                End If
-                Q.App.SetLocalInfo() 'update so it is installed
+                If res = False Then Exit Sub
             Else
                 Exit Sub
             End If
@@ -458,21 +449,12 @@ Public Class frmPlotter
     End Sub
 
     Private Sub ResumePlottingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResumePlottingToolStripMenuItem.Click
-        If Not Q.App.isInstalled(QGlobal.AppNames.Xplotter) Then
+        If Not Q.AppManager.IsAppInstalled("Xplotter") Then
             If MsgBox("Xplotter is not installed yet. Do you want to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Xplotter") = MsgBoxResult.Yes Then
-                Dim s As frmDownloadExtract = New frmDownloadExtract
-                s.Appid = QGlobal.AppNames.Xplotter
-                Dim res As DialogResult
                 Me.Hide()
-                res = s.ShowDialog
+                Dim res As Boolean = Q.AppManager.InstallApp("Xplotter")
                 Me.Show()
-                If res = DialogResult.Cancel Then
-                    Exit Sub
-                ElseIf res = DialogResult.Abort Then
-                    MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-                    Exit Sub
-                End If
-                Q.App.SetLocalInfo() 'update so it is installed
+                If res = False Then Exit Sub
             Else
                 Exit Sub
             End If

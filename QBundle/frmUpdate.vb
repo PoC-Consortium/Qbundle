@@ -90,13 +90,13 @@
 
     Private Sub DoUpdate()
 
-        Dim S As frmDownloadExtract
+        Dim S As frmDownloadManager
         Dim AppCount As Integer = UBound([Enum].GetNames(GetType(QGlobal.AppNames)))
         CheckAndUpdateLW()
         Dim res As DialogResult
         For t As Integer = 0 To AppCount
             If Q.App.ShouldUpdate(t) Then
-                S = New frmDownloadExtract
+                S = New frmDownloadManager
                 S.Appid = t
                 S.Upgrade = True 'we download UpgradeUrl not full
                 res = S.ShowDialog

@@ -68,40 +68,19 @@
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
         Me.Hide()
-        Dim S As frmDownloadExtract
-        Dim res As DialogResult
+
         btnBack.Enabled = False
         btnDownload.Enabled = False
         btnDone.Enabled = False
         Q.App.SetLocalInfo()
         Q.App.SetRemoteInfo()
-        If Not Q.App.isInstalled(QGlobal.AppNames.JavaInstalled) And Not Q.App.isInstalled(QGlobal.AppNames.JavaPortable) Then
-            S = New frmDownloadExtract
-            S.Appid = QGlobal.AppNames.JavaPortable
-            res = S.ShowDialog()
-            If res = DialogResult.Abort Then
-                lblStatusInfo.Text = "Error: Internet is unreachable or repository offline."
-                lblStatusInfo.Visible = True
-                btnDownload.Enabled = True
-                btnBack.Enabled = True
-                S = Nothing
-                Me.Show()
-                Exit Sub
-            End If
-            If res = DialogResult.Cancel Then
-                lblStatusInfo.Text = "Error: You have aborted the download."
-                lblStatusInfo.Visible = True
-                btnDownload.Enabled = True
-                btnBack.Enabled = True
-                S = Nothing
-                Me.Show()
-                Exit Sub
-            End If
-            S = Nothing
+        If Not Q.AppManager.isJavaInstalled() Then
+            Q.AppManager.InstallApp("JavaPortable")
             'now java is installed
             pnlJava.BackColor = Color.PaleGreen
             lblJavaStatus.Text = "Java was found in a portable version."
         End If
+
         Q.App.SetLocalInfo()
 
         Me.Show()

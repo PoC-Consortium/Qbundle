@@ -185,6 +185,7 @@
   <ItemGroup>
     <Compile Include="clsAccounts.vb" />
     <Compile Include="clsApp.vb" />
+    <Compile Include="clsAppManager.vb" />
     <Compile Include="clsHttp.vb" />
     <Compile Include="clsNonceMaker.vb" />
     <Compile Include="clsProcessHandler.vb" />
@@ -228,10 +229,10 @@
     <Compile Include="frmDeveloper.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDownloadExtract.Designer.vb">
-      <DependentUpon>frmDownloadExtract.vb</DependentUpon>
+    <Compile Include="frmDownloadManager.Designer.vb">
+      <DependentUpon>frmDownloadManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmDownloadExtract.vb">
+    <Compile Include="frmDownloadManager.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmExportDb.Designer.vb">
@@ -364,8 +365,8 @@
       <DependentUpon>frmDeveloper.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDownloadExtract.resx">
-      <DependentUpon>frmDownloadExtract.vb</DependentUpon>
+    <EmbeddedResource Include="frmDownloadManager.resx">
+      <DependentUpon>frmDownloadManager.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmExportDb.resx">

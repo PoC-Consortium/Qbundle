@@ -146,8 +146,8 @@ Public Class frmImport
 
     End Sub
     Private Sub DownloadForH2(ByVal Url As String)
-        Dim S As frmDownloadExtract
-        S = New frmDownloadExtract
+        Dim S As frmDownloadManager
+        S = New frmDownloadManager
         S.Url = Url
         S.Unzip = True
         Me.Hide()
@@ -193,8 +193,8 @@ Public Class frmImport
 
     End Sub
     Private Sub DownloadForMaria(ByVal Url As String)
-        Dim S As frmDownloadExtract
-        S = New frmDownloadExtract
+        Dim S As frmDownloadManager
+        S = New frmDownloadManager
         S.Url = Url
         S.Unzip = True
         Me.Hide()
@@ -347,8 +347,8 @@ Public Class frmImport
     End Sub
 
     Private Sub ImportFromUrl(ByVal Url As String)
-        Dim S As frmDownloadExtract
-        S = New frmDownloadExtract
+        Dim S As frmDownloadManager
+        S = New frmDownloadManager
         S.Url = Url
         Me.Hide()
 
