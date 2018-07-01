@@ -1,4 +1,7 @@
-﻿Public Class frmMain
+﻿Imports Chromium
+Imports Chromium.Remote
+Imports Chromium.WebBrowser
+Public Class frmMain
     Private Delegate Sub DUpdate(ByVal [AppId] As Integer, ByVal [Operation] As Integer, ByVal [data] As String)
     Private Delegate Sub DStarting(ByVal [AppId] As Integer)
     Private Delegate Sub DStoped(ByVal [AppId] As Integer)
@@ -6,6 +9,8 @@
     Private Delegate Sub DAPIResult(ByVal [Height] As String, ByVal [TimeStamp] As String)
     Private Delegate Sub DHttpResult(ByVal [Data] As String)
     Private Delegate Sub DNewUpdatesAvilable()
+    Private WB1 As ChromiumWebBrowser
+
     Public Console(1) As List(Of String)
     Public Running As Boolean
     Public FullySynced As Boolean
@@ -117,6 +122,13 @@
         AddHandler Q.Service.Stopped, AddressOf Stopped
         AddHandler Q.Service.Update, AddressOf ProcEvents
 
+        'Init Browser
+        ChromiumWebBrowser.Initialize()
+
+        WB1 = New ChromiumWebBrowser()
+        WB1.Dock = DockStyle.Fill
+        pnlAIO.Controls.Add(WB1)
+        '  WB1.LoadUrl("https://google.se")
 
 
 
@@ -504,9 +516,8 @@
                     Else
                         url = "http://" & s(0) & ":" & s(1)
                     End If
-                    wb1.Stop()
-                    wb1.Navigate(url & "?refreshToken=" + Guid.NewGuid().ToString())
-                    wb1.Refresh(WebBrowserRefreshOption.Completely)
+
+                    WB1.LoadUrl(url & "?refreshToken=" + Guid.NewGuid().ToString())
                 End If
             Case QGlobal.ProcOp.Stopping
                 If AppId = QGlobal.AppNames.MariaPortable Then
@@ -704,12 +715,20 @@
                 If Pass.Length > 0 Then
                     If Q.settings.QBMode = 0 And Q.settings.NoDirectLogin = False Then
                         Try
-                            Dim element As HtmlElement = wb1.Document.GetElementById("remember_password")
-                            If Not Convert.ToBoolean(element.GetAttribute("checked")) Then
-                                element.InvokeMember("click")
-                            End If
-                            Dim codeString As String() = {[String].Format(" {0}('{1}') ", "BRS.login", Pass)}
-                            Me.wb1.Document.InvokeScript("eval", codeString)
+                            WB1.ExecuteJavascript("$('#remember_password').prop('checked', true);")
+
+                            WB1.ExecuteJavascript("BRS.login('" & Pass & "');")
+
+                            'Dim element As HtmlElement = wb1.Document.GetElementById("remember_password")
+
+                            'If Not Convert.ToBoolean(element.GetAttribute("checked")) Then
+                            ' element.InvokeMember("click")
+                            ' End If
+
+                            '    Dim codeString As String() = {[String].Format(" {0}('{1}') ", "BRS.login", Pass)}
+                            'WB1.ExecuteJavascript("")
+
+                            '  WB1.Document.InvokeScript("eval", codeString)
                             Pass = ""
                         Catch ex As Exception
                             Generic.WriteDebug(ex)
@@ -1100,13 +1119,12 @@
             If OneMinCron.Enabled = True Then
                 Dim address = Q.App.DynamicInfo.Wallets(cmbSelectWallet.SelectedIndex).Address
                 If cmbSelectWallet.SelectedIndex > 0 Then
-                    wb1.Stop()
-                    wb1.Navigate(address)
-                    wb1.Refresh(WebBrowserRefreshOption.Completely)
+
+                    WB1.LoadUrl(address)
+
                 Else
                     If Running Then
-                        wb1.Navigate(address & "?refreshToken=" + Guid.NewGuid().ToString())
-                        wb1.Refresh(WebBrowserRefreshOption.Completely)
+                        WB1.LoadUrl(address & "?refreshToken=" + Guid.NewGuid().ToString())
                     Else
                         MsgBox("Your local wallet is not running. Checked address: " + address, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Local wallet")
                     End If

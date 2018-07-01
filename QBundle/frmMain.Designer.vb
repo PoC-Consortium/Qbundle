@@ -101,7 +101,6 @@ Partial Class frmMain
         Me.lblUpdates = New System.Windows.Forms.Label()
         Me.pnlLauncher = New System.Windows.Forms.Panel()
         Me.pnlAIO = New System.Windows.Forms.Panel()
-        Me.wb1 = New System.Windows.Forms.WebBrowser()
         Me.TrayIcon = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.MenuBar = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
@@ -113,7 +112,6 @@ Partial Class frmMain
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.pnlLauncher.SuspendLayout()
-        Me.pnlAIO.SuspendLayout()
         Me.MenuBar.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -644,21 +642,10 @@ Partial Class frmMain
         '
         'pnlAIO
         '
-        Me.pnlAIO.Controls.Add(Me.wb1)
         Me.pnlAIO.Location = New System.Drawing.Point(12, 160)
         Me.pnlAIO.Name = "pnlAIO"
         Me.pnlAIO.Size = New System.Drawing.Size(379, 163)
         Me.pnlAIO.TabIndex = 10
-        '
-        'wb1
-        '
-        Me.wb1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.wb1.Location = New System.Drawing.Point(0, 0)
-        Me.wb1.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.wb1.Name = "wb1"
-        Me.wb1.ScriptErrorsSuppressed = True
-        Me.wb1.Size = New System.Drawing.Size(379, 163)
-        Me.wb1.TabIndex = 0
         '
         'TrayIcon
         '
@@ -735,7 +722,6 @@ Partial Class frmMain
         Me.StatusStrip1.PerformLayout()
         Me.pnlLauncher.ResumeLayout(False)
         Me.pnlLauncher.PerformLayout()
-        Me.pnlAIO.ResumeLayout(False)
         Me.MenuBar.ResumeLayout(False)
         Me.MenuBar.PerformLayout()
         Me.ResumeLayout(False)
@@ -812,7 +798,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents VanityAddressGeneratorToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblUpdateAvail2 As ToolStripLabel
-    Private WithEvents wb1 As WebBrowser
     Friend WithEvents PlottingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PlotterToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents DynamicPlottingToolStripMenuItem1 As ToolStripMenuItem
