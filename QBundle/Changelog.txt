@@ -12,8 +12,8 @@ Known problems:
 pipeclient+server implementation in service
 minimize to tray on exit ?
 Iconify(?)
-Use CefSharp. but need to fix the fxxkload of library in mainfolder
 Make a complete transactionObject
+
 
 1. Remake clsapp and clsprocesshandler to be more generic
 2. Remake Updater to be able to download ALL components in a selectable style and uninstall components. and show last updateinfo
@@ -24,12 +24,12 @@ Make a complete transactionObject
 7. Dynplotter should have multiple pathes.
 8. Remove BurstService
 9. Fee system in reward assignment.
+10. ChromiumFX
 
 Create plotchecker / verifier.
 Connection checker. Something went wrong error.
 Make full settings of BRS? Make Settings profiles?
 Updater should not stop wallet unless wallet/Qbundle needs updates.
-
 
 
 'Notes
@@ -41,11 +41,12 @@ If it exist then it will be treated installed. (generic check system.)
 Autoinstalling should be done by Hardcoded Names so we can skip ID numbers of components.
 Java,Qbundle have special treatments.
 
-with https://www.nuget.org/packages/PrettyBin we can move all externals to Qlib folders easily. but not cef
+
 
 
 
 v2.1.2
+Account manger seed generation now uses RFC4086 compliant method.
 
 
 
