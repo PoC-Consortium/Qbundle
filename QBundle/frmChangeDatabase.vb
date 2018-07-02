@@ -101,7 +101,7 @@
         'download and install mariadb if that is checked and not installed
         If SelDB = QGlobal.DbType.pMariaDB Then
             If Not Q.AppManager.IsAppInstalled("MariaPortable") Then
-                If Not MsgBox("MariaDB Portable is not installed. Would you like to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Maria DB?") = MsgBoxResult.Yes Then
+                If MsgBox("MariaDB Portable is not installed. Would you like to download and install it now?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Download Maria DB?") = MsgBoxResult.Yes Then
                     Me.Hide()
                     Dim res As Boolean = Q.AppManager.InstallApp("MariaPortable")
                     Me.Show()

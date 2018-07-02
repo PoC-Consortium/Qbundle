@@ -36,6 +36,7 @@ Wallet mode start size is more adapted to new BRS gui.
 Paperburst is added under tools.
 Own settings in brs.properties will now be preserved.
 Load and informationscreens added instead of white blank pages in wallet mode.
+DPI awareness. 4K resolutions should now look better.
 A lot of code refactoring.
 
 ~v2.1.1

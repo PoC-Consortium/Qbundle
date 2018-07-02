@@ -25,11 +25,11 @@ Partial Class frmUpdate
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdate))
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.lw1 = New System.Windows.Forms.ListView()
+        Me.upd = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Application = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.InstalledVersion = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.AvailableVersion = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Information = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.upd = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'btnUpdate
@@ -52,6 +52,11 @@ Partial Class frmUpdate
         Me.lw1.UseCompatibleStateImageBehavior = False
         Me.lw1.View = System.Windows.Forms.View.Details
         '
+        'upd
+        '
+        Me.upd.Text = ""
+        Me.upd.Width = 20
+        '
         'Application
         '
         Me.Application.Text = "Application"
@@ -71,11 +76,6 @@ Partial Class frmUpdate
         '
         Me.Information.Text = "Information"
         Me.Information.Width = 164
-        '
-        'upd
-        '
-        Me.upd.Text = ""
-        Me.upd.Width = 20
         '
         'frmUpdate
         '

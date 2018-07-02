@@ -270,6 +270,7 @@ Public Class frmMain
 
     Private Sub PrepareUpdate()
         Dim f As New frmUpdate
+
         If f.ShowDialog = DialogResult.Yes Then
             ShutdownOnUpdate()
         End If
@@ -339,6 +340,7 @@ Public Class frmMain
         Me.Close()
     End Sub
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+
         frmSettings.Show()
         frmSettings.Focus()
 
@@ -353,6 +355,7 @@ Public Class frmMain
 
     End Sub
     Private Sub ChangeDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeDatabaseToolStripMenuItem.Click
+
         frmChangeDatabase.Show()
         frmChangeDatabase.Focus()
 
