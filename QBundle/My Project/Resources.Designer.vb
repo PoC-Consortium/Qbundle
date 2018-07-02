@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -107,6 +107,105 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("gb", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        '''&lt;html lang=&quot;en&quot; &gt;
+        '''
+        '''&lt;head&gt;
+        '''  &lt;meta charset=&quot;UTF-8&quot;&gt;
+        '''  &lt;title&gt;Prism Loading Screen&lt;/title&gt;
+        '''  &lt;style&gt;
+        '''  body {
+        '''  -webkit-font-smoothing: antialiased;
+        '''  text-rendering: optimizeLegibility;
+        '''  font-family: &quot;proxima-nova-soft&quot;, sans-serif;
+        '''  -webkit-user-select: none;
+        '''  overflow: hidden;
+        '''}
+        '''body .vertical-centered-box {
+        '''  position: absolute;
+        '''  width: 100%;
+        '''  height: 100%;
+        '''  text-align: center;
+        '''}
+        '''body .vertical-centered-box:after {
+        '''  content: &apos;&apos;;
+        '''  display: inline-block;
+        '''  height: 100%;
+        '''  vertical-al [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property loadscreen() As String
+            Get
+                Return ResourceManager.GetString("loadscreen", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        '''&lt;html lang=&quot;en&quot; &gt;
+        '''
+        '''&lt;head&gt;
+        '''  &lt;meta charset=&quot;UTF-8&quot;&gt;
+        '''  &lt;title&gt;Prism Loading Screen&lt;/title&gt;
+        '''  &lt;style&gt;
+        '''  body {
+        '''  -webkit-font-smoothing: antialiased;
+        '''  text-rendering: optimizeLegibility;
+        '''  font-family: &quot;proxima-nova-soft&quot;, sans-serif;
+        '''  -webkit-user-select: none;
+        '''  overflow: hidden;
+        '''}
+        '''body .vertical-centered-box {
+        '''  position: absolute;
+        '''  width: 100%;
+        '''  height: 100%;
+        '''  text-align: center;
+        '''}
+        '''body .vertical-centered-box:after {
+        '''  content: &apos;&apos;;
+        '''  display: inline-block;
+        '''  height: 100%;
+        '''  vertical-al [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property stoppedscreen() As String
+            Get
+                Return ResourceManager.GetString("stoppedscreen", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        '''&lt;html lang=&quot;en&quot; &gt;
+        '''
+        '''&lt;head&gt;
+        '''  &lt;meta charset=&quot;UTF-8&quot;&gt;
+        '''  &lt;title&gt;Prism Loading Screen&lt;/title&gt;
+        '''  &lt;style&gt;
+        '''  body {
+        '''  -webkit-font-smoothing: antialiased;
+        '''  text-rendering: optimizeLegibility;
+        '''  font-family: &quot;proxima-nova-soft&quot;, sans-serif;
+        '''  -webkit-user-select: none;
+        '''  overflow: hidden;
+        '''}
+        '''body .vertical-centered-box {
+        '''  position: absolute;
+        '''  width: 100%;
+        '''  height: 100%;
+        '''  text-align: center;
+        '''}
+        '''body .vertical-centered-box:after {
+        '''  content: &apos;&apos;;
+        '''  display: inline-block;
+        '''  height: 100%;
+        '''  vertical-al [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Stoppingscreen() As String
+            Get
+                Return ResourceManager.GetString("Stoppingscreen", resourceCulture)
             End Get
         End Property
         

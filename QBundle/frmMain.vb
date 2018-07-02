@@ -121,6 +121,8 @@ Public Class frmMain
         pnlAIO.Controls.Add(WB1)
         WB1.Dock = DockStyle.Fill
 
+
+
         Generic.UpdateLocalWallet()
         For t As Integer = 0 To UBound(Q.AppManager.AppStore.Wallets)
             cmbSelectWallet.Items.Add(Q.AppManager.AppStore.Wallets(t).Name)
@@ -222,7 +224,7 @@ Public Class frmMain
     End Sub
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
-            If Running And Not Q.Service.IsServiceRunning Then
+            If Running Then
                 e.Cancel = True
                 If e.CloseReason = CloseReason.UserClosing And
                     MsgBox("Do you want to shutdown the wallet?", MsgBoxStyle.YesNo, "Exit") = MsgBoxResult.No Then
@@ -235,6 +237,7 @@ Public Class frmMain
                 StopWallet()
                 frmShutdown.Show()
                 Me.Hide()
+                WB1.Dispose()
                 Exit Sub
             End If
         Catch ex As Exception
@@ -428,6 +431,10 @@ Public Class frmMain
                 lblWalletStatus.Text = "Stopped"
                 lblGotoWallet.Visible = False
                 StopAPIFetch()
+
+                WB1.LoadString(My.Resources.stoppedscreen)
+
+
             Case QGlobal.ProcOp.FoundSignal ' Running
 
                 btnStartStop.Text = "Stop wallet"
@@ -472,6 +479,8 @@ Public Class frmMain
                 '   lblNrsStatus.ForeColor = Color.Red
                 '   lblWalletStatus.Text = "Stopped"
              '   End If
+
+
             Case QGlobal.ProcOp.FoundSignal
                 If AppId = QGlobal.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Running"
@@ -497,13 +506,14 @@ Public Class frmMain
                 If AppId = QGlobal.AppNames.MariaPortable Then
                     LblDbStatus.Text = "Stopping"
                     LblDbStatus.ForeColor = Color.DarkOrange
+                    WB1.LoadString(My.Resources.Stoppingscreen)
                 End If
 
                 If AppId = QGlobal.AppNames.BRS Then
                     lblNrsStatus.Text = "Stopping"
                     lblNrsStatus.ForeColor = Color.DarkOrange
                     lblWalletStatus.Text = "Stopping"
-
+                    WB1.LoadString(My.Resources.Stoppingscreen)
                 End If
             Case QGlobal.ProcOp.ConsoleOut
                 If AppId = QGlobal.AppNames.MariaPortable Then
@@ -570,6 +580,7 @@ Public Class frmMain
 
     End Sub
     Friend Sub StartWallet(Optional ByVal WriteDebug As Boolean = False)
+        WB1.LoadString(My.Resources.loadscreen)
         If Not QB.Generic.SanityCheck() Then
             UpdateUIState(QGlobal.ProcOp.Stopped)
             Exit Sub

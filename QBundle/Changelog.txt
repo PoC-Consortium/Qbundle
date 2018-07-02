@@ -14,7 +14,7 @@ Iconify(?)
 Make a complete transactionObject
 '''''''''''''''''''''''''''''''''''''''
 
-4. Make HTML pages that show wallet if offline/starting/stopping.
+
 5. Include check of MariaDB ports if mariaDB is selected. Readed from config.
 7. Dynplotter should have multiple pathes.
 11. Plotter should be able to specify a size manually
@@ -35,7 +35,7 @@ BRS is no longer shipped with Qbundle but installed by user on first run.
 Wallet mode start size is more adapted to new BRS gui.
 Paperburst is added under tools.
 Own settings in brs.properties will now be preserved.
-
+Load and informationscreens added instead of white blank pages in wallet mode.
 A lot of code refactoring.
 
 ~v2.1.1

@@ -440,6 +440,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\stoppedscreen.html" />
+    <None Include="Resources\Stoppingscreen.html" />
+    <None Include="Resources\loadscreen.html" />
     <Content Include="BurstLogo.ico" />
     <Content Include="Changelog.txt" />
     <Content Include="HowToUpgradeversion.txt" />
@@ -464,6 +467,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\x64\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

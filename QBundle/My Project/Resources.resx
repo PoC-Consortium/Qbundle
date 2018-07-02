@@ -139,4 +139,13 @@
   <data name="CPU" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CPUInstructions.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="loadscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loadscreen.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="stoppedscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stoppedscreen.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Stoppingscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stoppingscreen.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>
