@@ -39,6 +39,9 @@ Partial Class frmPlotter
         Me.lstPlots = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.radPoC2 = New System.Windows.Forms.RadioButton()
+        Me.radPoC1 = New System.Windows.Forms.RadioButton()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -77,9 +80,6 @@ Partial Class frmPlotter
         Me.ActionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartPlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumePlottingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.radPoC1 = New System.Windows.Forms.RadioButton()
-        Me.radPoC2 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -246,6 +246,37 @@ Partial Class frmPlotter
         Me.GroupBox4.TabIndex = 34
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Advanced Settings"
+        '
+        'radPoC2
+        '
+        Me.radPoC2.AutoSize = True
+        Me.radPoC2.Checked = True
+        Me.radPoC2.Location = New System.Drawing.Point(125, 115)
+        Me.radPoC2.Name = "radPoC2"
+        Me.radPoC2.Size = New System.Drawing.Size(51, 17)
+        Me.radPoC2.TabIndex = 35
+        Me.radPoC2.TabStop = True
+        Me.radPoC2.Text = "PoC2"
+        Me.radPoC2.UseVisualStyleBackColor = True
+        '
+        'radPoC1
+        '
+        Me.radPoC1.AutoSize = True
+        Me.radPoC1.Location = New System.Drawing.Point(69, 115)
+        Me.radPoC1.Name = "radPoC1"
+        Me.radPoC1.Size = New System.Drawing.Size(51, 17)
+        Me.radPoC1.TabIndex = 34
+        Me.radPoC1.Text = "PoC1"
+        Me.radPoC1.UseVisualStyleBackColor = True
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(16, 116)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(51, 13)
+        Me.Label22.TabIndex = 33
+        Me.Label22.Text = "Plot type:"
         '
         'Label1
         '
@@ -592,37 +623,6 @@ Partial Class frmPlotter
         Me.ResumePlottingToolStripMenuItem.Name = "ResumePlottingToolStripMenuItem"
         Me.ResumePlottingToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.ResumePlottingToolStripMenuItem.Text = "Resume plotting"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(16, 116)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(51, 13)
-        Me.Label22.TabIndex = 33
-        Me.Label22.Text = "Plot type:"
-        '
-        'radPoC1
-        '
-        Me.radPoC1.AutoSize = True
-        Me.radPoC1.Location = New System.Drawing.Point(69, 115)
-        Me.radPoC1.Name = "radPoC1"
-        Me.radPoC1.Size = New System.Drawing.Size(51, 17)
-        Me.radPoC1.TabIndex = 34
-        Me.radPoC1.Text = "PoC1"
-        Me.radPoC1.UseVisualStyleBackColor = True
-        '
-        'radPoC2
-        '
-        Me.radPoC2.AutoSize = True
-        Me.radPoC2.Checked = True
-        Me.radPoC2.Location = New System.Drawing.Point(125, 115)
-        Me.radPoC2.Name = "radPoC2"
-        Me.radPoC2.Size = New System.Drawing.Size(51, 17)
-        Me.radPoC2.TabIndex = 35
-        Me.radPoC2.TabStop = True
-        Me.radPoC2.Text = "PoC2"
-        Me.radPoC2.UseVisualStyleBackColor = True
         '
         'frmPlotter
         '

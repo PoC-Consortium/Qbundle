@@ -188,6 +188,7 @@
     <Compile Include="clsHttp.vb" />
     <Compile Include="clsNonceMaker.vb" />
     <Compile Include="clsProcessHandler.vb" />
+    <Compile Include="clsProperties.vb" />
     <Compile Include="clsQ.vb" />
     <Compile Include="clsServiceHandler.vb" />
     <Compile Include="Curve.vb" />

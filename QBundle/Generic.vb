@@ -1,4 +1,5 @@
-﻿Imports System.Management
+﻿Imports System.IO
+Imports System.Management
 Imports System.Net
 Imports System.Net.Sockets
 Imports System.Text.RegularExpressions
@@ -128,9 +129,96 @@ Friend Class Generic
         Q.settings.SaveSettings()
 
     End Sub
-    Friend Shared Sub WriteBRSConfig(Optional ByVal WriteDebug As Boolean = False)
-        Dim Data As String = ""
+
+    Friend Shared Sub WriteNewBRSConfig(Optional ByVal WriteDebug As Boolean = False)
         Dim Buffer() As String = Nothing
+        Dim Props As New clsProperties
+        Props.Load(QGlobal.AppDir & "conf\brs.properties")
+
+        'Peer settings
+        Buffer = Split(Q.settings.ListenPeer, ";")
+        Props.Add("P2P.Listen", Buffer(0))
+        Props.Add("P2P.Port", Buffer(1))
+
+
+        'API settings
+        Buffer = Split(Q.settings.ListenIf, ";")
+        Props.Add("API.Port", Buffer(1))
+        Props.Add("API.Listen", Buffer(0))
+        If Q.settings.ConnectFrom.Contains("0.0.0.0") Then
+            Props.Add("API.allowed", "*")
+        Else
+            Props.Add("API.allowed", Q.settings.ConnectFrom)
+        End If
+
+        'autoip
+        If Q.settings.AutoIp Then
+            Dim ip As String = GetMyIp()
+            If ip <> "" Then
+                Props.Add("P2P.myAddress", ip)
+            End If
+        Else
+            If Q.settings.Broadcast.Length > 0 Then
+                Props.Add("P2P.myAddress", Q.settings.Broadcast)
+            End If
+        End If
+
+        'platformname
+        If Q.settings.DynPlatform Then
+            Props.Add("P2P.myPlatform", "Q-" & GetDbNameFromType(Q.settings.DbType))
+        End If
+
+        'database
+        Props.Add("DB.Url", Q.settings.DbServer)
+        Props.Add("DB.Username", Q.settings.DbUser)
+        Props.Add("DB.Password", Q.settings.DbPass)
+
+        'OpenCL
+        If Q.settings.useOpenCL Then
+            Props.Add("GPU.AutoDetect", "on")
+            Props.Add("GPU.HashesPerBatch", "100")
+            Props.Add("GPU.Acceleration", "on")
+        Else
+            Props.Add("GPU.Acceleration", "off")
+        End If
+
+        If WriteDebug Then
+            Props.Add("brs.disablePeerConnectingThread", "true")
+            Props.Add("brs.enableTransactionRebroadcasting", "false")
+            Props.Add("brs.getMorePeers", "false")
+            Props.Add("brs.disableProcessTransactionsThread", "true")
+            Props.Add("brs.disableRemoveUnconfirmedTransactionsThread", "true")
+            Props.Add("brs.disableRebroadcastTransactionsThread", "true")
+            Props.Add("API.ServerEnforcePOST", "false")
+            Props.Add("API.Debug", "true")
+        Else
+            Props.Delete("brs.disablePeerConnectingThread")
+            Props.Delete("brs.enableTransactionRebroadcasting")
+            Props.Delete("brs.getMorePeers")
+            Props.Delete("brs.disableProcessTransactionsThread")
+            Props.Delete("brs.disableRemoveUnconfirmedTransactionsThread")
+            Props.Delete("brs.disableRebroadcastTransactionsThread")
+            Props.Delete("API.ServerEnforcePOST")
+            Props.Delete("API.Debug")
+        End If
+
+        Props.Save(QGlobal.AppDir & "conf\brs.properties")
+
+    End Sub
+
+
+    Friend Shared Sub WriteBRSConfig(Optional ByVal WriteDebug As Boolean = False)
+        Dim Buffer() As String = Nothing
+        Try
+            If IO.File.Exists(QGlobal.AppDir & "conf\brs.properties") Then
+                Buffer = IO.File.ReadAllLines(QGlobal.AppDir & "conf\brs.properties")
+            End If
+        Catch ex As Exception
+            Generic.WriteDebug(ex)
+        End Try
+
+        Dim Data As String = ""
+
         'writing brs.properties
 
         'Peer settings
@@ -172,16 +260,6 @@ Friend Class Generic
         End If
 
         Select Case Q.settings.DbType
-            Case QGlobal.DbType.FireBird
-                Try
-                    If Not IO.Directory.Exists(QGlobal.AppDir & "burst_db") Then
-                        IO.Directory.CreateDirectory(QGlobal.AppDir & "burst_db")
-                    End If
-                Catch ex As Exception
-                    Generic.WriteDebug(ex)
-                End Try
-                Data &= "#Using Firebird" & vbCrLf
-
             Case QGlobal.DbType.pMariaDB
                 Data &= "#Using MariaDb Portable" & vbCrLf
             Case QGlobal.DbType.MariaDB
@@ -201,7 +279,6 @@ Friend Class Generic
             Data &= "GPU.AutoDetect = on" & vbCrLf
             Data &= "GPU.HashesPerBatch = 100" & vbCrLf
             Data &= "GPU.Acceleration = on" & vbCrLf & vbCrLf
-
         End If
         If WriteDebug Then
             Data &= "#Debug mode" & vbCrLf
@@ -224,104 +301,9 @@ Friend Class Generic
 
     End Sub
     Friend Shared Sub WriteWalletConfig(Optional ByVal WriteDebug As Boolean = False)
-        '  WriteNRSConfig(WriteDebug)
-        WriteBRSConfig(WriteDebug)
+        WriteNewBRSConfig(WriteDebug)
     End Sub
-    Friend Shared Sub WriteNRSConfig(Optional ByVal WriteDebug As Boolean = False)
-        Dim Data As String = ""
-        Dim Buffer() As String = Nothing
-        'writing brs.properties
 
-        'Peer settings
-        Data &= "#Peer network" & vbCrLf
-        Buffer = Split(Q.settings.ListenPeer, ";")
-        Data &= "nxt.peerServerPort = " & Buffer(1) & vbCrLf
-        Data &= "nxt.peerServerHost = " & Buffer(0) & vbCrLf & vbCrLf
-
-        'API settings
-        Data &= "#API network" & vbCrLf
-        Buffer = Split(Q.settings.ListenIf, ";")
-        Data &= "nxt.apiServerPort = " & Buffer(1) & vbCrLf
-        Data &= "nxt.apiServerHost = " & Buffer(0) & vbCrLf
-        If Q.settings.ConnectFrom.Contains("0.0.0.0") Then
-            Data &= "nxt.allowedBotHosts = *" & vbCrLf & vbCrLf
-        Else
-            Data &= "nxt.allowedBotHosts = " & Q.settings.ConnectFrom & vbCrLf & vbCrLf
-        End If
-
-        'autoip
-        If Q.settings.AutoIp Then
-            Dim ip As String = GetMyIp()
-            If ip <> "" Then
-                Data &= "#Auto IP set" & vbCrLf
-                Data &= "nxt.myAddress = " & ip & vbCrLf & vbCrLf
-            End If
-        Else
-            If Q.settings.Broadcast.Length > 0 Then
-                Data &= "#Manual broadcast" & vbCrLf
-                Data &= "nxt.myAddress = " & Q.settings.Broadcast & vbCrLf & vbCrLf
-            End If
-        End If
-
-        'Dyn platform
-        If Q.settings.DynPlatform Then
-            Data &= "#Dynamic platform" & vbCrLf
-            Data &= "nxt.myPlatform = Q-" & GetDbNameFromType(Q.settings.DbType) & vbCrLf & vbCrLf
-        End If
-
-        Select Case Q.settings.DbType
-            Case QGlobal.DbType.FireBird
-                Try
-                    If Not IO.Directory.Exists(QGlobal.AppDir & "burst_db") Then
-                        IO.Directory.CreateDirectory(QGlobal.AppDir & "burst_db")
-                    End If
-                Catch ex As Exception
-                    Generic.WriteDebug(ex)
-                End Try
-                Data &= "#Using Firebird" & vbCrLf
-
-            Case QGlobal.DbType.pMariaDB
-                Data &= "#Using MariaDb Portable" & vbCrLf
-            Case QGlobal.DbType.MariaDB
-                Data &= "#Using installed MariaDb" & vbCrLf
-            Case QGlobal.DbType.H2
-                Data &= "#Using H2" & vbCrLf
-                Data &= "nxt.dbMaximumPoolSize = 30" & vbCrLf
-        End Select
-
-        Data &= "nxt.dbUrl = " & Q.settings.DbServer & vbCrLf
-        Data &= "nxt.dbUsername = " & Q.settings.DbUser & vbCrLf
-        Data &= "nxt.dbPassword = " & Q.settings.DbPass & vbCrLf & vbCrLf
-
-
-
-        If Q.settings.useOpenCL Then
-            Data &= "#CPU Offload" & vbCrLf
-            Data &= "burst.oclAuto = true" & vbCrLf
-            Data &= "burst.oclHashesPerEnqueue=100" & vbCrLf
-            Data &= "burst.oclVerify = true" & vbCrLf & vbCrLf
-        End If
-
-        If WriteDebug Then
-            Data &= "#Debug mode" & vbCrLf
-            Data &= "nxt.disablePeerConnectingThread = true" & vbCrLf
-            Data &= "nxt.enableTransactionRebroadcasting=false" & vbCrLf
-            Data &= "nxt.disableGetMorePeersThread = true " & vbCrLf
-            Data &= "nxt.disableProcessTransactionsThread = true" & vbCrLf
-            Data &= "nxt.disableRemoveUnconfirmedTransactionsThread = true" & vbCrLf
-            Data &= "nxt.disableRebroadcastTransactionsThread = true" & vbCrLf
-            Data &= "nxt.apiServerEnforcePOST = false" & vbCrLf
-            Data &= "nxt.enableDebugAPI = true" & vbCrLf & vbCrLf
-        End If
-        Try
-            IO.File.WriteAllText(QGlobal.AppDir & "conf\nxt.properties", Data)
-        Catch ex As Exception
-            Generic.WriteDebug(ex)
-        End Try
-
-
-
-    End Sub
     Friend Shared Function CalculateBytes(ByVal value As Long, ByVal decimals As Integer, Optional ByVal startat As Integer = 0) As String
         Dim t As Integer
         Dim res As Double = CDbl(value)
@@ -790,6 +772,7 @@ Friend Class Generic
         End Try
         Return False
     End Function
+
 
 
 End Class
