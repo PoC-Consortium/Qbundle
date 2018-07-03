@@ -7,8 +7,7 @@ Public Class clsProcessHandler
     Public Event Aborting(ByVal Pid As Integer, ByVal Data As String)
 
     Private P() As clsProcessWorker
-    ' Generic Processhandler class
-    '
+
     Sub New()
         ReDim P(UBound([Enum].GetNames(GetType(QGlobal.AppNames))))
     End Sub
@@ -239,10 +238,10 @@ Public Class clsProcessHandler
             p.StartInfo.WorkingDirectory = WorkingDirectory
             p.StartInfo.Arguments = Arguments
             p.StartInfo.UseShellExecute = False
-            '    p.StartInfo.RedirectStandardOutput = True
+
             p.StartInfo.RedirectStandardError = True
             p.StartInfo.CreateNoWindow = True
-            '    AddHandler p.OutputDataReceived, AddressOf OutputHandler
+
             AddHandler p.ErrorDataReceived, AddressOf ErroutHandler
             p.StartInfo.FileName = AppToStart
 
@@ -252,9 +251,9 @@ Public Class clsProcessHandler
                 If Cores <> 0 Then p.ProcessorAffinity = CType(Cores, IntPtr)
                 p.BeginErrorReadLine()
 
-                '     p.BeginOutputReadLine()
+
             Catch ex As Exception
-                'if we have error here exit right away.
+
                 RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Err, ex.Message)
                 RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Stopped, "")
                 Abort = True
@@ -263,7 +262,7 @@ Public Class clsProcessHandler
 
             RaiseEvent UpdateConsole(Appid, QGlobal.ProcOp.Running, "")
 
-            'if no startsignal then just asume we did
+
             If StartSignal = "" Then FoundStartSignal = True
             Dim SSMTEndTime As Date = Now.AddSeconds(SSMTEnd)
 

@@ -57,7 +57,7 @@ Public Class clsAppManager
     End Sub
 
     Friend Function IsAppInstalled(ByVal AppName As String) As Boolean
-        If AppName = "Qbundle" Then Return True
+        If AppName = "Launcher" Then Return True
         For t As Integer = 0 To UBound(AppStore.Apps)
             If AppStore.Apps(t).Name = AppName Then Return IO.File.Exists(QGlobal.BaseDir & AppStore.Apps(t).VersionPath)
         Next
@@ -68,7 +68,7 @@ Public Class clsAppManager
     End Function
     Friend Function GetInstalledVersion(ByVal AppName As String, Optional ByVal UseFilter As Boolean = False) As String
         Dim Version As String = ""
-        If AppName = "Qbundle" Then Return GetQbundleVersion()
+        If AppName = "Launcher" Then Return GetQbundleVersion()
         Try
             For t As Integer = 0 To UBound(AppStore.Apps)
                 If AppStore.Apps(t).Name = AppName Then
@@ -264,6 +264,8 @@ Public Class clsAppManager
     End Function
 
     Private Function FilterVersionNr(ByVal data As String) As String
+        data = Split(data, vbCr)(0)
+        data = Split(data, vbLf)(0)
         Dim acceptedChars() As Char = "01234567890._".ToCharArray
         data = (From ch As Char In data Select ch Where acceptedChars.Contains(ch)).ToArray
         'remove all preceeding or trailing _ or .

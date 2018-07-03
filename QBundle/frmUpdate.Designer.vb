@@ -34,7 +34,7 @@ Partial Class frmUpdate
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(348, 318)
+        Me.btnUpdate.Location = New System.Drawing.Point(319, 303)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(107, 28)
         Me.btnUpdate.TabIndex = 3
@@ -45,7 +45,7 @@ Partial Class frmUpdate
         '
         Me.lw1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.upd, Me.Application, Me.InstalledVersion, Me.AvailableVersion, Me.Information})
         Me.lw1.GridLines = True
-        Me.lw1.Location = New System.Drawing.Point(30, 12)
+        Me.lw1.Location = New System.Drawing.Point(8, 11)
         Me.lw1.Name = "lw1"
         Me.lw1.Size = New System.Drawing.Size(724, 287)
         Me.lw1.TabIndex = 4
@@ -82,7 +82,7 @@ Partial Class frmUpdate
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(796, 367)
+        Me.ClientSize = New System.Drawing.Size(744, 335)
         Me.Controls.Add(Me.lw1)
         Me.Controls.Add(Me.btnUpdate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

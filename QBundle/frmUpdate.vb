@@ -40,8 +40,7 @@
         Next
 
         If lw1.Items(0).Checked Then
-
-            'we need to restart Qbundle
+            Me.DialogResult = DialogResult.Yes
         End If
 
 
@@ -65,8 +64,7 @@
 
     Private Function UpdateLW() As Boolean
 
-        Dim StrApp As String() = [Enum].GetNames(GetType(QGlobal.AppNames)) 'only used to count
-        Dim L(2) As String
+
         Dim AnyUpdates As Boolean = False
         lw1.Items.Clear()
         Dim item1 As ListViewItem
@@ -80,7 +78,7 @@
             RemoteVer = Q.AppManager.GetAppStoreVersion(AppName)
             IsRunning = Q.AppManager.IsAppRunning(AppName)
             If IsInstalled Then
-                LocalVer = Q.AppManager.GetInstalledVersion(AppName)
+                LocalVer = Q.AppManager.GetInstalledVersion(AppName, True)
                 NeedUpdate = Q.AppManager.DoesAppNeedUpdate(AppName)
             Else
                 LocalVer = "-"

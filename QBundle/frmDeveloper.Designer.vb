@@ -56,6 +56,7 @@ Partial Class frmDeveloper
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.White
         Me.SplitContainer1.Panel2.Controls.Add(Me.TextBox1)
         Me.SplitContainer1.Panel2.Controls.Add(Me.LinkLabel3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label7)
