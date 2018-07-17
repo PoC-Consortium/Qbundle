@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label3.Text" xml:space="preserve">
-    <value>This tool will allow you to generate
-Addresses of a more personal brand
+    <value>This tool allows you to generate
+Addresses on a more personal level
 Keep in mind that the more chars
 you select the longer it will take
 to create the address.
 
-Replace the @ in the 
-Addressbox at the possition you
-would like to have your personal chars.
+Replace the @ in the address box
+at the position you would like
+to have your personal chars.
 You are not allowed to use I, O, 0 and 1</value>
   </data>
   <metadata name="tmr.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
