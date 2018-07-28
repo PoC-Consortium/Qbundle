@@ -1,0 +1,7 @@
+**/bin/**
+**/obj/**
+**/Debug/**
+**/.vs/**
+.vs/QBundle/v14/.suo
+.vs/QBundle/v15/sqlite3/storage.ide
+*.ide

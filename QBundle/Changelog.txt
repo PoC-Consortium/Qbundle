@@ -1,0 +1,214 @@
+﻿+ Added
+* Changed
+- Removed
+~dev edition
+
+Hash in powershell
+Get-FileHash <filename> -Algorithm SHA256 | Format-List
+
+Known problems:
+
+''''To Be done:''''
+minimize to tray on exit ?
+Iconify(?)
+Make a complete transactionObject
+'''''''''''''''''''''''''''''''''''''''
+
+
+5. Include check of MariaDB ports if mariaDB is selected. Readed from config.
+7. Dynplotter should have multiple pathes.
+11. Plotter should be able to specify a size manually
+
+Create plotchecker / verifier.
+Connection checker. Something went wrong error.
+Make full settings of BRS? Make Settings profiles?
+
+'Notes
+
+v2.5.0
+Account manger seed generation now uses RFC4086 compliant method.
+Moved from IE to Chromium
+Reward assignment works again and you are able to specify a fee.
+Burst as Service is no longer supported in Qbundle.
+Check for updates is now Application Manager and allow you to update/install individual components.
+BRS is no longer shipped with Qbundle but installed by user on first run.
+Wallet mode start size is more adapted to new BRS gui.
+Paperburst is added under tools.
+Own settings in brs.properties will now be preserved.
+Load and informationscreens added instead of white blank pages in wallet mode.
+DPI awareness. 4K resolutions should now look better.
+A lot of code refactoring.
+
+~v2.1.1
+
+
+v2.1.0
+Compatible with new core wallet API standard.
+PoC2 plotfiles is now standard for plotting. 
+Qbundle now uses Modified versions of Xplotter and Miner for PoC2 compability
+Dynamic plotting now supports avx2 and poc2 format
+JohnnyFFM's plot converter added to tools.
+Help tab is now added with Qbundle Manual and great commuinty burst resources
+
+v2.0.2
+Fixed Downalod of Java at setup screen
+Added support for Xplotter v1.1 AVX2
+Updates will not ask to shut down wallet if no updates are available
+Bootstrap chain is now available again for H2 and MariaDB.
+Fixed problem when solomining where serverdata were never filled.
+
+v2.0.1
+* Accountmanager login for BRS gui.
+* Miner not starting problem.
+* Setting for NoDirectLogin.
+* Updater system
+
+v2.0.0
+Check for updates now automatically updates Pool/wallet info.
+Ability to set amount of threads and ram on dynamic plotting.
+Qbundle checks for NTFS compressed drive or folder and warns when it is not supported.
+Drives mounted in folders now show free space correctly.
+Pool lists updated
+Upgrade system changed slightly to support second grade upgrades.
+servicemodule updated to handle BRS 2.0.0 
+Core wallet configuration schema updated to handle BRS 2.0.0
+
+Due to change in BRS software following features have been removed and changed.
+Export Database removed.
+bbd fileformat removed.
+Import database is changed to bootstrap chain.
+Import database for now only support built in repositories.
+Change database can no longer convert database content
+
+~1.9
+* Updated pool lists.
+* Ability to set manual broadcast address.
+* Tray icon updated.
+* Improved Vanity address generator speed.
+* Resume plotting can now contain spaces in path to plot file.
+* Ability to show coinmarketcap info in different currencies. Issue #20
+* Sigint improved to work on windows 7 Issue #18
+* Updated database repositories.
+* Wallet should now be more stable while solomining on H2 db.
+
+1.8
+* Changing database should no longer cause issues.
+* Miner window now remembers your settings when you start to mine
+* Ability to Select / Deselect multiple plot files. Issue #4
+* Better error handling in Sanity check.
+* Pool list updated.
+* minor visual changes.
+* new logo for better visibility
+* updated well known peers.
+* Import repositories updated.
+
+~1.7
+* Corrected errors in predefined pool list
+* Accounts.xml is now correctly spelled.
+* NTP checks should no longer cause hangs
++ Qbundle Installer will from now on be provided.
+* Login account now shows * instead of cleartext pin
+* Account manager can now show more info about accounts.
++ Vanity address generator added.
++ Setting to disable direct login from Account manager accounts.
+* Ability to change connection string for databases.
+* multiple minor internal changes.
+* Burstneon repo is no longer in zip format
+* Small change in update handling and visibility
+
+1.6
+* Added ability to resume plotfile.
+* Burstneon block catcher added to Repository for direct H2 Import.
+* Updated Pool list
+* Windows scale factor is now compatible with Qbundle
+* No internet connection should no longer cause crashes.
+* Addressed an issue in Plotter saying there is an overlap when there is not.
+* Plotter now supports RS address for account id.
+* Checks that correct .net version is installed.
+ 
+1.5
+* Plotting to pathes with spaces in them is now working.
+* Parrent window is now hidden during download to prevent locked windows. (Issue #2 on github)
+* More information regarding java is now presented on setupscreen (Issue #1 on github)
+* H2 db is now default for new users.
+* Setup wizard now selects h2 by default without asking users.
+* Setup wizard does not show option to download db.
+* Switching to MariaDB portable without editing or deleting BWL.ini now works.
+* Disabled firebird as selectable database
+* Ability to minimize download window.
+
+V1.4
+Added: 
++ Ability to import a folder with plotfiles to My Plotfiles
++ Added NTP time check before starting wallet.
++ Dynamic plotting (Add/Remove Plotfiles depending on free space)
++ Rollback chain function (popoff blocks)
++ Minimize to tray function
++ Can show Burst price info from Coinmarketcap
++ Online wallets can now be used in wallet mode.
++ New bar with price and wallet selection added
++ Shows blocks/minute when syncing chain.
+
+Changed:
+* Some minor GUI changes.
+* HashesPerEnqueue is now set to 100 when using OpenCL
+
+Fixes:
+* when solomining passphrase is now only saved to disk for 3 seconds.
+* Restricted path selection for Xplotter.
+* Updated built in pool list.
+* fixed a bug when importing bbd files.
+* Setupwizard resizing problem.
+
+
+V1.3
++ Full wallet mode.
++ Account Manager with AES 256bit encryption.
++ Added CPU Instructionset detection.
++ Added support for XPlotter.
++ Added Reward Recipient handling.
++ Added Support for Blago's miner.
++ Added Support to install wallet as a windows service.
++ Setting to allow usage of remote wallet for verifications.
++ View to see if wallet is synced.
+
+* Changed name to Qbundle
+* Improved Exception monitoring
+* Improved Processhandling
+
+
+V1.2
++ Getting started Wizard.
++ Support for multiple database types.
++ Individual components download at start.
++ Contributors Window.
++ NRS network configuration.
++ Export, Import and Convert database using (binary burst database format).
++ Builtin repositories for quickdownload of databases.
++ Autodetect and setup Peer IP
++ Limit logical CPU cores feature.
++ Option to use automatic GPU acceleration.
++ Sanity check
++ Internal Upgrade Scenarios Handler
++ Windows firewall rules can be automatically configured.
++ Option to always start with administrative privileges.
++ Wallet Exception monitoring with automatic restart.
++ Debug option with stack trace log
+* Internal settings handler changed.
+* Corrected spelling errors.
+* Update system changed to handle more components.
+* Internal code structure changed to be more modular
+* Download system changed to be consistent and show more info.
+* Console log is now Realtime and limited to 3000 lines
+
+V1.1
++ Update Functions
++ Mirrorfunction for repositories
+* Fixed potential problem with Sigint that could cause launcer to close.
++ Menu
++ Statusbar
++ Settings window
+
+V1.0
++Gui
++Processmanager
