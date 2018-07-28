@@ -207,7 +207,7 @@ Public Class clsAppManager
             Dim res As DialogResult
             res = s.ShowDialog
             If res = DialogResult.Cancel Then
-                Return True
+                Return False
             ElseIf res = DialogResult.Abort Then
                 MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
                 Return False

@@ -110,9 +110,9 @@ Public Class frmMain
             ChromiumWebBrowser.Initialize()
         Catch ex As Chromium.CfxException
             If Q.AppManager.InstallApp("chromium") Then
+                QB.Generic.RestartBundle()
                 Close()
             Else
-                QB.Generic.RestartBundle()
                 Close()
             End If
         End Try
