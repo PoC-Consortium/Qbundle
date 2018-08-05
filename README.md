@@ -11,8 +11,11 @@ Installer package is made with Advanced installer.
 
 ## Credits
 
+@HeosSacer
+* Main Developer
+
 @Quibus
-* Main developer.
+* Former Main Developer
 
 @SvlatCjelli
 * Improved vanity address generation
