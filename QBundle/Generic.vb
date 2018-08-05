@@ -1,9 +1,11 @@
 ﻿Imports System.IO
+Imports System.Net.IPAddress.TryParse
 Imports System.Management
 Imports System.Net
 Imports System.Net.Sockets
 Imports System.Text.RegularExpressions
 Imports Microsoft.Win32
+
 
 Friend Class Generic
     Private Declare Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" (ByVal lpDirectoryName As String, ByRef lpFreeBytesAvailableToCaller As Long, ByRef lpTotalNumberOfBytes As Long, ByRef lpTotalNumberOfFreeBytes As Long) As Long
@@ -154,7 +156,8 @@ Friend Class Generic
         'autoip
         If Q.settings.AutoIp Then
             Dim ip As String = GetMyIp()
-            If ip <> "" Then
+            Dim address As IPAddress = Nothing
+            If ip <> "" And IPAddress.TryParse(ip, address) Then
                 Props.Add("P2P.myAddress", ip)
             End If
         Else
@@ -436,7 +439,7 @@ Friend Class Generic
                 Case "Debug"
                     QB.Generic.DebugMe = True
                 Case "BetaUpdate"
-                    Q.AppManager.AppXML = clArgs(2)
+                    Q.AppManager.AppXML = "BetaUpdate.xml"
             End Select
         End If
     End Sub
@@ -564,7 +567,7 @@ Friend Class Generic
     Friend Shared Function GetMyIp() As String
         Try
             Dim WC As Net.WebClient = New Net.WebClient()
-            Return WC.DownloadString("http://files.getburst.net/ip.php")
+            Return WC.DownloadString("http://whatismyip.akamai.com/")
         Catch ex As Exception
             Generic.WriteDebug(ex)
         End Try
@@ -597,6 +600,18 @@ Friend Class Generic
         End Try
 
 
+    End Sub
+    Friend Shared Sub RestartBundle()
+        Try
+            Dim p As Process = New Process
+            p.StartInfo.WorkingDirectory = QGlobal.BaseDir
+            p.StartInfo.UseShellExecute = True
+            If QB.Generic.DebugMe Then p.StartInfo.Arguments = "Debug"
+            p.StartInfo.FileName = Application.ExecutablePath
+            p.Start()
+        Catch ex As Exception
+            MsgBox("Failed to start Qbundle", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly)
+        End Try
     End Sub
     Friend Shared Sub RestartAsAdmin()
 

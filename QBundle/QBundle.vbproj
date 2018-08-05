@@ -14,6 +14,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -440,14 +442,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\stoppedscreen.html" />
     <None Include="Resources\Stoppingscreen.html" />
     <None Include="Resources\loadscreen.html" />
     <Content Include="BurstLogo.ico" />
     <Content Include="Changelog.txt" />
     <Content Include="HowToUpgradeversion.txt" />
+    <Content Include="libcfx64.dll" />
     <Content Include="Resources\blago.jpg" />
-    <None Include="packages.config" />
     <None Include="Resources\CPUInstructions.exe" />
     <None Include="Resources\Download.png" />
     <None Include="Resources\vps_168_57.jpg" />

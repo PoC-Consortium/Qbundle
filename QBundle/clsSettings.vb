@@ -504,7 +504,7 @@
         _CheckForUpdates = False
         _Upgradev = 212
         _AlwaysAdmin = False
-        _Repo = "http://files.getburst.net;http://files2.getburst.net"
+        _Repo = QGlobal.UpdateMirrors(0)
         _QBMode = 1 '0 = AIO 1 = Launcher
         _Debug = False
         _UseOnlineWallet = False

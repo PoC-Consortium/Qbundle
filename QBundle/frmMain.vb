@@ -106,7 +106,16 @@ Public Class frmMain
         AddHandler Q.Service.Update, AddressOf ProcEvents
 
         'Init Browser
-        ChromiumWebBrowser.Initialize()
+        Try
+            ChromiumWebBrowser.Initialize()
+        Catch ex As Chromium.CfxException
+            If Q.AppManager.InstallApp("chromium") Then
+                QB.Generic.RestartBundle()
+                Close()
+            Else
+                Close()
+            End If
+        End Try
         WB1 = New ChromiumWebBrowser()
 
         SetLoginMenu()

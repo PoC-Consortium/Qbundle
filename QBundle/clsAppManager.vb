@@ -25,26 +25,36 @@ Public Class clsAppManager
             Reader.Close()
             Reader.Dispose()
             x = Nothing
+        Catch ex As System.IO.FileNotFoundException
+            UpdateAppStoreInformation()
         Catch ex As Exception
             Generic.WriteDebug(ex)
+            MessageBox.Show(ex.Message.ToString(),
+            "FileNotFoundError",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error,
+            MessageBoxDefaultButton.Button1)
+            Environment.Exit(1)
         End Try
 
     End Sub
     Friend Sub UpdateAppStoreInformation()
         'load previous data
         Dim data As String = ""
-        If IsNothing(AppStore.Repositories) Or AppStore.Repositories(0) = "" Then
-            ReDim AppStore.Repositories(0)
-            AppStore.Repositories(0) = "http://files.getburst.net/" 'fallback / rescue
-        End If
-        If Q.settings.CheckForUpdates Then
-            For i = 0 To UBound(AppStore.Repositories)
+        ReDim AppStore.Repositories(0)
+        Dim SourceMirror As String = QGlobal.UpdateMirrors(0)
+        Try
+            If Q.settings.CheckForUpdates Then
                 Dim Http As New clsHttp
-                data = Http.GetUrl(AppStore.Repositories(i) & AppXML)
+                data = Http.GetUrl(SourceMirror & AppXML)
                 Http = Nothing
-                If data.Length <> 0 Then Exit For
-            Next
-        End If
+            End If
+        Catch ex As Exception
+            Dim Http As New clsHttp
+            data = Http.GetUrl(SourceMirror & "QInfo.xml")
+            Http = Nothing
+        End Try
+
         'save info if sucessfull. if not load previous config
         If data.Length > 0 Then
             Try
@@ -188,17 +198,34 @@ Public Class clsAppManager
     End Function
 
     Friend Function InstallApp(ByVal AppName As String, Optional ForceReinstall As Boolean = False)
+        If AppName = "chromium" Then
+            Dim s As New frmDownloadManager
+            s.DownloadName = "Chromium Pocket Browser"
+            s.Url = QGlobal.UpdateMirrors(0) & "chromium/chromium_1.0.zip"
+            s.Unzip = True
+
+            Dim res As DialogResult
+            res = s.ShowDialog
+            If res = DialogResult.Cancel Then
+                Return False
+            ElseIf res = DialogResult.Abort Then
+                MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
+                Return False
+            End If
+            Return True
+        End If
+
         For t As Integer = 0 To UBound(AppStore.Apps)
             If AppStore.Apps(t).Name = AppName Then
                 Dim s As New frmDownloadManager
                 s.DownloadName = AppStore.Apps(t).DisplayName
                 If ForceReinstall Then
-                    s.Url = AppStore.Repositories(0) & AppStore.Apps(t).FullUrl
+                    s.Url = QGlobal.UpdateMirrors(0) & AppStore.Apps(t).FullUrl
                 Else
                     If IsAppInstalled(AppName) Then
-                        s.Url = AppStore.Repositories(0) & AppStore.Apps(t).UpgradeUrl
+                        s.Url = QGlobal.UpdateMirrors(0) & AppStore.Apps(t).UpgradeUrl
                     Else
-                        s.Url = AppStore.Repositories(0) & AppStore.Apps(t).FullUrl
+                        s.Url = QGlobal.UpdateMirrors(0) & AppStore.Apps(t).FullUrl
                     End If
                 End If
                 s.Unzip = True
@@ -206,10 +233,10 @@ Public Class clsAppManager
                 Dim res As DialogResult
                 res = s.ShowDialog
                 If res = DialogResult.Cancel Then
-                    Return False
+                    Return True
                 ElseIf res = DialogResult.Abort Then
                     MsgBox("Something went wrong. Internet connection might have been lost.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Error")
-                    Return False
+                    Return True
                 End If
                 Return True
             End If
